@@ -1,11 +1,11 @@
 ---
 lab:
-  title: Creare un copilota personalizzato usando gli strumenti di sviluppo incentrati sul codice
+  title: Creare un copilota personalizzato usando gli strumenti di sviluppo code-first
 ---
 
-# Creare un copilota personalizzato usando gli strumenti di sviluppo incentrati sul codice
+# Creare un copilota personalizzato usando gli strumenti di sviluppo code-first
 
-In questo esercizio, verrà clonato e distribuito un modello di Azure Developer CLI che effettua il provisioning e [distribuisce il progetto di intelligenza artificiale in un endpoint online](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) su Studio AI della piattaforma Azure. Verrà quindi usato come punto di partenza per creare un copilota personalizzato con Azure per intelligenza artificiale e un'esperienza incentrata sul codice.
+In questo esercizio, si clonerà e si distribuirà un modello di Azure Developer CLI effettua il provisioning e [distribuisce il progetto di intelligenza artificiale in un endpoint online](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) Studio AI della piattaforma Azure. Verrà quindi usato come punto di partenza per creare un copilota personalizzato con Azure per l'intelligenza artificiale e un'esperienza code-first.
 
 Questo esercizio richiederà circa **90** minuti.
 
@@ -13,19 +13,20 @@ Questo esercizio richiederà circa **90** minuti.
 
 Per completare questo esercizio, sarà necessario disporre di:
 
-- Un account GitHub per creare una copia tramite fork del repository del progetto e testarlo in un ambiente GitHub Codespaces. Creare un account gratuito [in GitHub](https://github.com/).
+- Una sottoscrizione di Azure approvata per l'accesso al Servizio OpenAI di Azure. Compilare il [modulo di registrazione](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access?WT.mc_id=academic-140829-cacaste) per richiedere l'accesso ai modelli OpenAI di Azure.
+- Un account GitHub per creare una fork del repository del progetto e testarlo in un ambiente GitHub Codespaces. Creare un account gratuito  [in GitHub](https://github.com/).
 - Livello di base di Azure AI Search per attivare il classificatore semantico. Altre informazioni sui [prezzi di AI Search](https://azure.microsoft.com/pricing/details/search/).
-- Per distribuire tre modelli OpenAI (`gpt-35-turbo`, `gpt-4`, `text-embedding-ada-002`). Per poter distribuire i modelli, è necessario creare l'hub di intelligenza artificiale in un'area con una quota sufficiente. Ulteriori informazioni sulla [disponibilità dell'area del modello](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?WT.mc_id=academic-140829-cacaste#model-summary-table-and-region-availability).
+- Per distribuire tre modelli OpenAI (`gpt-35-turbo`, `gpt-4`, `text-embedding-ada-002`). Per poter distribuire i modelli, è necessario creare l'hub di intelligenza artificiale in un'area con una quota sufficiente. Altre informazioni sulla [disponibilità dell'area del modello](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?WT.mc_id=academic-140829-cacaste#model-summary-table-and-region-availability).
 
 ## Informazioni sullo scenario
 
-Per iniziare a usare il modello di progetto di intelligenza artificiale di Azure Developer CLI, passare ai [modelli di Azure per l'intelligenza artificiale con la raccolta di Azure Developer CLI ](https://learn.microsoft.com/collections/5pq0uompdgje8d/?WT.mc_id=academic-140829-cacaste). Esplorando la raccolta, è possibile trovare diversi progetti raggruppati per tecnologia e caso d'uso, tra cui esempi di progetti multi-modale e multi-agente, progetti simili a copilot ed esempi che integrano framework e servizi di Azure diversi.
+Per iniziare a usare il modello di progetto di intelligenza artificiale di Azure Developer CLI, passare ai [modelli di Azure per l'intelligenza artificiale con la raccolta di Azure Developer CLI ](https://learn.microsoft.com/collections/5pq0uompdgje8d/?WT.mc_id=academic-140829-cacaste). Esplorando la raccolta, è possibile trovare diversi progetti raggruppati per tecnologia e caso d'uso, tra cui esempi di progetti multi-modale e multi-agente, progetti simili a copilota ed esempi che integrano framework e servizi di Azure diversi.
 
-Per questo esercizio, verrà usato come punto di partenza il modello di progetto **[Copilot di Contoso Chat Retail con Studio AI della piattaforma Azure e PromptFlow (Python)](https://aka.ms/contoso-retail-sample)**. Questo modello di progetto è un'esperienza incentrata sul codice che usa Prompty e PromptFlow per creare un copilota personalizzato (chat IA) che può essere integrato nel sito Web di vendita al dettaglio (interfaccia utente di chat) di una società fittizia denominata Contoso Outdoors.
+Per questo esercizio si userà il**[ copilota Contoso Chat Retail con il modello del progetto Studio AI della piattaforma Azure e PromptFlow (Python)](https://aka.ms/contoso-retail-sample)** come punto di partenza. Questo modello di progetto è un'esperienza code-first che usa Prompty e PromptFlow per creare un copilota personalizzato (Intelligenza artificiale di chat) che può essere integrato nel sito Web di vendita al dettaglio (interfaccia utente di chat) di una società fittizia denominata Contoso Outdoors.
 
 ![Interfaccia utente/esperienza utente di chat Contoso](./media/contoso_outdoors_website.png)
 
-La soluzione di copilota per la vendita al dettaglio usa un modello di RAG (generazione aumentata di recupero) per mettere a punto le risposte nei dati dei prodotti e dei clienti dell'azienda. I clienti possono porre domande al chatbot per la vendita al dettaglio sul catalogo dei prodotti dell'azienda e ricevere consigli anche in base agli acquisti precedenti.
+La soluzione di copilota per la vendita al dettaglio usa un modello di generazione aumentata di recupero (RAG) per mettere a punto le risposte nei dati dei prodotti e dei clienti dell'azienda. I clienti possono porre domande al chatbot per la vendita al dettaglio sul catalogo dei prodotti dell'azienda e ricevere consigli anche in base agli acquisti precedenti.
 
 Selezionando il collegamento al progetto incluso nella raccolta, si verrà reindirizzati al repository GitHub che ospita il codice del modello. Il file [README.md](https://github.com/Azure-Samples/contoso-chat/blob/main/README.md) nel repository fornisce una descrizione dettagliata del progetto, tra cui l'architettura, i prerequisiti e i passaggi per distribuire il progetto.
 
@@ -33,17 +34,17 @@ Selezionando il collegamento al progetto incluso nella raccolta, si verrà reind
 
 ## Configurare GitHub Codespaces
 
-In questo esercizio verrà usato [GitHub Codespaces](https://github.com/features/codespaces), una funzionalità di GitHub che consente di avviare un [contenitore di sviluppo](https://docs.github.com/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers) ospitato nel cloud preconfigurato direttamente dal repository, con un solo clic. In questo modo, è possibile iniziare rapidamente a scrivere codice senza dover configurare l'ambiente di sviluppo locale, poiché Codespaces dispone già di tutti i necessari strumenti e dipendenze preinstallati.
+In questo esercizio si userà [GitHub Codespaces](https://github.com/features/codespaces), una funzionalità di GitHub che consente di avviare un [ contenitore di sviluppo](https://docs.github.com/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers) ospitato nel cloud preconfigurato direttamente dal repository, con un solo clic. In questo modo, è possibile iniziare rapidamente a scrivere codice senza dover configurare l'ambiente di sviluppo locale, poiché Codespaces ha già tutti i necessari strumenti e dipendenze preinstallati.
 
 Per inizializzare l'ambiente di sviluppo, seguire questa procedura:
 
-1. **Creare una copia tramite fork del repository**: selezionare il pulsante **Fork** nell'angolo superiore destro della pagina del repository GitHub per creare una copia del repository nell'account GitHub.
-1. Dopo aver creato una copia tramite fork del repository, selezionare il pulsante **Codice** e selezionare **Codespaces**.
-1. Selezionare il pulsante **+** per creare un nuovo codespace nel ramo principale del repository di cui è stata creata una copia tramite fork.
+1. **Creare una fork del repository**: selezionare il pulsante **Fork** nell'angolo superiore destro della pagina del repository GitHub per creare una copia del repository nell'account GitHub.
+1. Dopo aver un repository di cui è stata creata una copia tramite fork, selezionare il pulsante **Codice** e selezionare **Codespaces**.
+1. Selezionare il **+** pulsante per creare un nuovo codespace nel ramo principale del repository di cui è stata creata una copia tramite fork.
 
-    ![Creare GitHub Codespaces](./media/create_codespaces.png)
+    ![Crea GitHub Codespaces](./media/create_codespaces.png)
 
-1. In pochi secondi, verrà eseguito il reindirizzamento a una nuova scheda del browser in cui l'ambiente Codespaces è configurato con un [editor di Visual Studio Code collegato](https://code.visualstudio.com/docs/devcontainers/containers) per impostazione predefinita. È possibile continuare a lavorare nella scheda del browser oppure riconnettersi a Codespaces in esecuzione dall'editor locale di Visual Studio Code facendo clic su pulsante **Apri in VS Code Desktop** dal menu in alto a sinistra.
+1. In pochi secondi, si verrà reindirizzati a una nuova scheda del browser in cui l'ambiente Codespaces è configurato con un [editor di Visual Studio Code collegato](https://code.visualstudio.com/docs/devcontainers/containers) per impostazione predefinita. È possibile continuare a lavorare nella scheda del browser oppure riconnettersi agli spazi di codice in esecuzione dall'editor locale di Visual Studio Code facendo clic su pulsante **Apri in VS Code Desktop** dal menu in alto a sinistra.
 
 ## Connettere l'ambiente VS Code ad Azure
 
@@ -70,90 +71,90 @@ Dopo aver eseguito l'accesso, è possibile iniziare a effettuare il provisioning
         azd up
     ```
 
-1. Verranno ora visualizzate le richieste seguenti. Rispondere usando le indicazioni seguenti:
+1. Verranno ora visualizzati i prompt seguenti. Rispondere usando le indicazioni seguenti:
     - **Immettere un nuovo nome di ambiente:***usato per creare il nome del gruppo di risorse*.
     - **Selezionare una sottoscrizione di Azure per usare**: *Selezionare una sottoscrizione che ha accesso ai modelli OpenAI di Azure*.
     - **Selezionare una località di Azure da usare**: *selezionare una località con quota di modello disponibile*.
 
-    > Usare la [tabella di riepilogo del modello e la disponibilità dell'area](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?WT.mc_id=academic-140829-cacaste#model-summary-table-and-region-availability) per trovare l'area necessaria. Ad esempio, è possibile usare `sweden central` come posizione di Azure poiché si tratta dell'area in cui sono disponibili la maggior parte dei modelli OpenAI di Azure.
+    > Usare la [tabella di riepilogo del modello e la disponibilità dell'area](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?WT.mc_id=academic-140829-cacaste#model-summary-table-and-region-availability) per trovare l'area necessaria. Ad esempio, è possibile usare `sweden central` come località di Azure poiché si tratta dell'area in cui sono disponibili la maggior parte dei modelli OpenAI di Azure.
 
-## Convalida del provisioning tramite il portale di Azure
+## Convalidare il provisioning tramite il portale di Azure
 
-Il provisioning e la distribuzione di un'applicazione di intelligenza artificiale con azd possono richiedere almeno 10 minuti. È possibile tenere traccia dell'avanzamento:
+Il provisioning e la distribuzione di un'applicazione di intelligenza artificiale con azd possono richiedere almeno 10 minuti o più per il completamento. È possibile tenere traccia dello stato di avanzamento:
 
 - Visualizzando l'avanzamento dettagliato nel [portale di Azure](https://ms.portal.azure.com/). Cercare il gruppo di risorse corrispondente al nome dell'ambiente. Selezionare l'opzione **Distribuzioni** nella barra laterale, quindi monitorare lo stato di distribuzione delle risorse create.
-- Visitare il portale di [Studio AI della piattaforma Azure](https://ai.azure.com). Accedere tramite l'account di Azure personale. Cercare l'hub di intelligenza artificiale corrispondente al gruppo di risorse precedente (potrebbe essere necessario aggiornare alcune volte). Selezionare il progetto di intelligenza artificiale elencato, quindi selezionare **Distribuzioni** nella relativa barra laterale per tenere traccia dello stato dei modelli e delle distribuzioni di applicazioni di chat.
+- Visitare il portale [Studio AI della piattaforma Azure](https://ai.azure.com). Accedere tramite l'account di Azure personale. Cercare l'hub di intelligenza artificiale corrispondente al gruppo di risorse precedente (potrebbe essere necessario aggiornare alcune volte). Selezionare il progetto di intelligenza artificiale elencato, quindi selezionare **Distribuzioni** nella relativa barra laterale per tenere traccia dello stato per i modelli e le distribuzioni di applicazioni di chat.
 
 Si esaminerà ora come convalidare il provisioning delle risorse usando il portale di Azure.
 
-1. Nel browser passare al [portale di Azure](https://ms.portal.azure.com/).
+1. Passare al [portale di Azure](https://ms.portal.azure.com/) nel browser.
 1. Accedere e trovare il gruppo di risorse corrispondente alla sottoscrizione e al nome dell'ambiente immessi in precedenza. Il pannello **Panoramica** dovrebbe essere simile al seguente:
 
     ![Panoramica del gruppo di risorse del portale di Azure](./media/azure-portal-resource-group.png)
 
-1. Per iniziare, verificare che siano state create le risorse principali [dell'architettura di Studio AI della piattaforma Azure](https://learn.microsoft.com/azure/ai-studio/concepts/architecture). La figura seguente fornisce altri dettagli su ciò che ognuna di queste risorse fornisce all'applicazione di intelligenza artificiale.
+1. Per iniziare, verificare che siano state create le risorse principali dell'[architettura di Studio Ai della piattaforma di Azure](https://learn.microsoft.com/azure/ai-studio/concepts/architecture). La figura seguente fornisce altri dettagli su ciò che ognuna di queste risorse fornisce all'applicazione di intelligenza artificiale.
 
-    - **Hub Azure per intelligenza artificiale**: risorsa di Azure di primo livello. Fornisce un ambiente di collaborazione per i team.
-    - **Progetto Azure per intelligenza artificiale**: figlio dell'hub. Raggruppa i componenti dell'app per orchestrazione, personalizzazione.
-    - **Servizi di Azure AI**: gestisce gli endpoint del modello.
+    - **Hub di Azure per l'intelligenza artificiale**: risorsa di Azure di primo livello. Fornisce un ambiente di collaborazione per i team.
+    - **Progetto di Azure per l'intelligenza artificiale**: figlio dell'hub. Raggruppa i componenti dell'app per orchestrazione, personalizzazione.
+    - **Servizi di Azure per l'intelligenza artificiale**: gestisce gli endpoint del modello.
 
     ![Architettura di Studio AI della piattaforma Azure](./media/resource-provider-connected-resources.svg)
 
-1. Successivamente, si verificherà che sia stato effettuato il provisioning di due risorse chiave per implementare lo schema progettuale di [Recupero di generazione aumentata](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation) archiviando il prodotto e i dati dei clienti per il recupero basato su query.
+1. Successivamente, si verificherà che sia stato effettuato il provisioning di due risorse chiave per implementare il modello di progettazione [Generazione aumentata di recupero](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation) archiviando il prodotto e i dati dei clienti per il recupero basato su query.
 
     - **Servizio di ricerca**: per gestire gli indici di ricerca per i dati del catalogo prodotti.
-    - **Account di Azure Cosmos DB**: per creare un database per i dati degli ordini dei clienti.
+    - **Account Azure Cosmos DB**: per creare un database per i dati degli ordini dei clienti.
 
 1. Successivamente, è possibile verificare che siano disponibili risorse di supporto per la gestione delle esigenze dell'applicazione di intelligenza artificiale:
 
-    - **Application Insights**: per supportare il monitoraggio e la telemetria dell'applicazione distribuita.
+    - **Application Insights**: per supportare il monitoraggio e la telemetria per l'applicazione distribuita.
     - **Registro contenitori**: per archiviare e gestire le immagini Docker usate nel progetto, privatamente.
     - **Key Vault**: per archiviare in modo sicuro i segreti del progetto (chiavi, credenziali).
-    - **Account di archiviazione**: per archiviare dati relativi alla gestione dei progetti di intelligenza artificiale (compresi i log).
+    - **Account di archiviazione**: per archiviare i dati correlati alla gestione dei progetti di intelligenza artificiale (inclusi i log).
     - **Regola di avviso del rilevatore intelligente**: rilevamento anomalie di Application Insights (per le richieste).
 
-1. Infine, sarà visibile una nuova risorsa di tipo **Distribuzione online di Azure Machine Learning**. È la risorsa corrispondente all'endpoint del progetto Azure per intelligenza artificiale (per il copilota di chat).
+1. Infine, si noterà una nuova risorsa con tipo **distribuzione online di Machine Learning**. Questa è la risorsa corrispondente all'endpoint del progetto distribuito di Azure per intelligenza artificiale (per il copilota di chat).
 
 ## Convalidare la distribuzione con Studio AI della piattaforma Azure
 
-Il portale di Azure aiuta a gestire le risorse Azure di sottostanti per il progetto. Il portale Studio AI della piattaforma Azure aiuta a *creare e gestire* i progetti di intelligenza artificiale, end-to-end, dalla selezione del modello alla distribuzione dell'applicazione. Il comando `azd up` dovrebbe aver completato l'intero processo, dal provisioning dei modelli necessari alla distribuzione e all'hosting dell'endpoint API di Copilot per l'utilizzo. Verificare che l'applicazione funzioni come previsto.
+Il portale di Azure consente di gestire le risorse di Azure sottostanti per il progetto. Il portale di Studio AI della piattaforma Azure consente di *compilare e gestire* i progetti di intelligenza artificiale stessi, end-to-end, dalla selezione del modello alla distribuzione dell'applicazione. Il comando `azd up` deve aver completato l'intero processo: dal provisioning dei modelli necessari, alla distribuzione e all'hosting dell'endpoint API copilot per l'utilizzo. Verificare che l'applicazione funzioni come previsto.
 
-1. Visitare la pagina **Gestisci** in [Studio AI della piattaforma Azure](https://ai.azure.com/manage) per visualizzare tutti gli hub di Azure per intelligenza artificiale dell'abbonamento.
-1. Selezionare l'hub del gruppo di risorse per visualizzare tutti i progetti di Azure per intelligenza artificiale al suo interno.
-1. Selezionare il progetto di intelligenza artificiale predefinito in hub, quindi selezionare **Distribuzioni** nel menu a sinistra.
-1. In **Distribuzioni modelli**, verificare che sia presente una connessione Azure OpenAI che includa le distribuzioni di:
-    - **gpt-35-turbo**: usato per il completamento della chat, formando il motore di chat principale.
-    - **gpt-4**: usato per la valutazione delle chat, in particolare dei flussi assistiti dall'intelligenza artificiale.
-    - **text-embedding-ada-002**: usato per la vettorizzazione e la ricerca delle query.
-1. Verificare che sia presente un endpoint online di machine learning con:
-    - **chat-model**: distribuzione dell'intelligenza artificiale della chat con risorsa endpoint *mloe-xxx*.
+1. Visitare la pagina **Gestione** in [Studio AI della piattaforma Azure](https://ai.azure.com/manage) per visualizzare tutti gli hub di Azure per Intelligenza artificiale nella sottoscrizione.
+1. Selezionare l'hub per il gruppo di risorse per visualizzare tutti i progetti di Azure per Intelligenza artificiale al suo interno.
+1. Selezionare il progetto di intelligenza artificiale predefinito nell'hub, quindi selezionare **Distribuzioni** nel menu a sinistra.
+1. In **Distribuzioni di modelli** verificare di avere una connessione ad OpenAI di Azure, incluse le distribuzioni di:
+    - **gpt-35-turbo**: usato per il completamento di chat, forma il motore principale della chat.
+    - **gpt-4**: usato per la valutazione della chat, in particolare per i flussi assistiti dall'intelligenza artificiale.
+    - **text-embedding-ada-002**: usato per la vettorializzazione e la ricerca di query.
+1. Verificare di avere un endpoint online di Machine Learning con:
+    - **modello di chat**: distribuzione di chat basati su intelligenza artificiale con la risorsa dell'endpoint *mloe-xxx*.
 
-    ![Distribuzione di progetti di Azure per intelligenza artificiale](./media/azure-ai-project-deployment.png)
+    ![Distribuzioni di progetti di Azure per Intelligenza artificiale](./media/azure-ai-project-deployment.png)
 
-## Testare la distribuzione (nel cloud) con Studio AI della piattaforma Azure
+## Testare la distribuzione (nel cloud) usando Studio AI della piattaforma Azure
 
-Per convalidare il funzionamento del copilota distribuito, usare la funzionalità playground di test integrata in Studio AI della piattaforma Azure.
+Per verificare che il copilota distribuito funzioni, usare la funzionalità predefinita del playground di test in Studio AI della piattaforma Azure.
 
 ![Dettagli della distribuzione della chat](./media/chat-deployment-details.png)
 
-1. In Studio AI della piattaforma Azure, dall'elenco **Distribuzioni app**, selezionare la distribuzione **chat-deployment-xxxx**.
-1. Nella pagina **Dettagli** dell'applicazione di chat distribuita, selezionare la scheda **Test** per visualizzare l'interfaccia di test.
+1. In Studio AI della piattaforma Azure, nell'elenco **Distribuzioni di app** selezionare la distribuzione **distribuzione-chat-xxxx**.
+1. Nella pagina **Dettagli** dell'applicazione chat distribuita, selezionare la scheda **Test** per ottenere l'interfaccia di test.
 
-    Tenere presente che la scheda **Dettagli** include anche valori `Target URI` ed `Key` è utilizzabile con altre applicazioni front-end (ad esempio il sito Web Contoso Outdoor), per integrare questo assistente chat nelle interazioni utente reali.
+    Si noti che la scheda **Dettagli** include anche `Target URI` e i valori `Key` che è possibile usare con altre applicazioni front-end (ad esempio il sito Web Contoso Outdoor) per integrare questo assistente di chat per le interazioni di utenti reali.
 
-1. Per il momento, testare la distribuzione di Copilot con l'**input ** di test seguente:
+1. Per il momento, testare la distribuzione del copilota con il seguente test di **Input**:
 
     ```bash
       {"question": "tell me about your hiking shoes", "customerId": "2", "chat_history": []}
     ```
 
-Si dovrebbe ottenere una risposta JSON valida nel componente di output come illustrato.
+Si dovrebbe ottenere una risposta JSON valida nel componente di output, come illustrato.
 
 ![Test di distribuzione chat](./media/chat-deployment-test.png)
 
-## Testare la distribuzione (in locale) usando Visual Studio Code
+## Testare la distribuzione (localmente) usando Visual Studio Code
 
-Il comando **azd up** non solo fornisce e distribuisce l'applicazione su Azure, ma *configura anche l'ambiente locale* in Visual Studio Code per supportare lo sviluppo locale, i test e l'iterazione. Verifichiamolo.
+Il comando **azd up** non solo effettua il provisioning e distribuisce l'applicazione in Azure, ma *configura anche l'ambiente locale* in Visual Studio Code per supportare lo sviluppo locale, il test e l'iterazione. Verifichiamolo.
 
 1. Prima di tutto, verificare che l'ambiente VS Code sia stato configurato correttamente. Cercare un file **config.json** nella cartella radice e verificare che abbia le tre proprietà definite di seguito, con valori validi.
 
@@ -196,17 +197,17 @@ Il comando **azd up** non solo fornisce e distribuisce l'applicazione su Azure, 
         pf version
     ```
 
-1. Usare lo strumento di **test del flusso pf** per testare l'applicazione del flusso flessibile di **contoso_chat** in locale, con la domanda di esempio seguente. Notare la sintassi del comando per l'introduzione degli input:
+1. Usare lo strumento di **test del flusso pf** per testare l'applicazione del flusso flessibile di **contoso_chat** in locale, con la domanda di esempio seguente. Si noti la sintassi del comando per l'introduzione degli input:
 
     ```bash
         pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[]
     ```
 
-Verrà visualizzata una risposta simile alla seguente:
+Si riceverà una risposta come la seguente:
 
 ![Esempio di output dell'app](./media/example_app_output.png)
 
-### Visualizzare le tracce (in locale) con Visual Studio Code
+### Visualizzare le tracce (localmente) con Visual Studio Code
 
 1. È possibile tracciare i dettagli dell'esecuzione con il flag `--ui` come illustrato di seguito.
 
@@ -214,19 +215,19 @@ Verrà visualizzata una risposta simile alla seguente:
         pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[] --ui
     ```
 
-Questo comando deve avviare una **visualizzazione della traccia** nel browser (in una nuova scheda) con una tabella che fornisce dettagli generali sull'esecuzione di tale test, tra cui la latenza e l'uso dei token.
+Questo comando deve avviare una **visualizzazione dellai traccia** nel browser (in una nuova scheda) con una tabella che fornisce dettagli generali sull'esecuzione di quel test, tra cui la latenza e l'utilizzo dei token.
 
-![riga di test pf](./media/pf-flow-test-row.png)
+![riga del test pf](./media/pf-flow-test-row.png)
 
-1. Selezionare il record da espandere in una visualizzazione della traccia più dettagliata che consente di esaminare i più piccoli dettagli del flusso, a partire dai dati non elaborati (input, output) ai singoli passaggi del flusso e ai componenti pertinenti(ad esempio, i modelli di richiesta usati per LLM).
+1. Selezionare il record da espandere in una visualizzazione della traccia più dettagliata che consente di esaminare i dettagli più specifici del flusso: dai dati non elaborati (input, output) ai singoli passaggi del flusso e ai componenti pertinenti (ad esempio, i modelli di prompt usati per LLM).
 
-![dettagli test pf](./media/pf-flow-test-detail.png)
+![dettaglio del test pf](./media/pf-flow-test-detail.png)
 
 ## Informazioni sulla codebase della Chat di Contoso
 
 È stato effettuato il provisioning del back-end di Azure che è pronto. L'ambiente di sviluppo locale è installato e configurato per l'uso con il back-end di Azure. A questo punto, è sufficiente iniziare a modificare il contenuto per personalizzare e ridistribuire la propria versione dell'applicazione. Di seguito viene esaminato rapidamente come è strutturata la codebase.
 
-> Si tratta di un **elenco semplificato** dell'archivio, eliminando alcuni file e cartelle per maggiore chiarezza.
+> Si tratta di un **elenco semplificato** del repository, eliminando alcuni file e cartelle per maggiore chiarezza.
 
 ```bash
 data/
@@ -263,32 +264,32 @@ deployment/                         # ai.endpoint config files (named in azure.y
 requirements.txt
 ```
 
-Quando si desidera personalizzare il codice:
+Quando si vuole personalizzare il codice:
 
-- Se si apportano modifiche all'app (in `contoso_chat/`), è sufficiente eseguire `azd deploy` per ridistribuire l'applicazione nel back-end di cui è stato eseguito il provisioning in precedenza. Non sono necessari altri passaggi di provisioning o interventi manuali.
+- Se si apportano modifiche all'app (in `contoso_chat/`) è sufficiente eseguire `azd deploy` per ridistribuire l'applicazione nel back-end di cui è stato eseguito il provisioning in precedenza. Non sono necessari altri passaggi di provisioning o intervento manuale.
 - Se si apportano modifiche alle risorse (nella cartella `infra/`), eseguire `azd up` per eseguire di nuovo il provisioning e ridistribuire l'applicazione. Deve selezionare automaticamente i valori di configurazione precedenti da `.azure/` e modificarli.
 
 ## Facoltativo: personalizzare e ridistribuire il copilota
 
-È il momento di creare un copilota personalizzato. Ecco alcune cose che è possibile esplorare, per fare una prova.
+È il momento di creare un copilota personalizzato. Ecco alcune cose che è possibile esplorare, per provare questo.
 
 Tenere presente per ognuna di queste opzioni:
 
-- Usare `azd deploy` per ridistribuire l'applicazione, se è stato modificato solo il codice dell'app.
-- Usare `azd up` per eseguire nuovamente il provisioning e ridistribuire l'applicazione, se è stata modificata la configurazione delle risorse.
+- Usare `azd deploy` per ridistribuire l'applicazione se è stato modificato solo il codice dell'app.
+- Usare `azd up` per eseguire nuovamente il provisioning e la ridistribuzione dell'applicazione se è stata modificata la configurazione delle risorse.
 
-### Personalizzare i dati della cronologia dei clienti e degli ordini
+### Personalizzare i dati della cronologia del cliente e degli ordini
 
-1. Esaminare i dati di esempio in **data/customer_info** per dare un senso allo schema predefinito.
+1. Esaminare i dati di esempio in **dati/customer_info** per un senso dello schema predefinito.
 1. Esplorare il notebook **data/create-cosmos-db.ipynb** per un approccio code-first agli aggiornamenti dei dati.
 1. **Modificare** i dati di esempio ed **eseguire** il notebook per modificare il database predefinito di Azure CosmosDB.
-1. **Ridistribuire** l'app. Provare una domanda di test per convalidare che vengano restituiti nuovi dati del cliente.
+1. **Ridistribuire** l'app. Provare una domanda di test per verificare che vengano restituiti nuovi dati del cliente.
 
 ### Personalizzare i dati del catalogo prodotti
 
 1. Esaminare i dati di esempio in **data/product_info/** per un'idea dello schema predefinito.
 1. Esplorare il notebook **create-azure-search.ipynb** per un approccio code-first agli aggiornamenti degli indici.
-1. **Modificare** i dati di esempio ed **eseguire** il notebook per modificare gli indici predefiniti di Azure AI Search.
+1. **Modificare** i dati di esempio ed **eseguire** il notebook per cambiare gli indici predefiniti di Azure AI Search.
 1. **Ridistribuire** l'app. Provare una domanda di test per verificare che vengano restituiti nuovi dati del prodotto.
 
 ### Personalizzare il modello di richiesta
@@ -313,7 +314,7 @@ Sostituire il set di dati di test usato per eseguire la pipeline di valutazione 
 
 ## Eseguire la pulizia ed eliminare le risorse di Azure
 
-Questo progetto usa modelli e servizi (ad esempio Azure AI Search) che possono comportare costi più complessi se lasciati in esecuzione per lungo tempo. Al termine dell'esplorazione del modello AZD di Azure per intelligenza artificiale, è importante eliminare le risorse create per evitare costi inutili di Azure. È possibile farlo eseguendo il comando seguente nel terminale di VS Code:
+Questo progetto usa modelli e servizi (ad esempio Azure AI Search) che possono comportare costi più complessi se lasciati in esecuzione per lungo tempo. Quando si finisce di esplorare il modello di Azure Developer di Azure AI, è necessario eliminare le risorse create per evitare costi di Azure non necessari. È possibile farlo eseguendo il comando seguente nel terminale di VS Code:
 
 ```bash
     azd down

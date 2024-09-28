@@ -1,27 +1,31 @@
 ---
 lab:
-  title: Esplorare i filtri di contenuto per prevenire la generazione di contenuti dannosi in Studio AI della piattaforma Azure
+  title: Esplorare i filtri di contenuto per impedire l'output di contenuto dannoso in Studio AI della piattaforma Azure
 ---
 
-# Esplorare i filtri di contenuto per prevenire la generazione di contenuti dannosi in Studio AI della piattaforma Azure
+# Esplorare i filtri di contenuto per impedire l'output di contenuto dannoso in Studio AI della piattaforma Azure
 
-Studio AI della piattaforma Azure include filtri di contenuto predefiniti per garantire che le richieste e i completamenti potenzialmente dannosi vengano identificati e rimossi dalle interazioni con il servizio. Inoltre, è possibile richiedere l'autorizzazione per definire filtri di contenuto personalizzati per esigenze specifiche per assicurarsi che le distribuzioni del modello applichino i principi di intelligenza artificiale appropriati per lo scenario di intelligenza artificiale generativa. Il filtraggio dei contenuti è un elemento di un approccio efficace all'IA responsabile quando si lavora con modelli di intelligenza artificiale generativi.
+Studio AI della piattaforma Azure include filtri di contenuto predefiniti per garantire che le richieste e i completamenti potenzialmente dannosi vengano identificati e rimossi dalle interazioni con il servizio. Inoltre, è possibile richiedere l'autorizzazione per definire filtri di contenuto personalizzati per esigenze specifiche per assicurarsi che le distribuzioni del modello applichino le entità di intelligenza artificiale responsabili appropriate per lo scenario di intelligenza artificiale generativa. Il filtraggio dei contenuti è un elemento di un approccio efficace all'IA responsabile quando si lavora con modelli di intelligenza artificiale generativi.
 
 In questo esercizio si esaminerà l'effetto dei filtri di contenuto predefiniti in Studio AI della piattaforma Azure.
 
 Questo esercizio richiederà circa **25** minuti.
 
+## Prima di iniziare
+
+Per completare questo esercizio, la sottoscrizione di Azure deve essere approvata per l'accesso al Servizio OpenAI di Azure. Compilare il [modulo di registrazione](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access) per richiedere l'accesso ai modelli OpenAI di Azure.
+
 ## Creare un hub di Azure per intelligenza artificiale
 
-Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di Azure per intelligenza artificiale. È possibile creare questa risorsa durante la creazione di un progetto o effettuarne il provisioning in anticipo (ciò che verrà fatto in questo esercizio).
+Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di Azure per intelligenza artificiale. È possibile creare questa risorsa durante la creazione di un progetto o eseguirne il provisioning in anticipo (ovvero ciò che verrà fatto in questo esercizio).
 
-1. In un Web browser aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
+1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
 
 1. Nella sezione Gestione, selezionare Tutti gli hub e quindi **+ Nuovo hub**. Creare un nuovo hub con le impostazioni seguenti:
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco o selezionarne uno esistente*
-    - **Ubicazione**: *effettuare una scelta **casuale** da una delle aree seguenti*\*
+    - **Posizione**: *effettuare una **scelta casuale** da una delle aree seguenti*\*
         - Australia orientale
         - Canada orientale
         - Stati Uniti orientali
@@ -35,27 +39,27 @@ Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di
     - **Connettere Servizi di Azure AI o OpenAI di Azure**: selezionare per creare un nuovo servizio di intelligenza artificiale o usarne uno esistente
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello di tenant. Le aree elencate includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota negli scenari in cui si condivide un tenant con altri utenti. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote di aree a livello tenant. Le aree elencate includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota negli scenari in cui si condivide un tenant con altri utenti. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
-1. Seleziona **Crea**. La creazione del primo hub può richiedere alcuni minuti per il suo completamento. Durante la creazione dell'hub, verranno create automaticamente anche le risorse di intelligenza artificiale seguenti: 
+1. Seleziona **Crea**. Il completamento della creazione del primo hub può richiedere alcuni minuti. Durante la creazione dell'hub, verranno create automaticamente anche le risorse di intelligenza artificiale seguenti: 
     - Servizi di intelligenza artificiale
     - Account di archiviazione
-    - Key Vault
+    - Key vault
 
-1. Dopo che l'hub di Azure per intelligenza artificiale è stato creato, il risultato dovrebbe essere simile all'immagine seguente.
+1. Dopo che l'hub di Azure per intelligenza artificiale è stato creato, il risultato dovrebbe essere simile all'immagine seguente:
 
-    ![Screenshot di un hub di Azure per intelligenza artificiale in Azure AI Studio.](./media/azure-ai-overview.png)
+    ![Screenshot di un hub di Azure per intelligenza artificiale in Studio AI della piattaforma Azure.](./media/azure-ai-overview.png)
 
 ## Creare un progetto
 
-Un hub di Azure per intelligenza artificiale offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto nell'hub di Azure per intelligenza artificiale.
+Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto nell'hub di Azure per intelligenza artificiale.
 
-1. Nella pagina **Compilazione** di Studio AI della piattaforma Azure, selezionare **+ Nuovo progetto**. Quindi, nella procedura guidata **Creare un nuovo progetto**, creare un progetto con le impostazioni seguenti:
+1. Nella pagina **Compilazione** di Studio AI della piattaforma Azure, selezionare **+ Nuovo progetto**. Quindi, nella procedura guidata **Creazione di un nuovo progetto**, creare un progetto con le impostazioni seguenti:
 
-    - **Nome progetto**: *nome univoco per il progetto*
+    - **Nome progetto**: *un nome univoco per il progetto*
     - **Hub**: *l'hub di intelligenza artificiale in uso*
 
-1. Attendere la creazione del progetto. Il risultato dovrebbe avere un aspetto simile all'immagine seguente:
+1. Attendere la creazione del progetto. Il risultato dovrebbe avere un aspetto simile all'immagine seguente.
 
     ![Screenshot dei dettagli di un progetto in Studio AI della piattaforma Azure.](./media/azure-ai-project.png)
 
@@ -82,10 +86,10 @@ A questo punto è possibile distribuire un modello da usare tramite **Studio AI 
 
 I filtri di contenuto vengono applicati ai prompt e ai completamenti per evitare che venga generato un linguaggio potenzialmente dannoso o offensivo.
 
-1. Nella pagina **Compilazione**, selezionare **Filtri di contenuto** nella barra di spostamento a sinistra e selezionare il pulsante **+ Crea filtro di contenuto**.
+1. Nella pagina **Compilazione**, selezionare **Filtri di contenuto** nella barra di spostamento a sinistra e selezionare **+ Crea filtro di contenuto**.
 
 1. Nella scheda **Nozioni di base** specificare le informazioni seguenti: 
-    - **Nome**: *nome univoco per il filtro di contenuto*
+    - **Nome**: *nome univoco per il filtro del contenuto*
     - **Connessione**: *connessione OpenAI di Azure*
 
 1. Selezionare **Avanti**.
@@ -101,9 +105,9 @@ I filtri di contenuto vengono applicati ai prompt e ai completamenti per evitare
 
     I filtri vengono applicati per ognuna di queste categorie a richieste e completamenti, con un'impostazione di gravità **sicura**, **bassa**, **media** ed **elevata** usata per determinare quali tipi specifici di linguaggio vengono intercettati e impediti dal filtro.
 
-1. Modificare la soglia per ogni categoria impostando **Bassa**. Selezionare **Avanti**. 
+1. Modificare la soglia per ogni categoria impostando **Basso**. Selezionare **Avanti**. 
 
-1. Nella scheda **Filtro output** modificare la soglia per ogni categoria impostando **Bassa**. Selezionare **Avanti**.
+1. Nella scheda **Filtro output** modificare la soglia per ogni categoria impostando **Basso**. Selezionare **Avanti**.
 
 1. Nella scheda **Distribuzione** selezionare la distribuzione creata in precedenza, quindi selezionare **Avanti**. 
 
@@ -111,7 +115,7 @@ I filtri di contenuto vengono applicati ai prompt e ai completamenti per evitare
 
 1. Tornare alla pagina delle distribuzioni e notare che la distribuzione ora fa riferimento al filtro di contenuto personalizzato creato.
 
-    ![Screenshot della pagina di distribuzione di Studio AI della piattaforma Azure](./media/azure-ai-deployment.png)
+    ![Screenshot della pagina di distribuzione di Studio AI della piattaforma Azure.](./media/azure-ai-deployment.png)
 
 ## Generare l'output del linguaggio naturale
 
