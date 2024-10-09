@@ -11,15 +11,11 @@ In questo esercizio verrà esaminato il catalogo dei modelli in Studio AI della 
 
 Questo esercizio richiederà circa **25** minuti.
 
-## Prima di iniziare
-
-Per completare questo esercizio, la sottoscrizione di Azure deve essere approvata per l'accesso al Servizio OpenAI di Azure. Compilare il [modulo di registrazione](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access) per richiedere l'accesso ai modelli OpenAI di Azure.
-
 ## Creare un hub di Azure per intelligenza artificiale
 
 Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di Azure per intelligenza artificiale. È possibile creare questa risorsa durante la creazione di un progetto o eseguirne il provisioning in anticipo (ovvero ciò che verrà fatto in questo esercizio).
 
-1. Nella sezione **Gestione**, selezionare **Tutti gli hub** e quindi **+ Nuovo hub**. Creare un nuovo hub con le impostazioni seguenti:
+1. Nella sezione **Gestione**, selezionare **Tutte le risorse** e quindi **+ Nuovo hub**. Creare un nuovo hub con le impostazioni seguenti:
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco o selezionarne uno esistente*

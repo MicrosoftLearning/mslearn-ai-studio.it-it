@@ -13,8 +13,7 @@ Questo esercizio richiederà circa **90** minuti.
 
 Per completare questo esercizio, sarà necessario disporre di:
 
-- Una sottoscrizione di Azure approvata per l'accesso al Servizio OpenAI di Azure. Compilare il [modulo di registrazione](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access?WT.mc_id=academic-140829-cacaste) per richiedere l'accesso ai modelli OpenAI di Azure.
-- Un account GitHub per creare una fork del repository del progetto e testarlo in un ambiente GitHub Codespaces. Creare un account gratuito  [in GitHub](https://github.com/).
+- Un account GitHub per creare una copia tramite fork del repository del progetto e testarlo in un ambiente GitHub Codespaces. Creare un account gratuito  [in GitHub](https://github.com/).
 - Livello di base di Azure AI Search per attivare il classificatore semantico. Altre informazioni sui [prezzi di AI Search](https://azure.microsoft.com/pricing/details/search/).
 - Per distribuire tre modelli OpenAI (`gpt-35-turbo`, `gpt-4`, `text-embedding-ada-002`). Per poter distribuire i modelli, è necessario creare l'hub di intelligenza artificiale in un'area con una quota sufficiente. Altre informazioni sulla [disponibilità dell'area del modello](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?WT.mc_id=academic-140829-cacaste#model-summary-table-and-region-availability).
 
@@ -52,13 +51,13 @@ Il passaggio successivo consiste nel connettere l'ambiente di sviluppo locale al
 
 1. Verificare prima di tutto che sia installata la [versione più recente](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_1.9.3) di Azure Developer CLI.
     ```bash
-        azd version
+    azd version
     ```
 
 1. Accedere quindi all'account di Azure dal terminale di VS Code.
 
     ```bash
-        azd auth login 
+    azd auth login 
     ```
 
 ## Effettuare il provisioning delle risorse di Azure per il progetto
@@ -68,7 +67,7 @@ Dopo aver eseguito l'accesso, è possibile iniziare a effettuare il provisioning
 1. Effettuare il provisioning *e distribuire* l'applicazione di intelligenza artificiale usando azd.
 
     ```bash
-        azd up
+    azd up
     ```
 
 1. Verranno ora visualizzati i prompt seguenti. Rispondere usando le indicazioni seguenti:
@@ -145,7 +144,7 @@ Per verificare che il copilota distribuito funzioni, usare la funzionalità pred
 1. Per il momento, testare la distribuzione del copilota con il seguente test di **Input**:
 
     ```bash
-      {"question": "tell me about your hiking shoes", "customerId": "2", "chat_history": []}
+    {"question": "tell me about your hiking shoes", "customerId": "2", "chat_history": []}
     ```
 
 Si dovrebbe ottenere una risposta JSON valida nel componente di output, come illustrato.
@@ -194,13 +193,13 @@ Il comando **azd up** non solo effettua il provisioning e distribuisce l'applica
 1. Verificare di avere installato gli **strumenti Promptflow** nell'ambiente di sviluppo.
 
     ```bash
-        pf version
+    pf version
     ```
 
 1. Usare lo strumento di **test del flusso pf** per testare l'applicazione del flusso flessibile di **contoso_chat** in locale, con la domanda di esempio seguente. Si noti la sintassi del comando per l'introduzione degli input:
 
     ```bash
-        pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[]
+    pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[]
     ```
 
 Si riceverà una risposta come la seguente:
@@ -212,7 +211,7 @@ Si riceverà una risposta come la seguente:
 1. È possibile tracciare i dettagli dell'esecuzione con il flag `--ui` come illustrato di seguito.
 
     ```bash
-        pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[] --ui
+    pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[] --ui
     ```
 
 Questo comando deve avviare una **visualizzazione dellai traccia** nel browser (in una nuova scheda) con una tabella che fornisce dettagli generali sull'esecuzione di quel test, tra cui la latenza e l'utilizzo dei token.
@@ -317,7 +316,7 @@ Sostituire il set di dati di test usato per eseguire la pipeline di valutazione 
 Questo progetto usa modelli e servizi (ad esempio Azure AI Search) che possono comportare costi più complessi se lasciati in esecuzione per lungo tempo. Quando si finisce di esplorare il modello di Azure Developer di Azure AI, è necessario eliminare le risorse create per evitare costi di Azure non necessari. È possibile farlo eseguendo il comando seguente nel terminale di VS Code:
 
 ```bash
-    azd down
+azd down
 ```
 
 Ciò non solo inverte i passaggi eseguiti per effettuare il provisioning e la distribuzione dell'applicazione, ma effettua anche passaggi aggiuntivi per *eliminare* le risorse che altrimenti possono essere mantenute nello stato di "eliminazione temporanea", con effetti sulla possibilità di riutilizzare i nomi delle risorse o recuperare la quota del modello. **Questo comando richiederà informazioni su queste azioni durante l'arresto, quindi assicurarsi di rispondere correttamente**.
