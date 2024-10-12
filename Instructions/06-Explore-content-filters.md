@@ -11,17 +11,13 @@ In questo esercizio si esaminerà l'effetto dei filtri di contenuto predefiniti 
 
 Questo esercizio richiederà circa **25** minuti.
 
-## Prima di iniziare
-
-Per completare questo esercizio, la sottoscrizione di Azure deve essere approvata per l'accesso al Servizio OpenAI di Azure. Compilare il [modulo di registrazione](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access) per richiedere l'accesso ai modelli OpenAI di Azure.
-
 ## Creare un hub di Azure per intelligenza artificiale
 
 Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di Azure per intelligenza artificiale. È possibile creare questa risorsa durante la creazione di un progetto o eseguirne il provisioning in anticipo (ovvero ciò che verrà fatto in questo esercizio).
 
 1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
 
-1. Nella sezione Gestione, selezionare Tutti gli hub e quindi **+ Nuovo hub**. Creare un nuovo hub con le impostazioni seguenti:
+1. Nella sezione Gestione, selezionare Tutte le risorse e quindi **+ Nuovo hub**. Creare un nuovo hub con le impostazioni seguenti:
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco o selezionarne uno esistente*
@@ -54,7 +50,7 @@ Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di
 
 Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto nell'hub di Azure per intelligenza artificiale.
 
-1. Nella pagina **Compilazione** di Studio AI della piattaforma Azure, selezionare **+ Nuovo progetto**. Quindi, nella procedura guidata **Creazione di un nuovo progetto**, creare un progetto con le impostazioni seguenti:
+1. Nella pagina **Panoramica dell'hub** di Studio AI della piattaforma Azure, selezionare **+ Nuovo progetto**. Quindi, nella procedura guidata **Creazione di un nuovo progetto**, creare un progetto con le impostazioni seguenti:
 
     - **Nome progetto**: *un nome univoco per il progetto*
     - **Hub**: *l'hub di intelligenza artificiale in uso*
@@ -86,7 +82,7 @@ A questo punto è possibile distribuire un modello da usare tramite **Studio AI 
 
 I filtri di contenuto vengono applicati ai prompt e ai completamenti per evitare che venga generato un linguaggio potenzialmente dannoso o offensivo.
 
-1. Nella pagina **Compilazione**, selezionare **Filtri di contenuto** nella barra di spostamento a sinistra e selezionare **+ Crea filtro di contenuto**.
+1. In **Componenti** nella barra di spostamento a sinistra selezionare **Filtri di contenuto** e selezionare **+ Crea filtro di contenuto**.
 
 1. Nella scheda **Nozioni di base** specificare le informazioni seguenti: 
     - **Nome**: *nome univoco per il filtro del contenuto*
@@ -121,7 +117,7 @@ I filtri di contenuto vengono applicati ai prompt e ai completamenti per evitare
 
 Vediamo come si comporta il modello in un'interazione conversazionale.
 
-1. Passare a **Playground** nel riquadro di sinistra.
+1. Passare a **Playground progetto** nel riquadro di sinistra.
 
 1. In modalità **Chat**, immettere il prompt seguente nella sezione **Sessione di chat**.
 
