@@ -5,7 +5,7 @@ lab:
 
 # Valutare le prestazioni del copilota personalizzato in Studio AI della piattaforma Azure
 
-In questo esercizio, verranno esaminate le valutazioni predefinite e personalizzate per valutare e confrontare le prestazioni delle applicazioni di intelligenza artificiale con Studio AI della piattaforma Azure.
+In questo esercizio verranno esaminate valutazioni predefinite e personalizzate per valutare e confrontare le prestazioni delle applicazioni di intelligenza artificiale con Studio AI della piattaforma Azure.
 
 Questo esercizio richiederà circa **30** minuti.
 
@@ -13,45 +13,34 @@ Questo esercizio richiederà circa **30** minuti.
 
 Per iniziare, creare un progetto di Studio AI della piattaforma Azure all'interno di un hub di Azure per intelligenza artificiale:
 
-1. In un Web browser aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
-1. Selezionare la **home** page e quindi **+ Nuovo progetto**.
-1. Nella procedura guidata **Crea un nuovo progetto** creare un progetto con le impostazioni seguenti:
-    - **Nome progetto**: *nome univoco per il progetto*
-    - **Hub**: *creare un nuovo hub con le impostazioni seguenti:*
-        - **Nome hub**: *un nome univoco*.
-        - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-        - **Gruppo di risorse**: *un nuovo gruppo di risorse*
-        - **Ubicazione**: *effettuare una scelta **casuale** da una delle aree seguenti*\*
-        - Australia orientale
-        - Canada orientale
-        - Stati Uniti orientali
-        - Stati Uniti orientali 2
-        - Francia centrale
-        - Giappone orientale
-        - Stati Uniti centro-settentrionali
-        - Svezia centrale
-        - Svizzera settentrionale
-        - Regno Unito meridionale
+1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
+1. Selezionare la pagina **Home** e quindi **+ Nuovo progetto**.
+1. Nella procedura guidata **Crea un progetto** assegnare un nome univoco al progetto, quindi selezionare **Personalizza** e configurare le impostazioni seguenti:
+    - **Nome hub**: *un nome univoco*.
+    - **Sottoscrizione**: *la sottoscrizione di Azure usata*
+    - **Gruppo di risorse**: *un nuovo gruppo di risorse*
+    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-35-turbo** nella finestra Helper posizione e usare l'area consigliata\*
     - **Connettere Servizi di Azure AI o OpenAI di Azure**: *creare una nuova connessione*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello di tenant. Le aree elencate includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Esaminare la configurazione e creare il progetto.
-1. Attendere la creazione del progetto.
+1. Selezionare **Avanti** per esaminare la configurazione.
+1. Selezionare **Crea un progetto** e attendere il completamento del processo.
 
-## Distribuire un modello GPT
+## Distribuire un modello GTP
 
-Per usare un modello linguistico nel flusso immedito, è prima necessario distribuire un modello. Studio AI della piattaforma Azure consente di distribuire modelli OpenAI che è possibile usare nei flussi.
+Per usare un modello linguistico nel prompt flow, è prima necessario distribuire un modello. Studio AI della piattaforma Azure consente all'utente di distribuire modelli OpenAI utilizzabili nei flussi.
 
-1. Nel riquadro di spostamento a sinistra, in **Componenti**. selezionare la pagina **Distribuzioni**.
+1. Nel riquadro di spostamento a sinistra, in **Componenti**, selezionare la pagina **Distribuzioni**.
 1. Creare una nuova distribuzione del modello **gpt-35-turbo** con le impostazioni seguenti:
     - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
-    - **Versione del modello**: *selezionare la versione predefinita*
     - **Tipo di distribuzione**: Standard
-    - **Risorsa OpenAI di Azure connessa**: *selezionare la connessione predefinita*
-    - **Limite di velocità dei token al minuto**: 5K
-    - **Filtro contenuto**: Predefinito
+    - **Versione del modello**: *selezionare la versione predefinita*
+    - **Risorsa di intelligenza artificiale**: *selezionare la risorsa creata in precedenza*
+    - **Limite di velocità dei token al minuto (migliaia)**: 5K
+    - **Filtro contenuto**: predefinitoV2
+    - **Abilitare la quota dinamica**: disabilitato
 1. Attendere la distribuzione del modello. Quando la distribuzione è pronta, selezionare **Apri nel playground**.
 1. Modificare il **messaggio di sistema** nel modo seguente:
 
@@ -73,14 +62,14 @@ Per usare un modello linguistico nel flusso immedito, è prima necessario distri
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Fare clic su **Applica modifiche**.
+1. Seleziona **Salva**.
 1. Nella finestra della chat immettere la query: `What can you do?` per verificare che il modello linguistico si comporti come previsto.
 
-Dopo aver distribuito un modello con un messaggio di sistema aggiornato, è possibile valutarlo.
+Dopo aver distribuito un modello con un messaggio di sistema aggiornato, è possibile valutare il modello.
 
 ## Valutare manualmente un modello linguistico in Studio AI della piattaforma Azure
 
-È possibile esaminare manualmente le risposte del modello in base ai dati di test. La revisione manuale consente di testare input diversi uno alla volta per valutare se il modello viene eseguito come previsto.
+È possibile esaminare manualmente le risposte del modello in base ai dati dei test. L'esame manuale consente di testare input diversi uno alla volta per valutare se il modello funziona come previsto.
 
 1. Nel **playground della chat** selezionare l'elenco a discesa **Valuta** nella barra superiore e selezionare **Valutazione manuale**.
 1. Modificare il **Messaggio di sistema** con lo stesso messaggio usato in precedenza (incluso di nuovo qui):
@@ -103,7 +92,7 @@ Dopo aver distribuito un modello con un messaggio di sistema aggiornato, è poss
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Nella sezione relativa al **risultato della valutazione manuale** si aggiungeranno cinque input per i quali si esaminerà l'output. Immettere le cinque domande seguenti come cinque **input** separati:
+1. Nella sezione **Risultato della valutazione manuale** si aggiungeranno cinque input dei quali si esaminerà l'output. Immettere le cinque domande seguenti come cinque **input** separati:
 
    `Can you provide a list of the top-rated budget hotels in Rome?`
 
@@ -116,10 +105,10 @@ Dopo aver distribuito un modello con un messaggio di sistema aggiornato, è poss
    `Are there any guided tours available for the Great Wall of China?`
 
 1. Selezionare **Esegui** dalla barra superiore per generare output per tutte le domande aggiunte come input.
-1. È ora possibile rivedere manualmente gli output per ogni domanda selezionando l'icona Mi piace o Non mi piace nella parte inferiore a destra di una risposta. Valuta ogni risposta, assicurandoti di includere almeno un Mi piace e un Non mi piace nelle tue valutazioni.
-1. Selezionare **Salva risultati** dalla barra superiore. Immettere `manual_evaluation_results` come nome per i risultati.
-1. Tramite il menu a sinistra, passare a **Valutazioni**.
-1. Selezionare la scheda **Valutazioni manuali** per trovare le valutazioni manuali appena salvate. Si noti che è possibile esplorare le valutazioni manuali create in precedenza, continuare dal punto in cui si era arrivati e salvare le valutazioni aggiornate.
+1. È ora possibile esaminare manualmente gli output per ogni domanda selezionando l'icona del pollice in su o del pollice in giù in basso a destra di una risposta. Valuta ogni risposta, assicurandoti di includere almeno una risposta con un pollice su e un pollice giù nelle tue valutazioni.
+1. Selezionare **Salva risultati** dalla barra in alto. Immettere `manual_evaluation_results` come nome per i risultati.
+1. Usando il menu a sinistra, passare a **Valutazione**.
+1. Selezionare la scheda **Valutazioni manuali** per trovare le valutazioni manuali appena salvate. Si noti che è possibile esplorare le valutazioni manuali create in precedenza, continuare da dove ci si è fermati e salvare le valutazioni aggiornate.
 
 ## Valutare il copilota con le metriche predefinite
 
@@ -130,7 +119,7 @@ Dopo aver creato un copilota con un flusso di chat, è possibile valutare il flu
         <p>Se viene visualizzato un errore di autorizzazioni quando si crea un nuovo prompt flow, provare a risolvere i problemi nel seguente modo:</p>
         <ul>
           <li>Nel portale di Azure, selezionare la risorsa Servizi di intelligenza artificiale.</li>
-          <li>Nella pagina IAM, nella scheda Identità, verificare che si tratti dell'identità gestita assegnata dal sistema.</li>
+          <li>Nella scheda Identità, in Gestione risorse, confermare che si tratti dell'identità gestita assegnata dal sistema.</li>
           <li>Passare all'account di archiviazione associato. Nella pagina IAM, aggiungere l'assegnazione di ruolo <em>Lettore dei dati del BLOB di archiviazione</em>.</li>
           <li>In <strong>Assegna accesso a</strong>, scegliere <strong>Identità gestita</strong>, <strong>+ Seleziona membri</strong> e selezionare <strong>Tutte le identità gestite assegnate dal sistema</strong>.</li>
           <li>Rivedere e assegnare per salvare le nuove impostazioni e ripetere il passaggio precedente.</li>
@@ -138,16 +127,18 @@ Dopo aver creato un copilota con un flusso di chat, è possibile valutare il flu
     </details>
 
     - **Cosa si vuole valutare?**: i set di dati
-    - **Nome valutazione**: *immettere un nome univoco*
+    - **Nome per la valutazione**: *immettere un nome univoco*
     - **Quale tipo di scenario si sta valutando?**: domanda e risposta senza contesto
+    - Selezionare **Avanti**.
     - **Selezionare i dati da valutare**: aggiungere il set di dati
         - Scaricare il file JSONL https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl e caricarlo nell'interfaccia utente.
     - **Selezionare le metriche**: coerenza, scorrevolezza
     - **Connessione**: *connessione ai servizi di intelligenza artificiale*
-    - **Nome distribuzione/Modello**: *modello GPT-3.5 distribuito*
-1. Attendere il completamento delle valutazioni, potrebbe essere necessario aggiornare la pagina.
+    - **Nome/Modello di distribuzione**: *modello GPT-3.5 distribuito*
+1. Selezionare **Avanti** , quindi esaminare i dati e inviare la nuova valutazione.
+1. Attendere il completamento delle valutazioni, potrebbe essere necessario aggiornare.
 1. Selezionare l'esecuzione della valutazione appena creata.
-1. Esplorare il **dashboard delle metriche** e il **risultato dettagliato delle metriche**.
+1. Esplorare la **dashboard delle metriche** e il **risultato dettagliato delle metriche**.
 
 ## Eliminare le risorse di Azure
 
