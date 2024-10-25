@@ -5,7 +5,7 @@ lab:
 
 # Creare un copilota personalizzato usando gli strumenti di sviluppo code-first
 
-In questo esercizio, si clonerà e si distribuirà un modello di Azure Developer CLI effettua il provisioning e [distribuisce il progetto di intelligenza artificiale in un endpoint online](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) Studio AI della piattaforma Azure. Verrà quindi usato come punto di partenza per creare un copilota personalizzato con Azure per l'intelligenza artificiale e un'esperienza code-first.
+In questo esercizio, verrà clonato e distribuito un modello di Azure Developer CLI effettua il provisioning e [distribuisce il progetto di intelligenza artificiale in un endpoint online](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) su Studio AI della piattaforma Azure. Verrà quindi usato come punto di partenza per creare un copilota personalizzato con Azure per l'intelligenza artificiale e un'esperienza code-first.
 
 Questo esercizio richiederà circa **90** minuti.
 
@@ -37,17 +37,18 @@ In questo esercizio si userà [GitHub Codespaces](https://github.com/features/co
 
 Per inizializzare l'ambiente di sviluppo, seguire questa procedura:
 
-1. **Creare una fork del repository**: selezionare il pulsante **Fork** nell'angolo superiore destro della pagina del repository GitHub per creare una copia del repository nell'account GitHub.
+1. Passare al repository della **chat di Contoso**: `https://github.com/Azure-Samples/contoso-chat`
+1. Selezionare il pulsante **Fork** nell'angolo in alto a destra della pagina del repository GitHub della chat di Contoso per creare una copia del repository nell'account GitHub.
 1. Dopo aver un repository di cui è stata creata una copia tramite fork, selezionare il pulsante **Codice** e selezionare **Codespaces**.
 1. Selezionare il **+** pulsante per creare un nuovo codespace nel ramo principale del repository di cui è stata creata una copia tramite fork.
 
     ![Crea GitHub Codespaces](./media/create_codespaces.png)
 
-1. In pochi secondi, si verrà reindirizzati a una nuova scheda del browser in cui l'ambiente Codespaces è configurato con un [editor di Visual Studio Code collegato](https://code.visualstudio.com/docs/devcontainers/containers) per impostazione predefinita. È possibile continuare a lavorare nella scheda del browser oppure riconnettersi agli spazi di codice in esecuzione dall'editor locale di Visual Studio Code facendo clic su pulsante **Apri in VS Code Desktop** dal menu in alto a sinistra.
+1. In pochi secondi, si verrà reindirizzati a una nuova scheda del browser in cui l'ambiente Codespaces è configurato con un [editor di Visual Studio Code collegato](https://code.visualstudio.com/docs/devcontainers/containers) per impostazione predefinita.
 
 ## Connettere l'ambiente VS Code ad Azure
 
-Il passaggio successivo consiste nel connettere l'ambiente di sviluppo locale alla sottoscrizione di Azure in cui si vuole distribuire il progetto. Per iniziare, aprire un nuovo terminale nell'IDE di Visual Studio Code.
+Il passaggio successivo consiste nel connettere l'ambiente di sviluppo alla sottoscrizione di Azure in cui si vuole distribuire il progetto. Per iniziare, aprire un nuovo terminale nell'ambiente VS Code in esecuzione in Codespaces.
 
 1. Verificare prima di tutto che sia installata la [versione più recente](https://github.com/Azure/azure-dev/releases/tag/azure-dev-cli_1.9.3) di Azure Developer CLI.
     ```bash
@@ -82,7 +83,7 @@ Dopo aver eseguito l'accesso, è possibile iniziare a effettuare il provisioning
 Il provisioning e la distribuzione di un'applicazione di intelligenza artificiale con azd possono richiedere almeno 10 minuti o più per il completamento. È possibile tenere traccia dello stato di avanzamento:
 
 - Visualizzando l'avanzamento dettagliato nel [portale di Azure](https://ms.portal.azure.com/). Cercare il gruppo di risorse corrispondente al nome dell'ambiente. Selezionare l'opzione **Distribuzioni** nella barra laterale, quindi monitorare lo stato di distribuzione delle risorse create.
-- Visitare il portale [Studio AI della piattaforma Azure](https://ai.azure.com). Accedere tramite l'account di Azure personale. Cercare l'hub di intelligenza artificiale corrispondente al gruppo di risorse precedente (potrebbe essere necessario aggiornare alcune volte). Selezionare il progetto di intelligenza artificiale elencato, quindi selezionare **Distribuzioni** nella relativa barra laterale per tenere traccia dello stato per i modelli e le distribuzioni di applicazioni di chat.
+- Visitare il portale [Studio AI della piattaforma Azure](https://ai.azure.com). Accedere tramite l'account di Azure personale. Cercare l'hub di intelligenza artificiale corrispondente al gruppo di risorse precedente (potrebbe essere necessario aggiornare alcune volte). Selezionare il progetto di intelligenza artificiale elencato, quindi selezionare **Distribuzioni** nella relativa barra laterale per tenere traccia dello stato per i modelli e le distribuzioni delle applicazioni di chat.
 
 Si esaminerà ora come convalidare il provisioning delle risorse usando il portale di Azure.
 
@@ -214,7 +215,7 @@ Si riceverà una risposta come la seguente:
     pf flow test --flow ./contoso_chat --inputs question="tell me about your jackets" customerId="3" chat_history=[] --ui
     ```
 
-Questo comando deve avviare una **visualizzazione dellai traccia** nel browser (in una nuova scheda) con una tabella che fornisce dettagli generali sull'esecuzione di quel test, tra cui la latenza e l'utilizzo dei token.
+Questo comando deve avviare una **visualizzazione della traccia** nel browser (in una nuova scheda) con una tabella che fornisce dettagli generali sull'esecuzione di tale test, tra cui la latenza e l'utilizzo dei token.
 
 ![riga del test pf](./media/pf-flow-test-row.png)
 
@@ -226,7 +227,7 @@ Questo comando deve avviare una **visualizzazione dellai traccia** nel browser (
 
 È stato effettuato il provisioning del back-end di Azure che è pronto. L'ambiente di sviluppo locale è installato e configurato per l'uso con il back-end di Azure. A questo punto, è sufficiente iniziare a modificare il contenuto per personalizzare e ridistribuire la propria versione dell'applicazione. Di seguito viene esaminato rapidamente come è strutturata la codebase.
 
-> Si tratta di un **elenco semplificato** del repository, eliminando alcuni file e cartelle per maggiore chiarezza.
+> Si tratta di un **elenco semplificato** dell'archivio, eliminando alcuni file e cartelle per maggiore chiarezza.
 
 ```bash
 data/
@@ -263,23 +264,23 @@ deployment/                         # ai.endpoint config files (named in azure.y
 requirements.txt
 ```
 
-Quando si vuole personalizzare il codice:
+Quando si desidera personalizzare il codice:
 
-- Se si apportano modifiche all'app (in `contoso_chat/`) è sufficiente eseguire `azd deploy` per ridistribuire l'applicazione nel back-end di cui è stato eseguito il provisioning in precedenza. Non sono necessari altri passaggi di provisioning o intervento manuale.
+- Se si apportano modifiche all'app (in `contoso_chat/`) è sufficiente eseguire `azd deploy` per ridistribuire l'applicazione nel back-end di cui è stato eseguito il provisioning in precedenza. Non sono necessari altri passaggi di provisioning o interventi manuali.
 - Se si apportano modifiche alle risorse (nella cartella `infra/`), eseguire `azd up` per eseguire di nuovo il provisioning e ridistribuire l'applicazione. Deve selezionare automaticamente i valori di configurazione precedenti da `.azure/` e modificarli.
 
 ## Facoltativo: personalizzare e ridistribuire il copilota
 
-È il momento di creare un copilota personalizzato. Ecco alcune cose che è possibile esplorare, per provare questo.
+È il momento di creare un copilota personalizzato. Ecco alcune cose che è possibile esplorare, per fare una prova.
 
 Tenere presente per ognuna di queste opzioni:
 
 - Usare `azd deploy` per ridistribuire l'applicazione se è stato modificato solo il codice dell'app.
 - Usare `azd up` per eseguire nuovamente il provisioning e la ridistribuzione dell'applicazione se è stata modificata la configurazione delle risorse.
 
-### Personalizzare i dati della cronologia del cliente e degli ordini
+### Personalizzare i dati della cronologia cliente e degli ordini
 
-1. Esaminare i dati di esempio in **dati/customer_info** per un senso dello schema predefinito.
+1. Esaminare i dati di esempio in **dati/customer_info** per dare un senso allo schema predefinito.
 1. Esplorare il notebook **data/create-cosmos-db.ipynb** per un approccio code-first agli aggiornamenti dei dati.
 1. **Modificare** i dati di esempio ed **eseguire** il notebook per modificare il database predefinito di Azure CosmosDB.
 1. **Ridistribuire** l'app. Provare una domanda di test per verificare che vengano restituiti nuovi dati del cliente.
@@ -288,7 +289,7 @@ Tenere presente per ognuna di queste opzioni:
 
 1. Esaminare i dati di esempio in **data/product_info/** per un'idea dello schema predefinito.
 1. Esplorare il notebook **create-azure-search.ipynb** per un approccio code-first agli aggiornamenti degli indici.
-1. **Modificare** i dati di esempio ed **eseguire** il notebook per cambiare gli indici predefiniti di Azure AI Search.
+1. **Modificare** i dati di esempio ed **eseguire** il notebook per modificare gli indici predefiniti di Azure AI Search.
 1. **Ridistribuire** l'app. Provare una domanda di test per verificare che vengano restituiti nuovi dati del prodotto.
 
 ### Personalizzare il modello di richiesta
