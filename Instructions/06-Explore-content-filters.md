@@ -20,22 +20,12 @@ Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di
 1. Nella sezione Gestione, selezionare Tutte le risorse e quindi **+ Nuovo hub**. Creare un nuovo hub con le impostazioni seguenti:
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-    - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco o selezionarne uno esistente*
-    - **Posizione**: *effettuare una **scelta casuale** da una delle aree seguenti*\*
-        - Australia orientale
-        - Canada orientale
-        - Stati Uniti orientali
-        - Stati Uniti orientali 2
-        - Francia centrale
-        - Giappone orientale
-        - Stati Uniti centro-settentrionali
-        - Svezia centrale
-        - Svizzera settentrionale
-        - Regno Unito meridionale
-    - **Connettere Servizi di Azure AI o OpenAI di Azure**: selezionare per creare un nuovo servizio di intelligenza artificiale o usarne uno esistente
+    - **Gruppo di risorse**: *un nuovo gruppo di risorse*
+    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-35-turbo** nella finestra Helper posizione e usare l'area consigliata\*
+    - **Connettere Servizi di Azure AI o OpenAI di Azure**: *creare una nuova connessione*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote di aree a livello tenant. Le aree elencate includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota negli scenari in cui si condivide un tenant con altri utenti. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Seleziona **Crea**. Il completamento della creazione del primo hub può richiedere alcuni minuti. Durante la creazione dell'hub, verranno create automaticamente anche le risorse di intelligenza artificiale seguenti: 
     - Servizi di intelligenza artificiale
@@ -68,14 +58,14 @@ A questo punto è possibile distribuire un modello da usare tramite **Studio AI 
 1. In Studio AI della piattaforma Azure creare una nuova distribuzione con le impostazioni seguenti:
 
     - **Modello**: gpt-35-turbo
+    - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
     - **Tipo di distribuzione**: Standard
-    - **Risorsa OpenAI di Azure connessa**: *connessione OpenAI di Azure*
-    - **Versione modello**: Aggiornamento automatico per impostazione predefinita
-    - **Nome distribuzione**: *nome univoco di propria scelta*
-    - **Opzioni avanzate**
-        - **Filtro contenuto**: Predefinito
-        - **Limite di velocità dei token al minuto**: 5K
-
+    - **Versione del modello**: *selezionare la versione predefinita*
+    - **Risorsa di intelligenza artificiale**: *selezionare la risorsa creata in precedenza*
+    - **Limite di velocità dei token al minuto (migliaia)**: 5K
+    - **Filtro contenuto**: predefinitoV2
+    - **Abilitare la quota dinamica**: disabilitato
+      
 > **Nota**: ogni modello di Studio AI della piattaforma Azure è ottimizzato per un equilibrio diverso tra funzionalità e prestazioni. In questo esercizio si userà il modello **GPT 3.5 Turbo**, che è altamente in grado di generare e chattare in linguaggio naturale.
 
 ## Esplorare i filtri di contenuto

@@ -20,7 +20,7 @@ Per iniziare, creare un progetto di Studio AI della piattaforma Azure all'intern
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *un nuovo gruppo di risorse*
     - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-35-turbo** nella finestra Helper posizione e usare l'area consigliata\*
-    - **Connettere Servizi di Azure AI o OpenAI di Azure**: *creare una nuova connessione*
+    - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
     - **Connettere Azure AI Search**: ignorare la connessione
 
     > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
@@ -33,7 +33,7 @@ Per iniziare, creare un progetto di Studio AI della piattaforma Azure all'intern
 Per usare un modello linguistico nel prompt flow, è prima necessario distribuire un modello. Studio AI della piattaforma Azure consente all'utente di distribuire modelli OpenAI utilizzabili nei flussi.
 
 1. Nel riquadro di spostamento a sinistra, in **Componenti**, selezionare la pagina **Distribuzioni**.
-1. Creare una nuova distribuzione del modello **gpt-35-turbo** con le impostazioni seguenti:
+1. Creare una nuova distribuzione del modello **gpt-35-turbo** con le impostazioni seguenti selezionando **Personalizza** nella procedura guidata **Distribuisci modello**:
     - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
     - **Tipo di distribuzione**: Standard
     - **Versione del modello**: *selezionare la versione predefinita*
@@ -42,7 +42,7 @@ Per usare un modello linguistico nel prompt flow, è prima necessario distribuir
     - **Filtro contenuto**: predefinitoV2
     - **Abilitare la quota dinamica**: disabilitato
 1. Attendere la distribuzione del modello. Quando la distribuzione è pronta, selezionare **Apri nel playground**.
-1. Modificare il **messaggio di sistema** nel modo seguente:
+1. Nella casella di testo **Fornisci istruzioni e contesto al modello** modificare il contenuto nel modo seguente:
 
    ```
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
@@ -128,14 +128,17 @@ Dopo aver creato un copilota con un flusso di chat, è possibile valutare il flu
 
     - **Cosa si vuole valutare?**: i set di dati
     - **Nome per la valutazione**: *immettere un nome univoco*
-    - **Quale tipo di scenario si sta valutando?**: domanda e risposta senza contesto
     - Selezionare **Avanti**.
     - **Selezionare i dati da valutare**: aggiungere il set di dati
         - Scaricare il file JSONL https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl e caricarlo nell'interfaccia utente.
+    - Selezionare **Avanti**.
     - **Selezionare le metriche**: coerenza, scorrevolezza
     - **Connessione**: *connessione ai servizi di intelligenza artificiale*
     - **Nome/Modello di distribuzione**: *modello GPT-3.5 distribuito*
-1. Selezionare **Avanti** , quindi esaminare i dati e inviare la nuova valutazione.
+    - **query**: selezionare **la domanda** come origine dati
+    - **risposta**: selezionare **la risposta** come origine dati
+      
+1. Selezionare **Avanti**, quindi esaminare i dati e **inviare** la nuova valutazione.
 1. Attendere il completamento delle valutazioni, potrebbe essere necessario aggiornare.
 1. Selezionare l'esecuzione della valutazione appena creata.
 1. Esplorare la **dashboard delle metriche** e il **risultato dettagliato delle metriche**.
