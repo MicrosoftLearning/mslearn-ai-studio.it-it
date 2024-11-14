@@ -5,13 +5,13 @@ lab:
 
 # Ottimizzare un modello linguistico per il completamento della chat in Studio AI della piattaforma Azure
 
-Se si desidera che un modello linguistico si comporti in modo specifico, è possibile usare la progettazione dei prompt per definire il comportamento desiderato. Quando si intende migliorare la coerenza del comportamento desiderato, è possibile scegliere di ottimizzare un modello, confrontandolo con l'approccio di progettazione dei prompt per valutare il metodo più adatto alle proprie esigenze.
+Se si desidera che un modello linguistico si comporti in modo specifico, è possibile usare la progettazione dei prompt per definire il comportamento desiderato. Se si desidera migliorare la coerenza del comportamento desiderato, è possibile scegliere di ottimizzare un modello, confrontandolo con il proprio approccio di progettazione dei prompt per valutare il metodo più adatto alle esigenze.
 
-In questo esercizio, verrà ottimizzato un modello linguistico con Studio AI della piattaforma Azure che si desidera usare per uno scenario di applicazione di chat personalizzato. Il modello ottimizzato verrà confrontato con un modello di base per valutare se il modello ottimizzato è più adatto alle proprie esigenze.
+In questo esercizio, verrà ottimizzato un modello linguistico con Studio AI della piattaforma Azure che si desidera utilizzae per uno scenario di applicazione di chat personalizzato. Il modello ottimizzato verrà confrontato con un modello di base per valutare se il modello ottimizzato è più adatto alle proprie esigenze.
 
-Si supponga di lavorare per un'agenzia di viaggi per la quale si sta sviluppando un'applicazione di chat per aiutare le persone a pianificare le loro vacanze. L'obiettivo è creare una chat semplice e accattivante che suggerisca destinazioni e attività. Poiché la chat non è connessa ad alcuna origine dati, **non ** deve fornire raccomandazioni specifiche per hotel, voli o ristoranti per essere considerata attendibile dai clienti.
+Si supponga di lavorare per un'agenzia di viaggi per la quale si sta sviluppando un'applicazione di chat per aiutare le persone a pianificare le proprie vacanze. L'obiettivo è creare una chat semplice e accattivante che suggerisca destinazioni e attività. Poiché la chat non è connessa ad alcuna origine dati, **non** deve fornire raccomandazioni specifiche per hotel, voli o ristoranti per essere considerata attendibile dai clienti.
 
-Questo esercizio richiederà circa **60** minuti.
+Questo esercizio richiederà circa **60** minuti.
 
 ## Creare un hub e un progetto di intelligenza artificiale in Studio AI della piattaforma Azure
 
@@ -25,11 +25,11 @@ Per iniziare, creare un progetto di Studio AI della piattaforma Azure all'intern
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *un nuovo gruppo di risorse*
-    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-35-turbo** nella finestra Helper posizione e usare l'area consigliata\*
+    - **Località**: scegliere una delle aree seguenti **Stati Uniti orientali 2**, **Stati Uniti centro-settentrionali**, **Svezia centrale**, **Svizzera occidentale**\*
     - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sull'[Ottimizzazione delle aree del modello](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#fine-tuning-models)
 
 1. Esaminare la configurazione e creare il progetto.
 1. Attendere la creazione del progetto.
@@ -65,7 +65,7 @@ Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare
     - **Caricare il file**: selezionare il file JSONL scaricato nel passaggio precedente.
     - **Dati di convalida**: nessuno
     - **Parametri attività**: *mantenere le impostazioni predefinite*
-1. L'ottimizzazione inizierà e potrebbe richiedere del tempo per il completamento.
+1. Verrà avviata l'ottimizzazione, che potrebbe richiedere del tempo per il completamento.
 
 > **Nota**: l'ottimizzazione e la distribuzione possono richiedere del tempo, quindi potrebbe essere necessario eseguire periodicamente il controllo. È già possibile continuare con il passaggio successivo durante l'attesa.
 
@@ -74,17 +74,17 @@ Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare
 Mentre si attende il completamento del processo di ottimizzazione, è possibile chattare con un modello GPT 3.5 di base per valutare le prestazioni.
 
 1. Passare alla pagina **Distribuzioni** nella sezione **Componenti** , usando il menu a sinistra.
-1. Selezionare il pulsante **+ Distribuisci modello** e selezionare l'opzione **Distribuisci modello di base**.
-1. Distribuire un modello `gpt-35-turbo`, che corrisponde allo stesso tipo di modello usato durante l'ottimizzazione.
+1. Selezionare il pulsante **+ Distribuisci modello** e scegliere l'opzione **Distribuisci modello di base**.
+1. Distribuire un `gpt-35-turbo` modello, che corrisponde allo stesso tipo di modello usato durante l'ottimizzazione.
 1. Al termine della distribuzione, passare alla pagina **Chat** nella sezione **Playground progetto**.
-1. Selezionare il modello di base `gpt-35-model` distribuito nella distribuzione di installazione.
+1. Selezionare il `gpt-35-model` modello di base distribuito nella distribuzione di installazione.
 1. Nella finestra della chat immettere la query `What can you do?` e visualizzare la risposta.
     Le risposte sono molto generiche. Si ricorda che l'obiettivo è creare un'applicazione di chat che susciti il desiderio di viaggiare.
 1. Aggiornare il messaggio di sistema con il prompt seguente:
     ```md
     You are an AI assistant that helps people plan their holidays.
     ```
-1. Selezionare **Salva**, quindi selezionare **Cancella chat** e chiedere nuovamente `What can you do?`. In risposta, l'assistente potrebbe indicare che può essere d'aiuto per la prenotazione di voli, hotel e auto a noleggio per un viaggio. Si intende evitare questo comportamento.
+1. Selezionare **Salva**, quindi selezionare **Cancella chat** e chiedere nuovamente `What can you do?` In risposta, l'assistente potrebbe indicare che può essere d'aiuto per la prenotazione di voli, hotel e auto a noleggio per un viaggio. Si intende evitare questo comportamento.
 1. Aggiornare di nuovo il messaggio di sistema con un nuovo prompt:
 
     ```md
@@ -94,7 +94,7 @@ Mentre si attende il completamento del processo di ottimizzazione, è possibile 
     ```
 
 1. Selezionare **Salva** e **Cancella chat**.
-1. Continuare a testare l'applicazione di chat per verificare che non fornisca informazioni non aggiornate nei dati recuperati Ad esempio, porre le domande seguenti ed esplorare le risposte del modello:
+1. Continuare a testare l'applicazione di chat per verificare che non fornisca informazioni non basate sui dati recuperati. Ad esempio, porre le domande seguenti ed esplorare le risposte del modello:
    
     `Where in Rome should I stay?`
     
@@ -102,7 +102,7 @@ Mentre si attende il completamento del processo di ottimizzazione, è possibile 
 
     `Give me a list of five bed and breakfasts in Trastevere.`
 
-    Il modello può fornire un elenco di hotel, anche qualora sia stato richiesto di non fornire suggerimenti sugli hotel. Questo è un esempio di comportamento incoerente. Si vedrà ora se il modello ottimizzato offre prestazioni migliori in questi casi.
+    Il modello può fornire un elenco di hotel, anche qualora sia stato richiesto di non fornire suggerimenti sugli hotel. Questo è un esempio di comportamento incoerente. Verrà ora esaminato se il modello ottimizzato offre prestazioni migliori in questi casi.
 
 1. Passare alla pagina **Ottimizzazione** in **Strumenti** per trovare il processo di ottimizzazione e il relativo stato. Se è ancora in esecuzione, è possibile scegliere di continuare a valutare manualmente il modello di base distribuito. Se l'operazione è stata completata, è possibile continuare con la sezione successiva.
 
@@ -116,7 +116,7 @@ Al termine dell'ottimizzazione, è possibile distribuire il modello ottimizzato.
     - **Tipo di distribuzione**: Standard
     - **Limite di velocità dei token al minuto (migliaia)**: 5K
     - **Filtro contenuto**: Predefinito
-1. Attendere il completamento della distribuzione prima di poterla sottoporre a test. L'operazione potrebbe richiedere alcuni minuti.
+1. Attendere il completamento della distribuzione prima di sottoporla a test. L'operazione potrebbe richiedere alcuni minuti.
 
 ## Test del modello ottimizzato
 
