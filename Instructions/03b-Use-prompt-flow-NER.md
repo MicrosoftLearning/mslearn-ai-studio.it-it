@@ -1,9 +1,9 @@
 ---
 lab:
-  title: Usare il prompt flow per il Riconoscimento entità denominata (NER) in Studio AI della piattaforma Azure
+  title: Usare il prompt flow per il Riconoscimento entità denominata (NER) nel portale Azure AI Foundry
 ---
 
-# Usare il prompt flow per il Riconoscimento entità denominata (NER) in Studio AI della piattaforma Azure
+# Usare il prompt flow per il Riconoscimento entità denominata (NER) nel portale Azure AI Foundry
 
 L'estrazione di informazioni preziose dal testo è nota come Riconoscimento entità denominata (NER). Le entità sono parole chiave di interesse per l'utente in un determinato testo.
 
@@ -11,39 +11,41 @@ L'estrazione di informazioni preziose dal testo è nota come Riconoscimento enti
 
 I modelli linguistici di grandi dimensioni (LLM) possono essere utilizzati per eseguire il NER. Per creare un'applicazione che accetti un testo come entità di input e output, è possibile creare un flusso che usa un nodo LLM con prompt flow.
 
-In questo esercizio verrà usato il prompt flow di Studio AI della piattaforma Azure per creare un'applicazione LLM che prevede un tipo di entità e un testo come input. L'applicazione chiama un modello GPT da Azure OpenAI tramite un nodo LLM per estrarre l'entità richiesta da un determinato testo, pulisce il risultato e restituisce le entità estratte.
+In questo esercizio, verrà usato il prompt flow del portale Azure AI Foundry per creare un'applicazione LLM che richiede un tipo di entità e un testo come input. L'applicazione chiama un modello GPT da Azure OpenAI tramite un nodo LLM per estrarre l'entità richiesta da un determinato testo, pulisce il risultato e restituisce le entità estratte.
 
 ![Panoramica dell'esercizio](./media/get-started-lab.png)
 
-Prima, è necessario creare un progetto in Studio AI della piattaforma Azure per creare le risorse di Azure necessarie. È quindi possibile distribuire un modello GPT con il Servizio OpenAI di Azure. Dopo aver creato le risorse necessarie, è possibile creare il flusso. Infine, il flusso verrà eseguito per testarlo e visualizzare l'output di esempio.
+È necessario innanzitutto creare un progetto nel portale Azure AI Foundry per creare le risorse di Azure necessarie. È quindi possibile distribuire un modello GPT con il Servizio OpenAI di Azure. Dopo aver creato le risorse necessarie, è possibile creare il flusso. Infine, il flusso verrà eseguito per testarlo e visualizzare l'output di esempio.
 
-## Creare un progetto in Studio AI della piattaforma Azure
+## Creare un progetto nel portale Azure AI Foundry
 
-Per iniziare, creare un progetto di Studio AI della piattaforma Azure e un hub di Azure per intelligenza per supportarlo.
+Per iniziare, è necessario creare un progetto del portale Azure AI Foundry e un hub di Azure AI per supportarlo.
 
 1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
-1. Selezionare la pagina **Home** e quindi **+ Nuovo progetto**.
-1. Nella procedura guidata **Crea un nuovo progetto**, creare un progetto con le impostazioni seguenti:
+1. Nella home page, selezionare **+ Crea progetto**.
+1. Nella procedura guidata **Creare un progetto** è possibile visualizzare tutte le risorse di Azure che verranno create automaticamente con il progetto, oppure personalizzare le impostazioni seguenti selezionando **Personalizza** prima di selezionare **Crea**:
+
     - **Nome progetto**: *un nome univoco per il progetto*
     - **Hub**: *creare un nuovo hub con le impostazioni seguenti:*
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *un nuovo gruppo di risorse*
     - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-35-turbo** nella finestra Helper posizione e usare l'area consigliata\*
-    - **Connettere Servizi di Azure AI o OpenAI di Azure**: *creare una nuova connessione*
+    - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
     - **Connettere Azure AI Search**: ignorare la connessione
 
     > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Esaminare la configurazione e creare il progetto.
-1. Attendere la creazione del progetto.
+1. Se si seleziona **Personalizza**, selezionare **Avanti** ed esaminare la configurazione.
+1. Selezionare **Crea** e attendere il completamento del processo.
 
 ## Distribuire un modello GTP
 
-Per usare un modello LLM nel prompt flow, prima è necessario distribuire un modello. Studio AI della piattaforma Azure consente all'utente di distribuire modelli OpenAI utilizzabili nei flussi.
+Per usare un modello LLM nel prompt flow, prima è necessario distribuire un modello. Il portale Azure AI Foundry consente all'utente di distribuire modelli OpenAI usabili nei flussi.
 
-1. Nel riquadro di spostamento a sinistra, in **Componenti**, selezionare la pagina **Distribuzioni**.
-1. Creare una nuova distribuzione del modello **gpt-35-turbo** con le impostazioni seguenti:
+1. Nel riquadro di spostamento a sinistra, in **Risorse personali**, selezionare la pagina **Modelli + endpoint**.
+1. Creare una nuova distribuzione del modello **gpt-35-turbo** con le seguenti impostazioni selezionando **Personalizza** nei dettagli della distribuzione:
+   
     - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
     - **Tipo di distribuzione**: Standard
     - **Versione del modello**: *selezionare la versione predefinita*
@@ -52,9 +54,9 @@ Per usare un modello LLM nel prompt flow, prima è necessario distribuire un mod
     - **Filtro contenuto**: predefinitoV2
     - **Abilitare la quota dinamica**: disabilitato
    
-Dopo aver distribuito il modello LLM, è possibile creare un flusso in Studio AI della piattaforma Azure che richiama il modello distribuito.
+Dopo aver distribuito il modello linguistico, è possibile creare un flusso nel portale Azure AI Foundry che richiama il modello distribuito.
 
-## Creare e gestire un flusso in Studio AI della piattaforma Azure
+## Creare e avviare un flusso nel portale Azure AI Foundry
 
 Ora che è stato effettuato il provisioning di tutte le risorse necessarie, è possibile creare un flusso.
 
@@ -62,7 +64,7 @@ Ora che è stato effettuato il provisioning di tutte le risorse necessarie, è p
 
 Per creare un nuovo flusso con un modello, è possibile selezionare uno dei tipi di flussi da sviluppare.
 
-1. Nel riquadro di spostamento a sinistra, in **Strumenti**, selezionare **Prompt flow**.
+1. Nel riquadro di spostamento a sinistra, in **Crea e personalizza**, selezionare **Prompt flow**.
 1. Selezionare **+ Creare** per creare un nuovo flusso.
 1. Creare un nuovo **flusso standard** e immettere `entity-recognition` come nome della cartella.
 
@@ -71,7 +73,7 @@ Per creare un nuovo flusso con un modello, è possibile selezionare uno dei tipi
     <p>Se viene visualizzato un errore di autorizzazioni quando si crea un nuovo prompt flow, provare a risolvere i problemi nel seguente modo:</p>
     <ul>
         <li>Nel portale di Azure, selezionare la risorsa Servizi di intelligenza artificiale.</li>
-        <li>Nella pagina IAM, nella scheda Identità, verificare che si tratti dell'identità gestita assegnata dal sistema.</li>
+        <li>Nella scheda Identità, in Gestione risorse, confermare che si tratti dell'identità gestita assegnata dal sistema.</li>
         <li>Passare all'account di archiviazione associato. Nella pagina IAM, aggiungere l'assegnazione di ruolo <em>Lettore dei dati del BLOB di archiviazione</em>.</li>
         <li>In <strong>Assegna accesso a</strong>, scegliere <strong>Identità gestita</strong>, <strong>+ Seleziona membri</strong> e selezionare <strong>Tutte le identità gestite assegnate dal sistema</strong>.</li>
         <li>Rivedere e assegnare per salvare le nuove impostazioni e ripetere il passaggio precedente.</li>
@@ -108,12 +110,11 @@ Il flusso standard include già un nodo che usa lo strumento LLM. È possibile t
 
 1. Passare al **nodo LLM** denominato `joke`.
 1. Sostituire il nome con `NER_LLM`
-1. In **Connessione**, selezionare la connessione `Default_AzureOpenAI`.
+1. Per **Connection**, selezionare la connessione creata al momento della creazione dell'hub AI.
 1. Per **deployment_name**, selezionare il modello `gpt-35-turbo` distribuito.
 1. Sostituire il campo richiesta con il codice seguente.
 
    ```yml
-   {% raw %}
    system:
 
    Your task is to find entities of a certain type from the given text content.
@@ -126,7 +127,6 @@ Il flusso standard include già un nodo che usa lo strumento LLM. È possibile t
    Entity type: {{entity_type}}
    Text content: {{text}}
    Entities:
-   {% endraw %}
    ```
 
 1. Selezionare **Convalida e analizza input**.
@@ -180,7 +180,7 @@ Dopo aver sviluppato il flusso, è possibile eseguirlo per testarlo. Poiché son
 
 ## Eliminare le risorse di Azure
 
-Quando si finisce di esplorare Studio AI della piattaforma Azure, è necessario eliminare le risorse create per evitare costi di Azure non necessari.
+Al termine dell'esplorazione del portale Azure AI Foundry, è necessario eliminare le risorse create per evitare costi di Azure inutili.
 
 - Passare al [portale di Azure](https://portal.azure.com) all'indirizzo `https://portal.azure.com`.
 - Nella **Home page** del portale di Azure selezionare **Gruppi di risorse**.

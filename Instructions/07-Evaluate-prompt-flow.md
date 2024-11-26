@@ -1,17 +1,17 @@
 ---
 lab:
-  title: Valutare le prestazioni del copilota personalizzato in Studio AI della piattaforma Azure
+  title: Valutare le prestazioni del copilota personalizzato in Azure AI Foundry
 ---
 
-# Valutare le prestazioni del copilota personalizzato in Studio AI della piattaforma Azure
+# Valutare le prestazioni del copilota personalizzato in Azure AI Foundry
 
-In questo esercizio verranno esaminate valutazioni predefinite e personalizzate per valutare e confrontare le prestazioni delle applicazioni di intelligenza artificiale con Studio AI della piattaforma Azure.
+In questo esercizio, verranno esaminate le valutazioni predefinite e personalizzate per valutare e confrontare le prestazioni delle applicazioni di intelligenza artificiale con il portale Azure AI Foundry.
 
 Questo esercizio richiederà circa **30** minuti.
 
-## Creare un hub e un progetto di intelligenza artificiale in Studio AI della piattaforma Azure
+## Creare un hub e un progetto di intelligenza artificiale in Azure AI Foundry
 
-Per iniziare, creare un progetto di Studio AI della piattaforma Azure all'interno di un hub di Azure per intelligenza artificiale:
+Per iniziare, creare un progetto di Azure AI Foundry all'interno di un hub di Azure AI:
 
 1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
 1. Selezionare la pagina **Home** e quindi **+ Nuovo progetto**.
@@ -30,9 +30,10 @@ Per iniziare, creare un progetto di Studio AI della piattaforma Azure all'intern
 
 ## Distribuire un modello GTP
 
-Per usare un modello linguistico nel prompt flow, è prima necessario distribuire un modello. Studio AI della piattaforma Azure consente all'utente di distribuire modelli OpenAI utilizzabili nei flussi.
+Per usare un modello linguistico nel prompt flow, è prima necessario distribuire un modello. Il portale Azure AI Foundry consente all'utente di distribuire modelli OpenAI usabili nei flussi.
 
-1. Nel riquadro di spostamento a sinistra, in **Componenti**, selezionare la pagina **Distribuzioni**.
+1. Passare alla pagina **Modelli + endpoint** nella sezione **Asset personali** usando il menu a sinistra.
+1. Selezionare il pulsante **+ Distribuisci modello** e scegliere l'opzione **Distribuisci modello di base**.
 1. Creare una nuova distribuzione del modello **gpt-35-turbo** con le impostazioni seguenti selezionando **Personalizza** nella procedura guidata **Distribuisci modello**:
     - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
     - **Tipo di distribuzione**: Standard
@@ -62,12 +63,12 @@ Per usare un modello linguistico nel prompt flow, è prima necessario distribuir
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Seleziona **Salva**.
-1. Nella finestra della chat immettere la query: `What can you do?` per verificare che il modello linguistico si comporti come previsto.
+1. Fare clic su **Applica modifiche**.
+1. Nella finestra (cronologia) della chat, immettere la query: `What can you do?` per verificare che il modello linguistico si comporti come previsto.
 
 Dopo aver distribuito un modello con un messaggio di sistema aggiornato, è possibile valutare il modello.
 
-## Valutare manualmente un modello linguistico in Studio AI della piattaforma Azure
+## Valutare manualmente un modello linguistico nel portale Azure AI Foundry
 
 È possibile esaminare manualmente le risposte del modello in base ai dati dei test. L'esame manuale consente di testare input diversi uno alla volta per valutare se il modello funziona come previsto.
 
@@ -112,7 +113,13 @@ Dopo aver distribuito un modello con un messaggio di sistema aggiornato, è poss
 
 ## Valutare il copilota con le metriche predefinite
 
-Dopo aver creato un copilota con un flusso di chat, è possibile valutare il flusso creando un'esecuzione batch e valutando le prestazioni del flusso con metriche predefinite.
+Dopo aver creato un'applicazione di chat con un prompt flow, è possibile valutare il flusso eseguendo un batch e valutando le prestazioni del flusso con le metriche predefinite.
+
+![Diagramma della costruzione del set di dati di input per la valutazione.](./media/diagram-dataset-evaluation.png)
+
+Per valutare un flusso di chat, le query utente e le risposte di chat vengono fornite come input per una valutazione.
+
+Per ridurre i tempi, è stato creato un set di dati di output batch che contiene i risultati di più input elaborati da un prompt flow. Ciascun risultato viene memorizzato nel set di dati che verrà valutato nel passaggio successivo.
 
 1. Selezionare la scheda **Valutazioni automatiche** e creare una **Nuova valutazione** con le impostazioni seguenti: <details>  
       <summary><b>Suggerimento per la risoluzione dei problemi</b>: errore di autorizzazioni</summary>
@@ -130,7 +137,7 @@ Dopo aver creato un copilota con un flusso di chat, è possibile valutare il flu
     - **Nome per la valutazione**: *immettere un nome univoco*
     - Selezionare **Avanti**.
     - **Selezionare i dati da valutare**: aggiungere il set di dati
-        - Scaricare il file JSONL https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl e caricarlo nell'interfaccia utente.
+        - Scaricare il [set di dati di convalida](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) in `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl`, salvarlo come file JSONL e caricarlo nell'interfaccia utente.
     - Selezionare **Avanti**.
     - **Selezionare le metriche**: coerenza, scorrevolezza
     - **Connessione**: *connessione ai servizi di intelligenza artificiale*
@@ -145,7 +152,7 @@ Dopo aver creato un copilota con un flusso di chat, è possibile valutare il flu
 
 ## Eliminare le risorse di Azure
 
-Quando si finisce di esplorare Studio AI della piattaforma Azure, è necessario eliminare le risorse create per evitare costi di Azure non necessari.
+Al termine dell'esplorazione di Azure AI Foundry, è necessario eliminare le risorse create per evitare costi di Azure non necessari.
 
 - Passare al [portale di Azure](https://portal.azure.com) all'indirizzo `https://portal.azure.com`.
 - Nella **Home page** del portale di Azure selezionare **Gruppi di risorse**.

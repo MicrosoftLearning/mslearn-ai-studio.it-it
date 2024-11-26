@@ -5,7 +5,7 @@ lab:
 
 # Creare un copilota personalizzato usando gli strumenti di sviluppo code-first
 
-In questo esercizio, verrà clonato e distribuito un modello di Azure Developer CLI effettua il provisioning e [distribuisce il progetto di intelligenza artificiale in un endpoint online](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) su Studio AI della piattaforma Azure. Verrà quindi usato come punto di partenza per creare un copilota personalizzato con Azure per l'intelligenza artificiale e un'esperienza code-first.
+In questo esercizio, verrà clonato e distribuito un modello di Azure Developer CLI che effettua il provisioning e [distribuisce il progetto di intelligenza artificiale in un endpoint online](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) su Azure AI Foundry. Verrà quindi usato come punto di partenza per creare un copilota personalizzato con Azure per l'intelligenza artificiale e un'esperienza code-first.
 
 Questo esercizio richiederà circa **90** minuti.
 
@@ -21,7 +21,7 @@ Per completare questo esercizio, sarà necessario disporre di:
 
 Per iniziare a usare il modello di progetto di intelligenza artificiale di Azure Developer CLI, passare ai [modelli di Azure per l'intelligenza artificiale con la raccolta di Azure Developer CLI ](https://learn.microsoft.com/collections/5pq0uompdgje8d/?WT.mc_id=academic-140829-cacaste). Esplorando la raccolta, è possibile trovare diversi progetti raggruppati per tecnologia e caso d'uso, tra cui esempi di progetti multi-modale e multi-agente, progetti simili a copilota ed esempi che integrano framework e servizi di Azure diversi.
 
-Per questo esercizio si userà il**[ copilota Contoso Chat Retail con il modello del progetto Studio AI della piattaforma Azure e PromptFlow (Python)](https://aka.ms/contoso-retail-sample)** come punto di partenza. Questo modello di progetto è un'esperienza code-first che usa Prompty e PromptFlow per creare un copilota personalizzato (Intelligenza artificiale di chat) che può essere integrato nel sito Web di vendita al dettaglio (interfaccia utente di chat) di una società fittizia denominata Contoso Outdoors.
+Per questo esercizio verrà usato come punto di partenza il modello di progetto **[Copilot di Contoso Chat Retail con Azure AI Foundry e PromptFlow (Python)](https://aka.ms/contoso-retail-sample)**. Questo modello di progetto è un'esperienza code-first che usa Prompty e PromptFlow per creare un copilota personalizzato (Intelligenza artificiale di chat) che può essere integrato nel sito Web di vendita al dettaglio (interfaccia utente di chat) di una società fittizia denominata Contoso Outdoors.
 
 ![Interfaccia utente/esperienza utente di chat Contoso](./media/contoso_outdoors_website.png)
 
@@ -83,7 +83,7 @@ Dopo aver eseguito l'accesso, è possibile iniziare a effettuare il provisioning
 Il provisioning e la distribuzione di un'applicazione di intelligenza artificiale con azd possono richiedere almeno 10 minuti o più per il completamento. È possibile tenere traccia dello stato di avanzamento:
 
 - Visualizzando l'avanzamento dettagliato nel [portale di Azure](https://ms.portal.azure.com/). Cercare il gruppo di risorse corrispondente al nome dell'ambiente. Selezionare l'opzione **Distribuzioni** nella barra laterale, quindi monitorare lo stato di distribuzione delle risorse create.
-- Visitare il portale [Studio AI della piattaforma Azure](https://ai.azure.com). Accedere tramite l'account di Azure personale. Cercare l'hub di intelligenza artificiale corrispondente al gruppo di risorse precedente (potrebbe essere necessario aggiornare alcune volte). Selezionare il progetto di intelligenza artificiale elencato, quindi selezionare **Distribuzioni** nella relativa barra laterale per tenere traccia dello stato per i modelli e le distribuzioni delle applicazioni di chat.
+- Visitare il portale di [Azure AI Foundry](https://ai.azure.com). Accedere tramite l'account di Azure personale. Cercare l'hub di intelligenza artificiale corrispondente al gruppo di risorse precedente (potrebbe essere necessario aggiornare alcune volte). Selezionare il progetto di intelligenza artificiale elencato, quindi selezionare **Distribuzioni** nella relativa barra laterale per tenere traccia dello stato per i modelli e le distribuzioni delle applicazioni di chat.
 
 Si esaminerà ora come convalidare il provisioning delle risorse usando il portale di Azure.
 
@@ -92,13 +92,13 @@ Si esaminerà ora come convalidare il provisioning delle risorse usando il porta
 
     ![Panoramica del gruppo di risorse del portale di Azure](./media/azure-portal-resource-group.png)
 
-1. Per iniziare, verificare che siano state create le risorse principali dell'[architettura di Studio Ai della piattaforma di Azure](https://learn.microsoft.com/azure/ai-studio/concepts/architecture). La figura seguente fornisce altri dettagli su ciò che ognuna di queste risorse fornisce all'applicazione di intelligenza artificiale.
+1. Per iniziare, verificare che siano state create le risorse principali dell'[architettura di Azure AI Foundry](https://learn.microsoft.com/azure/ai-studio/concepts/architecture). La figura seguente fornisce altri dettagli su ciò che ognuna di queste risorse fornisce all'applicazione di intelligenza artificiale.
 
     - **Hub di Azure per l'intelligenza artificiale**: risorsa di Azure di primo livello. Fornisce un ambiente di collaborazione per i team.
     - **Progetto di Azure per l'intelligenza artificiale**: figlio dell'hub. Raggruppa i componenti dell'app per orchestrazione, personalizzazione.
     - **Servizi di Azure per l'intelligenza artificiale**: gestisce gli endpoint del modello.
 
-    ![Architettura di Studio AI della piattaforma Azure](./media/resource-provider-connected-resources.svg)
+    ![Architettura di Azure AI Foundry](./media/resource-provider-connected-resources.svg)
 
 1. Successivamente, si verificherà che sia stato effettuato il provisioning di due risorse chiave per implementare il modello di progettazione [Generazione aumentata di recupero](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation) archiviando il prodotto e i dati dei clienti per il recupero basato su query.
 
@@ -115,11 +115,11 @@ Si esaminerà ora come convalidare il provisioning delle risorse usando il porta
 
 1. Infine, si noterà una nuova risorsa con tipo **distribuzione online di Machine Learning**. Questa è la risorsa corrispondente all'endpoint del progetto distribuito di Azure per intelligenza artificiale (per il copilota di chat).
 
-## Convalidare la distribuzione con Studio AI della piattaforma Azure
+## Convalidare la distribuzione con Azure AI Foundry
 
-Il portale di Azure consente di gestire le risorse di Azure sottostanti per il progetto. Il portale di Studio AI della piattaforma Azure consente di *compilare e gestire* i progetti di intelligenza artificiale stessi, end-to-end, dalla selezione del modello alla distribuzione dell'applicazione. Il comando `azd up` deve aver completato l'intero processo: dal provisioning dei modelli necessari, alla distribuzione e all'hosting dell'endpoint API copilot per l'utilizzo. Verificare che l'applicazione funzioni come previsto.
+Il portale di Azure consente di gestire le risorse di Azure sottostanti per il progetto. Il portale di Azure AI Foundry consente di *compilare e gestire* i progetti di intelligenza artificiale stessi, end-to-end, dalla selezione del modello alla distribuzione dell'applicazione. Il comando `azd up` deve aver completato l'intero processo: dal provisioning dei modelli necessari, alla distribuzione e all'hosting dell'endpoint API copilot per l'utilizzo. Verificare che l'applicazione funzioni come previsto.
 
-1. Visitare la pagina **Gestione** in [Studio AI della piattaforma Azure](https://ai.azure.com/manage) per visualizzare tutti gli hub di Azure per Intelligenza artificiale nella sottoscrizione.
+1. Visitare la pagina **Gestione** in [Azure AI Foundry](https://ai.azure.com/manage) per visualizzare tutti gli hub di Azure per intelligenza artificiale nella sottoscrizione.
 1. Selezionare l'hub per il gruppo di risorse per visualizzare tutti i progetti di Azure per Intelligenza artificiale al suo interno.
 1. Selezionare il progetto di intelligenza artificiale predefinito nell'hub, quindi selezionare **Distribuzioni** nel menu a sinistra.
 1. In **Distribuzioni di modelli** verificare di avere una connessione ad OpenAI di Azure, incluse le distribuzioni di:
@@ -131,13 +131,13 @@ Il portale di Azure consente di gestire le risorse di Azure sottostanti per il p
 
     ![Distribuzioni di progetti di Azure per Intelligenza artificiale](./media/azure-ai-project-deployment.png)
 
-## Testare la distribuzione (nel cloud) usando Studio AI della piattaforma Azure
+## Testare la distribuzione (nel cloud) usando Azure AI Foundry
 
-Per verificare che il copilota distribuito funzioni, usare la funzionalità predefinita del playground di test in Studio AI della piattaforma Azure.
+Per verificare che il copilota distribuito funzioni, usare la funzionalità predefinita del playground di test nel portale di Azure AI Foundry.
 
 ![Dettagli della distribuzione della chat](./media/chat-deployment-details.png)
 
-1. In Studio AI della piattaforma Azure, nell'elenco **Distribuzioni di app** selezionare la distribuzione **distribuzione-chat-xxxx**.
+1. In Azure AI Foundry, nell'elenco **Distribuzioni di app** selezionare la distribuzione **distribuzione-chat-xxxx**.
 1. Nella pagina **Dettagli** dell'applicazione chat distribuita, selezionare la scheda **Test** per ottenere l'interfaccia di test.
 
     Si noti che la scheda **Dettagli** include anche `Target URI` e i valori `Key` che è possibile usare con altre applicazioni front-end (ad esempio il sito Web Contoso Outdoor) per integrare questo assistente di chat per le interazioni di utenti reali.

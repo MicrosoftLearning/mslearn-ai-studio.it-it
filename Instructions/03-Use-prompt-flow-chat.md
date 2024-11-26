@@ -1,40 +1,39 @@
 ---
 lab:
-  title: Introduzione alla compilazione di copilot personalizzati con prompt flow in Studio AI della piattaforma Azure
+  title: Creare un copilota personalizzato con prompt flow nel portale Azure AI Foundry
 ---
 
-# Introduzione alla compilazione di copilot personalizzati con prompt flow in Studio AI della piattaforma Azure
+# Creare un copilota personalizzato con prompt flow nel portale Azure AI Foundry
 
-In questo esercizio verrà utilizzato il flusso di richiesta di Studio AI della piattaforma Azure per creare un copilota personalizzato che usa una richiesta utente e la cronologia delle chat come input e un modello GPT di OpenAI di Azure per generare un output.
+In questo esercizio, verrà usato il prompt flow del portale Azure AI Foundry per creare un copilota personalizzato che impiega un prompt dell'utente e la cronologia della chat come input e usa un modello GPT di Azure OpenAI per generare un output.
 
 Questo esercizio richiederà circa **30** minuti.
 
-## Creare un hub e un progetto di intelligenza artificiale in Studio AI della piattaforma Azure
+## Creare un hub e un progetto di intelligenza artificiale nel portale Azure AI Foundry
 
-Per iniziare, creare un progetto di Studio AI della piattaforma Azure all'interno di un hub di Azure per intelligenza artificiale:
+Per iniziare, è necessario creare il progetto del portale Azure AI Foundry all'interno di un hub Azure AI:
 
 1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
-1. Selezionare la pagina **Home** e quindi **+ Nuovo progetto**.
-1. Nella procedura guidata **Crea un nuovo progetto**, creare un progetto con le impostazioni seguenti:
-    - **Nome progetto**: *un nome univoco per il progetto*
-    - **Hub**: *creare un nuovo hub con le impostazioni seguenti:*
+1. Nella home page, selezionare **+ Crea progetto**.
+1. Nella procedura guidata **Creare un progetto** è possibile visualizzare tutte le risorse di Azure che verranno create automaticamente con il progetto, oppure personalizzare le impostazioni seguenti selezionando **Personalizza** prima di selezionare **Crea**:
+
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *un nuovo gruppo di risorse*
     - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-35-turbo** nella finestra Helper posizione e usare l'area consigliata\*
-    - **Connettere Servizi di Azure AI o OpenAI di Azure**: *creare una nuova connessione*
+    - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
     - **Connettere Azure AI Search**: ignorare la connessione
 
     > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
-1. Esaminare la configurazione e creare il progetto.
-1. Attendere la creazione del progetto.
+1. Se si seleziona **Personalizza**, selezionare **Avanti** ed esaminare la configurazione.
+1. Selezionare **Crea** e attendere il completamento del processo.
 
 ## Distribuire un modello GTP
 
-Per usare un modello linguistico nel prompt flow, è prima necessario distribuire un modello. Studio AI della piattaforma Azure consente all'utente di distribuire modelli OpenAI utilizzabili nei flussi.
+Per usare un modello linguistico nel prompt flow, è prima necessario distribuire un modello. Il portale Azure AI Foundry consente all'utente di distribuire modelli OpenAI usabili nei flussi.
 
-1. Nel riquadro di spostamento a sinistra, in **Componenti**, selezionare la pagina **Distribuzioni**.
+1. Nel riquadro di spostamento a sinistra, in **Risorse personali**, selezionare la pagina **Modelli + endpoint**.
 1. Creare una nuova distribuzione del modello **gpt-35-turbo** con le impostazioni seguenti:
     - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
     - **Tipo di distribuzione**: Standard
@@ -48,7 +47,7 @@ Per usare un modello linguistico nel prompt flow, è prima necessario distribuir
 
     Tenere presente che la risposta è generica perché non sono disponibili istruzioni specifiche per l'assistente. Per concentrarsi su un'attività, è possibile modificare la richiesta di sistema.
 
-1. Modificare il **messaggio di sistema** nel modo seguente:
+1. Modificare il messaggio **Fornisci istruzioni e contesto al modello** nel modo seguente:
 
    ```md
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
@@ -68,12 +67,12 @@ Per usare un modello linguistico nel prompt flow, è prima necessario distribuir
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Seleziona **Salva**.
+1. Fare clic su **Applica modifiche**.
 1. Nella finestra della chat immettere la stessa query di prima: `What can you do?` Tenere presente il cambiamento della risposta.
 
 Ora che è stato sperimentato il messaggio di sistema per il modello GPT distribuito, è possibile personalizzare ulteriormente l'applicazione usando il prompt flow.
 
-## Creare ed eseguire un flusso di chat in Studio AI della piattaforma Azure
+## Creare ed eseguire un flusso di chat nel portale Azure AI Foundry
 
 È possibile creare un nuovo flusso da un modello o crearne uno in base alle configurazioni nel playground. Poiché si stava già sperimentando nel playground, questa opzione verrà utilizzata per creare un nuovo flusso.
 
@@ -82,7 +81,7 @@ Ora che è stato sperimentato il messaggio di sistema per il modello GPT distrib
     <p>Se viene visualizzato un errore di autorizzazioni quando si crea un nuovo prompt flow, provare a risolvere i problemi nel seguente modo:</p>
     <ul>
         <li>Nel portale di Azure, selezionare la risorsa Servizi di intelligenza artificiale.</li>
-        <li>Nella pagina IAM, nella scheda Identità, verificare che si tratti dell'identità gestita assegnata dal sistema.</li>
+        <li>Nella scheda Identità, in Gestione risorse, confermare che si tratti dell'identità gestita assegnata dal sistema.</li>
         <li>Passare all'account di archiviazione associato. Nella pagina IAM, aggiungere l'assegnazione di ruolo <em>Lettore dei dati del BLOB di archiviazione</em>.</li>
         <li>In <strong>Assegna accesso a</strong>, scegliere <strong>Identità gestita</strong>, <strong>+ Seleziona membri</strong> e selezionare <strong>Tutte le identità gestite assegnate dal sistema</strong>.</li>
         <li>Rivedere e assegnare per salvare le nuove impostazioni e ripetere il passaggio precedente.</li>
@@ -109,7 +108,6 @@ Ora che è stato sperimentato il messaggio di sistema per il modello GPT distrib
 1. Esaminare il campo della richiesta e verificare che sia simile al seguente:
 
    ```yml
-   {% raw %}
    system:
    **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
@@ -136,7 +134,6 @@ Ora che è stato sperimentato il messaggio di sistema per il modello GPT distrib
 
    user:
    {{question}}
-   {% endraw %}
    ```
 
 ### Testare e distribuire il flusso
@@ -160,16 +157,15 @@ Dopo aver sviluppato il flusso, è possibile usare la finestra di chat per testa
         - **Raccolta di dati di inferenza**: abilitata
     - **Impostazioni avanzate**:
         - *Usa le impostazioni predefinite*
-1. In Studio AI dalla piattaforma Azure, nel progetto, nel riquadro di spostamento a sinistra, in **Componenti** selezionare la pagina **Distribuzioni**.
-1. Tenere presente che per impostazione predefinita sono elencate le **distribuzioni del modello**, incluso il modello linguistico distribuito.
-1. Selezionare la scheda **Distribuzioni di app** per trovare il flusso distribuito. Potrebbe essere necessario del tempo prima che la distribuzione venga elencata e creata correttamente.
+1. Nel portale Azure AI Foundry, nel progetto, nel riquadro di navigazione a sinistra, in **Asset personali**, selezionare la pagina **Modelli + endpoint**.
+1. Tenere presente che per impostazione predefinita sono elencate le **Distribuzioni del modello**, compresi il modello linguistico e il flusso distribuiti. Potrebbe essere necessario del tempo prima che la distribuzione venga elencata e creata correttamente.
 1. Al termine della distribuzione, selezionarla. Quindi, nella sua pagina **Test**, immettere il prompt `What is there to do in San Francisco?` e rivedere la risposta.
 1. Immettere il prompt `Where else could I go?` e rivedere la risposta.
 1. Visualizzare la pagina **Utilizzo** per l'endpoint e osservare che contiene informazioni di connessione e codice di esempio che è possibile usare per compilare un'applicazione client per l'endpoint, che consente di integrare la soluzione prompt flow in un'applicazione come copilota personalizzato.
 
 ## Eliminare le risorse di Azure
 
-Quando si finisce di esplorare Studio AI della piattaforma Azure, è necessario eliminare le risorse create per evitare costi di Azure non necessari.
+Al termine dell'esplorazione del portale Azure AI Foundry, è necessario eliminare le risorse create per evitare costi di Azure inutili.
 
 - Passare al [portale di Azure](https://portal.azure.com) all'indirizzo `https://portal.azure.com`.
 - Nella **Home page** del portale di Azure selezionare **Gruppi di risorse**.

@@ -1,29 +1,30 @@
 ---
 lab:
-  title: Esplorare i componenti e gli strumenti di Studio AI dalla piattaforma Azure
+  title: Esplorare i componenti e gli strumenti di Azure AI Foundry
 ---
 
-# Esplorare i componenti e gli strumenti di Studio AI dalla piattaforma Azure
+# Esplorare i componenti e gli strumenti di Azure AI Foundry
 
-In questo esercizio Studio AI della piattaforma Azure viene usato per creare un progetto ed esplorare un modello di intelligenza artificiale generativa.
+In questo esercizio, Azure AI Foundry viene usato per creare un progetto ed esplorare un modello di intelligenza artificiale generativa.
 
 Questo esercizio richiede circa **30** minuti.
 
-## Aprire Studio AI della piattaforma Azure
+## Aprire il portale di Azure AI Foundry
 
-Per iniziare, verrà esaminato Studio AI della piattaforma Azure.
+Per iniziare, esplorare il portale di Azure AI Foundry.
 
-1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure. La home page di Studio AI della piattaforma Azure si presenta come l'immagine seguente:
+1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure. La home page del portale di Azure AI Foundry si presenta come l'immagine seguente:
 
-    ![Screenshot di Studio AI della piattaforma Azure](./media/azure-ai-studio-home.png)
+    ![Screenshot del portale di Azure AI Foundry.](./media/azure-ai-studio-home.png)
 
 1. Esaminare le informazioni nella home page e visualizzare ciascuna scheda, osservando le opzioni per esplorare modelli e funzionalità, creare progetti e gestire le risorse.
 
-## Creare un hub di Azure per intelligenza artificiale
+## Creare un progetto e un hub di Azure per intelligenza artificiale
 
-Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di Azure per intelligenza artificiale. È possibile creare questa risorsa durante la creazione di un progetto o eseguirne il provisioning in anticipo (ovvero ciò che verrà fatto in questo esercizio).
+Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto un hub di Azure per intelligenza artificiale.
 
-1. Nella sezione **Gestione**, selezionare **Tutte le risorse** e quindi **+ Nuovo hub**. Creare un nuovo hub con le impostazioni seguenti:
+1. Nella home page, selezionare **+ Crea progetto**. Nella procedura guidata **Creare un progetto** è possibile visualizzare tutte le risorse di Azure che verranno create automaticamente con il progetto, oppure personalizzare le impostazioni seguenti selezionando **Personalizza** prima di selezionare **Crea**:
+   
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco o selezionarne uno esistente*
@@ -33,45 +34,30 @@ Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di
 
     > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota negli scenari in cui si condivide un tenant con altri utenti. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
-1. Selezionare **Avanti** per esaminare la configurazione.
+1. Se si seleziona **Personalizza**, selezionare **Avanti** ed esaminare la configurazione.
 1. Selezionare **Crea** e attendere il completamento del processo.
    
-    Dopo che l'hub di Azure per intelligenza artificiale è stato creato, il risultato dovrebbe essere simile all'immagine seguente:
+    Dopo che l'hub di Azure per intelligenza artificiale e il progetto sono stati creati, il risultato dovrebbe essere simile all'immagine seguente:
 
-    ![Screenshot di un hub di Azure per intelligenza artificiale in Studio AI della piattaforma Azure.](./media/azure-ai-resource.png)
+    ![Screenshot dei dettagli di un hub di Azure per intelligenza artificiale nel portale di Azure AI Foundry.](./media/azure-ai-resource.png)
 
-1. Aprire una nuova scheda del browser (lasciando aperta la scheda di Studio AI della piattaforma Azure) e passare al portale di Azure all'indirizzo [https://portal.azure.com](https://portal.azure.com?azure-portal=true), effettuando l'accesso con le credenziali di Azure, se richiesto.
+1. Aprire una nuova scheda del browser (lasciando aperta la scheda di Azure AI Foundry) e passare al portale di Azure all'indirizzo [https://portal.azure.com](https://portal.azure.com?azure-portal=true), effettuando l'accesso con le credenziali di Azure, se richiesto.
 1. Passare al gruppo di risorse in cui è stato creato l'hub di Azure per intelligenza artificiale e visualizzare le risorse di Azure create.
 
     ![Screenshot di un hub di Azure per intelligenza artificiale e delle risorse correlate nel portale di Azure.](./media/azure-portal.png)
 
-1. Tornare alla scheda del browser di Studio AI della piattaforma Azure.
-1. Visualizzare ognuna delle pagine nel riquadro a sinistra della pagina per l'hub di Azure per intelligenza artificiale e prendere nota degli artefatti che è possibile creare e gestire. Nella pagina **Connessioni**, osservare che sono già state create le connessioni ai servizi OpenAI di Azure e intelligenza artificiale.
-
-## Creare un progetto
-
-Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto nell'hub di Azure per intelligenza artificiale.
-
-1. In Studio AI della piattaforma Azure assicurarsi di essere nell'hub appena creato (è possibile verificare l'indirizzo controllando il percorso nella parte superiore della schermata).
-1. Passare a **Tutti i progetti** usando il menu a sinistra.
-1. Selezionare **+ Nuovo progetto**.
-1. Nella procedura guidata **Crea un nuovo progetto**, creare un progetto con le impostazioni seguenti:
-    - **** Hub corrente: *hub di intelligenza artificiale*
-    - **Nome progetto**: *un nome univoco per il progetto*
-1. Attendere la creazione del progetto. Il risultato dovrebbe avere un aspetto simile all'immagine seguente.
-
-    ![Screenshot dei dettagli di un progetto in Studio AI della piattaforma Azure.](./media/azure-ai-project.png)
-
-1. Visualizzare le pagine nel riquadro a sinistra, espandendo ogni sezione e annotando le attività che è possibile eseguire e le risorse che è possibile gestire in un progetto.
+1. Tornare alla scheda del browser del portale di Azure AI Foundry.
+1. Visualizzare ognuna delle pagine nel riquadro a sinistra della pagina per l'hub di Azure per intelligenza artificiale e prendere nota degli artefatti che è possibile creare e gestire. Nella pagina **Centro gestione** è possibile selezionare le **Risorse connesse**, nell'hub o nel progetto, e osservare che sono già state create le connessioni ai servizi OpenAI e IA di Azure.
+1. Nella pagina del Centro gestione, selezionare **Vai al progetto**.
 
 ## Distribuire e testare il modello
 
-È possibile usare un progetto per creare soluzioni di intelligenza artificiale complesse basate su modelli di intelligenza artificiale generativa. Un'esplorazione completa di tutte le opzioni di sviluppo disponibili in Studio AI della piattaforma Azure esula dall'ambito di questo esercizio, ma verranno esaminati alcuni semplici modi in cui è possibile usare i modelli in un progetto.
+È possibile usare un progetto per creare soluzioni di intelligenza artificiale complesse basate su modelli di intelligenza artificiale generativa. Un'esplorazione completa di tutte le opzioni di sviluppo disponibili nel portale Azure AI Foundry esula dall'ambito di questo esercizio, ma verranno esaminati alcuni semplici modi in cui è possibile usare i modelli in un progetto.
 
-1. Nel riquadro a sinistra del progetto selezionare la pagina **Distribuzioni** nella sezione **Componenti**.
-1. Nella pagina **Distribuzioni**, nella scheda **Distribuzioni del modello**, selezionare **+ Distribuisci modello**.
+1. Nel riquadro a sinistra del progetto, nella sezione **Risorse personali** selezionare la pagina **Modelli + endpoint**.
+1. Nella pagina **Modelli + endpoint**, nella scheda **Distribuzioni del modello**, selezionare **+ Distribuisci modello**.
 1. Cercare il modello **gpt-35-turbo** dall'elenco, selezionarlo e confermare.
-1. Distribuire il modello con le impostazioni seguenti:
+1. Distribuire il modello con le impostazioni seguenti selezionando **Personalizza** nei dettagli della distribuzione:
     - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
     - **Tipo di distribuzione**: Standard
     - **Versione del modello**: *selezionare la versione predefinita*
@@ -86,11 +72,11 @@ Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativ
 1. Nella pagina **playground della chat** assicurarsi che la distribuzione del modello sia selezionata nella sezione **Distribuzione**.
 1. Nella finestra della chat immettere una query, ad esempio *Che cos'è l'intelligenza artificiale?* e visualizzare la risposta:
 
-    ![Screenshot del playground in Studio AI della piattaforma Azure.](./media/playground.png)
+    ![Screenshot del playground nel portale Azure AI Foundry.](./media/playground.png)
 
 ## Eseguire la pulizia
 
-Al termine dell'esplorazione di Studio AI dalla piattaforma Azure, è necessario eliminare le risorse create in questo esercizio per evitare di incorrere in costi di Azure non necessari.
+Al termine dell'esplorazione del portale Azure AI Foundry, è necessario eliminare le risorse create in questo esercizio per evitare di incorrere in costi di Azure non necessari.
 
 1. Tornare alla scheda del browser che contiene il portale di Azure (o riaprire il [portale di Azure](https://portal.azure.com?azure-portal=true) in una nuova scheda del browser) e visualizzare il contenuto del gruppo di risorse in cui sono state distribuite le risorse usate in questo esercizio.
 1. Sulla barra degli strumenti selezionare **Elimina gruppo di risorse**.

@@ -17,15 +17,15 @@ Questo esercizio richiederà circa **25** minuti.
 
 ## Creare un hub di Azure per intelligenza artificiale
 
-Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di Azure per intelligenza artificiale. È possibile creare questa risorsa durante la creazione di un progetto o effettuarne il provisioning in anticipo (ciò che verrà fatto in questo esercizio).
+Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di Azure per intelligenza artificiale. È possibile creare questa risorsa durante la creazione di un progetto o eseguirne il provisioning in anticipo (ovvero ciò che verrà fatto in questo esercizio).
 
-1. In un Web browser aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
+1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
 
 1. Nella sezione Gestione, selezionare Tutti gli hub e quindi **+ Nuovo hub**. Creare un nuovo hub con le impostazioni seguenti:
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco o selezionarne uno esistente*
-    - **Ubicazione**: *effettuare una scelta **casuale** da una delle aree seguenti*\*
+    - **Posizione**: *effettuare una scelta **casuale** da una delle aree seguenti*\*
         - Australia orientale
         - Canada orientale
         - Stati Uniti orientali
@@ -39,27 +39,27 @@ Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di
     - **Connettere Servizi di Azure AI o OpenAI di Azure**: selezionare per creare un nuovo servizio di intelligenza artificiale o usarne uno esistente
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello di tenant. Le aree elencate includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota negli scenari in cui si condivide un tenant con altri utenti. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota negli scenari in cui si condivide un tenant con altri utenti. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
-1. Seleziona **Crea**. La creazione del primo hub può richiedere alcuni minuti per il suo completamento. Durante la creazione dell'hub, verranno create automaticamente anche le risorse di intelligenza artificiale seguenti: 
+1. Seleziona **Crea**. Il completamento della creazione del primo hub può richiedere alcuni minuti. Durante la creazione dell'hub, verranno create automaticamente anche le risorse di intelligenza artificiale seguenti: 
     - Servizi di intelligenza artificiale
     - Account di archiviazione
     - Key vault
 
-1. Dopo che l'hub di Azure per intelligenza artificiale è stato creato, il risultato dovrebbe essere simile all'immagine seguente.
+1. Dopo che l'hub di Azure per intelligenza artificiale è stato creato, il risultato dovrebbe essere simile all'immagine seguente:
 
-    ![Screenshot di un hub di Azure per intelligenza artificiale in Azure AI Studio.](./media/azure-ai-overview.png)
+    ![Screenshot di un hub di Azure per intelligenza artificiale in Studio AI della piattaforma Azure.](./media/azure-ai-overview.png)
 
 ## Creare un progetto
 
-Un hub di Azure per intelligenza artificiale offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto nell'hub di Azure per intelligenza artificiale.
+Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto nell'hub di Azure per intelligenza artificiale.
 
-1. Nella pagina **Compilazione** di Studio AI della piattaforma Azure, selezionare **+ Nuovo progetto**. Quindi, nella procedura guidata **Creare un nuovo progetto**, creare un progetto con le impostazioni seguenti:
+1. Nella pagina **Compilazione** di Studio AI della piattaforma Azure, selezionare **+ Nuovo progetto**. Quindi, nella procedura guidata **Creazione di un nuovo progetto**, creare un progetto con le impostazioni seguenti:
 
-    - **Nome progetto**: *nome univoco per il progetto*
+    - **Nome progetto**: *un nome univoco per il progetto*
     - **Hub**: *l'hub di intelligenza artificiale in uso*
 
-1. Attendere la creazione del progetto. Il risultato dovrebbe avere un aspetto simile all'immagine seguente:
+1. Attendere la creazione del progetto. Il risultato dovrebbe avere un aspetto simile all'immagine seguente.
 
     ![Screenshot dei dettagli di un progetto in Studio AI della piattaforma Azure.](./media/azure-ai-project.png)
 
