@@ -7,7 +7,7 @@ lab:
 
 Generazione ottimizzata per il recupero (RAG) è una tecnica usata per creare applicazioni che integrano dati da origini dati personalizzate in una richiesta di un modello di intelligenza artificiale generativa. RAG è un modello comunemente usato per lo sviluppo di *copiloti* personalizzati: applicazioni basate su chat che usano un modello linguistico per interpretare gli input e generare risposte appropriate.
 
-In questo esercizio si userà Studio AI della piattaforma Azure per integrare dati personalizzati in un flusso immediato di intelligenza artificiale generativa.
+In questo esercizio si userà il portale di Azure AI Foundry per integrare dati personalizzati in un flusso immediato di intelligenza artificiale generativa.
 
 Questo esercizio richiede circa **45** minuti.
 
@@ -39,23 +39,22 @@ La soluzione copilota integra dati personalizzati in un flusso immediato. Per su
 
 ## Creare un progetto di Intelligenza artificiale di Azure
 
-A questo momento si è pronti per creare un progetto di Studio AI della piattaforma Azure e le risorse di Azure per l'intelligenza artificiale per supportarlo.
+A questo momento si è pronti per creare un progetto di Azure AI Foundry e le risorse di Azure per l'intelligenza artificiale per supportarlo.
 
-1. In un Web browser aprire [Studio AI della piattaforma Azure](https://ai.azure.com) all'indirizzo `https://ai.azure.com` e accedere usando le credenziali di Azure.
-1. Nella pagina **home** di Studio AI della piattaforma Azure selezionare **+ Nuovo progetto**.
-1. Nella procedura guidata **Crea un progetto** assegnare un nome univoco al progetto, quindi selezionare **Personalizza** e creare un progetto con le impostazioni seguenti:
+1. In un Web browser, aprire il [portale di Azure AI Foundry](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure.
+1. Nella home page, selezionare **+ Crea progetto**.
+1. Nella **creazione guidata di un progetto** è possibile visualizzare tutte le risorse di Azure che verranno create automaticamente con il progetto. Selezionare **Personalizza** e connettersi alla risorsa di Azure AI Search:
 
-    - **Crea un progetto**: *creare una nuova risorsa con le impostazioni seguenti:*
+    - **Nome hub**: *un nome univoco*.
+    - **Sottoscrizione di Azure**: *La sottoscrizione di Azure usata*.
+    - **Gruppo di risorse**: *selezionare il gruppo di risorse contenente la risorsa di Azure AI Search*
+    - **Posizione**: *la stessa posizione della risorsa di Azure AI Search*
+    - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
+    - **Connettere Azure AI Search**: *scegliere la risorsa di Azure AI Search*.
 
-        - **Nome hub**: *un nome univoco*.
-        - **Sottoscrizione di Azure**: *La sottoscrizione di Azure usata*.
-        - **Gruppo di risorse**: *selezionare il gruppo di risorse contenente la risorsa di Azure AI Search*
-        - **Posizione**: *la stessa posizione della risorsa di Azure AI Search*
-        - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
-        - **Connettere Azure AI Search**: *scegliere la risorsa di Azure AI Search*.
-
-1. Attendere la creazione del progetto.
-
+1. Selezionare **Avanti** per esaminare la configurazione.
+1. Selezionare **Crea** e attendere il completamento del processo.
+   
 ## Distribuire i modelli
 
 Per implementare la soluzione sono necessari due modelli:
@@ -63,7 +62,7 @@ Per implementare la soluzione sono necessari due modelli:
 - Un modello di *incorporamento* per vettorizzare i dati di testo per un'indicizzazione e un'elaborazione efficienti.
 - Modello che può generare risposte in linguaggio naturale alle domande in base ai dati.
 
-1. In Studio AI della piattaforma Azure, nel progetto, nel riquadro di spostamento a sinistra, in **Componenti** selezionare la pagina **Distribuzioni**.
+1. Nel portale di Azure AI Foundry, nel progetto in uso, nel riquadro di spostamento a sinistra, in **Asset personali**, selezionare la pagina **Modelli + endpoint**.
 1. Creare una nuova distribuzione del modello **text-embedding-ada-002** con le impostazioni seguenti, selezionando **Personalizza** nella procedura guidata Distribuisci modello:
 
     - **Nome distribuzione**: `text-embedding-ada-002`
@@ -83,21 +82,21 @@ Per implementare la soluzione sono necessari due modelli:
 I dati per il copilota sono costituiti da una serie di brochure di viaggio in formato PDF dell'agenzia di viaggi fittizia *Margie's Travel*. Aggiungerli al progetto.
 
 1. Scaricare [l'archivio compresso di brochure](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) da `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` ed estrarlo in una cartella denominata **brochure** nel file system locale.
-1. In Studio AI della piattaforma Azure, nel progetto, nel riquadro di spostamento a sinistra, in **Componenti** selezionare la pagina **Dati**.
+1. Nel portale Azure AI Foundry, nel progetto, nel riquadro di spostamento a sinistra, in **Asset personali**, selezionare la pagina **Dati + indici**.
 1. Selezionare **+ Nuovi dati**.
 1. Nella procedura guidata **Aggiungi dati** espandere il menu a discesa per selezionare **Carica file/cartelle**.
 1. Selezionare **Carica cartella** e selezionare la cartella **brochure**.
-1. Impostare il nome dei dati su `brochures`.
+1. Selezionare **Avanti** e impostare il nome dei dati su `brochures`.
 1. Attendere il caricamento della cartella e notare che contiene diversi file .pdf.
 
 ## Creare un indice per i dati
 
 Dopo aver aggiunto un'origine dati al progetto, è possibile usarla per creare un indice nella risorsa di Azure AI Search.
 
-1. In Studio AI della piattaforma Azure, nel progetto, nel riquadro di spostamento a sinistra, in **Componenti**, selezionare la pagina **Indici**.
-1. Aggiungere un nuovo indice con le impostazioni seguenti:
+1. Nel portale Azure AI Foundry, nel progetto, nel riquadro di spostamento a sinistra, in **Asset personali**, selezionare la pagina **Dati + indici**.
+1. Nella scheda **Indici**, aggiungere un nuovo indice con le impostazioni seguenti:
     - **Posizione di origine**:
-        - **Origine dati**: dati in Studio AI della piattaforma Azure
+        - **Origine dati**: dati nel portale di Azure AI Foundry
             - *Selezionare l'origine dati delle **brochure***
     - **Configurazione dell'indice**:
         - **Selezionare il servizio Azure AI Search**: *selezionare la connessione tra **AzureAISearch** e la risorsa di Azure AI Search in uso*
@@ -117,10 +116,10 @@ Dopo aver aggiunto un'origine dati al progetto, è possibile usarla per creare u
 
 Prima di usare l'indice in un flusso immediato basato su RAG, verificare che possa essere usato per influire sulle risposte di intelligenza artificiale generativa.
 
-1. Nel riquadro di spostamento a sinistra, in **Playground progetto**, selezionare la pagina **Chat**.
+1. Selezionare la pagina **Playground** nel pannello di navigazione a sinistra.
 1. In tale pagina, nel pannello di installazione, verificare che sia selezionata la distribuzione modello **gpt-35-turbo-16k**. Quindi, nel pannello principale della sessione di chat inviare la richiesta `Where can I stay in New York?`
 1. Esaminare la risposta, che deve essere una risposta generica dal modello senza dati dall'indice.
-1. Nel pannello di installazione selezionare la scheda **Aggiungi dati**, quindi aggiungere l'indice di progetto **brochures-index** e selezionare il tipo di ricerca **ibrido (vettore + parola chiave)**.
+1. Nel pannello di installazione espandere il campo **Aggiungi dati**, quindi aggiungere l'indice di progetto **brochures-index** e selezionare il tipo di ricerca **ibrido (vettore + parola chiave)**.
 
    > **Nota**: alcuni utenti trovano immediatamente gli indici appena creati non disponibili. L'aggiornamento del browser in genere è utile, ma se si verifica ancora il problema per cui non è possibile trovare l'indice, potrebbe essere necessario attendere fino a quando l'indice non viene riconosciuto.
 
@@ -129,9 +128,9 @@ Prima di usare l'indice in un flusso immediato basato su RAG, verificare che pos
 
 ## Usare l'indice in un prompt flow
 
-L'indice vettoriale è stato salvato nel progetto di Studio AI della piattaforma Azure, consentendo di usarlo facilmente in un prompt flow.
+L'indice vettoriale è stato salvato nel progetto Azure AI Foundry, consentendo di usarlo facilmente in un flusso immediato.
 
-1. In Studio AI della piattaforma Azure, all'interno del progetto, nel riquadro di spostamento a sinistra, in **Strumenti**, selezionare la pagina **prompt flow**.
+1. Nel portale di Azure AI Foundry, all'interno del progetto, nel riquadro di spostamento a sinistra, in **Crea e personalizza**, selezionare la pagina **Pompt flow**.
 1. Creare un nuovo prompt flow clonando l'esempio **Domande e risposte multiple sui dati del profilo** nella raccolta. Salvare il clone di questo esempio in una cartella denominata `brochure-flow`.
     <details>  
       <summary><b>Suggerimento per la risoluzione dei problemi</b>: errore di autorizzazioni</summary>
@@ -233,17 +232,17 @@ Ora che si dispone di un flusso di lavoro che usa i dati indicizzati, è possibi
         - **Raccolta di dati di inferenza**: selezionato
     - **Impostazioni avanzate**:
         - *Usa le impostazioni predefinite*
-1. In Studio AI dalla piattaforma Azure, nel progetto, nel riquadro di spostamento a sinistra, in **Componenti** selezionare la pagina **Distribuzioni**.
+1. Nel portale Azure AI Foundry, nel progetto, nel riquadro di navigazione a sinistra, in **Asset personali**, selezionare la pagina **Modelli + endpoint**.
 1. Mantenere aggiornata la visualizzazione fino a quando la distribuzione di **brochure-endpoint-1** non viene mostrata come *completata* nell'endpoint di **brochure-endpoint** (questo potrebbe richiedere un periodo di tempo significativo).
 1. Al termine della distribuzione, selezionarla. Quindi, nella sua pagina **Test**, immettere il prompt `What is there to do in San Francisco?` e rivedere la risposta.
 1. Immettere il prompt `Where else could I go?` e rivedere la risposta.
 1. Visualizzare la pagina **Utilizzo** per l'endpoint e osservare che contiene informazioni di connessione e codice di esempio che è possibile usare per compilare un'applicazione client per l'endpoint, che consente di integrare la soluzione prompt flow in un'applicazione come copilota personalizzato.
 
-## Esercizio 
+## Proposta 
 
-Ora che si è appreso come integrare i dati in un copilota creato con Studio AI della piattaforma Azure, esaminare le fasi successive.
+Ora che sono state apprese le modalità di integrazione dei dati in un copilota realizzato con il portale Azure AI Foundry, è possibile procedere.
 
-Provare ad aggiungere una nuova origine dati tramite Studio AI della piattaforma Azure, a indicizzarla e a integrare i dati indicizzati in un prompt flow. Alcuni set di dati che è possibile provare sono:
+Provare ad aggiungere una nuova origine dati tramite il portale Azure AI Foundry, indicizzarla e integrare i dati indicizzati in un prompt flow. Alcuni set di dati che è possibile provare sono:
 
 - Una raccolta di articoli (di ricerca) presenti sul computer.
 - Una serie di presentazioni delle conferenze precedenti.
@@ -255,4 +254,4 @@ Attingere da tutte le risorse disponibili per creare l'origine dati e integrarla
 
 Per evitare i costi e l'utilizzo delle risorse di Azure non necessari, si dovrebbero rimuovere le risorse distribuite in questo esercizio.
 
-1. Se è stata completata l'esplorazione dello Studio AI della piattaforma Azure, si torna al [portale di Azure](https://portal.azure.com) all'indirizzo `https://portal.azure.com` e si accede usando le credenziali di Azure, se necessario. Quindi eliminare le risorse nel gruppo di risorse in cui è stato effettuato il provisioning di Azure Ai Search e delle risorse di Azure AI.
+1. Se è stata completata l'esplorazione di Azure AI Foundry, tornare al [portale di Azure](https://portal.azure.com) all'indirizzo `https://portal.azure.com` e accedere usando le credenziali di Azure, se necessario. Quindi eliminare le risorse nel gruppo di risorse in cui è stato effettuato il provisioning di Azure Ai Search e delle risorse di Azure AI.

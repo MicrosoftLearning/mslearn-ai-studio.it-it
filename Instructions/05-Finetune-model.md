@@ -1,33 +1,33 @@
 ---
 lab:
-  title: Ottimizzare un modello linguistico per il completamento della chat in Studio AI della piattaforma Azure
+  title: Ottimizzare un modello linguistico per il completamento della chat in Azure AI Foundry
 ---
 
-# Ottimizzare un modello linguistico per il completamento della chat in Studio AI della piattaforma Azure
+# Ottimizzare un modello linguistico per il completamento della chat in Azure AI Foundry
 
 Se si desidera che un modello linguistico si comporti in modo specifico, è possibile usare la progettazione dei prompt per definire il comportamento desiderato. Se si desidera migliorare la coerenza del comportamento desiderato, è possibile scegliere di ottimizzare un modello, confrontandolo con il proprio approccio di progettazione dei prompt per valutare il metodo più adatto alle esigenze.
 
-In questo esercizio, verrà ottimizzato un modello linguistico con Studio AI della piattaforma Azure che si desidera utilizzae per uno scenario di applicazione di chat personalizzato. Il modello ottimizzato verrà confrontato con un modello di base per valutare se il modello ottimizzato è più adatto alle proprie esigenze.
+In questo esercizio, verrà ottimizzato un modello linguistico con Azure AI Foundry che si desidera usare per uno scenario di applicazione di chat personalizzato. Il modello ottimizzato verrà confrontato con un modello di base per valutare se il modello ottimizzato è più adatto alle proprie esigenze.
 
 Si supponga di lavorare per un'agenzia di viaggi per la quale si sta sviluppando un'applicazione di chat per aiutare le persone a pianificare le proprie vacanze. L'obiettivo è creare una chat semplice e accattivante che suggerisca destinazioni e attività. Poiché la chat non è connessa ad alcuna origine dati, **non** deve fornire raccomandazioni specifiche per hotel, voli o ristoranti per essere considerata attendibile dai clienti.
 
 Questo esercizio richiederà circa **60** minuti.
 
-## Creare un hub e un progetto di intelligenza artificiale in Studio AI della piattaforma Azure
+## Creare un hub e un progetto di intelligenza artificiale nel portale Azure AI Foundry
 
-Per iniziare, creare un progetto di Studio AI della piattaforma Azure all'interno di un hub di Azure per intelligenza artificiale:
+Per iniziare, è necessario creare il progetto del portale Azure AI Foundry all'interno di un hub Azure AI:
 
 1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
-1. Selezionare la pagina **Home** e quindi **+ Nuovo progetto**.
+1. Dalla home page, selezionare **+ Crea progetto**.
 1. Nella procedura guidata **Crea un nuovo progetto**, creare un progetto con le impostazioni seguenti:
     - **Nome progetto**: *un nome univoco per il progetto*
-    - **Hub**: *creare un nuovo hub con le impostazioni seguenti:*
-    - **Nome hub**: *un nome univoco*.
-    - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-    - **Gruppo di risorse**: *un nuovo gruppo di risorse*
-    - **Località**: scegliere una delle aree seguenti **Stati Uniti orientali 2**, **Stati Uniti centro-settentrionali**, **Svezia centrale**, **Svizzera occidentale**\*
-    - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
-    - **Connettere Azure AI Search**: ignorare la connessione
+    - Selezionare **Personalizza**
+        - **Hub**: *riempimento automatico con nome predefinito*
+        - **Sottoscrizione**: *riempimento automatico con l'account con cui è stato effettuato l'accesso*
+        - **Gruppo di risorse**: (nuovo) *riempimento automatico con il nome del progetto*
+        - **Località**: scegliere una delle aree seguenti **Stati Uniti orientali 2**, **Stati Uniti centro-settentrionali**, **Svezia centrale**, **Svizzera occidentale**\*
+        - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
+        - **Connettere Azure AI Search**: ignorare la connessione
 
     > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sull'[Ottimizzazione delle aree del modello](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#fine-tuning-models)
 
@@ -38,21 +38,21 @@ Per iniziare, creare un progetto di Studio AI della piattaforma Azure all'intern
 
 Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare prima di tutto con il processo di ottimizzazione. Prima di poter ottimizzare un modello, è necessario un set di dati.
 
-1. Salvare il set di dati di training come file JSONL in locale: [https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-finetune.jsonl](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl)
+1. Scaricare il [set di dati di training](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl) in `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl` e salvarlo come file JSONL in locale.
 
     > **Nota**: per impostazione predefinita, il dispositivo potrebbe salvare il file come file .txt. Selezionare tutti i file e rimuovere il suffisso .txt per assicurarsi di salvare il file come JSONL.
 
-1. Passare alla pagina **Ottimizzazione** nella sezione **Strumenti**, usando il menu a sinistra.
-1. Selezionare il pulsante per aggiungere un nuovo modello di ottimizzazione, selezionare il `gpt-35-turbo` modello e selezionare **Conferma**.
+1. Passare alla pagina **Ottimizzazione** nella sezione **Crea e personalizza**, usando il menu a sinistra.
+1. Selezionare il pulsante per aggiungere un nuovo modello di ottimizzazione, selezionare il modello `gpt-35-turbo`, selezionare **Avanti** e quindi **Conferma**.
 1. **Ottimizzare** il modello usando la configurazione seguente:
     - **Versione del modello**: *selezionare la versione predefinita*
     - **Suffisso del modello**: `ft-travel`
-    - **Connessione di OpenAI di Azure**: *selezionare la connessione creata al momento della creazione dell'hub*
+    - **Risorsa AI connessa**: *selezionare la connessione predefinita creata al momento della creazione dell'hub. Dovrebbe essere selezionata per impostazione predefinita.*
     - **Dati di training**: caricare i file
 
     <details>  
     <summary><b>Suggerimento per la risoluzione dei problemi</b>: errore di autorizzazioni</summary>
-    <p>Se viene visualizzato un errore di autorizzazioni quando si crea un nuovo prompt flow, provare a risolvere i problemi nel seguente modo:</p>
+    <p>Se viene visualizzato un errore di autorizzazione, provare i seguenti passaggi per la risoluzione dei problemi:</p>
     <ul>
         <li>Nel portale di Azure, selezionare la risorsa Servizi di intelligenza artificiale.</li>
         <li>Nella pagina IAM, nella scheda Identità, verificare che si tratti dell'identità gestita assegnata dal sistema.</li>
@@ -73,18 +73,20 @@ Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare
 
 Mentre si attende il completamento del processo di ottimizzazione, è possibile chattare con un modello GPT 3.5 di base per valutare le prestazioni.
 
-1. Passare alla pagina **Distribuzioni** nella sezione **Componenti** , usando il menu a sinistra.
+1. Passare alla pagina **Modelli + endpoint** nella sezione **Asset personali** usando il menu a sinistra.
 1. Selezionare il pulsante **+ Distribuisci modello** e scegliere l'opzione **Distribuisci modello di base**.
 1. Distribuire un `gpt-35-turbo` modello, che corrisponde allo stesso tipo di modello usato durante l'ottimizzazione.
-1. Al termine della distribuzione, passare alla pagina **Chat** nella sezione **Playground progetto**.
-1. Selezionare il `gpt-35-model` modello di base distribuito nella distribuzione di installazione.
+1. Quando la distribuzione è completa, selezionare il pulsante **Apri nel playground**.
+1. Verificare che il modello di base distribuito `gpt-35-model` sia selezionato nel riquadro di configurazione.
 1. Nella finestra della chat immettere la query `What can you do?` e visualizzare la risposta.
     Le risposte sono molto generiche. Si ricorda che l'obiettivo è creare un'applicazione di chat che susciti il desiderio di viaggiare.
-1. Aggiornare il messaggio di sistema con il prompt seguente:
+1. Aggiornare il messaggio di sistema nel riquadro di configurazione con la seguente richiesta:
+
     ```md
     You are an AI assistant that helps people plan their holidays.
     ```
-1. Selezionare **Salva**, quindi selezionare **Cancella chat** e chiedere nuovamente `What can you do?` In risposta, l'assistente potrebbe indicare che può essere d'aiuto per la prenotazione di voli, hotel e auto a noleggio per un viaggio. Si intende evitare questo comportamento.
+
+1. Selezionare **Applica modifiche**, quindi selezionare **Cancella chat** e chiedere nuovamente `What can you do?` Come risposta, l'assistente potrebbe comunicare all'utente che può aiutare a prenotare voli, hotel e auto a noleggio per il viaggio. Si intende evitare questo comportamento.
 1. Aggiornare di nuovo il messaggio di sistema con un nuovo prompt:
 
     ```md
@@ -93,7 +95,7 @@ Mentre si attende il completamento del processo di ottimizzazione, è possibile 
     Ask engaging questions to help someone plan their trip and think about what they want to do on their holiday.
     ```
 
-1. Selezionare **Salva** e **Cancella chat**.
+1. Selezionare **Applica modifiche** e **Cancella chat**.
 1. Continuare a testare l'applicazione di chat per verificare che non fornisca informazioni non basate sui dati recuperati. Ad esempio, porre le domande seguenti ed esplorare le risposte del modello:
    
     `Where in Rome should I stay?`
@@ -104,7 +106,7 @@ Mentre si attende il completamento del processo di ottimizzazione, è possibile 
 
     Il modello può fornire un elenco di hotel, anche qualora sia stato richiesto di non fornire suggerimenti sugli hotel. Questo è un esempio di comportamento incoerente. Verrà ora esaminato se il modello ottimizzato offre prestazioni migliori in questi casi.
 
-1. Passare alla pagina **Ottimizzazione** in **Strumenti** per trovare il processo di ottimizzazione e il relativo stato. Se è ancora in esecuzione, è possibile scegliere di continuare a valutare manualmente il modello di base distribuito. Se l'operazione è stata completata, è possibile continuare con la sezione successiva.
+1. Passare alla pagina **Ottimizzazione** in **Crea e personalizza** per trovare il processo di ottimizzazione e il relativo stato. Se è ancora in esecuzione, è possibile scegliere di continuare a valutare manualmente il modello di base distribuito. Se l'operazione è stata completata, è possibile continuare con la sezione successiva.
 
 ## Distribuire il modello ottimizzato
 
@@ -141,7 +143,7 @@ Dopo aver distribuito il modello ottimizzato, è possibile testare il modello co
 
 ## Eseguire la pulizia
 
-Al termine dell’esplorazione di Studio AI della piattaforma Azure, è necessario eliminare le risorse create per evitare costi di Azure non necessari.
+Al termine dell'esplorazione di Azure AI Foundry, è necessario eliminare le risorse create per evitare costi di Azure non necessari.
 
 - Passare al [portale di Azure](https://portal.azure.com) all'indirizzo `https://portal.azure.com`.
 - Nella **Home page** del portale di Azure selezionare **Gruppi di risorse**.

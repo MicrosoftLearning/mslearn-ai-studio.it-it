@@ -20,15 +20,15 @@ Per compilare un copilota con prompt flow, è necessario:
 
 Per iniziare, creare un progetto di Studio AI della piattaforma Azure all'interno di un hub di Azure per intelligenza artificiale:
 
-1. In un Web browser aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
-1. Selezionare la **home** page e quindi **+ Nuovo progetto**.
-1. Nella procedura guidata **Crea un nuovo progetto** creare un progetto con le impostazioni seguenti:
-    - **Nome progetto**: *nome univoco per il progetto*
+1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
+1. Selezionare la pagina **Home** e quindi **+ Nuovo progetto**.
+1. Nella procedura guidata **Crea un nuovo progetto**, creare un progetto con le impostazioni seguenti:
+    - **Nome progetto**: *un nome univoco per il progetto*
     - **Hub**: *creare un nuovo hub con le impostazioni seguenti:*
         - **Nome hub**: *un nome univoco*.
         - **Sottoscrizione**: *la sottoscrizione di Azure usata*
         - **Gruppo di risorse**: *un nuovo gruppo di risorse*
-        - **Ubicazione**: *effettuare una scelta **casuale** da una delle aree seguenti*\*
+        - **Posizione**: *effettuare una scelta **casuale** da una delle aree seguenti*\*
         - Australia orientale
         - Canada orientale
         - Stati Uniti orientali
@@ -42,27 +42,27 @@ Per iniziare, creare un progetto di Studio AI della piattaforma Azure all'intern
     - **Connettere Servizi di Azure AI o OpenAI di Azure**: *creare una nuova connessione*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello di tenant. Le aree elencate includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Esaminare la configurazione e creare il progetto.
 1. Attendere 5-10 minuti per la creazione del progetto.
 
 ## Distribuire un modello GPT
 
-Per usare un modello linguistico nel flusso immedito, è prima necessario distribuire un modello. Studio AI della piattaforma Azure consente di distribuire modelli OpenAI che è possibile usare nei flussi.
+Per usare un modello linguistico nel prompt flow, è prima necessario distribuire un modello. Studio AI della piattaforma Azure consente all'utente di distribuire modelli OpenAI utilizzabili nei flussi.
 
-1. Nel riquadro di spostamento a sinistra, in **Componenti**. selezionare la pagina **Distribuzioni**.
+1. Nel riquadro di spostamento a sinistra, in **Componenti**, selezionare la pagina **Distribuzioni**.
 1. Creare una nuova distribuzione del modello **gpt-35-turbo** con le impostazioni seguenti:
     - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
     - **Versione del modello**: *selezionare la versione predefinita*
     - **Tipo di distribuzione**: Standard
     - **Risorsa OpenAI di Azure connessa**: *selezionare la connessione predefinita*
-    - **Limite di velocità dei token al minuto**: 5K
+    - **Limite di velocità dei token al minuto (migliaia)**: 5K
     - **Filtro contenuto**: Predefinito
 1. Attendere la distribuzione del modello. Quando la distribuzione è pronta, selezionare **Apri nel playground**.
-1. Nella finestra della chat immetti la query `What can you do?`.
+1. Nella finestra della chat immettere la query `What can you do?`.
 
-    Si noti che la risposta è generica perché non sono disponibili istruzioni specifiche per l'assistente. Per farlo concentrare su un'attività, è possibile modificare la richiesta del sistema.
+    Tenere presente che la risposta è generica perché non sono disponibili istruzioni specifiche per l'assistente. Per concentrarsi su un'attività, è possibile modificare la richiesta di sistema.
 
 1. Modificare il **messaggio di sistema** nel modo seguente:
 
@@ -85,32 +85,32 @@ Per usare un modello linguistico nel flusso immedito, è prima necessario distri
    ```
 
 1. Fare clic su **Applica modifiche**.
-1. Nella finestra della chat immetti la stessa query di prima: `What can you do?` Si noti il cambiamento della risposta.
+1. Nella finestra della chat immettere la stessa query di prima: `What can you do?` Tenere presente il cambiamento della risposta.
 
-Ora che hai messo alla prova il messaggio di sistema per il modello GPT distribuito, puoi personalizzare ulteriormente l'applicazione usando il flusso di richiesta.
+Ora che è stato sperimentato il messaggio di sistema per il modello GPT distribuito, è possibile personalizzare ulteriormente l'applicazione usando il prompt flow.
 
 ## Creare ed eseguire un flusso di chat in Studio AI della piattaforma Azure
 
-È possibile creare un nuovo flusso da un modello o creare un flusso in base alle configurazioni nel playground. Poiché si stava già sperimentando nel playground, si userà questa opzione per creare un nuovo flusso.
+È possibile creare un nuovo flusso da un modello o crearne uno in base alle configurazioni nel playground. Poiché si stava già sperimentando nel playground, questa opzione verrà utilizzata per creare un nuovo flusso.
 
-1. Nel **playground della chat**, seleziona **Prompt flow** nella barra superiore.
-1. Immetti `Travel-Chat` come nome cartella.
+1. Nel **playground della chat**, selezionare **Prompt flow** nella barra superiore.
+1. Immettere `Travel-Chat` come nome cartella.
 
     Viene creato un flusso di chat semplice. Notare che sono presenti due input (cronologia chat e domanda dell'utente), un nodo LLM che si connetterà al modello linguistico distribuito e un output per riflettere la risposta nella chat.
 
-    Per poter testare il flusso, è necessario calcolare.
+    Per poter testare il flusso, è necessario effettuare un calcolo.
 
-1. Seleziona **Avvia sessione di calcolo** dalla barra in alto.
+1. Selezionare **Avvia sessione di calcolo** dalla barra in alto.
 1. L'avvio della sessione di calcolo richiederà 1-3 minuti.
-1. Trova il nodo LLM denominato **chat**. Si noti che il prompt include già il prompt di sistema specificato nel playground della chat.
+1. Trovare il nodo LLM denominato **chat**. Tenere presente che il prompt include già il prompt di sistema specificato nel playground della chat.
 
     È comunque necessario connettere il nodo LLM al modello distribuito.
 
-1. Nella sezione del nodo LLM, per **Connessione**, seleziona la connessione creata al momento della creazione dell'hub IA.
-1. Per **Api**, seleziona **Chat**.
-1. Per **deployment_name**, seleziona il modello **gpt-35-turbo** distribuito.
-1. Per **response_format**, seleziona **{"type":"text"}**.
-1. Rivedere il campo della richiesta e verificare che sia simile al seguente:
+1. Nella sezione del nodo LLM, per **Connessione**, selezionare la connessione creata al momento della creazione dell'hub IA.
+1. Per **API** selezionare **Chat**.
+1. Per **deployment_name** selezionare il modello **gpt-35-turbo** distribuito.
+1. Per **response_format**, selezionare **{"type":"text"}**.
+1. Esaminare il campo della richiesta e verificare che sia simile al seguente:
 
    ```yml
    {% raw %}
@@ -143,33 +143,33 @@ Ora che hai messo alla prova il messaggio di sistema per il modello GPT distribu
    {% endraw %}
    ```
 
-### Testare ed eseguire il flusso
+### Testare e distribuire il flusso
 
-Dopo aver sviluppato il flusso, è possibile usare la finestra di chat per testare il flusso.
+Dopo aver sviluppato il flusso, è possibile usare la finestra di chat per testarlo.
 
 1. Verificare che la sessione di calcolo sia in esecuzione.
 1. Seleziona **Salva**.
-1. Seleziona **Chat** per testare il flusso.
-1. Immetti la query `I have one day in London, what should I do?` ed esamina l'output.
+1. Selezionare **Chat** per testare il flusso.
+1. Immettere la query `I have one day in London, what should I do?` ed esaminare l'output.
 
-    Quando si è soddisfatti del comportamento del flusso creato, è possibile distribuire il flusso.
+    Quando si è soddisfatti del comportamento del flusso creato, è possibile distribuirlo.
 
-1. Seleziona **Distribuisci** per distribuire il flusso con le impostazioni seguenti:
+1. Selezionare **Distribuisci** per distribuire il flusso con le impostazioni seguenti:
     - **Impostazioni di base**:
         - **Endpoint**: Nuovo
-        - **Nome endpoint**: *Immetti un nome univoco*
-        - **Nome distribuzione**: *Immetti un nome univoco*
+        - **Nome endpoint**: *Immettere un nome univoco*
+        - **Nome distribuzione**: *Immettere un nome univoco*
         - **Macchina virtuale**: Standard_DS3_v2
         - **Numero di istanze**: 3
         - **Raccolta di dati di inferenza**: abilitata
     - **Impostazioni avanzate**:
-        - *usare le impostazioni predefinite*
-1. In Studio AI della piattaforma Azure, nel progetto, nel riquadro di spostamento a sinistra, in **Componenti** selezionare la pagina **Distribuzioni**.
-1. Si noti che per impostazione predefinita sono elencate le **distribuzioni di modelli**, incluso il modello linguistico distribuito.
-1. Seleziona la scheda **Distribuzioni di app** per trovare il flusso distribuito. Potrebbe essere necessario del tempo prima che la distribuzione venga elencata e creata correttamente.
-1. Al termine della distribuzione, selezionarla. Quindi, nella pagina **Test** immettere il prompt `What is there to do in San Francisco?` e rivedere la risposta.
-1. Immettere il prompt `Where else could I go?` ed esaminare la risposta.
-1. Visualizzare la pagina **Consumo** relativa all'endpoint e notare che contiene informazioni sulla connessione e codice di esempio, usabili per sviluppare un'applicazione client per l'endpoint. Questo consente di integrare la soluzione di flusso immediato in un'applicazione come copilot personalizzato.
+        - *Usa le impostazioni predefinite*
+1. In Studio AI dalla piattaforma Azure, nel progetto, nel riquadro di spostamento a sinistra, in **Componenti** selezionare la pagina **Distribuzioni**.
+1. Tenere presente che per impostazione predefinita sono elencate le **distribuzioni del modello**, incluso il modello linguistico distribuito.
+1. Selezionare la scheda **Distribuzioni di app** per trovare il flusso distribuito. Potrebbe essere necessario del tempo prima che la distribuzione venga elencata e creata correttamente.
+1. Al termine della distribuzione, selezionarla. Quindi, nella sua pagina **Test**, immettere il prompt `What is there to do in San Francisco?` e rivedere la risposta.
+1. Immettere il prompt `Where else could I go?` e rivedere la risposta.
+1. Visualizzare la pagina **Utilizzo** per l'endpoint e osservare che contiene informazioni di connessione e codice di esempio che è possibile usare per compilare un'applicazione client per l'endpoint, che consente di integrare la soluzione prompt flow in un'applicazione come copilota personalizzato.
 
 ## Eliminare le risorse di Azure
 

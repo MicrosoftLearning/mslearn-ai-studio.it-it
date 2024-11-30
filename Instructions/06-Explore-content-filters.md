@@ -1,13 +1,13 @@
 ---
 lab:
-  title: Esplorare i filtri di contenuto per impedire l'output di contenuto dannoso in Studio AI della piattaforma Azure
+  title: Esplorare i filtri di contenuto per impedire l'output di contenuto dannoso in Azure AI Foundry
 ---
 
-# Esplorare i filtri di contenuto per impedire l'output di contenuto dannoso in Studio AI della piattaforma Azure
+# Esplorare i filtri di contenuto per impedire l'output di contenuto dannoso in Azure AI Foundry
 
-Studio AI della piattaforma Azure include filtri di contenuto predefiniti per garantire che le richieste e i completamenti potenzialmente dannosi vengano identificati e rimossi dalle interazioni con il servizio. Inoltre, è possibile richiedere l'autorizzazione per definire filtri di contenuto personalizzati per esigenze specifiche per assicurarsi che le distribuzioni del modello applichino le entità di intelligenza artificiale responsabili appropriate per lo scenario di intelligenza artificiale generativa. Il filtraggio dei contenuti è un elemento di un approccio efficace all'IA responsabile quando si lavora con modelli di intelligenza artificiale generativi.
+Azure AI Foundry include filtri di contenuto predefiniti per garantire che le richieste e i completamenti potenzialmente dannosi vengano identificati e rimossi dalle interazioni con il servizio. Inoltre, è possibile richiedere l'autorizzazione per definire filtri di contenuto personalizzati per esigenze specifiche per assicurarsi che le distribuzioni del modello applichino le entità di intelligenza artificiale responsabili appropriate per lo scenario di intelligenza artificiale generativa. Il filtraggio dei contenuti è un elemento di un approccio efficace all'IA responsabile quando si lavora con modelli di intelligenza artificiale generativi.
 
-In questo esercizio si esaminerà l'effetto dei filtri di contenuto predefiniti in Studio AI della piattaforma Azure.
+In questo esercizio, verrà esaminato l'effetto dei filtri di contenuto predefiniti in Azure AI Foundry.
 
 Questo esercizio richiederà circa **25** minuti.
 
@@ -34,28 +34,28 @@ Per ospitare i progetti, la sottoscrizione di Azure dovrà disporre di un hub di
 
 1. Dopo che l'hub di Azure per intelligenza artificiale è stato creato, il risultato dovrebbe essere simile all'immagine seguente:
 
-    ![Screenshot di un hub di Azure per intelligenza artificiale in Studio AI della piattaforma Azure.](./media/azure-ai-overview.png)
+    ![Screenshot di un hub di Azure AI nel portale Azure AI Foundry.](./media/azure-ai-overview.png)
 
 ## Creare un progetto
 
 Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto nell'hub di Azure per intelligenza artificiale.
 
-1. Nella pagina **Panoramica dell'hub** di Studio AI della piattaforma Azure, selezionare **+ Nuovo progetto**. Quindi, nella procedura guidata **Creazione di un nuovo progetto**, creare un progetto con le impostazioni seguenti:
+1. Nel portale Azure AI Foundry, nella pagina **Panoramica hub**, selezionare  **+ Nuovo progetto**. Quindi, nella procedura guidata **Creazione di un nuovo progetto**, creare un progetto con le impostazioni seguenti:
 
     - **Nome progetto**: *un nome univoco per il progetto*
     - **Hub**: *l'hub di intelligenza artificiale in uso*
 
 1. Attendere la creazione del progetto. Il risultato dovrebbe avere un aspetto simile all'immagine seguente.
 
-    ![Screenshot dei dettagli di un progetto in Studio AI della piattaforma Azure.](./media/azure-ai-project.png)
+    ![Screenshot della pagina dei dettagli di un progetto nel portale Azure AI Foundry.](./media/azure-ai-project.png)
 
 1. Visualizzare le pagine nel riquadro a sinistra, espandendo ogni sezione e annotando le attività che è possibile eseguire e le risorse che è possibile gestire in un progetto.
 
 ## Distribuire un modello
 
-A questo punto è possibile distribuire un modello da usare tramite **Studio AI della piattaforma Azure**. Dopo la distribuzione, si userà il modello per generare contenuto in linguaggio naturale.
+Ora è possibile distribuire un modello da usare tramite il **portale Azure AI Foundry**. Dopo la distribuzione, si userà il modello per generare contenuto in linguaggio naturale.
 
-1. In Studio AI della piattaforma Azure creare una nuova distribuzione con le impostazioni seguenti:
+1. Nel portale Azure AI Foundry, creare una nuova distribuzione con le seguenti impostazioni:
 
     - **Modello**: gpt-35-turbo
     - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
@@ -66,7 +66,7 @@ A questo punto è possibile distribuire un modello da usare tramite **Studio AI 
     - **Filtro contenuto**: predefinitoV2
     - **Abilitare la quota dinamica**: disabilitato
       
-> **Nota**: ogni modello di Studio AI della piattaforma Azure è ottimizzato per un equilibrio diverso tra funzionalità e prestazioni. In questo esercizio si userà il modello **GPT 3.5 Turbo**, che è altamente in grado di generare e chattare in linguaggio naturale.
+> **Nota**: ogni modello di Azure AI Foundry è ottimizzato per un equilibrio diverso tra funzionalità e prestazioni. In questo esercizio si userà il modello **GPT 3.5 Turbo**, che è altamente in grado di generare e chattare in linguaggio naturale.
 
 ## Esplorare i filtri di contenuto
 
@@ -101,7 +101,7 @@ I filtri di contenuto vengono applicati ai prompt e ai completamenti per evitare
 
 1. Tornare alla pagina delle distribuzioni e notare che la distribuzione ora fa riferimento al filtro di contenuto personalizzato creato.
 
-    ![Screenshot della pagina di distribuzione di Studio AI della piattaforma Azure.](./media/azure-ai-deployment.png)
+    ![Screenshot della pagina di distribuzione del portale Azure AI Foundry.](./media/azure-ai-deployment.png)
 
 ## Generare l'output del linguaggio naturale
 
@@ -131,9 +131,9 @@ Vediamo come si comporta il modello in un'interazione conversazionale.
    Describe characteristics of Scottish people.
     ```
 
-8. Osservare l'output, che dovrebbe indicare che la richiesta di essere razzisti e sprezzanti non è supportata. Questa prevenzione dell'output offensivo è il risultato dei filtri di contenuto predefiniti in Studio AI della piattaforma Azure.
+8. Osservare l'output, che dovrebbe indicare che la richiesta di essere razzisti e sprezzanti non è supportata. Questa prevenzione di output offensivi è il risultato dei filtri di contenuto predefiniti nel portale Azure AI Foundry.
 
-> **Suggerimento**: per altri dettagli sulle categorie e sui livelli di gravità usati nei filtri di contenuto, vedere [Filtro del contenuto](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering) nella documentazione del servizio Studio AI della piattaforma Azure.
+> **Suggerimento**: per ulteriori dettagli sulle categorie e sui livelli di gravità impiegati nei filtri dei contenuti, consultare [Filtro dei contenuti](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering) nella documentazione del servizio del portale Azure AI Foundry.
 
 ## Eseguire la pulizia
 
