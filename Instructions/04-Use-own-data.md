@@ -1,11 +1,11 @@
 ---
 lab:
-  title: Creare un copilota personalizzato che usa dati propri
+  title: Creare un'app di IA generativa che usa dati propri
 ---
 
-# Creare un copilota personalizzato che usa dati propri
+# Creare un'app di IA generativa che usa dati propri
 
-Generazione ottimizzata per il recupero (RAG) è una tecnica usata per creare applicazioni che integrano dati da origini dati personalizzate in una richiesta di un modello di intelligenza artificiale generativa. RAG è un modello comunemente usato per lo sviluppo di *copiloti* personalizzati: applicazioni basate su chat che usano un modello linguistico per interpretare gli input e generare risposte appropriate.
+Generazione ottimizzata per il recupero (RAG) è una tecnica usata per creare applicazioni che integrano dati da origini dati personalizzate in una richiesta di un modello di intelligenza artificiale generativa. RAG è un modello comunemente usato per lo sviluppo di app di IA generativa: applicazioni basate su chat che usano un modello linguistico per interpretare gli input e generare risposte appropriate.
 
 In questo esercizio si userà il portale di Azure AI Foundry per integrare dati personalizzati in un flusso immediato di intelligenza artificiale generativa.
 
@@ -13,7 +13,7 @@ Questo esercizio richiede circa **45** minuti.
 
 ## Creare una risorsa di Azure AI Search
 
-La soluzione copilota integra dati personalizzati in un flusso immediato. Per supportare questa integrazione, è necessaria una risorsa di Azure AI Search con cui indicizzare i dati.
+La soluzione di app di IA generativa integra dati personalizzati in un prompt flow. Per supportare questa integrazione, è necessaria una risorsa di Azure AI Search con cui indicizzare i dati.
 
 1. Nel web browser, aprire il [portale di Azure](https://portal.azure.com) su `https://portal.azure.com` e accedere usando le credenziali di Azure.
 1. Nella pagina iniziale, selezionare **+ Crea una risorsa** e cercare `Azure AI Search`. Creare quindi una nuova risorsa di Azure AI Search con le impostazioni seguenti:
@@ -240,7 +240,7 @@ Ora che si dispone di un flusso di lavoro che usa i dati indicizzati, è possibi
 
 ## Proposta 
 
-Ora che sono state apprese le modalità di integrazione dei dati in un copilota realizzato con il portale Azure AI Foundry, è possibile procedere.
+Ora che si sono apprese le modalità di integrazione dei dati in un'app di IA generativa realizzata con il portale Azure AI Foundry, è possibile procedere.
 
 Provare ad aggiungere una nuova origine dati tramite il portale Azure AI Foundry, indicizzarla e integrare i dati indicizzati in un prompt flow. Alcuni set di dati che è possibile provare sono:
 
