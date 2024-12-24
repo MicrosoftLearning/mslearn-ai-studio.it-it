@@ -4,7 +4,7 @@ permalink: index.html
 layout: home
 ---
 
-# Sviluppare applicazioni di intelligenza artificiale generativa con Studio AI della piattaforma Azure
+# Sviluppare app di IA generativa nel portale di Azure AI Foundry
 
 Gli esercizi seguenti sono progettati per offrire un'esperienza di apprendimento pratica in cui verranno esaminati modelli e tecniche comuni usati dagli sviluppatori per creare applicazioni di intelligenza artificiale generativa come "copiloti" basati su chat e imparare a implementare questi modelli usando i servizi di Azure AI, in particolare il Servizio OpenAI di Azure e Studio AI della piattaforma Azure.
 
