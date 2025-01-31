@@ -42,6 +42,9 @@ Per usare un modello linguistico nel prompt flow, è prima necessario distribuir
     - **Limite di velocità dei token al minuto (migliaia)**: 5K
     - **Filtro contenuto**: predefinitoV2
     - **Abilitare la quota dinamica**: disabilitato
+
+    > **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
+
 1. Attendere la distribuzione del modello. Quando la distribuzione è pronta, selezionare **Apri nel playground**.
 1. Nella casella di testo **Fornisci istruzioni e contesto al modello** modificare il contenuto nel modo seguente:
 
@@ -138,6 +141,9 @@ Per ridurre i tempi, è stato creato un set di dati di output batch che contiene
     - Selezionare **Avanti**.
     - **Selezionare i dati da valutare**: aggiungere il set di dati
         - Scaricare il [set di dati di convalida](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) in `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl`, salvarlo come file JSONL e caricarlo nell'interfaccia utente.
+
+    > **Nota**: per impostazione predefinita, il dispositivo potrebbe salvare il file come file .txt. Selezionare tutti i file e rimuovere il suffisso .txt per assicurarsi di salvare il file come JSONL.
+
     - Selezionare **Avanti**.
     - **Selezionare le metriche**: coerenza, scorrevolezza
     - **Connessione**: *connessione ai servizi di intelligenza artificiale*
