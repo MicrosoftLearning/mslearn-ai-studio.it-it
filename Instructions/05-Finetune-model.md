@@ -55,9 +55,9 @@ Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare
     <p>Se viene visualizzato un errore di autorizzazione, provare i seguenti passaggi per la risoluzione dei problemi:</p>
     <ul>
         <li>Nel portale di Azure, selezionare la risorsa Servizi di intelligenza artificiale.</li>
-        <li>Nella pagina IAM, nella scheda Identità, verificare che si tratti dell'identità gestita assegnata dal sistema.</li>
-        <li>Passare all'account di archiviazione associato. Nella pagina IAM, aggiungere l'assegnazione di ruolo <em>Lettore dei dati del BLOB di archiviazione</em>.</li>
-        <li>In <strong>Assegna accesso a</strong>, scegliere <strong>Identità gestita</strong>, <strong>+ Seleziona membri</strong> e selezionare <strong>Tutte le identità gestite assegnate dal sistema</strong>.</li>
+        <li>Nella scheda Identità, in Gestione risorse, confermare che si tratti dell'identità gestita assegnata dal sistema.</li>
+        <li>Passare all'account di archiviazione associato. Nella pagina IAM, aggiungere l'assegnazione di ruolo <em>Proprietario dei dati del BLOB di archiviazione</em>.</li>
+        <li>In <strong>Assegna accesso a</strong>, scegliere <strong>Identità gestita</strong>, <strong>+ Seleziona membri</strong>, selezionare <strong>Tutte le identità gestite assegnate dal sistema</strong> e selezionare la risorsa dei Servizi di Azure AI.</li>
         <li>Rivedere e assegnare per salvare le nuove impostazioni e ripetere il passaggio precedente.</li>
     </ul>
     </details>
@@ -76,6 +76,9 @@ Mentre si attende il completamento del processo di ottimizzazione, è possibile 
 1. Passare alla pagina **Modelli + endpoint** nella sezione **Asset personali** usando il menu a sinistra.
 1. Selezionare il pulsante **+ Distribuisci modello** e scegliere l'opzione **Distribuisci modello di base**.
 1. Distribuire un `gpt-35-turbo` modello, che corrisponde allo stesso tipo di modello usato durante l'ottimizzazione.
+
+> **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
+
 1. Quando la distribuzione è completa, selezionare il pulsante **Apri nel playground**.
 1. Verificare che il modello di base distribuito `gpt-35-model` sia selezionato nel riquadro di configurazione.
 1. Nella finestra della chat immettere la query `What can you do?` e visualizzare la risposta.
@@ -122,7 +125,7 @@ Al termine dell'ottimizzazione, è possibile distribuire il modello ottimizzato.
 
 ## Test del modello ottimizzato
 
-Dopo aver distribuito il modello ottimizzato, è possibile testare il modello come è possibile testare il modello di base distribuito.
+Dopo aver distribuito il modello ottimizzato, è possibile testarlo come si è testato il modello di base distribuito.
 
 1. Quando la distribuzione è pronta, passare al modello ottimizzato e selezionare **Apri nel playground**.
 1. Aggiornare il messaggio di sistema con le istruzioni seguenti:

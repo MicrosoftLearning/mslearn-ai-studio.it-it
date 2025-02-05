@@ -15,6 +15,8 @@ Questo esercizio richiederà circa **25** minuti.
 
 Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto un hub di Azure per intelligenza artificiale.
 
+1. In un Web browser, aprire il [portale di Azure AI Foundry](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure.
+
 1. Nella home page, selezionare **+ Crea progetto**. Nella procedura guidata **Creare un progetto** è possibile visualizzare tutte le risorse di Azure che verranno create automaticamente con il progetto, oppure personalizzare le impostazioni seguenti selezionando **Personalizza** prima di selezionare **Crea**:
 
     - **Nome hub**: *un nome univoco*.
@@ -27,7 +29,7 @@ Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativ
     > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
 
 1. Se si seleziona **Personalizza**, selezionare **Avanti** ed esaminare la configurazione.
-1. 1. Selezionare **Crea** e attendere il completamento del processo.
+1. Selezionare **Crea** e attendere il completamento del processo.
    
     Dopo che l'hub di Azure per intelligenza artificiale e il progetto sono stati creati, il risultato dovrebbe essere simile all'immagine seguente:
 
@@ -50,16 +52,16 @@ Immaginiamo di voler creare un copilota personalizzato che funge da assistente d
 
 Il copilota dovrà fornire informazioni effettivamente accurate, quindi l'attendibilità è importante. Accanto a questo, si vuole che le risposte del copilota siano facili da leggere e comprendere. Pertanto, è necessario scegliere un modello che abbia un'alta percentuale di efficienza e coerenza.
 
-1. Nel portale del progetto Azure AI Foundry, passare a **Indicatori di modello** usando il menu a sinistra.
-    Nella scheda **Benchmark di qualità** è possibile trovare alcuni grafici già visualizzati, confrontando modelli diversi.
-1. Filtrare i modelli visualizzati:
-    - **Attività**: Risposta alla domanda
-    - **Raccolte**: Azure OpenAI
-    - **Metriche**: coerenza, scorrevolezza, fondatezza
-1. Esplorare i grafici risultanti e la tabella di confronto. Durante l'esplorazione, è possibile provare a rispondere alle domande seguenti:
+1. Nel portale del progetto Fonderia Azure AI, passare a **Catalogo modelli** usando il menu a sinistra.
+    Nella pagina del catalogo selezionare **Confronta con i benchmark**. Nella pagina Indicatori di modello è disponibile un grafico già tracciato, che mette a confronto modelli diversi.
+1. Selezionare **+ Modello da confrontare** e aggiungere **gpt-4-32k** e **gpt-4** al grafico delle metriche. Nel menu a discesa **Asse X**, in **Qualità**, selezionare le metriche seguenti e osservare ogni grafico risultante prima di passare al successivo:
+    - Coerenza
+    - Scorrevolezza
+    - Allineamento
+1. Durante l'esplorazione, è possibile provare a rispondere alle domande seguenti:
     - Si nota una differenza nelle prestazioni tra i modelli GPT-3.5 e GPT-4?
     - Esiste una differenza tra le versioni dello stesso modello?
-    - In che modo le varianti di 32k differiscono dai modelli di base?
+    - In che modo la variante 32k di GPT-4 differisce dal modello di base?
 
 Dalla raccolta OpenAI di Azure è possibile scegliere tra modelli GPT-3.5 e GPT-4. Distribuire questi due modelli ed esaminare il modo in cui vengono confrontati per il caso d'uso.
 
@@ -82,6 +84,8 @@ Iniziamo distribuendo un modello dal catalogo dei modelli. È possibile preferir
     - **Filtro contenuto**: predefinitoV2
     - **Abilitare la quota dinamica**: disabilitato
 
+    > **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
+
 ### Distribuire un modello tramite Modelli + endpoint
 
 Se si conosce già esattamente il modello che si vuole distribuire, è consigliabile eseguirlo tramite **Modelli + endpoint**.
@@ -96,8 +100,6 @@ Se si conosce già esattamente il modello che si vuole distribuire, è consiglia
     - **Limite di velocità dei token al minuto (migliaia)**: 5K
     - **Filtro contenuto**: predefinitoV2
     - **Abilitare la quota dinamica**: disabilitato
-
-    > **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
 
 ## Testare i modelli nel playground della chat
 

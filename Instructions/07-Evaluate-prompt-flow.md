@@ -141,15 +141,12 @@ Per ridurre i tempi, è stato creato un set di dati di output batch che contiene
     - Selezionare **Avanti**.
     - **Selezionare i dati da valutare**: aggiungere il set di dati
         - Scaricare il [set di dati di convalida](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) in `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl`, salvarlo come file JSONL e caricarlo nell'interfaccia utente.
-
-    > **Nota**: per impostazione predefinita, il dispositivo potrebbe salvare il file come file .txt. Selezionare tutti i file e rimuovere il suffisso .txt per assicurarsi di salvare il file come JSONL.
-
     - Selezionare **Avanti**.
     - **Selezionare le metriche**: coerenza, scorrevolezza
     - **Connessione**: *connessione ai servizi di intelligenza artificiale*
     - **Nome/Modello di distribuzione**: *modello GPT-3.5 distribuito*
-    - **query**: selezionare **la domanda** come origine dati
-    - **risposta**: selezionare **la risposta** come origine dati
+    - **query**: selezionare la **query** come origine dati
+    - **risposta**: selezionare la **risposta** come origine dati
       
 1. Selezionare **Avanti**, quindi esaminare i dati e **inviare** la nuova valutazione.
 1. Attendere il completamento delle valutazioni, potrebbe essere necessario aggiornare.
