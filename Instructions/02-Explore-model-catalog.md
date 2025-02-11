@@ -1,9 +1,10 @@
 ---
 lab:
-  title: 'Esplorare, distribuire e chattare con i modelli linguistici in Azure AI Foundry'
+  title: Scegliere e distribuire un modello linguistico
+  description: Le applicazioni di IA generativa si basano su uno o più modelli linguistici. Informazioni su come trovare e selezionare i modelli appropriati per il progetto di IA generativa.
 ---
 
-# Esplorare, distribuire e chattare con i modelli linguistici in Azure AI Foundry
+# Scegliere e distribuire un modello linguistico
 
 Il catalogo dei modelli in Azure AI Foundry funge da repository centrale in cui è possibile esplorare e usare un'ampia gamma di modelli, semplificando la creazione dello scenario di intelligenza artificiale generativa.
 

@@ -1,67 +1,123 @@
 ---
 lab:
-  title: Esplorare i componenti e gli strumenti di Azure AI Foundry
+  title: Prepararsi per un progetto di sviluppo di intelligenza artificiale
+  description: Informazioni su come organizzare le risorse cloud in hub e progetti in modo da garantire agli sviluppatori una creazione di soluzioni di intelligenza artificiale di successo.
 ---
 
-# Esplorare i componenti e gli strumenti di Azure AI Foundry
+# Prepararsi per un progetto di sviluppo di intelligenza artificiale
 
-In questo esercizio, Azure AI Foundry viene usato per creare un progetto ed esplorare un modello di intelligenza artificiale generativa.
+In questo esercizio si usa il Portale Fonderia Azure AI per creare un hub e un progetto, pronti per permettere a un team di sviluppatori di creare una soluzione di intelligenza artificiale.
 
 Questo esercizio richiede circa **30** minuti.
 
 ## Aprire il portale di Azure AI Foundry
 
-Per iniziare, esplorare il portale di Azure AI Foundry.
+Per iniziare, accedere al Portale Fonderia Azure AI.
 
-1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure. La home page del portale di Azure AI Foundry si presenta come l'immagine seguente:
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente:
 
-    ![Screenshot del portale di Azure AI Foundry.](./media/azure-ai-studio-home.png)
+    ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Esaminare le informazioni nella home page e visualizzare ciascuna scheda, osservando le opzioni per esplorare modelli e funzionalità, creare progetti e gestire le risorse.
+1. Esaminare le informazioni nella home page.
 
-## Creare un progetto e un hub di Azure per intelligenza artificiale
+## Creare un hub e un progetto
 
-Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto un hub di Azure per intelligenza artificiale.
+Un *hub* di Azure per intelligenza artificiale offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Verrà creato un progetto e un hub di Azure AI e verranno esaminate le risorse di Azure create per supportarli.
 
-1. Nella home page, selezionare **+ Crea progetto**. Nella procedura guidata **Creare un progetto** è possibile visualizzare tutte le risorse di Azure che verranno create automaticamente con il progetto, oppure personalizzare le impostazioni seguenti selezionando **Personalizza** prima di selezionare **Crea**:
-   
-    - **Nome hub**: *un nome univoco*.
+1. Nella home page, selezionare **+ Crea progetto**.
+1. Nella procedura guidata **Crea un progetto** immettere un nome di progetto appropriato (ad esempio, `my-ai-project`) e quindi rivedere le risorse di Azure che verranno create automaticamente per supportare il progetto.
+1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
+    - **Nome hub**: *un nome univoco, ad esempio `my-ai-hub`*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-    - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco o selezionarne uno esistente*
-    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-35-turbo** nella finestra Helper posizione e usare l'area consigliata\*
-    - **Connettere i Servizi di Azure AI o OpenAI di Azure**: *selezionare per creare un nuovo servizio di intelligenza artificiale o usarne uno esistente*
+    - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco (ad esempio, `my-ai-resources`) o selezionarne uno esistente*
+    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4** nella finestra Helper posizione e usare l'area consigliata\*
+    - **Connettere i Servizi di Azure AI o Azure OpenAI**: *creare una nuova risorsa di Servizi di intelligenza artificiale con un nome appropriato (ad esempio, `my-ai-services`) o usarne uno esistente*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota negli scenari in cui si condivide un tenant con altri utenti. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
-1. Se si seleziona **Personalizza**, selezionare **Avanti** ed esaminare la configurazione.
-1. Selezionare **Crea** e attendere il completamento del processo.
-   
-    Dopo che l'hub di Azure per intelligenza artificiale e il progetto sono stati creati, il risultato dovrebbe essere simile all'immagine seguente:
+1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
+1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel Portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
 
-    ![Screenshot dei dettagli di un hub di Azure per intelligenza artificiale nel portale di Azure AI Foundry.](./media/azure-ai-resource.png)
+    ![Screenshot dei dettagli di un progetto di Azure AI nel Portale Fonderia Azure AI.](./media/ai-foundry-project.png)
 
-1. Aprire una nuova scheda del browser (lasciando aperta la scheda di Azure AI Foundry) e passare al portale di Azure all'indirizzo [https://portal.azure.com](https://portal.azure.com?azure-portal=true), effettuando l'accesso con le credenziali di Azure, se richiesto.
-1. Passare al gruppo di risorse in cui è stato creato l'hub di Azure per intelligenza artificiale e visualizzare le risorse di Azure create.
+1. Nella parte inferiore del riquadro di spostamento a sinistra selezionare **Centro di gestione**. Il centro di gestione consente di configurare le impostazioni sia a livello di *hub* che di *progetto*, entrambi visualizzati nel riquadro di spostamento.
 
-    ![Screenshot di un hub di Azure per intelligenza artificiale e delle risorse correlate nel portale di Azure.](./media/azure-portal.png)
+    ![Screenshot della pagina del centro di gestione del Portale Fonderia Azure AI.](./media/ai-foundry-management.png)
 
-1. Tornare alla scheda del browser del portale di Azure AI Foundry.
-1. Visualizzare ognuna delle pagine nel riquadro a sinistra della pagina per l'hub di Azure per intelligenza artificiale e prendere nota degli artefatti che è possibile creare e gestire. Nella pagina **Centro gestione** è possibile selezionare le **Risorse connesse**, nell'hub o nel progetto, e osservare che sono già state create le connessioni ai servizi OpenAI e IA di Azure.
-1. Nella pagina del Centro gestione, selezionare **Vai al progetto**.
+    Si noti che nel riquadro di spostamento è possibile visualizzare e gestire asset a livello di hub e di progetto nelle pagine seguenti:
 
-## Distribuire e testare il modello
+    - Panoramica
+    - Utenti
+    - Modelli ed endpoint
+    - Risorse connesse
+    - Calcolo (*solo a livello di hub*)
 
-È possibile usare un progetto per creare soluzioni di intelligenza artificiale complesse basate su modelli di intelligenza artificiale generativa. Un'esplorazione completa di tutte le opzioni di sviluppo disponibili nel portale Azure AI Foundry esula dall'ambito di questo esercizio, ma verranno esaminati alcuni semplici modi in cui è possibile usare i modelli in un progetto.
+    > **Nota**: a seconda delle autorizzazioni assegnate al proprio Entra ID nel tenant di Azure, potrebbe non essere possibile gestire le risorse a livello di hub.
+
+1. Nel riquadro di spostamento, nella sezione relativa all'hub, selezionare la pagina **Panoramica** per visualizzare i dettagli dell'hub. 
+1. Nel riquadro **Proprietà hub** selezionare il collegamento al gruppo di risorse associato all'hub per aprire una nuova scheda del browser e passare al portale di Azure. Se richiesto, accedere con le proprie credenziali di Azure.
+1. Visualizzare il gruppo di risorse nel portale di Azure per visualizzare le risorse di Azure create per supportare l'hub e il progetto.
+
+    ![Screenshot di un hub di Azure per intelligenza artificiale e delle risorse correlate nel portale di Azure.](./media/azure-portal-resources.png)
+
+    Si noti che le risorse sono state create nell'area selezionata durante la creazione dell'hub.
+
+## Aggiungere una risorsa connessa
+
+Si supponga che il progetto debba accedere a una seconda risorsa di **Servizi di Azure AI** in un'area diversa.
+
+1. Nel portale di Azure, nella pagina del gruppo di risorse, selezionare **+ Crea** e cercare `Azure AI Services`. Nei risultati selezionare la risorsa multiservizio di **Servizi di Azure AI**, come illustrato nell'immagine seguente:
+
+    ![Screenshot della risorsa dei Servizi di Azure AI nel portale di Azure.](./media/azure-ai-services.png)
+
+1. Creare una nuova risorsa di **Servizi di Azure AI** con le impostazioni seguenti:
+    - **Sottoscrizione**: *la sottoscrizione di Azure usata*
+    - **Gruppo di risorse**: *il gruppo di risorse contenente la risorsa di Fonderia Azure AI esistente*
+    - **Area**: *selezionare una qualsiasi area disponibile diversa da quella contenente le risorse esistenti*
+    - **Nome**: *un nome univoco*
+    - **Piano tariffario**: Standard S0.
+1. Attendere che la risorsa dei servizi d'intelligenza artificiale venga creata.
+1. Tornare alla scheda del browser del Portale Fonderia Azure AI e nella vista **Centro di gestione**, nella sezione relativa al *<u>progetto</u>* nel riquadro di spostamento, visualizzare la pagina **Risorse connesse**. Vengono elencate le risorse connesse esistenti nel progetto.
+
+    ![Screenshot delle risorse connesse in un progetto Fonderia AI.](./media/ai-foundry-project-resources.png)
+
+1. Selezionare **+ Nuova connessione** e selezionare il tipo di risorsa di **Servizi di Azure AI**. Esplorare quindi le risorse disponibili per trovare la risorsa di Servizi AI creata nel portale di Azure e usare il relativo pulsante **Aggiungi connessione** per aggiungerla al progetto.
+
+    ![Screenshot della finestra di dialogo Connetti risorse di Servizi di Azure AI in un progetto Fonderia AI.](./media/add-resource.png)
+
+1. Quando la nuova risorsa è connessa, chiudere la finestra di dialogo **Connetti risorse di Servizi di Azure AI** e verificare che siano elencate le nuove risorse connesse per Servizi di Azure AI e Servizio OpenAI di Azure.
+
+## Esplorare i Servizi di intelligenza artificiale
+
+Il progetto di Fonderia Azure AI ha accesso ai Servizi di Azure AI. Ora si proverà a farlo nel portale.
+
+1. Nel riquadro di spostamento della pagina Centro di gestione, sotto il progetto, selezionare **Vai al progetto**.
+1. Nel riquadro di spostamento del progetto, selezionare **Servizi di intelligenza artificiale** e selezionare il riquadro **Lingua e traduttore**.
+
+    ![Screenshot del riquadro Lingua e Traduttore nel Portale Fonderia Azure AI.](./media/language-and-translator.png)
+
+1. Nella sezione **Esplora funzionalità di lingua** visualizzare la scheda **Traduzione** e selezionare **Traduzione testo**.
+
+    ![Screenshot del riquadro Traduzione testo nel Portale Fonderia Azure AI.](./media/text-translation.png)
+
+1. Nella pagina **Traduzione testo**, nella sezione **Prova**, visualizzare la scheda **Prova con**.
+1. Selezionare una delle risorse di Servizi di Azure AI e quindi provare a tradurre un testo (ad esempio, `Hello world`) da una lingua a un'altra.
+
+    ![Screenshot del riquadro Traduzione testo nel Portale Fonderia Azure AI.](./media/try-translation.png)
+
+## Implementare e testare un modello di IA generativa
+
+Il progetto contiene anche le risorse connesse per Azure OpenAI, che consente di usare modelli linguistici di Azure OpenAI per implementare soluzioni di IA generativa.
 
 1. Nel riquadro a sinistra del progetto, nella sezione **Risorse personali** selezionare la pagina **Modelli + endpoint**.
-1. Nella pagina **Modelli + endpoint**, nella scheda **Distribuzioni del modello**, selezionare **+ Distribuisci modello**.
-1. Cercare il modello **gpt-35-turbo** dall'elenco, selezionarlo e confermare.
+1. Nella scheda **Distribuzioni del modello** della pagina **Modelli + endpoint**, nel menu **+ Distribuisci modello** selezionare **Distribuisci modello di base**.
+1. Cercare il modello **gpt-4** nell'elenco e quindi selezionarlo e confermarlo.
 1. Distribuire il modello con le impostazioni seguenti selezionando **Personalizza** nei dettagli della distribuzione:
-    - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
+    - **Nome distribuzione**: *nome univoco per la distribuzione del modello, ad esempio `gpt-4-model`*
     - **Tipo di distribuzione**: Standard
     - **Versione del modello**: *selezionare la versione predefinita*
-    - **Risorsa di intelligenza artificiale**: *selezionare la risorsa creata in precedenza*
+    - **Risorsa di intelligenza artificiale connessa**: *selezionare una delle connessioni alle risorse Azure OpenAI*
     - **Limite di velocità dei token al minuto (migliaia)**: 5K
     - **Filtro contenuto**: predefinitoV2
     - **Abilitare la quota dinamica**: disabilitato
@@ -70,14 +126,18 @@ Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativ
 
 1. Dopo aver distribuito il modello, nella pagina di panoramica della distribuzione selezionare **Apri nel playground**.
 1. Nella pagina **playground della chat** assicurarsi che la distribuzione del modello sia selezionata nella sezione **Distribuzione**.
-1. Nella finestra della chat immettere una query, ad esempio *Che cos'è l'intelligenza artificiale?* e visualizzare la risposta:
+1. Nella finestra della chat immettere una query, ad esempio `How can I use Azure AI Services in a software development project?`, e visualizzare la risposta:
 
-    ![Screenshot del playground nel portale Azure AI Foundry.](./media/playground.png)
+    ![Screenshot del playground nel portale Azure AI Foundry.](./media/ai-foundry-playground.png)
+
+## Riepilogo
+
+In questo esercizio è stata esaminata Fonderia Azure AI ed è stato illustrato come creare e gestire hub e progetti, aggiungere risorse connesse ed esplorare i modelli di Servizi di Azure AI e di Azure OpenAI nel Portale Fonderia Azure AI.
 
 ## Eseguire la pulizia
 
 Al termine dell'esplorazione del portale Azure AI Foundry, è necessario eliminare le risorse create in questo esercizio per evitare di incorrere in costi di Azure non necessari.
 
-1. Tornare alla scheda del browser che contiene il portale di Azure (o riaprire il [portale di Azure](https://portal.azure.com?azure-portal=true) in una nuova scheda del browser) e visualizzare il contenuto del gruppo di risorse in cui sono state distribuite le risorse usate in questo esercizio.
+1. Tornare alla scheda del browser che contiene il portale di Azure (o riaprire il [portale di Azure](https://portal.azure.com) su `https://portal.azure.com` in una nuova scheda del browser) e visualizzare il contenuto del gruppo di risorse in cui sono state distribuite le risorse usate in questo esercizio.
 1. Sulla barra degli strumenti selezionare **Elimina gruppo di risorse**.
 1. Immettere il nome del gruppo di risorse e confermarne l'eliminazione.

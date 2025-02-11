@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Valutare le prestazioni del copilota personalizzato in Azure AI Foundry
+  title: Valutare le prestazioni dell'IA generativa
+  description: Informazioni su come valutare i modelli e i flussi di chat per ottimizzare le prestazioni dell'app di chat e la sua capacità di rispondere in modo appropriato.
 ---
 
-# Valutare le prestazioni del copilota personalizzato in Azure AI Foundry
+# Valutare le prestazioni dell'IA generativa
 
 In questo esercizio, verranno esaminate le valutazioni predefinite e personalizzate per valutare e confrontare le prestazioni delle applicazioni di intelligenza artificiale con il portale Azure AI Foundry.
 
@@ -112,9 +113,9 @@ Dopo aver distribuito un modello con un messaggio di sistema aggiornato, è poss
 1. È ora possibile esaminare manualmente gli output per ogni domanda selezionando l'icona del pollice in su o del pollice in giù in basso a destra di una risposta. Valuta ogni risposta, assicurandoti di includere almeno una risposta con un pollice su e un pollice giù nelle tue valutazioni.
 1. Selezionare **Salva risultati** dalla barra in alto. Immettere `manual_evaluation_results` come nome per i risultati.
 1. Usando il menu a sinistra, passare a **Valutazione**.
-1. Selezionare la scheda **Valutazioni manuali** per trovare le valutazioni manuali appena salvate. Si noti che è possibile esplorare le valutazioni manuali create in precedenza, continuare da dove ci si è fermati e salvare le valutazioni aggiornate.
+1. Selezionare la scheda **Valutazioni manuali** per trovare le valutazioni manuali appena salvate. Si noti che è possibile esplorare le valutazioni manuali create in precedenza, continuare dal punto in cui si era arrivati e salvare le valutazioni aggiornate.
 
-## Valutare il copilota con le metriche predefinite
+## Valutare l'app di chat con le metriche predefinite
 
 Dopo aver creato un'applicazione di chat con un prompt flow, è possibile valutare il flusso eseguendo un batch e valutando le prestazioni del flusso con le metriche predefinite.
 
@@ -141,6 +142,9 @@ Per ridurre i tempi, è stato creato un set di dati di output batch che contiene
     - Selezionare **Avanti**.
     - **Selezionare i dati da valutare**: aggiungere il set di dati
         - Scaricare il [set di dati di convalida](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) in `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl`, salvarlo come file JSONL e caricarlo nell'interfaccia utente.
+
+    > **Nota**: per impostazione predefinita, il dispositivo potrebbe salvare il file come file .txt. Selezionare tutti i file e rimuovere il suffisso .txt per assicurarsi di salvare il file come JSONL.
+
     - Selezionare **Avanti**.
     - **Selezionare le metriche**: coerenza, scorrevolezza
     - **Connessione**: *connessione ai servizi di intelligenza artificiale*
