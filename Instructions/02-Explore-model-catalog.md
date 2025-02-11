@@ -1,10 +1,9 @@
 ---
 lab:
-  title: Scegliere e distribuire un modello linguistico
-  description: Le applicazioni di IA generativa si basano su uno o più modelli linguistici. Informazioni su come trovare e selezionare i modelli appropriati per il progetto di IA generativa.
+  title: 'Esplorare, distribuire e chattare con i modelli linguistici in Azure AI Foundry'
 ---
 
-# Scegliere e distribuire un modello linguistico
+# Esplorare, distribuire e chattare con i modelli linguistici in Azure AI Foundry
 
 Il catalogo dei modelli in Azure AI Foundry funge da repository centrale in cui è possibile esplorare e usare un'ampia gamma di modelli, semplificando la creazione dello scenario di intelligenza artificiale generativa.
 
@@ -59,7 +58,7 @@ Il copilota dovrà fornire informazioni effettivamente accurate, quindi l'attend
     - Coerenza
     - Scorrevolezza
     - Allineamento
-1. Durante l'esplorazione, è possibile provare a rispondere alle domande seguenti:
+1. Durante l'esplorazione dei risultati, è possibile provare a rispondere alle domande seguenti:
     - Si nota una differenza nelle prestazioni tra i modelli GPT-3.5 e GPT-4?
     - Esiste una differenza tra le versioni dello stesso modello?
     - In che modo la variante 32k di GPT-4 differisce dal modello di base?

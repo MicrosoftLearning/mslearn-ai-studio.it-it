@@ -1,10 +1,9 @@
 ---
 lab:
-  title: Usare il prompt flow per il Riconoscimento entità denominata (NER)
-  description: 'L''IA generativa non si limita alle applicazioni di chat: informazioni sulle modalità di utilizzo di prompt flow in contesti di analisi testuale finalizzati all''estrazione delle entità denominate.'
+  title: Usare il prompt flow per il Riconoscimento entità denominata (NER) nel portale Azure AI Foundry
 ---
 
-# Usare il prompt flow per il Riconoscimento entità denominata (NER)
+# Usare il prompt flow per il Riconoscimento entità denominata (NER) nel portale Azure AI Foundry
 
 L'estrazione di informazioni preziose dal testo è nota come Riconoscimento entità denominata (NER). Le entità sono parole chiave di interesse per l'utente in un determinato testo.
 

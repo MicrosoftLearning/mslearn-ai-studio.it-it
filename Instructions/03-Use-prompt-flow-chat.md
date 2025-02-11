@@ -1,12 +1,11 @@
 ---
 lab:
-  title: Usare un prompt flow per gestire la conversazione in un'app di chat
-  description: Informazioni su come usare i prompt flow per gestire i dialoghi di conversazione e assicurarsi che i prompt vengano sviluppati e orchestrati per ottenere risultati ottimali.
+  title: Creare un copilota personalizzato con prompt flow nel portale Azure AI Foundry
 ---
 
-# Usare un prompt flow per gestire la conversazione in un'app di chat
+# Creare un copilota personalizzato con prompt flow nel portale Azure AI Foundry
 
-In questo esercizio, verrà usato il prompt flow del Portale Fonderia Azure AI per creare un'app di chat personalizzata che impiega un prompt dell'utente e la cronologia della chat come input e usa un modello GPT di Azure OpenAI per generare un output.
+In questo esercizio, verrà usato il prompt flow del portale Azure AI Foundry per creare un copilota personalizzato che impiega un prompt dell'utente e la cronologia della chat come input e usa un modello GPT di Azure OpenAI per generare un output.
 
 Questo esercizio richiederà circa **30** minuti.
 
