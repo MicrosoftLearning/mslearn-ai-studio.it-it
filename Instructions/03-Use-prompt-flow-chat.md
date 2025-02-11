@@ -1,11 +1,12 @@
 ---
 lab:
-  title: Creare un copilota personalizzato con prompt flow nel portale Azure AI Foundry
+  title: Usare un prompt flow per gestire la conversazione in un'app di chat
+  description: Informazioni su come usare i prompt flow per gestire i dialoghi di conversazione e assicurarsi che i prompt vengano sviluppati e orchestrati per ottenere risultati ottimali.
 ---
 
-# Creare un copilota personalizzato con prompt flow nel portale Azure AI Foundry
+# Usare un prompt flow per gestire la conversazione in un'app di chat
 
-In questo esercizio, verrà usato il prompt flow del portale Azure AI Foundry per creare un copilota personalizzato che impiega un prompt dell'utente e la cronologia della chat come input e usa un modello GPT di Azure OpenAI per generare un output.
+In questo esercizio, verrà usato il prompt flow del Portale Fonderia Azure AI per creare un'app di chat personalizzata che impiega un prompt dell'utente e la cronologia della chat come input e usa un modello GPT di Azure OpenAI per generare un output.
 
 Questo esercizio richiederà circa **30** minuti.
 
@@ -42,6 +43,9 @@ Per usare un modello linguistico nel prompt flow, è prima necessario distribuir
     - **Limite di velocità dei token al minuto (migliaia)**: 5K
     - **Filtro contenuto**: predefinitoV2
     - **Abilitare la quota dinamica**: disabilitato
+
+    > **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
+
 1. Attendere la distribuzione del modello. Quando la distribuzione è pronta, selezionare **Apri nel playground**.
 1. Nella finestra della chat immettere la query `What can you do?`.
 
@@ -83,7 +87,7 @@ Ora che è stato sperimentato il messaggio di sistema per il modello GPT distrib
         <li>Nel portale di Azure, selezionare la risorsa Servizi di intelligenza artificiale.</li>
         <li>Nella scheda Identità, in Gestione risorse, confermare che si tratti dell'identità gestita assegnata dal sistema.</li>
         <li>Passare all'account di archiviazione associato. Nella pagina IAM, aggiungere l'assegnazione di ruolo <em>Lettore dei dati del BLOB di archiviazione</em>.</li>
-        <li>In <strong>Assegna accesso a</strong>, scegliere <strong>Identità gestita</strong>, <strong>+ Seleziona membri</strong> e selezionare <strong>Tutte le identità gestite assegnate dal sistema</strong>.</li>
+        <li>In <strong>Assegna accesso a</strong>, scegliere <strong>Identità gestita</strong>, <strong>+ Seleziona membri</strong>, selezionare <strong>Tutte le identità gestite assegnate dal sistema</strong> e selezionare la risorsa dei servizi di intelligenza artificiale di Azure.</li>
         <li>Rivedere e assegnare per salvare le nuove impostazioni e ripetere il passaggio precedente.</li>
     </ul>
 </details>

@@ -1,6 +1,7 @@
 ---
 lab:
   title: Creare un'app di IA generativa che usa dati propri
+  description: Informazioni su come usare il modello RAG (Retrieval Augmented Generation) per sviluppare un'app di chat in grado di contestualizzare i prompt mediante l'integrazione di propri dati.
 ---
 
 # Creare un'app di IA generativa che usa dati propri
@@ -72,7 +73,9 @@ Per implementare la soluzione sono necessari due modelli:
     - **Limite di velocità dei token al minuto (migliaia)**: 5K
     - **Filtro contenuto**: predefinitoV2
     - **Abilitare la quota dinamica**: disabilitato
-      
+
+    > **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
+
 1. Ripetere i passaggi precedenti per distribuire un modello **gpt-35-turbo-16k** con il nome della distribuzione `gpt-35-turbo-16k`.
 
     > **Nota**: la riduzione dei token al minuto (TPM) consente di evitare di usare eccessivamente la quota disponibile nella sottoscrizione in uso. 5.000 TPM è sufficiente per i dati usati in questo esercizio.

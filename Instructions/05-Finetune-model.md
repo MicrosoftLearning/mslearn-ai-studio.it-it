@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Ottimizzare un modello linguistico per il completamento della chat in Azure AI Foundry
+  title: Ottimizzare un modello linguistico
+  description: Informazioni su come usare dati di training aggiuntivi per ottimizzare un modello e personalizzarne il comportamento.
 ---
 
-# Ottimizzare un modello linguistico per il completamento della chat in Azure AI Foundry
+# Ottimizzare un modello linguistico
 
 Se si desidera che un modello linguistico si comporti in modo specifico, è possibile usare la progettazione dei prompt per definire il comportamento desiderato. Se si desidera migliorare la coerenza del comportamento desiderato, è possibile scegliere di ottimizzare un modello, confrontandolo con il proprio approccio di progettazione dei prompt per valutare il metodo più adatto alle esigenze.
 
