@@ -1,10 +1,9 @@
 ---
 lab:
-  title: Applicare i filtri di contenuto per impedire l'output di contenuto dannoso
-  description: Informazioni su come applicare filtri di contenuto che attenuano l'output potenzialmente offensivo o dannoso nell'app di IA generativa.
+  title: Esplorare i filtri di contenuto per impedire l'output di contenuto dannoso in Azure AI Foundry
 ---
 
-# Applicare i filtri di contenuto per impedire l'output di contenuto dannoso
+# Esplorare i filtri di contenuto per impedire l'output di contenuto dannoso in Azure AI Foundry
 
 Azure AI Foundry include filtri di contenuto predefiniti per garantire che le richieste e i completamenti potenzialmente dannosi vengano identificati e rimossi dalle interazioni con il servizio. Inoltre, è possibile richiedere l'autorizzazione per definire filtri di contenuto personalizzati per esigenze specifiche per assicurarsi che le distribuzioni del modello applichino le entità di intelligenza artificiale responsabili appropriate per lo scenario di intelligenza artificiale generativa. Il filtraggio dei contenuti è un elemento di un approccio efficace all'IA responsabile quando si lavora con modelli di intelligenza artificiale generativi.
 

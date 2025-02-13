@@ -1,7 +1,6 @@
 ---
 lab:
   title: Creare un'app di IA generativa che usa dati propri
-  description: Informazioni su come usare il modello RAG (Retrieval Augmented Generation) per sviluppare un'app di chat in grado di contestualizzare i prompt mediante l'integrazione di propri dati.
 ---
 
 # Creare un'app di IA generativa che usa dati propri

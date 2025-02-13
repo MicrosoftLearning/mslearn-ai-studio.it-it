@@ -1,10 +1,9 @@
 ---
 lab:
-  title: Ottimizzare un modello linguistico
-  description: Informazioni su come usare dati di training aggiuntivi per ottimizzare un modello e personalizzarne il comportamento.
+  title: Ottimizzare un modello linguistico per il completamento della chat in Azure AI Foundry
 ---
 
-# Ottimizzare un modello linguistico
+# Ottimizzare un modello linguistico per il completamento della chat in Azure AI Foundry
 
 Se si desidera che un modello linguistico si comporti in modo specifico, è possibile usare la progettazione dei prompt per definire il comportamento desiderato. Se si desidera migliorare la coerenza del comportamento desiderato, è possibile scegliere di ottimizzare un modello, confrontandolo con il proprio approccio di progettazione dei prompt per valutare il metodo più adatto alle esigenze.
 
@@ -58,7 +57,7 @@ Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare
         <li>Nel portale di Azure, selezionare la risorsa Servizi di intelligenza artificiale.</li>
         <li>Nella scheda Identità, in Gestione risorse, confermare che si tratti dell'identità gestita assegnata dal sistema.</li>
         <li>Passare all'account di archiviazione associato. Nella pagina IAM, aggiungere l'assegnazione di ruolo <em>Proprietario dei dati del BLOB di archiviazione</em>.</li>
-        <li>In <strong>Assegna accesso a</strong>, scegliere <strong>Identità gestita</strong>, <strong>+ Seleziona membri</strong>, selezionare <strong>Tutte le identità gestite assegnate dal sistema</strong> e selezionare la risorsa dei Servizi di Azure AI.</li>
+        <li>In <strong>Assegna accesso a</strong>, scegliere <strong>Identità gestita</strong>, <strong>+Seleziona membri</strong>, selezionare <strong>Tutte le identità gestite assegnate dal sistema</strong> e selezionare la risorsa dei Servizi di Azure AI.</li>
         <li>Rivedere e assegnare per salvare le nuove impostazioni e ripetere il passaggio precedente.</li>
     </ul>
     </details>
