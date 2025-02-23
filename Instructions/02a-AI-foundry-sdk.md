@@ -14,17 +14,17 @@ Questo esercizio richiede circa **30** minuti.
 
 Per iniziare, creare un progetto Fonderia Azure AI.
 
-1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente:
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere i suggerimenti o i riquadri di avvio rapido aperti la prima volta che si accede e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente:
 
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Nella home page, selezionare **+ Crea progetto**.
-1. Nella procedura guidata **Crea un progetto** immettere un nome di progetto appropriato (ad esempio, `my-ai-project`) e quindi rivedere le risorse di Azure che verranno create automaticamente per supportare il progetto.
+1. Nella procedura guidata **Crea un progetto** immettere un nome di progetto appropriato per (ad esempio, `my-ai-project`) e quindi rivedere le risorse di Azure che verranno create automaticamente per supportare il progetto.
 1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
     - **Nome hub**: *un nome univoco, ad esempio `my-ai-hub`*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco (ad esempio, `my-ai-resources`) o selezionarne uno esistente*
-    - **Posizione**: scegliere un'area casuale dal seguente elenco\*:
+    - **Posizione**: effettuare una scelta casuale dl seguente elenco\*:
         - Stati Uniti orientali
         - Stati Uniti orientali 2
         - Stati Uniti centro-settentrionali
@@ -35,12 +35,12 @@ Per iniziare, creare un progetto Fonderia Azure AI.
     - **Connettere i Servizi di Azure AI o Azure OpenAI**: *creare una nuova risorsa di Servizi di intelligenza artificiale con un nome appropriato (ad esempio, `my-ai-services`) o usarne uno esistente*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le quote dei modelli sono vincolate a livello tenant dalle quote locali. La scelta di un'area casuale consente di distribuire la disponibilità della quota quando più utenti lavorano nello stesso tenant. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > \* Le quote dei modelli sono vincolate dalle quote locali a livello tenant. La scelta di un'area casuale consente di distribuire la disponibilità della quota quando più utenti lavorano nello stesso tenant. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
 1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
-1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel Portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
+1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
 
-    ![Screenshot dei dettagli di un progetto di Azure AI nel Portale Fonderia Azure AI.](./media/ai-foundry-project.png)
+    ![Screenshot dei dettagli di un progetto di Azure AI nel portale Fonderia di Azure AI.](./media/ai-foundry-project.png)
 
 ## Implementare un modello di IA generativa
 
@@ -85,7 +85,7 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
     ```
 
 1. Nel riquadro della riga di comando di Cloud Shell immettere il comando seguente per installare le librerie Python che si useranno, ovvero:
-    - **python-dotenv**: usato per caricare le impostazioni da un file di configurazione dell'applicazione.
+    - **python-dotenv** : usato per caricare le impostazioni da un file di configurazione dell'applicazione.
     - **azure-identity**: usato per eseguire l'autenticazione con le credenziali Entra ID.
     - **azure-ai-projects**: usato per lavorare con un progetto Fonderia Azure AI.
     - **azure-ai-inference**: usato per chattare con un modello di IA generativa.
@@ -122,7 +122,7 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
     ```
 
 1. Nella funzione **principale**, sotto il commento **# Ottieni impostazioni di configurazione**, si noti che il codice carica i valori della stringa di connessione del progetto e del nome della distribuzione del modello definiti nel file **.env**.
-1. Nel commento **# Inizializza il client del progetto**, aggiungere il codice seguente per connettersi al progetto Fonderia Azure AI usando le credenziali di Azure con cui è stato attualmente eseguito l'accesso:
+1. Nel commento **# Inizializza il client del progetto** aggiungere il codice seguente per connettersi al progetto Fonderia Azure AI usando le credenziali di Azure con cui si è attualmente eseguito l'accesso:
 
     ```python
    project = AIProjectClient.from_connection_string(
