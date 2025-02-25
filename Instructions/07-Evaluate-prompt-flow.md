@@ -20,11 +20,11 @@ Per iniziare, creare un progetto di Azure AI Foundry all'interno di un hub di Az
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *un nuovo gruppo di risorse*
-    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-35-turbo** nella finestra Helper posizione e usare l'area consigliata\*
+    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4** nella finestra Helper posizione e usare l'area consigliata\*
     - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Selezionare **Avanti** per esaminare la configurazione.
 1. Selezionare **Crea un progetto** e attendere il completamento del processo.
@@ -35,7 +35,7 @@ Per usare un modello linguistico nel prompt flow, è prima necessario distribuir
 
 1. Passare alla pagina **Modelli + endpoint** nella sezione **Asset personali** usando il menu a sinistra.
 1. Selezionare il pulsante **+ Distribuisci modello** e scegliere l'opzione **Distribuisci modello di base**.
-1. Creare una nuova distribuzione del modello **gpt-35-turbo** con le impostazioni seguenti selezionando **Personalizza** nella procedura guidata **Distribuisci modello**:
+1. Creare una nuova distribuzione del modello **gpt-4** con le impostazioni seguenti selezionando **Personalizza** nella procedura guidata **Distribuisci modello**:
     - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
     - **Tipo di distribuzione**: Standard
     - **Versione del modello**: *selezionare la versione predefinita*
@@ -148,7 +148,7 @@ Per ridurre i tempi, è stato creato un set di dati di output batch che contiene
     - Selezionare **Avanti**.
     - **Selezionare le metriche**: coerenza, scorrevolezza
     - **Connessione**: *connessione ai servizi di intelligenza artificiale*
-    - **Nome/Modello di distribuzione**: *modello GPT-3.5 distribuito*
+    - **Nome/Modello di distribuzione**: *modello GPT-4 distribuito*
     - **query**: selezionare la **query** come origine dati
     - **risposta**: selezionare la **risposta** come origine dati
       

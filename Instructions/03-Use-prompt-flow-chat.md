@@ -1,11 +1,12 @@
 ---
 lab:
-  title: Creare un copilota personalizzato con prompt flow nel portale Azure AI Foundry
+  title: Usare un prompt flow per gestire la conversazione in un'app di chat
+  description: Informazioni su come usare i prompt flow per gestire i dialoghi di conversazione e assicurarsi che i prompt vengano sviluppati e orchestrati per ottenere risultati ottimali.
 ---
 
-# Creare un copilota personalizzato con prompt flow nel portale Azure AI Foundry
+# Usare un prompt flow per gestire la conversazione in un'app di chat
 
-In questo esercizio, verrà usato il prompt flow del portale Azure AI Foundry per creare un copilota personalizzato che impiega un prompt dell'utente e la cronologia della chat come input e usa un modello GPT di Azure OpenAI per generare un output.
+In questo esercizio, verrà usato il prompt flow del Portale Fonderia Azure AI per creare un'app di chat personalizzata che impiega un prompt dell'utente e la cronologia della chat come input e usa un modello GPT di Azure OpenAI per generare un output.
 
 Questo esercizio richiederà circa **30** minuti.
 
@@ -20,11 +21,11 @@ Per iniziare, è necessario creare il progetto del portale Azure AI Foundry all'
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *un nuovo gruppo di risorse*
-    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-35-turbo** nella finestra Helper posizione e usare l'area consigliata\*
+    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4** nella finestra Helper posizione e usare l'area consigliata\*
     - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Se si seleziona **Personalizza**, selezionare **Avanti** ed esaminare la configurazione.
 1. Selezionare **Crea** e attendere il completamento del processo.
@@ -34,7 +35,8 @@ Per iniziare, è necessario creare il progetto del portale Azure AI Foundry all'
 Per usare un modello linguistico nel prompt flow, è prima necessario distribuire un modello. Il portale Azure AI Foundry consente all'utente di distribuire modelli OpenAI usabili nei flussi.
 
 1. Nel riquadro di spostamento a sinistra, in **Risorse personali**, selezionare la pagina **Modelli + endpoint**.
-1. Creare una nuova distribuzione del modello **gpt-35-turbo** con le impostazioni seguenti:
+1. Selezionare **+ Distribuisci modello** e **Distribuisci modello di base**. 
+1. Creare una nuova distribuzione del modello **gpt-4** con le seguenti impostazioni selezionando **Personalizza** nei dettagli della distribuzione:
     - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
     - **Tipo di distribuzione**: Standard
     - **Versione del modello**: *selezionare la versione predefinita*
@@ -106,7 +108,7 @@ Ora che è stato sperimentato il messaggio di sistema per il modello GPT distrib
 
 1. Nella sezione del nodo LLM, per **Connessione**, selezionare la connessione creata al momento della creazione dell'hub IA.
 1. Per **API** selezionare **Chat**.
-1. Per **deployment_name** selezionare il modello **gpt-35-turbo** distribuito.
+1. Per **deployment_name** selezionare il modello **gpt-4** distribuito.
 1. Per **response_format**, selezionare **{"type":"text"}**.
 1. Esaminare il campo della richiesta e verificare che sia simile al seguente:
 

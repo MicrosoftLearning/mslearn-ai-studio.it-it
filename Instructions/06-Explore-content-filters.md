@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Esplorare i filtri di contenuto per impedire l'output di contenuto dannoso in Azure AI Foundry
+  title: Applicare i filtri di contenuto per impedire l'output di contenuto dannoso
+  description: Informazioni su come applicare filtri di contenuto che attenuano l'output potenzialmente offensivo o dannoso nell'app di IA generativa.
 ---
 
-# Esplorare i filtri di contenuto per impedire l'output di contenuto dannoso in Azure AI Foundry
+# Applicare i filtri di contenuto per impedire l'output di contenuto dannoso
 
 Azure AI Foundry include filtri di contenuto predefiniti per garantire che le richieste e i completamenti potenzialmente dannosi vengano identificati e rimossi dalle interazioni con il servizio. Inoltre, è possibile richiedere l'autorizzazione per definire filtri di contenuto personalizzati per esigenze specifiche per assicurarsi che le distribuzioni del modello applichino le entità di intelligenza artificiale responsabili appropriate per lo scenario di intelligenza artificiale generativa. Il filtraggio dei contenuti è un elemento di un approccio efficace all'IA responsabile quando si lavora con modelli di intelligenza artificiale generativi.
 
@@ -22,11 +23,11 @@ Per iniziare, è necessario creare il progetto del portale Azure AI Foundry all'
     - **Nome hub**: *un nome univoco*.
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *un nuovo gruppo di risorse*
-    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-35-turbo** nella finestra Helper posizione e usare l'area consigliata\*
+    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4** nella finestra Helper posizione e usare l'area consigliata\*
     - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-35-turbo-model-availability)
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Se si seleziona **Personalizza**, selezionare **Avanti** ed esaminare la configurazione.
 1. Selezionare **Crea** e attendere il completamento del processo.
@@ -36,7 +37,7 @@ Per iniziare, è necessario creare il progetto del portale Azure AI Foundry all'
 Ora è possibile distribuire un modello da usare tramite il **portale Azure AI Foundry**. Dopo la distribuzione, si userà il modello per generare contenuto in linguaggio naturale.
 
 1. Nel riquadro di spostamento a sinistra, in **Risorse personali**, selezionare la pagina **Modelli + endpoint**.
-1. Creare una nuova distribuzione del modello **gpt-35-turbo** con le impostazioni seguenti selezionando **Personalizza** nella procedura guidata Distribuisci modello:
+1. Creare una nuova distribuzione del modello **gpt-4** con le impostazioni seguenti selezionando **Personalizza** nella procedura guidata Distribuisci modello:
    
     - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
     - **Tipo di distribuzione**: Standard
@@ -46,7 +47,7 @@ Ora è possibile distribuire un modello da usare tramite il **portale Azure AI F
     - **Filtro contenuto**: predefinitoV2
     - **Abilitare la quota dinamica**: disabilitato
       
-> **Nota**: ogni modello di Azure AI Foundry è ottimizzato per un equilibrio diverso tra funzionalità e prestazioni. In questo esercizio si userà il modello **GPT 3.5 Turbo**, che è altamente in grado di generare e chattare in linguaggio naturale.
+> **Nota**: ogni modello di Azure AI Foundry è ottimizzato per un equilibrio diverso tra funzionalità e prestazioni. In questo esercizio verrà utilizzato il modello **GPT-4**, che è altamente in grado di generare e chattare in linguaggio naturale.
 
 ## Esplorare i filtri di contenuto
 
@@ -83,7 +84,7 @@ I filtri di contenuto vengono applicati ai prompt e ai completamenti per evitare
 
 1. Tornare alla pagina **Modelli + endpoint** e notare che la distribuzione ora fa riferimento al filtro di contenuto personalizzato creato.
 
-    ![Screenshot della pagina di distribuzione del portale Azure AI Foundry.](./media/azure-ai-deployment.png)
+    ![Screenshot della pagina di distribuzione del portale Azure AI Foundry.](./media/model-gpt-4-custom-filter.png)
 
 ## Generare l'output del linguaggio naturale
 

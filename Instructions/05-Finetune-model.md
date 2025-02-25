@@ -1,9 +1,10 @@
 ---
 lab:
-  title: Ottimizzare un modello linguistico per il completamento della chat in Azure AI Foundry
+  title: Ottimizzare un modello linguistico
+  description: Informazioni su come usare dati di training aggiuntivi per ottimizzare un modello e personalizzarne il comportamento.
 ---
 
-# Ottimizzare un modello linguistico per il completamento della chat in Azure AI Foundry
+# Ottimizzare un modello linguistico
 
 Se si desidera che un modello linguistico si comporti in modo specifico, è possibile usare la progettazione dei prompt per definire il comportamento desiderato. Se si desidera migliorare la coerenza del comportamento desiderato, è possibile scegliere di ottimizzare un modello, confrontandolo con il proprio approccio di progettazione dei prompt per valutare il metodo più adatto alle esigenze.
 
@@ -34,7 +35,7 @@ Per iniziare, è necessario creare il progetto del portale Azure AI Foundry all'
 1. Esaminare la configurazione e creare il progetto.
 1. Attendere la creazione del progetto.
 
-## Ottimizzare un modello GPT-3.5
+## Ottimizzare un modello GPT-4
 
 Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare prima di tutto con il processo di ottimizzazione. Prima di poter ottimizzare un modello, è necessario un set di dati.
 
@@ -43,7 +44,7 @@ Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare
     > **Nota**: per impostazione predefinita, il dispositivo potrebbe salvare il file come file .txt. Selezionare tutti i file e rimuovere il suffisso .txt per assicurarsi di salvare il file come JSONL.
 
 1. Passare alla pagina **Ottimizzazione** nella sezione **Crea e personalizza**, usando il menu a sinistra.
-1. Selezionare il pulsante per aggiungere un nuovo modello di ottimizzazione, selezionare il modello `gpt-35-turbo`, selezionare **Avanti** e quindi **Conferma**.
+1. Selezionare il pulsante per aggiungere un nuovo modello di ottimizzazione, selezionare il modello `gpt-4`, selezionare **Avanti** e quindi **Conferma**.
 1. **Ottimizzare** il modello usando la configurazione seguente:
     - **Versione del modello**: *selezionare la versione predefinita*
     - **Suffisso del modello**: `ft-travel`
@@ -71,16 +72,16 @@ Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare
 
 ## Chat con un modello di base
 
-Mentre si attende il completamento del processo di ottimizzazione, è possibile chattare con un modello GPT 3.5 di base per valutare le prestazioni.
+Mentre si attende il completamento del processo di ottimizzazione, è possibile chattare con un modello GPT 4 di base per valutare le prestazioni.
 
 1. Passare alla pagina **Modelli + endpoint** nella sezione **Asset personali** usando il menu a sinistra.
 1. Selezionare il pulsante **+ Distribuisci modello** e scegliere l'opzione **Distribuisci modello di base**.
-1. Distribuire un `gpt-35-turbo` modello, che corrisponde allo stesso tipo di modello usato durante l'ottimizzazione.
+1. Distribuire un `gpt-4` modello, che corrisponde allo stesso tipo di modello usato durante l'ottimizzazione.
 
 > **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
 
 1. Quando la distribuzione è completa, selezionare il pulsante **Apri nel playground**.
-1. Verificare che il modello di base distribuito `gpt-35-model` sia selezionato nel riquadro di configurazione.
+1. Verificare che il modello di base distribuito `gpt-4` sia selezionato nel riquadro di configurazione.
 1. Nella finestra della chat immettere la query `What can you do?` e visualizzare la risposta.
     Le risposte sono molto generiche. Si ricorda che l'obiettivo è creare un'applicazione di chat che susciti il desiderio di viaggiare.
 1. Aggiornare il messaggio di sistema nel riquadro di configurazione con la seguente richiesta:
