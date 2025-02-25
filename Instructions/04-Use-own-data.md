@@ -1,6 +1,7 @@
 ---
 lab:
   title: Creare un'app di IA generativa che usa dati propri
+  description: Informazioni su come usare il modello RAG (Retrieval Augmented Generation) per sviluppare un'app di chat in grado di contestualizzare i prompt mediante l'integrazione di propri dati.
 ---
 
 # Creare un'app di IA generativa che usa dati propri
@@ -75,7 +76,7 @@ Per implementare la soluzione sono necessari due modelli:
 
     > **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
 
-1. Ripetere i passaggi precedenti per distribuire un modello **gpt-35-turbo-16k** con il nome della distribuzione `gpt-35-turbo-16k`.
+1. Ripetere i passaggi precedenti per distribuire un modello **gpt-4** con il nome della distribuzione `gpt-4`.
 
     > **Nota**: la riduzione dei token al minuto (TPM) consente di evitare di usare eccessivamente la quota disponibile nella sottoscrizione in uso. 5.000 TPM è sufficiente per i dati usati in questo esercizio.
 
@@ -119,7 +120,7 @@ Dopo aver aggiunto un'origine dati al progetto, è possibile usarla per creare u
 Prima di usare l'indice in un flusso immediato basato su RAG, verificare che possa essere usato per influire sulle risposte di intelligenza artificiale generativa.
 
 1. Selezionare la pagina **Playground** nel pannello di navigazione a sinistra.
-1. In tale pagina, nel pannello di installazione, verificare che sia selezionata la distribuzione modello **gpt-35-turbo-16k**. Quindi, nel pannello principale della sessione di chat inviare la richiesta `Where can I stay in New York?`
+1. In tale pagina, nel pannello di installazione, verificare che sia selezionata la distribuzione modello **gpt-4**. Quindi, nel pannello principale della sessione di chat inviare la richiesta `Where can I stay in New York?`
 1. Esaminare la risposta, che deve essere una risposta generica dal modello senza dati dall'indice.
 1. Nel pannello di installazione espandere il campo **Aggiungi dati**, quindi aggiungere l'indice di progetto **brochures-index** e selezionare il tipo di ricerca **ibrido (vettore + parola chiave)**.
 
@@ -176,7 +177,7 @@ L'indice vettoriale è stato salvato nel progetto Azure AI Foundry, consentendo 
 
     - **Connessione**: *la risorsa OpenAI di Azure predefinita per l'hub IA*
     - **API**: chat
-    - **deployment_name**: gpt-35-turbo-16k
+    - **deployment_name**: gpt-4
     - **response_format**: {"type":"text"}
 
 1. Attendere l'avvio della sessione di calcolo, quindi nella sezione di **ricerca** impostare i valori dei parametri seguenti:
@@ -200,9 +201,9 @@ L'indice vettoriale è stato salvato nel progetto Azure AI Foundry, consentendo 
 
 1. Nella sezione **chat_with_context** selezionare le impostazioni seguenti (lasciando gli altri così come sono):
 
-    - **Connessione**: Default_AzureOpenAI
+    - **Connessione**: *la risorsa OpenAI di Azure predefinita per l'hub IA*
     - **API**: Chat
-    - **deployment_name**: gpt-35-turbo-16k
+    - **deployment_name**: gpt-4
     - **response_format**: {"type":"text"}
 
     Assicurarsi quindi che gli **input** per questo strumento includano i parametri seguenti:
