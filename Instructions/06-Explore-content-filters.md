@@ -27,7 +27,7 @@ Per iniziare, è necessario creare il progetto del portale Azure AI Foundry all'
     - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
 
 1. Se si seleziona **Personalizza**, selezionare **Avanti** ed esaminare la configurazione.
 1. Selezionare **Crea** e attendere il completamento del processo.
@@ -92,7 +92,7 @@ Vediamo come si comporta il modello in un'interazione conversazionale.
 
 1. Passare a **Playground** nel riquadro sinistro.
 
-1. In modalità **Chat**, immettere il prompt seguente nella sezione **Cronologia della chat**.
+1. Aprire il **Playground Chat** e immettere il prompt seguente nella sezione **Cronologia della chat**.
 
     ```
    Describe characteristics of Scottish people.
@@ -108,13 +108,13 @@ Vediamo come si comporta il modello in un'interazione conversazionale.
 
 1. Applicare le modifiche apportate al messaggio di sistema.
 
-1. Nella sezione **Sessione di chat** immettere nuovamente il prompt seguente.
+1. Nella sezione **Cronologia della chat** immettere nuovamente il prompt seguente.
 
     ```
    Describe characteristics of Scottish people.
     ```
 
-8. Osservare l'output, che dovrebbe indicare che la richiesta di essere razzisti e sprezzanti non è supportata. Questa prevenzione di output offensivi è il risultato dei filtri di contenuto predefiniti nel portale Azure AI Foundry.
+8. Osservare l'output, che dovrebbe indicare che la richiesta di essere razzisti e sprezzanti non è supportata. Questa prevenzione dell'output offensivo è il risultato dei filtri di contenuto.
 
 > **Suggerimento**: per ulteriori dettagli sulle categorie e sui livelli di gravità impiegati nei filtri dei contenuti, consultare [Filtro dei contenuti](https://learn.microsoft.com/azure/ai-studio/concepts/content-filtering) nella documentazione del servizio del portale Azure AI Foundry.
 
