@@ -12,7 +12,9 @@ In questo esercizio, verrà ottimizzato un modello linguistico con Azure AI Foun
 
 Si supponga di lavorare per un'agenzia di viaggi per la quale si sta sviluppando un'applicazione di chat per aiutare le persone a pianificare le proprie vacanze. L'obiettivo è creare una chat semplice e accattivante che suggerisca destinazioni e attività. Poiché la chat non è connessa ad alcuna origine dati, **non** deve fornire raccomandazioni specifiche per hotel, voli o ristoranti per essere considerata attendibile dai clienti.
 
-Questo esercizio richiederà circa **60** minuti.
+Questo esercizio richiederà circa **60** minuti\*.
+
+> \***Nota**: questa tempistica è una stima basata sull'esperienza media. L'ottimizzazione dipende dalle risorse dell'infrastruttura cloud, che possono richiedere una quantità variabile di tempo per il provisioning a seconda della capacità del data center e della domanda simultanea. Alcune attività in questo esercizio possono impiegare <u>molto</u> tempo per essere completate e richiedono pazienza. Se la procedura richiede diverso tempo, è consigliabile esaminare la [documentazione sull'ottimizzazione di Fonderia Azure AI](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) o fare una pausa.
 
 ## Creare un hub e un progetto di intelligenza artificiale nel portale Azure AI Foundry
 
@@ -26,18 +28,18 @@ Per iniziare, è necessario creare il progetto del portale Azure AI Foundry all'
         - **Hub**: *riempimento automatico con nome predefinito*
         - **Sottoscrizione**: *riempimento automatico con l'account con cui è stato effettuato l'accesso*
         - **Gruppo di risorse**: (nuovo) *riempimento automatico con il nome del progetto*
-        - **Località**: scegliere una delle aree seguenti **Stati Uniti orientali 2**, **Stati Uniti centro-settentrionali**, **Svezia centrale**, **Svizzera occidentale**\*
+        -  **Posizione**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4-finetune** nella finestra Helper posizione e usare l'area consigliata\*
         - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
         - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. La scelta casuale di un'area riduce il rischio che una singola area raggiunga il limite di quota. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sull'[Ottimizzazione delle aree del modello](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#fine-tuning-models)
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sull'[Ottimizzazione delle aree del modello](https://learn.microsoft.com/azure/ai-services/openai/concepts/models?tabs=python-secure%2Cglobal-standard%2Cstandard-chat-completions#fine-tuning-models)
 
 1. Esaminare la configurazione e creare il progetto.
 1. Attendere la creazione del progetto.
 
 ## Ottimizzare un modello GPT-4
 
-Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare prima di tutto con il processo di ottimizzazione. Prima di poter ottimizzare un modello, è necessario un set di dati.
+Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare subito il processo di ottimizzazione e ritornarci dopo aver esplorato un modello di base che non è stato ottimizzato a scopo di confronto.
 
 1. Scaricare il [set di dati di training](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl) in `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel-finetune-hotel.jsonl` e salvarlo come file JSONL in locale.
 
@@ -68,7 +70,7 @@ Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare
     - **Parametri attività**: *mantenere le impostazioni predefinite*
 1. Verrà avviata l'ottimizzazione, che potrebbe richiedere del tempo per il completamento.
 
-> **Nota**: l'ottimizzazione e la distribuzione possono richiedere del tempo, quindi potrebbe essere necessario eseguire periodicamente il controllo. È già possibile continuare con il passaggio successivo durante l'attesa.
+> **Nota**: l'ottimizzazione e la distribuzione possono richiedere una notevole quantità di tempo (30 minuti o più), quindi potrebbe essere necessario eseguire periodicamente il controllo. È già possibile continuare con il passaggio successivo durante l'attesa.
 
 ## Chat con un modello di base
 
@@ -76,7 +78,11 @@ Mentre si attende il completamento del processo di ottimizzazione, è possibile 
 
 1. Passare alla pagina **Modelli + endpoint** nella sezione **Asset personali** usando il menu a sinistra.
 1. Selezionare il pulsante **+ Distribuisci modello** e scegliere l'opzione **Distribuisci modello di base**.
-1. Distribuire un `gpt-4` modello, che corrisponde allo stesso tipo di modello usato durante l'ottimizzazione.
+1. Distribuire un`gpt-4` modello con le impostazioni seguenti:
+    - **Nome distribuzione**: *un nome univoco per il modello, è possibile usare il valore predefinito*
+    - **Tipo di distribuzione**: Standard
+    - **Limite di velocità dei token al minuto (migliaia)**: 5K
+    - **Filtro contenuto**: Predefinito
 
 > **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
 
@@ -100,36 +106,54 @@ Mentre si attende il completamento del processo di ottimizzazione, è possibile 
     ```
 
 1. Selezionare **Applica modifiche** e **Cancella chat**.
-1. Continuare a testare l'applicazione di chat per verificare che non fornisca informazioni non basate sui dati recuperati. Ad esempio, porre le domande seguenti ed esplorare le risposte del modello:
+1. Continuare a testare l'applicazione di chat per verificare che non fornisca informazioni non basate sui dati recuperati. Ad esempio, porre le domande seguenti ed esaminare le risposte del modello, prestando particolare attenzione al tono e allo stile di scrittura usato dal modello per rispondere:
    
     `Where in Rome should I stay?`
     
     `I'm mostly there for the food. Where should I stay to be within walking distance of affordable restaurants?`
 
-    `Give me a list of five bed and breakfasts in Trastevere.`
+    `What are some local delicacies I should try?`
 
-    Il modello può fornire un elenco di hotel, anche qualora sia stato richiesto di non fornire suggerimenti sugli hotel. Questo è un esempio di comportamento incoerente. Verrà ora esaminato se il modello ottimizzato offre prestazioni migliori in questi casi.
+    `When is the best time of year to visit in terms of the weather?`
 
-1. Passare alla pagina **Ottimizzazione** in **Crea e personalizza** per trovare il processo di ottimizzazione e il relativo stato. Se è ancora in esecuzione, è possibile scegliere di continuare a valutare manualmente il modello di base distribuito. Se l'operazione è stata completata, è possibile continuare con la sezione successiva.
+    `What's the best way to get around the city?`
+
+## Esaminare il file di training
+
+Il modello di base sembra funzionare abbastanza bene, ma potrebbe essere necessario cercare uno stile di conversazione specifico dall'app di IA generativa. I dati di training usati per l'ottimizzazione offrono la possibilità di creare esempi espliciti dei tipi di risposta desiderati.
+
+1. Aprire il file JSONL scaricato in precedenza (è possibile aprirlo in qualsiasi editor di testo)
+1. Esaminare l'elenco dei documenti JSON nel file di dati di training. Il primo dovrebbe essere simile a questo (formattato per la leggibilità):
+
+    ```json
+    {"messages": [
+        {"role": "system", "content": "You are an AI travel assistant that helps people plan their trips. Your objective is to offer support for travel-related inquiries, such as visa requirements, weather forecasts, local attractions, and cultural norms. You should not provide any hotel, flight, rental car or restaurant recommendations. Ask engaging questions to help someone plan their trip and think about what they want to do on their holiday."},
+        {"role": "user", "content": "What's a must-see in Paris?"},
+        {"role": "assistant", "content": "Oh la la! You simply must twirl around the Eiffel Tower and snap a chic selfie! After that, consider visiting the Louvre Museum to see the Mona Lisa and other masterpieces. What type of attractions are you most interested in?"}
+        ]}
+    ```
+
+    Ogni interazione di esempio nell'elenco include lo stesso messaggio di sistema testato con il modello di base, una richiesta dell'utente correlata a una query di viaggio e una risposta. Lo stile delle risposte nei dati di training consentirà al modello ottimizzato di apprendere come deve rispondere.
 
 ## Distribuire il modello ottimizzato
 
 Al termine dell'ottimizzazione, è possibile distribuire il modello ottimizzato.
 
+1. Passare alla pagina **Ottimizzazione** in **Crea e personalizza** per trovare il processo di ottimizzazione e il relativo stato. Se è ancora in esecuzione, è possibile scegliere di continuare a chattare con il modello di base distribuito o fare una pausa. Se l'operazione è stata completata, è possibile continuare.
 1. Selezionare il modello ottimizzato. Selezionare la scheda **Metriche** ed esplorare le metriche ottimizzate.
 1. Distribuire il modello ottimizzato con le configurazioni seguenti:
     - **Nome distribuzione**: *un nome univoco per il modello, è possibile usare il valore predefinito*
     - **Tipo di distribuzione**: Standard
     - **Limite di velocità dei token al minuto (migliaia)**: 5K
     - **Filtro contenuto**: Predefinito
-1. Attendere il completamento della distribuzione prima di sottoporla a test. L'operazione potrebbe richiedere alcuni minuti.
+1. Attendere il completamento della distribuzione prima di sottoporla a test. L'operazione potrebbe richiedere alcuni minuti. Controllare lo **stato provisioning** fino a quando non è stato completato (potrebbe essere necessario aggiornare il browser per visualizzare lo stato aggiornato).
 
 ## Test del modello ottimizzato
 
 Dopo aver distribuito il modello ottimizzato, è possibile testarlo come si è testato il modello di base distribuito.
 
 1. Quando la distribuzione è pronta, passare al modello ottimizzato e selezionare **Apri nel playground**.
-1. Aggiornare il messaggio di sistema con le istruzioni seguenti:
+1. Verificare che il messaggio di sistema includa queste istruzioni:
 
     ```md
     You are an AI travel assistant that helps people plan their trips. Your objective is to offer support for travel-related inquiries, such as visa requirements, weather forecasts, local attractions, and cultural norms.
@@ -143,7 +167,13 @@ Dopo aver distribuito il modello ottimizzato, è possibile testarlo come si è t
     
     `I'm mostly there for the food. Where should I stay to be within walking distance of affordable restaurants?`
 
-    `Give me a list of five bed and breakfasts in Trastevere.`
+    `What are some local delicacies I should try?`
+
+    `When is the best time of year to visit in terms of the weather?`
+
+    `What's the best way to get around the city?`
+
+1. Dopo aver esaminato le risposte, come vengono confrontate con quelle del modello di base?
 
 ## Eseguire la pulizia
 
