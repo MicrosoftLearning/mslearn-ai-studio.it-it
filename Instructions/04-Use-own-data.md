@@ -8,7 +8,7 @@ lab:
 
 Generazione ottimizzata per il recupero (RAG) è una tecnica usata per creare applicazioni che integrano dati da origini dati personalizzate in una richiesta di un modello di intelligenza artificiale generativa. RAG è un modello comunemente usato per lo sviluppo di app di IA generativa: applicazioni basate su chat che usano un modello linguistico per interpretare gli input e generare risposte appropriate.
 
-In questo esercizio si userà il portale di Azure AI Foundry per integrare dati personalizzati in un flusso immediato di intelligenza artificiale generativa.
+In questo esercizio si userà il portale di Azure AI Foundry per integrare dati personalizzati in un flusso immediato di intelligenza artificiale generativa. Si esaminerà anche come implementare il criterio RAG in un'app client usando Fonderia di Azure AI e gli SDK OpenAI di Azure.
 
 Questo esercizio richiede circa **45** minuti.
 
@@ -89,7 +89,7 @@ Dopo aver aggiunto un'origine dati al progetto, è possibile usarla per creare u
     - **Ricerca impostazioni**:
         - **Impostazioni del vettore**: aggiungere la ricerca vettoriale a questa risorsa di ricerca
         - **Connessione OpenAI di Azure**: *selezionare la risorsa OpenAI di Azure predefinita per l'hub.*
-        
+
 1. Attendere il completamento del processo di indicizzazione, che può richiedere alcuni minuti. L'operazione di creazione dell'indice è costituita dai processi seguenti:
 
     - Spezzare, suddividere e incorporare i token di testo nei dati delle brochure.
@@ -116,21 +116,22 @@ L'indice vettoriale è stato salvato nel progetto Azure AI Foundry, consentendo 
 
 1. Nel portale di Azure AI Foundry, all'interno del progetto, nel riquadro di spostamento a sinistra, in **Crea e personalizza**, selezionare la pagina **Pompt flow**.
 1. Creare un nuovo prompt flow clonando l'esempio **Domande e risposte multiple sui dati del profilo** nella raccolta. Salvare il clone di questo esempio in una cartella denominata `brochure-flow`.
-    <details>  
-      <summary><b>Suggerimento per la risoluzione dei problemi</b>: errore di autorizzazioni</summary>
+
+    <details> 
+        <summary><font color="red"><b>Suggerimento per la risoluzione dei problemi</b>: errore di autorizzazioni</font></summary>
         <p>Se viene visualizzato un errore di autorizzazioni quando si crea un nuovo prompt flow, provare a risolvere i problemi nel seguente modo:</p>
         <ul>
-          <li>Nel portale di Azure, selezionare la risorsa Servizi di intelligenza artificiale.</li>
-          <li>Nella scheda Identità, in Gestione risorse, confermare che si tratti dell'identità gestita assegnata dal sistema.</li>
-          <li>Passare all'account di archiviazione associato. Nella pagina IAM, aggiungere l'assegnazione di ruolo <em>Lettore dei dati del BLOB di archiviazione</em>.</li>
-          <li>In <strong>Assegna accesso a</strong>, scegliere <strong>Identità gestita</strong>, <strong>+ Seleziona membri</strong>, selezionare <strong>Tutte le identità gestite assegnate dal sistema</strong> e selezionare la risorsa dei servizi di intelligenza artificiale di Azure.</li>
-          <li>Rivedere e assegnare per salvare le nuove impostazioni e ripetere il passaggio precedente.</li>
+            <li>Nel portale di Azure, nel gruppo di risorse per l'hub di Fonderia Azure AI, selezionare la risorsa Servizi di intelligenza artificiale.</li>
+            <li>Nella scheda <b>Identità</b>, in <b>Gestione risorse</b>, assicurarsi che lo stato dell'identità gestita <b>assegnata dal sistema</b> sia <b>On</b>.</li>
+            <li>Nel gruppo di risorse per l'hub di Fonderia Azure AI selezionare l'account di archiviazione</li>
+            <li>Nella pagina <b>Controllo di accesso (IAM)</b> aggiungere un'assegnazione di ruolo per assegnare il ruolo <b>Lettore dei dati del BLOB di archiviazione</b> all'identità gestita per la risorsa dei Servizi di Azure AI.</li>
+            <li>Attendere l'assegnazione del ruolo e quindi ripetere il passaggio precedente.</li>
         </ul>
     </details>
 
 1. Quando si apre la pagina della finestra di progettazione del prompt flow, esaminare il **flusso della brochure**. Il relativo grafo dovrebbe avere l'aspetto dell'immagine seguente:
 
-    ![Screenshot di un grafo del prompt flow](./media/chat-flow.png)
+    ![Screenshot di un grafo del prompt flow.](./media/chat-flow.png)
 
     Il prompt flow di esempio usato implementa la logica di richiesta per un'applicazione di chat in cui l'utente può inviare in modo iterativo l'input di testo all'interfaccia di chat. La cronologia conversazionale viene mantenuta e inclusa nel contesto per ogni iterazione. Il prompt flow orchestra una sequenza di *strumenti* per:
 
@@ -142,7 +143,11 @@ L'indice vettoriale è stato salvato nel progetto Azure AI Foundry, consentendo 
 
 1. Usare il pulsante **Avvia sessione di calcolo** per avviare il calcolo di runtime per il flusso.
 
-    Attendere l'avvio del runtime. In questo modo viene fornito un contesto di calcolo relativo al prompt flow. Durante l'attesa, nella scheda **Flusso**, esaminare le sezioni relative agli strumenti nel flusso.
+    Attendere l'avvio della sessione di calcolo. In questo modo viene fornito un contesto di calcolo relativo al prompt flow. Durante l'attesa, nella scheda **Flusso**, esaminare le sezioni relative agli strumenti nel flusso.
+
+    >**Nota**: a causa delle limitazioni dell'infrastruttura e della capacità, la sessione di calcolo potrebbe non riuscire durante periodi di domanda elevata. In questo caso, è possibile ignorare l'uso del prompt flow e avviare l'attività **Creare un'app client RAG con Fonderia di Azure AI e gli SDK di OpenAI di Azure**.
+
+    Quindi, all'avvio della sessione di calcolo...
 
 1. Nella sezione **Input**, assicurarsi che gli input includano:
     - **chat_history**
@@ -161,7 +166,7 @@ L'indice vettoriale è stato salvato nel progetto Azure AI Foundry, consentendo 
     - **deployment_name**: gpt-4
     - **response_format**: {"type":"text"}
 
-1. Attendere l'avvio della sessione di calcolo, quindi nella sezione di **ricerca** impostare i valori dei parametri seguenti:
+1. Impostare i seguenti valori dei parametri nella sezione **Ricerca**:
 
     - **mlindex_content**: *selezionare il campo vuoto per aprire il riquadro Genera*
         - **index_type**: indice registrato
@@ -199,30 +204,140 @@ L'indice vettoriale è stato salvato nel progetto Azure AI Foundry, consentendo 
 1. Esaminare la risposta, che deve essere basata sui dati nell'indice e prendere in considerazione la cronologia delle chat (quindi "there" è compresa come "a Londra").
 1. Esaminare gli output per ogni strumento nel flusso, notando il modo in cui ogni strumento nel flusso ha eseguito i relativi input per preparare una richiesta contestualizzata e ottenere una risposta appropriata.
 
-## Distribuire il flusso
+    Ora è disponibile un prompt flow funzionante che usa l'indice di Ricerca di Azure AI per implementare il criterio RAG. Per ulteriori informazioni su come distribuire e utilizzare il prompt flow, vedere la documentazione [Fonderia di Azure AI](https://learn.microsoft.com/azure/ai-foundry/how-to/flow-deploy).
 
-Ora che si dispone di un flusso di lavoro che usa i dati indicizzati, è possibile distribuirlo come un servizio da utilizzare da un'applicazione copilota.
+## Creare un'app client RAG con Fonderia di Azure AI e gli SDK OpenAI di Azure
 
-> **Nota**: a seconda dell'area e del carico del data center, le distribuzioni possono richiedere qualche minuto e talvolta generano un errore durante l'interazione con la distribuzione. È possibile passare alla sezione di richiesta di verifica di seguito durante la distribuzione o ignorare i test di distribuzione se non si dispone di molto tempo.
+Anche se un prompt flow è un ottimo modo per incapsulare il modello e i dati in un'applicazione basata su RAG, è anche possibile usare Fonderia di Azure AI e gli SDK OpenAI di Azure per implementare il criterio RAG in un'applicazione client. Varrà ora esaminato il codice per eseguire questa operazione in un semplice esempio.
 
-1. Sulla barra degli strumenti, selezionare **Distribuisci**.
-1. Creare una distribuzione con le impostazioni seguenti:
-    - **Impostazioni di base**:
-        - **Endpoint**: Nuovo
-        - **Nome endpoint**: *usare il nome dell'endpoint univoco predefinito*
-        - **Nome distribuzione**: *usare il nome dell'endpoint di distribuzione predefinito*
-        - **Macchina virtuale**: Standard_DS3_v2
-        - **Numero di istanze**: 3
-        - **Raccolta di dati di inferenza**: selezionato
-    - **Impostazioni avanzate**:
-        - *Usa le impostazioni predefinite*
-1. Nel portale Azure AI Foundry, nel progetto, nel riquadro di navigazione a sinistra, in **Asset personali**, selezionare la pagina **Modelli + endpoint**.
-1. Mantenere aggiornata la visualizzazione fino a quando la distribuzione di **brochure-endpoint-1** non viene mostrata come *completata* nell'endpoint di **brochure-endpoint** (questo potrebbe richiedere un periodo di tempo significativo).
-1. Al termine della distribuzione, selezionarla. Quindi, nella sua pagina **Test**, immettere il prompt `What is there to do in San Francisco?` e rivedere la risposta.
-1. Immettere il prompt `Where else could I go?` e rivedere la risposta.
-1. Visualizzare la pagina **Utilizzo** per l'endpoint e osservare che contiene informazioni di connessione e codice di esempio che è possibile usare per compilare un'applicazione client per l'endpoint, che consente di integrare la soluzione prompt flow in un'applicazione come copilota personalizzato.
+> **Suggerimento**: è possibile scegliere di sviluppare la soluzione RAG usando Python o Microsoft C#. Seguire le istruzioni nella sezione appropriata per la lingua scelta.
 
-## Proposta 
+### Preparare la configurazione dell'applicazione
+
+1. Nel Portale Fonderia Azure AI visualizzare la pagina **Panoramica** per il progetto.
+1. Nell'area **Dettagli di progetto** prendere nota della **stringa di connessione del progetto**. Questa stringa di connessione verrà usata per connettersi al progetto in un'applicazione client.
+1. Aprire una nuova scheda del browser (mantenendo aperto il Portale Fonderia Azure AI nella scheda esistente). In una nuova scheda del browser, passare al [portale di Azure](https://portal.azure.com) su `https://portal.azure.com`, accedendo con le credenziali di Azure se richiesto.
+1. Usare il pulsante **[\>_]** a destra della barra di ricerca, nella parte superiore della pagina, per aprire una nuova sessione di Cloud Shell nel portale di Azure selezionando un ambiente ***PowerShell***. Cloud Shell fornisce un'interfaccia della riga di comando in un riquadro nella parte inferiore del portale di Azure.
+
+    > **Nota**: se in precedenza è stata creata una sessione Cloud Shell che usa un ambiente *Bash*, passare a ***PowerShell***.
+
+1. Nella barra degli strumenti di Cloud Shell scegliere **Vai alla versione classica** dal menu **Impostazioni**. Questa operazione è necessaria per usare l'editor di codice.
+
+    > **Suggerimento**: quando si incollano i comandi in CloudShell, l'ouput può richiedere una grande quantità di buffer dello schermo. È possibile cancellare la schermata immettendo il `cls` comando per rendere più semplice concentrarsi su ogni attività.
+
+1. Nel riquadro PowerShell immettere i comandi seguenti per clonare il repository GitHub per questo esercizio:
+
+    ```
+    rm -r mslearn-ai-foundry -f
+    git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
+    ```
+
+> **Nota**: seguire i passaggi per il linguaggio di programmazione scelto.
+
+1. Dopo aver clonato il repository, passare alla cartella contenente i file di codice dell'applicazione chat:  
+
+    **Python**
+
+    ```
+   cd mslearn-ai-foundry/labfiles/rag-app/python
+    ```
+
+    **C#**
+
+    ```
+   cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
+    ```
+
+1. Nel riquadro della riga di comando di Cloud Shell immettere il comando seguente per installare le librerie che si useranno, ovvero:
+
+    **Python**
+
+    ```
+   pip install python-dotenv azure-ai-projects azure-identity openai
+    ```
+
+    **C#**
+
+    ```
+   dotnet add package Azure.Identity
+   dotnet add package Azure.AI.Projects --prerelease
+   dotnet add package Azure.AI.OpenAI --prerelease
+    ```
+    
+
+1. Immettere il comando seguente per modificare il file di configurazione fornito:
+
+    **Python**
+
+    ```
+   code .env
+    ```
+
+    **C#**
+
+    ```
+   code appsettings.json
+    ```
+
+    Il file viene aperto in un editor di codice.
+
+1. Nel file del codice, sostituire i segnaposto seguenti: 
+    - **your_project_endpoint**: sostituire con la stringa di connessione per il progetto (copiato dalla pagina **Panoramica** del progetto nel portale Fonderia di Azure AI)
+    - **your_model_deployment** sostituire con il nome assegnato alla distribuzione modello (che deve essere `gpt-4`)
+    - **your_index**: sostituire con il nome dell'indice (che deve essere `brochures-index`)
+1. Dopo aver sostituito i segnaposto, usare il comando **CTRL+S** per salvare le modifiche e quindi usare il comando **CTRL+Q** per chiudere l'editor di codice mantenendo aperta la riga di comando di Cloud Shell.
+
+### Esplorare il codice per implementare il criterio RAG
+
+1. Immettere il comando seguente per modificare il file di codice fornito:
+
+    **Python**
+
+    ```
+   code rag-app.py
+    ```
+
+    **C#**
+
+    ```
+   code Program.cs
+    ```
+
+1. Esaminare il codice nel file, notando che:
+    - usa l'SDK Fonderia di Azure AI per connettersi al progetto (usando il progetto stringa di connessione)
+    - recupera la connessione predefinita di Azure AI Search dal progetto in modo da poter determinare l'endpoint e la chiave per il servizio di Azure AI Search.
+    - Crea un client Azure OpenAI autenticato in base alla connessione predefinita di Servizio OpenAI di Azure nel progetto.
+    - Invia un prompt (incluso un messaggio di sistema e utente) al client Azure OpenAI, aggiungendo informazioni aggiuntive sull'indice di Azure AI Search da usare per eseguire il grounding del prompt.
+    - Visualizza la risposta dal prompt di cui è stato eseguito il grounding.
+1. Usare il comando **CTRL+Q** per chiudere l'editor di codice senza salvare le modifiche, mantenendo aperta la riga di comando di Cloud Shell.
+
+### Eseguire l'applicazione di chat
+
+1. Nel riquadro della riga di comando di Cloud Shell immettere il comando seguente per eseguire l'app:
+
+    **Python**
+
+    ```
+   python rag-app.py
+    ```
+
+    **C#**
+
+    ```
+   dotnet run
+    ```
+
+1. Quando richiesto, immettere una domanda, ad esempio `Where can I travel to?` ed esaminare la risposta del modello di IA generativa.
+
+    Si noti che la risposta include riferimenti all'origine per indicare i dati indicizzati in cui è stata trovata la risposta.
+
+1. Provare a immettere altre domande, ad esempio `Where should I stay in London?`
+
+    > **Nota**: questa semplice applicazione di esempio non include alcuna logica per conservare la cronologia delle conversazioni, quindi ogni richiesta viene considerata come una nuova conversazione.
+
+1. Al termine, immettere `quit` per uscire dal programma. Quindi chiudere il riquadro Cloud Shell.
+
+## Proposta
 
 Ora che si sono apprese le modalità di integrazione dei dati in un'app di IA generativa realizzata con il portale Azure AI Foundry, è possibile procedere.
 
@@ -232,7 +347,7 @@ Provare ad aggiungere una nuova origine dati tramite il portale Azure AI Foundry
 - Una serie di presentazioni delle conferenze precedenti.
 - Ognuno dei set di dati disponibili nell'archivio dei [dati di esempio di Ricerca di Azure](https://github.com/Azure-Samples/azure-search-sample-data).
 
-Attingere da tutte le risorse disponibili per creare l'origine dati e integrarla nel prompt flow. Provare il nuovo prompt flow e inviare dei prompt ai quali potrebbe rispondere solo il set di dati scelto.
+Attingere da tutte le risorse disponibili per creare l'origine dati e integrarla in un prompt flow o in un'app client. Testare la soluzione inviando richieste che potrebbero trovare risposta solo nel set di dati scelto.
 
 ## Eseguire la pulizia
 
