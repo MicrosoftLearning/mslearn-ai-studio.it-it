@@ -55,7 +55,7 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
 
 > **Suggerimento**: è possibile scegliere di sviluppare la soluzione usando Python o Microsoft C#. Seguire le istruzioni nella sezione appropriata per la lingua scelta.
 
-### Clonare la repository dell'applicazione
+### Preparare la configurazione dell'applicazione
 
 1. Nel Portale Fonderia Azure AI visualizzare la pagina **Panoramica** per il progetto.
 1. Nell'area **Dettagli di progetto** prendere nota della **stringa di connessione del progetto**. Questa stringa di connessione verrà usata per connettersi al progetto in un'applicazione client.
@@ -74,8 +74,6 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
-
-### Preparare la configurazione dell'applicazione
 
 > **Nota**: seguire i passaggi per il linguaggio di programmazione scelto.
 
