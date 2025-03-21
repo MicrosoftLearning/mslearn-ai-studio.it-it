@@ -24,11 +24,18 @@ Per iniziare, creare un progetto Fonderia Azure AI.
     - **Nome hub**: *un nome univoco, ad esempio `my-ai-hub`*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco (ad esempio, `my-ai-resources`) o selezionarne uno esistente*
-    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4** nella finestra Helper posizione e usare l'area consigliata\*
+    - **Posizione**: selezionare una delle aree seguenti\*:
+        - Stati Uniti orientali
+        - Stati Uniti orientali 2
+        - Stati Uniti centro-settentrionali
+        - Stati Uniti centro-meridionali
+        - Svezia centrale
+        - Stati Uniti occidentali
+        - Stati Uniti occidentali 3
     - **Connettere i Servizi di Azure AI o Azure OpenAI**: *creare una nuova risorsa di Servizi di intelligenza artificiale con un nome appropriato (ad esempio, `my-ai-services`) o usarne uno esistente*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > \* Al momento della stesura di questo documento, il modello Microsoft *Phi-4* che verrà usato in questo esercizio è disponibile in queste aree. È possibile controllare la disponibilità a livello di area più recente per modelli specifici nella documentazione di [Fonderia Azure AI ](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). In caso di raggiungimento di un limite di quota di area più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
 1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
 1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
@@ -102,9 +109,9 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
     **C#**
 
     ```
-   dotnet add package Azure.AI.Inference --version 1.0.0-beta.3
-   dotnet add package Azure.AI.Projects --version 1.0.0-beta.3
    dotnet add package Azure.Identity
+   dotnet add package Azure.AI.Projects --version 1.0.0-beta.3
+   dotnet add package Azure.AI.Inference --version 1.0.0-beta.3
     ```
     
 
@@ -153,6 +160,7 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
    from dotenv import load_dotenv
    from azure.identity import DefaultAzureCredential
    from azure.ai.projects import AIProjectClient
+   from azure.ai.inference.models import SystemMessage, UserMessage
     ```
 
     **C#**
@@ -201,14 +209,13 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
 
     ```python
    response = chat.complete(
-        model=model_deployment,
-        messages=[
-            {"role": "system", "content": "You are a helpful AI assistant that answers questions."},
-            {"role": "user", "content": input_text},
-            ],
-        )
-   print(response.choices[0].message.content)
-    ```
+       model=model_deployment,
+       messages=[
+           SystemMessage("You are a helpful AI assistant that answers questions."),
+           UserMessage(input_text)
+       ])
+   print(response.choices[0].message.content
+```
 
     **C#**
 

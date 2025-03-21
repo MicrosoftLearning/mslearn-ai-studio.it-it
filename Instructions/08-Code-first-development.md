@@ -1,9 +1,3 @@
----
-lab:
-  title: Creare un'app di IA generativa usando gli strumenti di sviluppo code-first
-  description: Informazioni su come usare il codice per creare e aggiornare gli elementi dell'app di IA generativa per supportare la compilazione e la distribuzione automatizzate in uno scenario DevOps.
----
-
 # Creare un'app di IA generativa usando gli strumenti di sviluppo code-first
 
 In questo esercizio, verrà clonato e distribuito un modello di Azure Developer CLI che effettua il provisioning e [distribuisce il progetto di intelligenza artificiale in un endpoint online](https://learn.microsoft.com/azure/developer/azure-developer-cli/azure-ai-ml-endpoints?WT.mc_id=academic-140829-cacaste) su Azure AI Foundry. Verrà quindi usato come punto di partenza per creare un copilota personalizzato con Azure per l'intelligenza artificiale e un'esperienza code-first.
