@@ -4,13 +4,13 @@ permalink: index.html
 layout: home
 ---
 
-# Sviluppare soluzioni di IA generativa
+# Sviluppare soluzioni di intelligenza artificiale generativa in Azure
 
-Gli esercizi di avvio rapido seguenti sono progettati per offrire un'esperienza di apprendimento pratica in cui verranno esaminate le attività comuni eseguite dagli sviluppatori durante la creazione di soluzioni di IA generativa in Microsoft Azure.
+Gli esercizi seguenti sono progettati per offrire un'esperienza di apprendimento pratica in cui verranno esaminate le attività comuni eseguite dagli sviluppatori durante la creazione di soluzioni di IA generativa con Microsoft Azure.
 
 > **Nota**: per completare gli esercizi, è necessaria una sottoscrizione di Azure in cui si dispone di autorizzazioni e quote sufficienti per effettuare il provisioning delle risorse di Azure e dei modelli di IA generativa necessari. Creazione di un [account di Azure](https://azure.microsoft.com/free), se non già disponibile. È disponibile un'opzione di versione gratuita per i nuovi utenti che include crediti per i primi 30 giorni.
 
-## Esercizi di avvio rapido
+## Esercizi
 
 {% assign labs = site.pages | where_exp:"page", "page.url contains '/Instructions'" %} {% for activity in labs  %}
 <hr>
