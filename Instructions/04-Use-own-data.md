@@ -12,6 +12,8 @@ In questo esercizio si userà il portale Fonderia Azure AI e gli SDK di Fonderia
 
 Questo esercizio richiede circa **45** minuti.
 
+> **Nota**: questo esercizio si basa su SDK non definitive, che possono essere soggette a modifiche. Se necessario, abbiamo usato versioni specifiche dei pacchetti; che potrebbero non riflettere le versioni disponibili più recenti.
+
 ## Creare un progetto Fonderia Azure AI
 
 Per iniziare, creare un progetto Azure AI Foundry e le risorse del servizio che deve supportare usando i propri dati, inclusa una risorsa di Azure AI Search.
@@ -30,7 +32,7 @@ Per iniziare, creare un progetto Azure AI Foundry e le risorse del servizio che 
     - **Connettere i Servizi di Azure AI o Azure OpenAI**: *creare una nuova risorsa di Servizi di intelligenza artificiale con un nome appropriato (ad esempio, `my-ai-services`) o usarne uno esistente*
     - **Connettere Azure AI Search**: *creare una nuova risorsa di Azure AI Search con un nome univoco*
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Se viene raggiunto un limite di quota e non è disponibile una regione consigliata per entrambi i modelli, scegliere un solo modello e usare la regione suggerita. Più avanti verrà creata un'altra risorsa in una regione diversa per il secondo modello.
 
 1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
 1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina **Panoramica** del progetto nel portale Fonderia Azure AI, che dovrebbe essere simile all'immagine seguente:
@@ -189,7 +191,7 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
     - **your_project_endpoint**: sostituire con la stringa di connessione per il progetto (copiato dalla pagina **Panoramica** del progetto nel portale Fonderia di Azure AI)
     - **your_model_deployment** sostituire con il nome assegnato alla distribuzione modello (che deve essere `gpt-4`)
     - **your_index**: sostituire con il nome dell'indice (che deve essere `brochures-index`)
-1. Dopo aver sostituito i segnaposto, usare il comando **CTRL+S** per salvare le modifiche e quindi usare il comando **CTRL+Q** per chiudere l'editor di codice mantenendo aperta la riga di comando di Cloud Shell.
+1. Dopo aver sostituito i segnaposto con l'editor di codice, usare il comando **CTRL+S** o **Fare clic con il pulsante destro del mouse > Salva** per salvare le modifiche e quindi usare il comando **CTRL+Q** o **Fare clic con il pulsante destro del mouse > Esci** per chiudere l'editor di codice mantenendo aperta la riga di comando di Cloud Shell.
 
 ### Esplorare il codice per implementare il criterio RAG
 

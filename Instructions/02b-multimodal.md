@@ -10,6 +10,8 @@ In questo esercizio, verrà usato il modello di IA generativa *Phi-4-multimodal-
 
 Questo esercizio richiede circa **30** minuti.
 
+> **Nota**: questo esercizio si basa su SDK non definitive, che possono essere soggette a modifiche. Se necessario, abbiamo usato versioni specifiche dei pacchetti; che potrebbero non riflettere le versioni disponibili più recenti.
+
 ## Creare un progetto Fonderia Azure AI
 
 Per iniziare, creare un progetto Fonderia Azure AI.
@@ -129,7 +131,7 @@ Dopo aver distribuito il modello, è possibile usare la distribuzione in un'appl
     Il file viene aperto in un editor di codice.
 
 10. Nel file di codice, sostituire il segnaposto **your_project_endpoint** con la stringa di connessione per il progetto (copiato dalla pagina **Panoramica** del progetto nel Portale Fonderia Azure AI) e il segnaposto **your_model_deployment** con il nome assegnato alla distribuzione del modello Phi-4-multimodal-instruct.
-11. Dopo aver sostituito i segnaposto, usare il comando **CTRL+S** per salvare le modifiche e quindi usare il comando **CTRL+Q** per chiudere l'editor di codice mantenendo aperta la riga di comando di Cloud Shell.
+11. Dopo aver sostituito i segnaposto con l'editor di codice, usare il comando **CTRL+S** o **Fare clic con il pulsante destro del mouse > Salva** per salvare le modifiche e quindi usare il comando **CTRL+Q** o **Fare clic con il pulsante destro del mouse > Esci** per chiudere l'editor di codice mantenendo aperta la riga di comando di Cloud Shell.
 
 ### Scrivere il codice per connettersi al progetto e ottenere un client di chat per il modello
 
