@@ -39,8 +39,8 @@ Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativ
 
 Sono disponibili più opzioni per la distribuzione di modelli nel Portale Fonderia Azure AI. In questo esercizio si userà l'opzione di distribuzione dell'**inferenza del modello di Azure per intelligenza artificiale**, che supporta sia i modelli *Azure OpenAI* che quelli *Modello come servizio* del catalogo modelli di Fonderia Azure AI. Poiché tutti i modelli vengono distribuiti in un endpoint comune ospitato dalla risorsa di Servizi di Azure AI, è facile passare da un modello all'altro durante il test per confrontare il comportamento e le prestazioni.
 
-1. Nella barra degli strumenti nella parte superiore destra della pagina del progetto Fonderia Azure AI, usare l'icona **Funzionalità di anteprima** per visualizzare le funzionalità di anteprima.
-1. Abilitare la funzionalità **Distribuisci modelli nel servizio di inferenza del modello di Azure per intelligenza artificiale**. Chiudere quindi il riquadro **Funzionalità di anteprima**.
+1. Nella barra degli strumenti nella parte superiore destra della pagina del progetto Fonderia Azure AI, usare l'icona **Funzionalità di anteprima** (📣) per visualizzare le funzionalità di anteprima.
+1. Verificare che la funzionalità **Distribuisci modelli nel servizio di inferenza del modello di Azure per intelligenza artificiale** sia abilitata. Chiudere quindi il riquadro **Funzionalità di anteprima**.
 
 ## Rivedere i benchmark e i dettagli del modello
 
@@ -101,7 +101,6 @@ Iniziamo distribuendo un modello dal catalogo dei modelli. È possibile preferir
     - **Risorsa di intelligenza artificiale connessa**: *connessione alla risorsa Azure OpenAI*
     - **Limite di velocità dei token al minuto (migliaia)**: 5K
     - **Filtro contenuto**: predefinitoV2
-    - **Abilitare la quota dinamica**: disabilitato
       
     > **Nota**: la riduzione del TPM consente di evitare l'eccessivo utilizzo della quota disponibile nella sottoscrizione in uso. 5.000 TPM è sufficiente per i dati usati in questo esercizio.
 

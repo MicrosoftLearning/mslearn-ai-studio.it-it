@@ -20,7 +20,7 @@ Questo esercizio richiederà circa **60** minuti\*.
 
 Per iniziare, è necessario creare il progetto del portale Azure AI Foundry all'interno di un hub Azure AI:
 
-1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure.
 1. Dalla home page, selezionare **+ Crea progetto**.
 1. Nella procedura guidata **Crea un nuovo progetto**, creare un progetto con le impostazioni seguenti:
     - **Nome progetto**: *un nome univoco per il progetto*
@@ -46,7 +46,7 @@ Poiché l'ottimizzazione di un modello richiede del tempo, è opportuno iniziare
     > **Nota**: per impostazione predefinita, il dispositivo potrebbe salvare il file come file .txt. Selezionare tutti i file e rimuovere il suffisso .txt per assicurarsi di salvare il file come JSONL.
 
 1. Passare alla pagina **Ottimizzazione** nella sezione **Crea e personalizza**, usando il menu a sinistra.
-1. Selezionare il pulsante per aggiungere un nuovo modello di ottimizzazione, selezionare il modello `gpt-4`, selezionare **Avanti** e quindi **Conferma**.
+1. Selezionare il pulsante per aggiungere un nuovo modello di ottimizzazione, selezionare il modello `gpt-4`, quindi **Avanti**.
 1. **Ottimizzare** il modello usando la configurazione seguente:
     - **Versione del modello**: *selezionare la versione predefinita*
     - **Suffisso del modello**: `ft-travel`

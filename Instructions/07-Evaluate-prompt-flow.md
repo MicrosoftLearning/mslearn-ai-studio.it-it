@@ -10,24 +10,28 @@ In questo esercizio, verranno esaminate le valutazioni predefinite e personalizz
 
 Questo esercizio richiederà circa **30** minuti.
 
-## Creare un hub e un progetto di intelligenza artificiale in Azure AI Foundry
+## Creare un progetto e un hub di Azure per intelligenza artificiale
 
-Per iniziare, creare un progetto di Azure AI Foundry all'interno di un hub di Azure AI:
+Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto un hub di Azure per intelligenza artificiale.
 
-1. In un Web browser, aprire [https://ai.azure.com](https://ai.azure.com) e accedere usando le credenziali di Azure.
-1. Selezionare la pagina **Home** e quindi **+ Nuovo progetto**.
-1. Nella procedura guidata **Crea un progetto** assegnare un nome univoco al progetto, quindi selezionare **Personalizza** e configurare le impostazioni seguenti:
-    - **Nome hub**: *un nome univoco*.
+1. In un Web browser, aprire il [portale di Azure AI Foundry](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure.
+
+1. Nella home page, selezionare **+ Crea progetto**.
+1. Nella procedura guidata **Crea un progetto** immettere un nome di progetto appropriato per (ad esempio, `my-ai-project`) e quindi rivedere le risorse di Azure che verranno create automaticamente per supportare il progetto.
+1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
+    - **Nome hub**: *un nome univoco, ad esempio `my-ai-hub`*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-    - **Gruppo di risorse**: *un nuovo gruppo di risorse*
+    - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco (ad esempio, `my-ai-resources`) o selezionarne uno esistente*
     - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4** nella finestra Helper posizione e usare l'area consigliata\*
-    - **Connettere Servizi di Azure AI o OpenAI di Azure**: (nuovo) *riempimento automatico con il nome dell'hub selezionato*
+    - **Connettere i Servizi di Azure AI o Azure OpenAI**: *creare una nuova risorsa di Servizi di intelligenza artificiale con un nome appropriato (ad esempio, `my-ai-services`) o usarne uno esistente*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Le aree elencate nell'helper posizione includono la quota predefinita per i tipi di modello usati in questo esercizio. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa. Altre informazioni sulla [disponibilità di modelli per area](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#availability)
+    > \* Le quote dei modelli sono vincolate dalle quote locali a livello tenant. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
-1. Selezionare **Avanti** per esaminare la configurazione.
-1. Selezionare **Crea un progetto** e attendere il completamento del processo.
+1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
+1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
+
+    ![Screenshot dei dettagli di un progetto di Azure AI nel portale Fonderia di Azure AI.](./media/ai-foundry-project.png)
 
 ## Distribuire un modello GTP
 
@@ -139,13 +143,13 @@ Per ridurre i tempi, è stato creato un set di dati di output batch che contiene
 
     - **Cosa si vuole valutare?**: i set di dati
     - **Nome per la valutazione**: *immettere un nome univoco*
-    - Selezionare **Avanti**.
+    - Selezionare **Avanti**
     - **Selezionare i dati da valutare**: aggiungere il set di dati
         - Scaricare il [set di dati di convalida](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) in `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl`, salvarlo come file JSONL e caricarlo nell'interfaccia utente.
 
     > **Nota**: per impostazione predefinita, il dispositivo potrebbe salvare il file come file .txt. Selezionare tutti i file e rimuovere il suffisso .txt per assicurarsi di salvare il file come JSONL.
 
-    - Selezionare **Avanti**.
+    - Selezionare **Avanti**
     - **Selezionare le metriche**: coerenza, scorrevolezza
     - **Connessione**: *connessione ai servizi di intelligenza artificiale*
     - **Nome/Modello di distribuzione**: *modello GPT-4 distribuito*
@@ -155,7 +159,7 @@ Per ridurre i tempi, è stato creato un set di dati di output batch che contiene
 1. Selezionare **Avanti**, quindi esaminare i dati e **inviare** la nuova valutazione.
 1. Attendere il completamento delle valutazioni, potrebbe essere necessario aggiornare.
 1. Selezionare l'esecuzione della valutazione appena creata.
-1. Esplorare la **dashboard delle metriche** e il **risultato dettagliato delle metriche**.
+1. Esplorare **Dashboard delle metriche** nella scheda **Report** e **Risultato dettagliato delle metriche** nella scheda **Dati**.
 
 ## Eliminare le risorse di Azure
 
