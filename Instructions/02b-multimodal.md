@@ -21,7 +21,7 @@ Per iniziare, creare un progetto Fonderia Azure AI.
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
 2. Nella home page, selezionare **+ Crea progetto**.
-3. Nella procedura guidata **Crea un progetto** immettere un nome di progetto appropriato per (ad esempio, `my-ai-project`) e quindi rivedere le risorse di Azure che verranno create automaticamente per supportare il progetto.
+3. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto (ad esempio, `my-ai-project`). Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
 4. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
     - **Nome hub**: *un nome univoco, ad esempio `my-ai-hub`*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
@@ -75,7 +75,7 @@ Dopo aver distribuito il modello, è possibile usare la distribuzione in un'appl
 
 5. Nella barra degli strumenti di Cloud Shell scegliere **Vai alla versione classica** dal menu **Impostazioni**. Questa operazione è necessaria per usare l'editor di codice.
 
-6. Nel riquadro PowerShell immettere i comandi seguenti per clonare il repository GitHub per questo esercizio:
+6. Nel riquadro PowerShell, immettere i comandi seguenti per clonare il repository GitHub contenente i file di codice per questo esercizio:
 
     ```
     rm -r mslearn-ai-foundry -f
@@ -130,7 +130,7 @@ Dopo aver distribuito il modello, è possibile usare la distribuzione in un'appl
 
     Il file viene aperto in un editor di codice.
 
-10. Nel file di codice, sostituire il segnaposto **your_project_endpoint** con la stringa di connessione per il progetto (copiato dalla pagina **Panoramica** del progetto nel Portale Fonderia Azure AI) e il segnaposto **your_model_deployment** con il nome assegnato alla distribuzione del modello Phi-4-multimodal-instruct.
+10. Nel file di codice, sostituire il segnaposto **your_project_connection_string** con la stringa di connessione per il progetto (copiata dalla pagina **Panoramica** del Portale Fonderia Azure AI) e il segnaposto **your_model_deployment** con il nome assegnato alla distribuzione modello Phi-4-multimodal-instruct.
 11. Dopo aver sostituito i segnaposto con l'editor di codice, usare il comando **CTRL+S** o **Fare clic con il pulsante destro del mouse > Salva** per salvare le modifiche e quindi usare il comando **CTRL+Q** o **Fare clic con il pulsante destro del mouse > Esci** per chiudere l'editor di codice mantenendo aperta la riga di comando di Cloud Shell.
 
 ### Scrivere il codice per connettersi al progetto e ottenere un client di chat per il modello
