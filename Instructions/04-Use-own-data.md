@@ -59,7 +59,7 @@ Per implementare la soluzione sono necessari due modelli:
 
     > **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
 
-1. Ripetere i passaggi precedenti per distribuire un modello **gpt-4** con il nome della distribuzione `gpt-4`.
+1. Ripetere i passaggi precedenti per distribuire un modello **gpt-4** con il nome di distribuzione `gpt-4` usando una distribuzione **standard** della versione predefinita con un limite di velocità TPM di 5K.
 
     > **Nota**: la riduzione dei token al minuto (TPM) consente di evitare di usare eccessivamente la quota disponibile nella sottoscrizione in uso. 5.000 TPM è sufficiente per i dati usati in questo esercizio.
 
@@ -67,7 +67,7 @@ Per implementare la soluzione sono necessari due modelli:
 
 I dati per il copilota sono costituiti da una serie di brochure di viaggio in formato PDF dell'agenzia di viaggi fittizia *Margie's Travel*. Aggiungerli al progetto.
 
-1. Scaricare [l'archivio compresso di brochure](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) da `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` ed estrarlo in una cartella denominata **brochure** nel file system locale.
+1. In una nuova scheda del browser, scaricare l'[archivio compresso delle brochure](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) da `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` ed estrarlo in una cartella denominata **brochures** sul file system locale.
 1. Nel portale Azure AI Foundry, nel progetto, nel riquadro di spostamento a sinistra, in **Asset personali**, selezionare la pagina **Dati + indici**.
 1. Selezionare **+ Nuovi dati**.
 1. Nella procedura guidata **Aggiungi dati** espandere il menu a discesa per selezionare **Carica file/cartelle**.
@@ -91,12 +91,18 @@ Dopo aver aggiunto un'origine dati al progetto, è possibile usarla per creare u
     - **Ricerca impostazioni**:
         - **Impostazioni del vettore**: aggiungere la ricerca vettoriale a questa risorsa di ricerca
         - **Connessione OpenAI di Azure**: *selezionare la risorsa OpenAI di Azure predefinita per l'hub.*
+        - **Modello di incorporamento**: text-embedding-ada-002
+        - **Distribuzione del modello di incorporamento**: *distribuzione del modello* text-embedding-ada-002 **
 
-1. Attendere il completamento del processo di indicizzazione, che può richiedere un po' di tempo a seconda delle risorse di calcolo disponibili nell'abbonamento. L'operazione di creazione dell'indice è costituita dai processi seguenti:
+1. Creare l'indice vettoriale e attendere il completamento del processo di indicizzazione, che può richiedere un po' di tempo a seconda delle risorse di calcolo disponibili nell'abbonamento.
+
+    L'operazione di creazione dell'indice è costituita dai processi seguenti:
 
     - Spezzare, suddividere e incorporare i token di testo nei dati delle brochure.
     - Creare l'indice di Azure AI Search.
     - Registrare la risorsa dell'indice.
+
+    > **Suggerimento**: in attesa della generazione dell'indice, è possibile consultare le brochure scaricate per approfondirne i contenuti.
 
 ## Testare l'indice nel playground
 
@@ -123,24 +129,31 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
 1. Nel Portale Fonderia Azure AI visualizzare la pagina **Panoramica** per il progetto.
 1. Nell'area **Dettagli di progetto** prendere nota della **stringa di connessione del progetto**. Questa stringa di connessione verrà usata per connettersi al progetto in un'applicazione client.
 1. Aprire una nuova scheda del browser (mantenendo aperto il Portale Fonderia Azure AI nella scheda esistente). In una nuova scheda del browser, passare al [portale di Azure](https://portal.azure.com) su `https://portal.azure.com`, accedendo con le credenziali di Azure se richiesto.
-1. Usare il pulsante **[\>_]** a destra della barra di ricerca, nella parte superiore della pagina, per aprire una nuova sessione di Cloud Shell nel portale di Azure selezionando un ambiente ***PowerShell***. Cloud Shell fornisce un'interfaccia della riga di comando in un riquadro nella parte inferiore del portale di Azure.
+
+    Chiudere eventuali notifiche di benvenuto per visualizzare la pagina iniziale del portale di Azure.
+
+1. Usare il pulsante **[\>_]** a destra della barra di ricerca, nella parte superiore della pagina, per aprire una nuova sessione di Cloud Shell nel portale di Azure selezionando un ambiente ***PowerShell*** senza archiviazione nell'abbonamento.
+
+    Cloud Shell fornisce un'interfaccia della riga di comando in un riquadro nella parte inferiore del portale di Azure. È possibile ridimensionare o ingrandire questo riquadro per ottimizzare l'esperienza d'uso.
 
     > **Nota**: se in precedenza è stata creata una sessione Cloud Shell che usa un ambiente *Bash*, passare a ***PowerShell***.
 
 1. Nella barra degli strumenti di Cloud Shell scegliere **Vai alla versione classica** dal menu **Impostazioni**. Questa operazione è necessaria per usare l'editor di codice.
 
-    > **Suggerimento**: quando si incollano i comandi in CloudShell, l'ouput può richiedere una grande quantità di buffer dello schermo. È possibile cancellare la schermata immettendo il `cls` comando per rendere più semplice concentrarsi su ogni attività.
+    **<font color="red">Verificare di passare alla versione classica di Cloud Shell prima di continuare.</font>**
 
-1. Nel riquadro PowerShell immettere i comandi seguenti per clonare il repository GitHub per questo esercizio:
+1. Nel riquadro PowerShell, immettere i comandi seguenti per clonare il repository GitHub contenente i file di codice per questo esercizio:
 
     ```
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
 
-> **Nota**: seguire i passaggi per il linguaggio di programmazione scelto.
+    > **Suggerimento**: quando si incollano i comandi in CloudShell, l'ouput può richiedere una grande quantità di buffer dello schermo. È possibile cancellare la schermata immettendo il `cls` comando per rendere più semplice concentrarsi su ogni attività.
 
-1. Dopo aver clonato il repository, passare alla cartella contenente i file di codice dell'applicazione chat:  
+1. Dopo aver clonato il repository, passare alla cartella contenente i file di codice dell'applicazione chat:
+
+    > **Nota**: seguire i passaggi per il linguaggio di programmazione scelto.
 
     **Python**
 
@@ -188,7 +201,7 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
     Il file viene aperto in un editor di codice.
 
 1. Nel file del codice, sostituire i segnaposto seguenti: 
-    - **your_project_endpoint**: sostituire con la stringa di connessione per il progetto (copiato dalla pagina **Panoramica** del progetto nel portale Fonderia di Azure AI)
+    - **your_project_connection_string**: sostituire con la stringa di connessione del progetto (copiata dalla pagina **Panoramica** del progetto nel portale Fonderia di Azure AI).
     - **your_model_deployment** sostituire con il nome assegnato alla distribuzione modello (che deve essere `gpt-4`)
     - **your_index**: sostituire con il nome dell'indice (che deve essere `brochures-index`)
 1. Dopo aver sostituito i segnaposto con l'editor di codice, usare il comando **CTRL+S** o **Fare clic con il pulsante destro del mouse > Salva** per salvare le modifiche e quindi usare il comando **CTRL+Q** o **Fare clic con il pulsante destro del mouse > Esci** per chiudere l'editor di codice mantenendo aperta la riga di comando di Cloud Shell.
@@ -211,10 +224,12 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
 
 1. Esaminare il codice nel file, notando che:
     - usa l'SDK Fonderia di Azure AI per connettersi al progetto (usando il progetto stringa di connessione)
+    - Crea un client Azure OpenAI autenticato dalla connessione al progetto.
     - recupera la connessione predefinita di Azure AI Search dal progetto in modo da poter determinare l'endpoint e la chiave per il servizio di Azure AI Search.
-    - Crea un client Azure OpenAI autenticato in base alla connessione predefinita di Servizio OpenAI di Azure nel progetto.
-    - Invia un prompt (incluso un messaggio di sistema e utente) al client Azure OpenAI, aggiungendo informazioni aggiuntive sull'indice di Azure AI Search da usare per eseguire il grounding del prompt.
+    - Crea un messaggio di sistema appropriato.
+    - Invia una richiesta al client Azure OpenAI contenente le istruzioni di sistema e il messaggio dell'utente basato sull'input fornito, includendo inoltre le informazioni relative all'indice di Azure AI Search da usare per eseguire il grounding del prompt.
     - Visualizza la risposta dal prompt di cui è stato eseguito il grounding.
+    - Aggiunge la risposta alla cronologia della chat.
 1. Usare il comando **CTRL+Q** per chiudere l'editor di codice senza salvare le modifiche, mantenendo aperta la riga di comando di Cloud Shell.
 
 ### Eseguire l'applicazione di chat
@@ -233,27 +248,13 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
    dotnet run
     ```
 
-1. Quando richiesto, immettere una domanda, ad esempio `Where can I travel to?` ed esaminare la risposta del modello di IA generativa.
+1. Quando richiesto, immettere una domanda, ad esempio `Where should I stay in London?` ed esaminare la risposta del modello di IA generativa.
 
     Si noti che la risposta include riferimenti all'origine per indicare i dati indicizzati in cui è stata trovata la risposta.
 
-1. Provare a immettere altre domande, ad esempio `Where should I stay in London?`
-
-    > **Nota**: questa semplice applicazione di esempio non include alcuna logica per conservare la cronologia delle conversazioni, quindi ogni richiesta viene considerata come una nuova conversazione.
+1. Provare una domanda di completamento, ad esempio `What can I do there?`
 
 1. Al termine, immettere `quit` per uscire dal programma. Quindi chiudere il riquadro Cloud Shell.
-
-## Proposta
-
-Ora che si sono apprese le modalità di integrazione dei dati in un'app di IA generativa realizzata con il portale Azure AI Foundry, è possibile procedere.
-
-Prova ad aggiungere una nuova origine dati tramite il portale Fonderia Azure AI, indicizzarla e integrare i dati indicizzati in un'applicazione client. Alcuni set di dati che è possibile provare sono:
-
-- Una raccolta di articoli (di ricerca) presenti sul computer.
-- Una serie di presentazioni delle conferenze precedenti.
-- Ognuno dei set di dati disponibili nell'archivio dei [dati di esempio di Ricerca di Azure](https://github.com/Azure-Samples/azure-search-sample-data).
-
-Testare la soluzione inviando richieste che potrebbero trovare risposta solo nel set di dati scelto.
 
 ## Eseguire la pulizia
 

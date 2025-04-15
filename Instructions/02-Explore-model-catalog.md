@@ -16,10 +16,12 @@ Questo esercizio richiederà circa **25** minuti.
 
 Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto un hub di Azure per intelligenza artificiale.
 
-1. In un Web browser, aprire il [portale di Azure AI Foundry](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure.
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere i suggerimenti o i riquadri di avvio rapido aperti la prima volta che si accede e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente:
+
+    ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Nella home page, selezionare **+ Crea progetto**.
-1. Nella procedura guidata **Crea un progetto** immettere un nome di progetto appropriato per (ad esempio, `my-ai-project`) e quindi rivedere le risorse di Azure che verranno create automaticamente per supportare il progetto.
+1. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto (ad esempio, `my-ai-project`). Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
 1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
     - **Nome hub**: *un nome univoco, ad esempio `my-ai-hub`*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
@@ -95,16 +97,18 @@ Iniziamo distribuendo un modello dal catalogo dei modelli. È possibile preferir
 1. Tornare alla home page del **Catalogo modelli**.
 1. Cercare e selezionare il modello `gpt-4` esattamente come in precedenza.
 1. Nella pagina **GPT-4** selezionare **Distribuisci** e distribuire il modello con le impostazioni seguenti selezionando **Personalizza** nei dettagli della distribuzione:
-    - **Nome distribuzione**: *nome univoco per la distribuzione del modello, ad esempio `gpt-4-model`*
-    - **Tipo di distribuzione**: standard globale
-    - **Versione del modello**: *selezionare la versione predefinita*
-    - **Risorsa di intelligenza artificiale connessa**: *connessione alla risorsa Azure OpenAI*
+1. Distribuire il modello con le impostazioni seguenti selezionando **Personalizza** nei dettagli della distribuzione:
+    - **Nome distribuzione**: *nome univoco per la distribuzione del modello, ad esempio `gpt-4`*
+    - **Tipo di distribuzione**: Standard
+    - **Versione modello**: 0613
+    - **Risorsa di intelligenza artificiale connessa**: *selezionare la connessione alla risorsa Azure OpenAI*
     - **Limite di velocità dei token al minuto (migliaia)**: 5K
     - **Filtro contenuto**: predefinitoV2
+    - **Abilitare la quota dinamica**: disabilitato
       
     > **Nota**: la riduzione del TPM consente di evitare l'eccessivo utilizzo della quota disponibile nella sottoscrizione in uso. 5.000 TPM è sufficiente per i dati usati in questo esercizio.
 
-1. Attendere che lo **Stato provisioning** della distribuzione sia **Completato**.
+1. Attendere il completamento della distribuzione.
 
 ### Distribuire un modello tramite *Modelli + endpoint*
 
@@ -114,11 +118,11 @@ Se si conosce già esattamente il modello che si vuole distribuire, è consiglia
 1. Nell'elenco a discesa **+ Distribuisci modello** della scheda **Distribuzioni modelli**, selezionare **Distribuisci modello di base**. Quindi cercare `Phi-3.5-mini-instruct` e confermare la selezione.
 1. Accettare la licenza del modello.
 1. Distribuire un modello **Phi-3.5-mini-instruct** con le impostazioni seguenti:
-    - **Nome distribuzione**: *nome univoco per la distribuzione del modello, ad esempio `phi-35-model`*
+    - **Nome distribuzione**: *nome univoco per la distribuzione del modello, ad esempio `Phi-3.5-mini-instruct`*
     - **Tipo di distribuzione**: standard globale
     - **Dettagli della distribuzione**: *usare le impostazioni predefinite*
 
-1. Attendere che lo **Stato provisioning** della distribuzione sia **Completato**.
+1. Attendere il completamento della distribuzione.
 
 ## Testare i modelli nel playground della chat
 
