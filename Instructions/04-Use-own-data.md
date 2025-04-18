@@ -23,22 +23,22 @@ Per iniziare, creare un progetto Azure AI Foundry e le risorse del servizio che 
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Nella home page, selezionare **+ Crea progetto**.
-1. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto (ad esempio, `my-ai-project`). Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
+1. Nella procedura guidata **Crea un progetto**, immettere un nome valido per il progetto e, se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
 1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Nome hub**: *un nome univoco, ad esempio `my-ai-hub`*
+    - **Nome hub**: *un nome valido per l'hub*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-    - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco (ad esempio, `my-ai-resources`) o selezionarne uno esistente*
-    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare sia **gpt-4** sia **text-embedding-ada-002** nella finestra Helper posizione e usare l'area consigliata\*
-    - **Connettere i Servizi di Azure AI o Azure OpenAI**: *creare una nuova risorsa di Servizi di intelligenza artificiale con un nome appropriato (ad esempio, `my-ai-services`) o usarne uno esistente*
+    - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
+    - **Posizione**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4o** nella finestra Helper posizione e usare l'area consigliata\*
+    - **Connettere Servizi di Azure AI o Azure OpenAI**: *Creare una nuova risorsa di Servizi di AI*
     - **Connettere Azure AI Search**: *creare una nuova risorsa di Azure AI Search con un nome univoco*
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. Se viene raggiunto un limite di quota e non è disponibile una regione consigliata per entrambi i modelli, scegliere un solo modello e usare la regione suggerita. Più avanti verrà creata un'altra risorsa in una regione diversa per il secondo modello.
+    > \* Le risorse Azure OpenAI sono limitate da quote di modelli regionali. In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
 1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
-1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina **Panoramica** del progetto nel portale Fonderia Azure AI, che dovrebbe essere simile all'immagine seguente:
+1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
 
     ![Screenshot dei dettagli di un progetto di Azure AI nel portale Fonderia di Azure AI.](./media/ai-foundry-project.png)
-   
+
 ## Distribuire i modelli
 
 Per implementare la soluzione sono necessari due modelli:
@@ -49,23 +49,22 @@ Per implementare la soluzione sono necessari due modelli:
 1. Nel portale di Azure AI Foundry, nel progetto in uso, nel riquadro di spostamento a sinistra, in **Asset personali**, selezionare la pagina **Modelli + endpoint**.
 1. Creare una nuova distribuzione del modello **text-embedding-ada-002** con le impostazioni seguenti, selezionando **Personalizza** nella procedura guidata Distribuisci modello:
 
-    - **Nome distribuzione**: `text-embedding-ada-002`
-    - **Tipo di distribuzione**: Standard
+    - **Nome distribuzione**: *nome univoco per la distribuzione del modello*
+    - **Tipo di distribuzione**: standard globale
     - **Versione del modello**: *selezionare la versione predefinita*
-    - **Risorsa di intelligenza artificiale**: *selezionare la risorsa creata in precedenza*
-    - **Limite di velocità dei token al minuto (migliaia)**: 5K
+    - **Risorsa di intelligenza artificiale connessa**: *selezionare la risorsa creata in precedenza*
+    - **Token al limite di velocità al minuto (migliaia)**: 50.000 *(o il valore massimo disponibile nella sottoscrizione se inferiore a 50.000)*
     - **Filtro contenuto**: predefinitoV2
-    - **Abilitare la quota dinamica**: disabilitato
 
     > **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
 
-1. Ripetere i passaggi precedenti per distribuire un modello **gpt-4** con il nome di distribuzione `gpt-4` usando una distribuzione **standard** della versione predefinita con un limite di velocità TPM di 5K.
+1. Tornare alla pagina **Modelli + endpoint** e ripetere i passaggi precedenti per distribuire un modello **gpt-4o** usando una distribuzione **Standard globale** della versione più recente con un limite di velocità TPM di **50.000** (o il massimo disponibile nella sottoscrizione se inferiore a 50.000).
 
-    > **Nota**: la riduzione dei token al minuto (TPM) consente di evitare di usare eccessivamente la quota disponibile nella sottoscrizione in uso. 5.000 TPM è sufficiente per i dati usati in questo esercizio.
+    > **Nota**: la riduzione dei token al minuto (TPM) consente di evitare di usare eccessivamente la quota disponibile nella sottoscrizione in uso. 50.000 TPM sono sufficienti per i dati usati in questo esercizio.
 
 ## Aggiungere dati al progetto
 
-I dati per il copilota sono costituiti da una serie di brochure di viaggio in formato PDF dell'agenzia di viaggi fittizia *Margie's Travel*. Aggiungerli al progetto.
+I dati per l'app sono costituiti da una serie di brochure di viaggio in formato PDF dell'agenzia di viaggi fittizia *Margie's Travel*. Aggiungerli al progetto.
 
 1. In una nuova scheda del browser, scaricare l'[archivio compresso delle brochure](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) da `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` ed estrarlo in una cartella denominata **brochures** sul file system locale.
 1. Nel portale Azure AI Foundry, nel progetto, nel riquadro di spostamento a sinistra, in **Asset personali**, selezionare la pagina **Dati + indici**.
@@ -82,7 +81,7 @@ Dopo aver aggiunto un'origine dati al progetto, è possibile usarla per creare u
 1. Nel portale Azure AI Foundry, nel progetto, nel riquadro di spostamento a sinistra, in **Asset personali**, selezionare la pagina **Dati + indici**.
 1. Nella scheda **Indici**, aggiungere un nuovo indice con le impostazioni seguenti:
     - **Posizione di origine**:
-        - **Origine dati**: dati nel portale di Azure AI Foundry
+        - **Origine dati**: dati nel portale di Fonderia Azure AI
             - *Selezionare l'origine dati delle **brochure***
     - **Configurazione dell'indice**:
         - **Selezionare il servizio Azure AI Search**: *selezionare la connessione tra **AzureAISearch** e la risorsa di Azure AI Search in uso*
@@ -109,7 +108,7 @@ Dopo aver aggiunto un'origine dati al progetto, è possibile usarla per creare u
 Prima di usare l'indice in un flusso immediato basato su RAG, verificare che possa essere usato per influire sulle risposte di intelligenza artificiale generativa.
 
 1. Nel riquadro di spostamento a sinistra, selezionare la pagina **Playground** e aprire il playground **Chat**.
-1. Nella pagina playground Chat, nel riquadro Configurazione, assicurarsi che sia selezionata la distribuzione modello **gpt-4**. Quindi, nel pannello principale della sessione di chat inviare la richiesta `Where can I stay in New York?`
+1. Nella pagina playground della chat, nel riquadro Configurazione, verificare che sia selezionata la distribuzione modello **gpt-4o**. Quindi, nel pannello principale della sessione di chat inviare la richiesta `Where can I stay in New York?`
 1. Esaminare la risposta, che deve essere una risposta generica dal modello senza dati dall'indice.
 1. Nel pannello di installazione espandere il campo **Aggiungi dati**, quindi aggiungere l'indice di progetto **brochures-index** e selezionare il tipo di ricerca **ibrido (vettore + parola chiave)**.
 
@@ -142,7 +141,7 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
 
     **<font color="red">Verificare di passare alla versione classica di Cloud Shell prima di continuare.</font>**
 
-1. Nel riquadro PowerShell, immettere i comandi seguenti per clonare il repository GitHub contenente i file di codice per questo esercizio:
+1. Nel riquadro Cloud Shell immettere i comandi seguenti per clonare il repository GitHub contenente i file di codice per questo esercizio (digitare il comando o copiarlo negli Appunti e quindi fare clic con il pulsante destro del mouse nella riga di comando e incollarlo come testo normale):
 
     ```
     rm -r mslearn-ai-foundry -f
@@ -167,11 +166,13 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
    cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
     ```
 
-1. Nel riquadro della riga di comando di Cloud Shell immettere il comando seguente per installare le librerie che si useranno, ovvero:
+1. Nel riquadro della riga di comando di Cloud Shell, immettere il comando seguente per installare le librerie che verranno utilizzate:
 
     **Python**
 
     ```
+   python -m venv labenv
+   ./labenv/bin/Activate.ps1
    pip install python-dotenv azure-ai-projects azure-identity openai
     ```
 
@@ -202,7 +203,7 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
 
 1. Nel file del codice, sostituire i segnaposto seguenti: 
     - **your_project_connection_string**: sostituire con la stringa di connessione del progetto (copiata dalla pagina **Panoramica** del progetto nel portale Fonderia di Azure AI).
-    - **your_model_deployment** sostituire con il nome assegnato alla distribuzione modello (che deve essere `gpt-4`)
+    - **your_model_deployment** sostituire con il nome assegnato alla distribuzione modello **gpt-4o**
     - **your_index**: sostituire con il nome dell'indice (che deve essere `brochures-index`)
 1. Dopo aver sostituito i segnaposto con l'editor di codice, usare il comando **CTRL+S** o **Fare clic con il pulsante destro del mouse > Salva** per salvare le modifiche e quindi usare il comando **CTRL+Q** o **Fare clic con il pulsante destro del mouse > Esci** per chiudere l'editor di codice mantenendo aperta la riga di comando di Cloud Shell.
 

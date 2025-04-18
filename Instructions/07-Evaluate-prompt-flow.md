@@ -1,69 +1,85 @@
 ---
 lab:
-  title: Valutare le prestazioni dell'IA generativa
-  description: Informazioni su come valutare i modelli e i flussi di chat per ottimizzare le prestazioni dell'app di chat e la sua capacità di rispondere in modo appropriato.
+  title: Valutare le prestazioni del modello dell'IA generativa
+  description: Informazioni su come valutare i modelli e le richieste per ottimizzare le prestazioni dell'app di chat e la sua capacità di rispondere in modo appropriato.
 ---
 
-# Valutare le prestazioni dell'IA generativa
+# Valutare le prestazioni del modello dell'IA generativa
 
-In questo esercizio, verranno esaminate le valutazioni predefinite e personalizzate per valutare e confrontare le prestazioni delle applicazioni di intelligenza artificiale con il portale Azure AI Foundry.
+In questo esercizio, verranno usate valutazioni manuali e automatizzate per valutare le prestazioni di un modello nel portale Fonderia Azure AI.
 
 Questo esercizio richiederà circa **30** minuti.
 
-## Creare un progetto e un hub di Azure per intelligenza artificiale
+## Creare un progetto Fonderia Azure AI
 
-Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto un hub di Azure per intelligenza artificiale.
+Per iniziare, creare un progetto Fonderia Azure AI.
 
-1. In un Web browser, aprire il [portale di Azure AI Foundry](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure.
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere i suggerimenti o i riquadri di avvio rapido aperti la prima volta che è stato eseguito l'accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** se è aperto):
+
+    ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Nella home page, selezionare **+ Crea progetto**.
-1. Nella procedura guidata **Crea un progetto** immettere un nome di progetto appropriato per (ad esempio, `my-ai-project`) e quindi rivedere le risorse di Azure che verranno create automaticamente per supportare il progetto.
+1. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto. Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
 1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Nome hub**: *un nome univoco, ad esempio `my-ai-hub`*
+    - **Nome hub**: *un nome valido per l'hub*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-    - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco (ad esempio, `my-ai-resources`) o selezionarne uno esistente*
-    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4** nella finestra Helper posizione e usare l'area consigliata\*
-    - **Connettere i Servizi di Azure AI o Azure OpenAI**: *creare una nuova risorsa di Servizi di intelligenza artificiale con un nome appropriato (ad esempio, `my-ai-services`) o usarne uno esistente*
+    - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
+    - **Posizione**: selezionare una delle aree seguenti\*
+        - Stati Uniti orientali 2
+        - Francia centrale
+        - Regno Unito meridionale
+        - Svezia centrale
+    - **Connettere Servizi di Azure AI o Azure OpenAI**: *Creare una nuova risorsa di Servizi di AI*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le quote dei modelli sono vincolate dalle quote locali a livello tenant. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > \* Al momento della stesura di questo documento, queste aree supportano la valutazione delle metriche di sicurezza dell'IA.
 
 1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
 1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
 
     ![Screenshot dei dettagli di un progetto di Azure AI nel portale Fonderia di Azure AI.](./media/ai-foundry-project.png)
 
-## Distribuire un modello GTP
+## Distribuire i modelli
 
-Per usare un modello linguistico nel prompt flow, è prima necessario distribuire un modello. Il portale Azure AI Foundry consente all'utente di distribuire modelli OpenAI usabili nei flussi.
+In questo esercizio, verranno valutate le prestazioni di un modello gpt-4o-mini. Verrà usato anche un modello gpt-4o per generare metriche di valutazione assistita dall'intelligenza artificiale.
 
-1. Passare alla pagina **Modelli + endpoint** nella sezione **Asset personali** usando il menu a sinistra.
-1. Selezionare il pulsante **+ Distribuisci modello** e scegliere l'opzione **Distribuisci modello di base**.
-1. Creare una nuova distribuzione del modello **gpt-4** con le impostazioni seguenti selezionando **Personalizza** nella procedura guidata **Distribuisci modello**:
-    - **Nome distribuzione**: *Nome univoco per la distribuzione del modello*
-    - **Tipo di distribuzione**: Standard
-    - **Versione del modello**: *selezionare la versione predefinita*
-    - **Risorsa di intelligenza artificiale**: *selezionare la risorsa creata in precedenza*
-    - **Limite di velocità dei token al minuto (migliaia)**: 5K
+1. Nel riquadro di spostamento a sinistra del progetto, nella sezione **Asset personali** selezionare la pagina **Modelli + endpoint**.
+1. Nella scheda **Distribuzioni del modello** della pagina **Modelli + endpoint**, nel menu **+ Distribuisci modello** selezionare **Distribuisci modello di base**.
+1. Cercare il modello **gpt-4o** nell'elenco e quindi selezionarlo e confermarlo.
+1. Distribuire il modello con le impostazioni seguenti selezionando **Personalizza** nei dettagli della distribuzione:
+    - **Nome distribuzione**: *nome univoco per la distribuzione del modello*
+    - **Tipo di distribuzione**: standard globale
+    - **Aggiornamento automatico della versione**: abilitato
+    - **Versione del modello**: *selezionare la versione più recente disponibile*
+    - **Risorsa di intelligenza artificiale connessa**: *selezionare la connessione alla risorsa Azure OpenAI*
+    - **Token al limite di velocità al minuto (migliaia)**: 50.000 *(o il valore massimo disponibile nella sottoscrizione se inferiore a 50.000)*
     - **Filtro contenuto**: predefinitoV2
-    - **Abilitare la quota dinamica**: disabilitato
 
-    > **Nota**: se la posizione corrente delle risorse di intelligenza artificiale non dispone di una quota disponibile per il modello che si vuole distribuire, verrà chiesto di scegliere una posizione diversa in cui verrà creata e connessa al progetto una nuova risorsa IA.
+    > **Nota**: la riduzione del TPM consente di evitare l'eccessivo utilizzo della quota disponibile nella sottoscrizione in uso. 50.000 TPM dovrebbero essere sufficienti per i dati usati in questo esercizio. Se la quota disponibile è inferiore a questa, sarà possibile completare l'esercizio, ma potrebbero verificarsi errori se viene superato il limite di velocità.
 
-1. Attendere la distribuzione del modello. Quando la distribuzione è pronta, selezionare **Apri nel playground**.
-1. Nella casella di testo **Fornisci istruzioni e contesto al modello** modificare il contenuto nel modo seguente:
+1. Attendere il completamento della distribuzione.
+1. Tornare alla pagina **Modelli + endpoint** e ripetere i passaggi precedenti per distribuire un modello **gpt-4o-mini** con le stesse impostazioni.
+
+## Valutare manualmente un modello
+
+È possibile esaminare manualmente le risposte del modello in base ai dati dei test. L'esame manuale consente di testare input diversi per valutare se il modello funziona come previsto.
+
+1. In una nuova scheda del browser, scaricare [travel_evaluation_data.csv](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.csv) da `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.csv` e salvarlo in una cartella locale.
+1. Tornare alla scheda del portale di Fonderia Azure AI, nel riquadro di spostamento, nella sezione **Valutazione e miglioramento**, selezionare **Valutazione**.
+1. Nella pagina **Valutazione**, visualizzare la scheda **Valutazioni manuali** e selezionare **+ Nuova valutazione manuale**.
+1. Modificare il **messaggio di sistema** con le istruzioni seguenti per un assistente viaggio di intelligenza artificiale:
 
    ```
-   **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
+   Objective: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
-   **Capabilities**:
+   Capabilities:
    - Provide up-to-date travel information, including destinations, accommodations, transportation, and local attractions.
    - Offer personalized travel suggestions based on user preferences, budget, and travel dates.
    - Share tips on packing, safety, and navigating travel disruptions.
    - Help with itinerary planning, including optimal routes and must-see landmarks.
    - Answer common travel questions and provide solutions to potential travel issues.
     
-   **Instructions**:
+   Instructions:
    1. Engage with the user in a friendly and professional manner, as a travel agent would.
    2. Use available resources to provide accurate and relevant travel information.
    3. Tailor responses to the user's specific travel needs and interests.
@@ -71,29 +87,41 @@ Per usare un modello linguistico nel prompt flow, è prima necessario distribuir
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Fare clic su **Applica modifiche**.
-1. Nella finestra (cronologia) della chat, immettere la query: `What can you do?` per verificare che il modello linguistico si comporti come previsto.
+1. Nella sezione **Configurazioni**, selezionare la distribuzione del modello **gpt-4o-mini** nell'elenco **Modello**.
+1. Nella sezione **Risultato della valutazione manuale** selezionare **Importa dati di test** e caricare il file **travel_evaluation_data.csv** scaricato in precedenza. Eseguire il mapping dei campi del set di dati come indicato di seguito:
+    - **Input**: domanda
+    - **Risposta prevista**: ExpectedResponse
+1. Esaminare le domande e le risposte previste nel file di test: verranno usate per valutare le risposte generate dal modello.
+1. Selezionare **Esegui** dalla barra superiore per generare output per tutte le domande aggiunte come input. Dopo alcuni minuti, le risposte del modello devono essere visualizzate in una nuova colonna **Output**, come illustrato di seguito:
 
-Dopo aver distribuito un modello con un messaggio di sistema aggiornato, è possibile valutare il modello.
+    ![Screenshot della pagina di valutazioni manuali nel portale Fonderia di Azure AI.](./media/manual-evaluation.png)
 
-## Valutare manualmente un modello linguistico nel portale Azure AI Foundry
+1. Esaminare gli output per ogni domanda, confrontando l'output del modello con la risposta prevista e "assegnando dei punteggi" ai risultati selezionando l'icona pollice verso l'alto o verso il basso in basso a destra di ogni risposta.
+1. Dopo aver ottenuto il punteggio delle risposte, esaminare i riquadri di riepilogo sopra l'elenco. Nella barra degli strumenti, selezionare **Salva risultati** e assegnare un nome appropriato. Il salvataggio dei risultati consente di recuperarli in un secondo momento per un'ulteriore valutazione o un confronto con un modello diverso.
 
-È possibile esaminare manualmente le risposte del modello in base ai dati dei test. L'esame manuale consente di testare input diversi uno alla volta per valutare se il modello funziona come previsto.
+## Usare valutazioni automatizzate
 
-1. Nel **playground della chat** selezionare l'elenco a discesa **Valuta** nella barra superiore e selezionare **Valutazione manuale**.
-1. Modificare il **Messaggio di sistema** con lo stesso messaggio usato in precedenza (incluso di nuovo qui):
+Mentre il confronto manuale dell'output del modello con le risposte previste può essere un modo utile per valutare le prestazioni di un modello, è un approccio dispendioso in termini di tempo in scenari in cui è attesa un'ampia gamma di domande e risposte; e fornisce poco nel modo delle metriche standardizzate che è possibile usare per confrontare diverse combinazioni di modelli e prompt.
+
+La valutazione automatizzata è un approccio che tenta di risolvere queste carenze calcolando le metriche e usando l'IA per valutare le risposte per coerenza, pertinenza e altri fattori.
+
+1. Usare la freccia indietro (**&larr;**) accanto al titolo pagina **Valutazione manuale** per tornare alla pagina **Valutazione**.
+1. Visualizzare la scheda **Valutazioni automatiche**.
+1. Selezionare **Crea una nuova valutazione** e, quando richiesto, selezionare l'opzione per valutare un **modello e prompt**
+1. Nella pagina **Crea una nuova valutazione**, nella sezione **Informazioni di base**, esaminare il nome di valutazione predefinito generato automaticamente (è possibile modificarlo) e selezionare la distribuzione del modello **gpt-40-mini**.
+1. Modificare il **messaggio di sistema** con le stesse istruzioni per un assistente viaggio di intelligenza artificiale usate in precedenza:
 
    ```
-   **Objective**: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
+   Objective: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
 
-   **Capabilities**:
+   Capabilities:
    - Provide up-to-date travel information, including destinations, accommodations, transportation, and local attractions.
    - Offer personalized travel suggestions based on user preferences, budget, and travel dates.
    - Share tips on packing, safety, and navigating travel disruptions.
    - Help with itinerary planning, including optimal routes and must-see landmarks.
    - Answer common travel questions and provide solutions to potential travel issues.
     
-   **Instructions**:
+   Instructions:
    1. Engage with the user in a friendly and professional manner, as a travel agent would.
    2. Use available resources to provide accurate and relevant travel information.
    3. Tailor responses to the user's specific travel needs and interests.
@@ -101,67 +129,33 @@ Dopo aver distribuito un modello con un messaggio di sistema aggiornato, è poss
    5. Encourage the user to ask follow-up questions for further assistance.
    ```
 
-1. Nella sezione **Risultato della valutazione manuale** si aggiungeranno cinque input dei quali si esaminerà l'output. Immettere le cinque domande seguenti come cinque **input** separati:
+1. Nella sezione **Configura dati di test**, è possibile usare un modello GPT per generare automaticamente i dati di test (che è quindi possibile modificare e integrare per soddisfare le proprie aspettative), usare un set di dati esistente o caricare un file. In questo esercizio, selezionare **Usa set di dati esistente** e quindi selezionare il set di dati **travel_evaluation_data_csv_*xxxx...*** (creato al momento del caricamento del file .csv in precedenza).
+1. Esaminare le righe di esempio del set di dati e quindi nella sezione **Scegliere la colonna di dati** selezionare i mapping di colonna seguenti:
+    - **Query**: domanda
+    - **Contesto**: *lasciare vuoto questo campo. Viene usato per valutare l'"allineamento" quando si associa un'origine dati contestuale al modello.*
+    - **Verità di base**: ExpectedAnswer
+1. Nella sezione **Scegliere cosa valutare** selezionare <u>tutte</u> le categorie di valutazione seguenti:
+    - Qualità dell'IA (basata sull'IA)
+    - Rischio e sicurezza (basati sull'IA)
+    - Qualità dell'intelligenza artificiale (NLP)
+1. Nell'elenco **Scegliere una distribuzione del modello come giudice** selezionare il modello **gpt-4o**. Questo modello verrà usato per valutare le risposte del modello ***gpt-4o-mini** per la qualità correlata al linguaggio e le metriche di confronto di IA generativa standard.
+1. Selezionare **Crea** per avviare il processo di valutazione e attenderne il completamento. L'operazione potrebbe richiedere alcuni minuti.
 
-   `Can you provide a list of the top-rated budget hotels in Rome?`
+    > **Suggerimento**: se viene visualizzato un errore che mostra che le autorizzazioni del progetto sono state impostate, attendere un minuto e quindi selezionare di nuovo **Crea**. Le autorizzazioni delle risorse possono richiedere del tempo prima della propagazione di un progetto appena creato.
 
-   `I'm looking for a vegan-friendly restaurant in New York City. Can you help?`
+1. Al termine della valutazione, scorrere verso il basso, se necessario, per visualizzare l'area **Dashboard delle metriche** e visualizzare le metriche di **qualità dell'intelligenza artificiale (basata sull'IA)**:
 
-   `Can you suggest a 7-day itinerary for a family vacation in Orlando, Florida?`
+    ![Screenshot delle metriche di qualità dell'intelligenza artificiale nel portale Fonderia Azure AI.](./media/ai-quality-metrics.png)
 
-   `Can you help me plan a surprise honeymoon trip to the Maldives?`
+    Usare le icone **<sup>(i) </sup>** per visualizzare le definizioni delle metriche.
 
-   `Are there any guided tours available for the Great Wall of China?`
+1. Visualizzare la scheda **Rischio e sicurezza** per visualizzare le metriche associate a contenuti potenzialmente dannosi.
+1. Visualizzare la scheda **Qualità intelligenza artificiale (NLP**) per visualizzare le metriche standard per i modelli di IA generativa.
+1. Scorrere di nuovo verso la parte superiore della pagina, se necessario, e selezionare la scheda **Dati** per visualizzare i dati non elaborati dalla valutazione. I dati includono le metriche per ogni input e le spiegazioni del ragionamento che il modello gpt-4o ha applicato durante la valutazione delle risposte.
 
-1. Selezionare **Esegui** dalla barra superiore per generare output per tutte le domande aggiunte come input.
-1. È ora possibile esaminare manualmente gli output per ogni domanda selezionando l'icona del pollice in su o del pollice in giù in basso a destra di una risposta. Valuta ogni risposta, assicurandoti di includere almeno una risposta con un pollice su e un pollice giù nelle tue valutazioni.
-1. Selezionare **Salva risultati** dalla barra in alto. Immettere `manual_evaluation_results` come nome per i risultati.
-1. Usando il menu a sinistra, passare a **Valutazione**.
-1. Selezionare la scheda **Valutazioni manuali** per trovare le valutazioni manuali appena salvate. Si noti che è possibile esplorare le valutazioni manuali create in precedenza, continuare dal punto in cui si era arrivati e salvare le valutazioni aggiornate.
+    ![Screenshot dei dati di valutazione nel portale Fonderia Azure AI.](./media/evaluation-data.png)
 
-## Valutare l'app di chat con le metriche predefinite
-
-Dopo aver creato un'applicazione di chat con un prompt flow, è possibile valutare il flusso eseguendo un batch e valutando le prestazioni del flusso con le metriche predefinite.
-
-![Diagramma della costruzione del set di dati di input per la valutazione.](./media/diagram-dataset-evaluation.png)
-
-Per valutare un flusso di chat, le query utente e le risposte di chat vengono fornite come input per una valutazione.
-
-Per ridurre i tempi, è stato creato un set di dati di output batch che contiene i risultati di più input elaborati da un prompt flow. Ciascun risultato viene memorizzato nel set di dati che verrà valutato nel passaggio successivo.
-
-1. Selezionare la scheda **Valutazioni automatiche** e creare una **Nuova valutazione** con le impostazioni seguenti: <details>  
-      <summary><b>Suggerimento per la risoluzione dei problemi</b>: errore di autorizzazioni</summary>
-        <p>Se viene visualizzato un errore di autorizzazioni quando si crea un nuovo prompt flow, provare a risolvere i problemi nel seguente modo:</p>
-        <ul>
-          <li>Nel portale di Azure, selezionare la risorsa Servizi di intelligenza artificiale.</li>
-          <li>Nella scheda Identità, in Gestione risorse, confermare che si tratti dell'identità gestita assegnata dal sistema.</li>
-          <li>Passare all'account di archiviazione associato. Nella pagina IAM, aggiungere l'assegnazione di ruolo <em>Lettore dei dati del BLOB di archiviazione</em>.</li>
-          <li>In <strong>Assegna accesso a</strong>, scegliere <strong>Identità gestita</strong>, <strong>+ Seleziona membri</strong> e selezionare <strong>Tutte le identità gestite assegnate dal sistema</strong>.</li>
-          <li>Rivedere e assegnare per salvare le nuove impostazioni e ripetere il passaggio precedente.</li>
-        </ul>
-    </details>
-
-    - **Cosa si vuole valutare?**: i set di dati
-    - **Nome per la valutazione**: *immettere un nome univoco*
-    - Selezionare **Avanti**
-    - **Selezionare i dati da valutare**: aggiungere il set di dati
-        - Scaricare il [set di dati di convalida](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl) in `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/main/data/travel-qa.jsonl`, salvarlo come file JSONL e caricarlo nell'interfaccia utente.
-
-    > **Nota**: per impostazione predefinita, il dispositivo potrebbe salvare il file come file .txt. Selezionare tutti i file e rimuovere il suffisso .txt per assicurarsi di salvare il file come JSONL.
-
-    - Selezionare **Avanti**
-    - **Selezionare le metriche**: coerenza, scorrevolezza
-    - **Connessione**: *connessione ai servizi di intelligenza artificiale*
-    - **Nome/Modello di distribuzione**: *modello GPT-4 distribuito*
-    - **query**: selezionare la **query** come origine dati
-    - **risposta**: selezionare la **risposta** come origine dati
-      
-1. Selezionare **Avanti**, quindi esaminare i dati e **inviare** la nuova valutazione.
-1. Attendere il completamento delle valutazioni, potrebbe essere necessario aggiornare.
-1. Selezionare l'esecuzione della valutazione appena creata.
-1. Esplorare **Dashboard delle metriche** nella scheda **Report** e **Risultato dettagliato delle metriche** nella scheda **Dati**.
-
-## Eliminare le risorse di Azure
+## Eseguire la pulizia
 
 Al termine dell'esplorazione di Azure AI Foundry, è necessario eliminare le risorse create per evitare costi di Azure non necessari.
 

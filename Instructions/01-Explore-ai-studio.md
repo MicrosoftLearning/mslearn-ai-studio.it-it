@@ -14,7 +14,7 @@ Questo esercizio richiede circa **30** minuti.
 
 Per iniziare, accedere al Portale Fonderia Azure AI.
 
-1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente:
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** nel caso sia aperto):
 
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
@@ -25,19 +25,19 @@ Per iniziare, accedere al Portale Fonderia Azure AI.
 Un *hub* di Azure per intelligenza artificiale offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Verrà creato un progetto e un hub di Azure AI e verranno esaminate le risorse di Azure create per supportarli.
 
 1. Nella home page, selezionare **+ Crea progetto**.
-1. Nella procedura guidata **Crea un progetto** immettere un nome di progetto appropriato (ad esempio, `my-ai-project`) e quindi rivedere le risorse di Azure che verranno create automaticamente per supportare il progetto.
+1. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto. Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
 1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Nome hub**: *un nome univoco, ad esempio `my-ai-hub`*
+    - **Nome hub**: *un nome valido per l'hub*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-    - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco (ad esempio, `my-ai-resources`) o selezionarne uno esistente*
-    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4** nella finestra Helper posizione e usare l'area consigliata\*
-    - **Connettere i Servizi di Azure AI o Azure OpenAI**: *creare una nuova risorsa di Servizi di intelligenza artificiale con un nome appropriato (ad esempio, `my-ai-services`) o usarne uno esistente*
+    - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
+    - **Posizione**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4o** nella finestra Helper posizione e usare l'area consigliata\*
+    - **Connettere Servizi di Azure AI o Azure OpenAI**: *Creare una nuova risorsa di Servizi di AI*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le risorse OpenAI di Azure sono vincolate dalle quote regionali a livello tenant. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > \* Le risorse Azure OpenAI sono limitate da quote di modelli regionali. In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
 1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
-1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel Portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
+1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
 
     ![Screenshot dei dettagli di un progetto di Azure AI nel Portale Fonderia Azure AI.](./media/ai-foundry-project.png)
 
@@ -75,7 +75,7 @@ Si supponga che il progetto debba accedere a una seconda risorsa di **Servizi di
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *il gruppo di risorse contenente la risorsa di Fonderia Azure AI esistente*
     - **Area**: *selezionare una qualsiasi area disponibile diversa da quella contenente le risorse esistenti*
-    - **Nome**: *un nome univoco*
+    - **Nome**: *un nome appropriato per la seconda risorsa di Servizi di Azure AI*
     - **Piano tariffario**: Standard S0.
 1. Attendere che la risorsa dei servizi d'intelligenza artificiale venga creata.
 1. Tornare alla scheda del browser del Portale Fonderia Azure AI e nella vista **Centro di gestione**, nella sezione relativa al *<u>progetto</u>* nel riquadro di spostamento, visualizzare la pagina **Risorse connesse**. Vengono elencate le risorse connesse esistenti nel progetto.
@@ -108,25 +108,34 @@ Il progetto di Fonderia Azure AI ha accesso ai Servizi di Azure AI. Ora si prove
 
 ## Implementare e testare un modello di IA generativa
 
-Il progetto contiene anche le risorse connesse per Azure OpenAI, che consente di usare modelli linguistici di Azure OpenAI per implementare soluzioni di IA generativa.
+Il progetto contiene anche le risorse connesse per Azure OpenAI, che consente di usare modelli linguistici di Azure OpenAI per implementare soluzioni di IA generativa. È anche possibile trovare e usare modelli di IA generativa di altri fornitori nel catalogo dei modelli.
 
 1. Nel riquadro a sinistra del progetto, nella sezione **Risorse personali** selezionare la pagina **Modelli + endpoint**.
 1. Nella scheda **Distribuzioni del modello** della pagina **Modelli + endpoint**, nel menu **+ Distribuisci modello** selezionare **Distribuisci modello di base**.
-1. Cercare il modello **gpt-4** nell'elenco e quindi selezionarlo e confermarlo.
+1. Cercare il modello **gpt-4o** nell'elenco e quindi selezionarlo e confermarlo.
 1. Distribuire il modello con le impostazioni seguenti selezionando **Personalizza** nei dettagli della distribuzione:
-    - **Nome distribuzione**: *nome univoco per la distribuzione del modello, ad esempio `gpt-4-model`*
-    - **Tipo di distribuzione**: Standard
-    - **Versione del modello**: *selezionare la versione predefinita*
-    - **Risorsa di intelligenza artificiale connessa**: *selezionare una delle connessioni alle risorse Azure OpenAI*
-    - **Limite di velocità dei token al minuto (migliaia)**: 5K
+    - **Nome distribuzione**: *nome univoco per la distribuzione del modello*
+    - **Tipo di distribuzione**: standard globale
+    - **Aggiornamento automatico della versione**: abilitato
+    - **Versione del modello**: *selezionare la versione più recente disponibile*
+    - **Risorsa di intelligenza artificiale connessa**: *selezionare la connessione alla risorsa Azure OpenAI*
+    - **Token al limite di velocità al minuto (migliaia)**: 50.000 *(o il valore massimo disponibile nella sottoscrizione se inferiore a 50.000)*
     - **Filtro contenuto**: predefinitoV2
-    - **Abilitare la quota dinamica**: disabilitato
-      
-    > **Nota**: la riduzione del TPM consente di evitare l'eccessivo utilizzo della quota disponibile nella sottoscrizione in uso. 5.000 TPM è sufficiente per i dati usati in questo esercizio.
+
+    > **Nota**: la riduzione del TPM consente di evitare l'eccessivo utilizzo della quota disponibile nella sottoscrizione in uso. 50.000 TPM dovrebbero essere sufficienti per i dati usati in questo esercizio. Se la quota disponibile è inferiore a questa, sarà possibile completare l'esercizio, ma potrebbero verificarsi errori se viene superato il limite di velocità.
+
+1. Attendere il completamento della distribuzione.
 
 1. Dopo aver distribuito il modello, nella pagina di panoramica della distribuzione selezionare **Apri nel playground**.
 1. Nella pagina **playground della chat** assicurarsi che la distribuzione del modello sia selezionata nella sezione **Distribuzione**.
-1. Nella finestra della chat immettere una query, ad esempio `How can I use Azure AI Services in a software development project?`, e visualizzare la risposta:
+1. Nel riquadro **Imposta**, nella casella **Fornisci istruzioni e contesto al modello**, immettere le istruzioni seguenti:
+
+    ```
+    You are a history teacher who can answer questions about past events all around the world.
+    ```
+
+1. Applicare le modifiche per aggiornare il messaggio di sistema.
+1. Nella finestra della chat immettere una query, ad esempio `What are the key events in the history of Scotland?`, e visualizzare la risposta:
 
     ![Screenshot del playground nel portale Azure AI Foundry.](./media/ai-foundry-playground.png)
 

@@ -16,21 +16,21 @@ Questo esercizio richiede circa **40** minuti.
 
 Per iniziare, creare un progetto Fonderia Azure AI.
 
-1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere i suggerimenti o i riquadri di avvio rapido aperti la prima volta che si accede e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente:
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** nel caso sia aperto):
 
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
 1. Nella home page, selezionare **+ Crea progetto**.
-1. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto (ad esempio, `my-ai-project`). Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
+1. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto. Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
 1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Nome hub**: *un nome univoco, ad esempio `my-ai-hub`*
+    - **Nome hub**: *un nome valido per l'hub*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-    - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco (ad esempio, `my-ai-resources`) o selezionarne uno esistente*
-    - **Località**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4** nella finestra Helper posizione e usare l'area consigliata\*
-    - **Connettere i Servizi di Azure AI o Azure OpenAI**: *creare una nuova risorsa di Servizi di intelligenza artificiale con un nome appropriato (ad esempio, `my-ai-services`) o usarne uno esistente*
+    - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
+    - **Posizione**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4o** nella finestra Helper posizione e usare l'area consigliata\*
+    - **Connettere Servizi di Azure AI o Azure OpenAI**: *Creare una nuova risorsa di Servizi di AI*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Le quote dei modelli sono vincolate dalle quote locali a livello tenant. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > \* Le risorse Azure OpenAI sono limitate da quote di modelli regionali. In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
 1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
 1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
@@ -39,22 +39,22 @@ Per iniziare, creare un progetto Fonderia Azure AI.
 
 ## Implementare un modello di IA generativa
 
-A questo punto è possibile distribuire un modello linguistico di IA generativa per supportare l'applicazione di chat. In questo esempio, verrà utilizzato il modello OpenAI gpt-4; ma i principi sono gli stessi per qualsiasi modello.
+A questo punto è possibile distribuire un modello linguistico di IA generativa per supportare l'applicazione di chat. In questo esempio, verrà utilizzato il modello OpenAI gpt-4o; ma i principi sono gli stessi per qualsiasi modello.
 
-1. Nella barra degli strumenti nella parte superiore destra della pagina del progetto Fonderia Azure AI, usare l'icona **Funzionalità di anteprima** per abilitare la funzionalità **Distribuisci modelli nel servizio di inferenza del modello di Azure per intelligenza artificiale**. Questa funzionalità garantisce che la distribuzione del modello sia disponibile per il servizio di inferenza di Azure AI, che verrà usato nel codice dell'applicazione.
+1. Nella barra degli strumenti nella parte superiore destra della pagina del progetto Fonderia Azure AI, usare l'icona **Funzionalità di anteprima** (**&#9215;**) per assicurarsi che la funzionalità **Distribuisci modelli nel servizio di inferenza del modello di Azure per intelligenza artificiale** sia abilitata. Questa funzionalità garantisce che la distribuzione del modello sia disponibile per il servizio di inferenza di Azure AI, che verrà usato nel codice dell'applicazione.
 1. Nel riquadro a sinistra del progetto, nella sezione **Risorse personali** selezionare la pagina **Modelli + endpoint**.
 1. Nella scheda **Distribuzioni del modello** della pagina **Modelli + endpoint**, nel menu **+ Distribuisci modello** selezionare **Distribuisci modello di base**.
-1. Cercare il modello **gpt-4** nell'elenco e quindi selezionarlo e confermarlo.
+1. Cercare il modello **gpt-4o** nell'elenco e quindi selezionarlo e confermarlo.
 1. Distribuire il modello con le impostazioni seguenti selezionando **Personalizza** nei dettagli della distribuzione:
-    - **Nome distribuzione**: *un univoco per la distribuzione del modello, ad esempio `gpt-4` (ricordare il nome assegnato poiché sarà necessario in un secondo momento)*
-    - **Tipo di distribuzione**: Standard
-    - **Versione modello**: 0613
+    - **Nome distribuzione**: *nome univoco per la distribuzione del modello*
+    - **Tipo di distribuzione**: standard globale
+    - **Aggiornamento automatico della versione**: abilitato
+    - **Versione del modello**: *selezionare la versione più recente disponibile*
     - **Risorsa di intelligenza artificiale connessa**: *selezionare la connessione alla risorsa Azure OpenAI*
-    - **Limite di velocità dei token al minuto (migliaia)**: 5K
+    - **Token al limite di velocità al minuto (migliaia)**: 50.000 *(o il valore massimo disponibile nella sottoscrizione se inferiore a 50.000)*
     - **Filtro contenuto**: predefinitoV2
-    - **Abilitare la quota dinamica**: disabilitato
 
-    > **Nota**: la riduzione del TPM consente di evitare l'eccessivo utilizzo della quota disponibile nella sottoscrizione in uso. 5.000 TPM è sufficiente per i dati usati in questo esercizio.
+    > **Nota**: la riduzione del TPM consente di evitare l'eccessivo utilizzo della quota disponibile nella sottoscrizione in uso. 50.000 TPM dovrebbero essere sufficienti per i dati usati in questo esercizio. Se la quota disponibile è inferiore a questa, sarà possibile completare l'esercizio, ma potrebbero verificarsi errori se viene superato il limite di velocità.
 
 1. Attendere il completamento della distribuzione.
 
@@ -82,14 +82,14 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
 
     **<font color="red">Verificare di passare alla versione classica di Cloud Shell prima di continuare.</font>**
 
-1. Nel riquadro PowerShell, immettere i comandi seguenti per clonare il repository GitHub contenente i file di codice per questo esercizio:
+1. Nel riquadro Cloud Shell immettere i comandi seguenti per clonare il repository GitHub contenente i file di codice per questo esercizio (digitare il comando o copiarlo negli Appunti e quindi fare clic con il pulsante destro del mouse nella riga di comando e incollarlo come testo normale):
 
     ```
     rm -r mslearn-ai-foundry -f
     git clone https://github.com/microsoftlearning/mslearn-ai-studio mslearn-ai-foundry
     ```
 
-    > **Suggerimento**: quando si incollano i comandi in CloudShell, l'ouput può richiedere una grande quantità di buffer dello schermo. È possibile cancellare la schermata immettendo il `cls` comando per rendere più semplice concentrarsi su ogni attività.
+    > **Suggerimento**: quando vengono incollati i comandi in CloudShell, l'ouput può richiedere una grande quantità di buffer dello schermo. È possibile cancellare la schermata immettendo il `cls` comando per rendere più semplice concentrarsi su ogni attività.
 
 1. Dopo aver clonato il repository, passare alla cartella contenente i file di codice dell'applicazione chat:
 
@@ -107,11 +107,13 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
    cd mslearn-ai-foundry/labfiles/chat-app/c-sharp
     ```
 
-1. Nel riquadro della riga di comando di Cloud Shell immettere il comando seguente per installare le librerie che si useranno, ovvero:
+1. Nel riquadro della riga di comando di Cloud Shell, immettere il comando seguente per installare le librerie che verranno utilizzate:
 
     **Python**
 
     ```
+   python -m venv labenv
+   ./labenv/bin/Activate.ps1
    pip install python-dotenv azure-identity azure-ai-projects azure-ai-inference
     ```
 
@@ -278,7 +280,7 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
 
 ### Eseguire l'applicazione di chat
 
-1. Nel riquadro della riga di comando di Cloud Shell, sotto l'editor di codice, inserire il seguente comando per eseguire l'applicazione:
+1. Nel riquadro della riga di comando di Cloud Shell, sotto l'editor di codice, immettere il seguente comando per eseguire l'applicazione:
 
     **Python**
 
@@ -295,6 +297,8 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
 1. Quando richiesto, immettere una domanda, ad esempio `What is the fastest animal on Earth?` ed esaminare la risposta del modello di IA generativa.
 1. Provare alcune domande di completamento, ad esempio `Where can I see one?` o `Are they endangered?`. La conversazione dovrebbe continuare, usando la cronologia delle chat come contesto per ogni iterazione.
 1. Al termine, immettere `quit` per uscire dal programma.
+
+> **Suggerimento**: se l'app non riesce perché viene superato il limite di velocità. Attendere alcuni secondi e riprovare. Se nella sottoscrizione è disponibile una quota insufficiente, il modello potrebbe non essere in grado di rispondere.
 
 ## Usare OpenAI SDK
 
@@ -414,7 +418,7 @@ Verranno ora apportate alcune modifiche al codice per vedere come implementare u
 
 1. Usare il comando **CTRL+S** per salvare le modifiche apportate al file di codice.
 
-1. Nel riquadro della riga di comando di Cloud Shell, sotto l'editor di codice, inserire il seguente comando per eseguire l'applicazione:
+1. Nel riquadro della riga di comando di Cloud Shell, sotto l'editor di codice, immettere il seguente comando per eseguire l'applicazione:
 
     **Python**
 

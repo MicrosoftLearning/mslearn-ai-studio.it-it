@@ -21,11 +21,11 @@ Per iniziare, creare un progetto Fonderia Azure AI.
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
 2. Nella home page, selezionare **+ Crea progetto**.
-3. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto (ad esempio, `my-ai-project`). Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
+3. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto. Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
 4. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Nome hub**: *un nome univoco, ad esempio `my-ai-hub`*
+    - **Nome hub**: *un nome valido per l'hub*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-    - **Gruppo di risorse**: *creare un nuovo gruppo di risorse con un nome univoco (ad esempio, `my-ai-resources`) o selezionarne uno esistente*
+    - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
     - **Posizione**: selezionare una delle aree seguenti\*:
         - Stati Uniti orientali
         - Stati Uniti orientali 2
@@ -34,7 +34,7 @@ Per iniziare, creare un progetto Fonderia Azure AI.
         - Svezia centrale
         - Stati Uniti occidentali
         - Stati Uniti occidentali 3
-    - **Connettere i Servizi di Azure AI o Azure OpenAI**: *creare una nuova risorsa di Servizi di intelligenza artificiale con un nome appropriato (ad esempio, `my-ai-services`) o usarne uno esistente*
+    - **Connettere Servizi di Azure AI o Azure OpenAI**: *Creare una nuova risorsa di Servizi di AI*
     - **Connettere Azure AI Search**: ignorare la connessione
 
     > \* Al momento della stesura del presente documento, il modello Microsoft *Phi-4-multimodal-instruct* che verrà usato in questo esercizio è disponibile in queste regioni. È possibile controllare la disponibilità a livello di area più recente per modelli specifici nella documentazione di [Fonderia Azure AI ](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). In caso di raggiungimento di un limite di quota di area più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
@@ -48,12 +48,12 @@ Per iniziare, creare un progetto Fonderia Azure AI.
 
 Ora è possibile distribuire un modello *Phi-4-multimodal-instruct* per supportare prompt multimodali.
 
-1. Nella barra degli strumenti nella parte superiore destra della pagina del progetto Fonderia Azure AI, usare l'icona **Funzionalità di anteprima** per abilitare la funzionalità **Distribuisci modelli nel servizio di inferenza del modello di Azure per intelligenza artificiale**. Questa funzionalità garantisce che la distribuzione del modello sia disponibile per il servizio di inferenza di Azure AI, che verrà usato nel codice dell'applicazione.
+1. Nella barra degli strumenti nella parte superiore destra della pagina del progetto Fonderia Azure AI, usare l'icona **Funzionalità di anteprima** (**&#9215;**) per assicurarsi che la funzionalità **Distribuisci modelli nel servizio di inferenza del modello di Azure per intelligenza artificiale** sia abilitata. Questa funzionalità garantisce che la distribuzione del modello sia disponibile per il servizio di inferenza di Azure AI, che verrà usato nel codice dell'applicazione.
 2. Nel riquadro a sinistra del progetto, nella sezione **Risorse personali** selezionare la pagina **Modelli + endpoint**.
 3. Nella scheda **Distribuzioni del modello** della pagina **Modelli + endpoint**, nel menu **+ Distribuisci modello** selezionare **Distribuisci modello di base**.
 4. Cercare il modello **Phi-4-multimodal-instruct** nell'elenco, quindi selezionarlo e confermarlo.
 5. Accettare il contratto di licenza se richiesto e quindi distribuire il modello con le impostazioni seguenti selezionando **Personalizza** nei dettagli della distribuzione:
-    - **Nome distribuzione**: *nome univoco per la distribuzione del modello, ad esempio `Phi-4-multimodal` (ricordare il nome assegnato poiché sarà necessario in un secondo momento*)
+    - **Nome distribuzione**: *nome univoco per la distribuzione del modello*
     - **Tipo di distribuzione**: standard globale
     - **Dettagli della distribuzione**: *usare le impostazioni predefinite*
 6. Attendere che lo stato di provisioning della distribuzione sia **completato**.
@@ -62,20 +62,27 @@ Ora è possibile distribuire un modello *Phi-4-multimodal-instruct* per supporta
 
 Dopo aver distribuito il modello, è possibile usare la distribuzione in un'applicazione client.
 
-> **Suggerimento**: è possibile scegliere di sviluppare la propria soluzione usando Python o Microsoft C#  *(presto disponibile)*. Seguire le istruzioni nella sezione appropriata per la lingua scelta.
+> **Suggerimento**: è possibile scegliere di sviluppare la soluzione usando Python o Microsoft C#. Seguire le istruzioni nella sezione appropriata per la lingua scelta.
 
 ### Preparare la configurazione dell'applicazione
 
 1. Nel Portale Fonderia Azure AI visualizzare la pagina **Panoramica** per il progetto.
 2. Nell'area **Dettagli di progetto** prendere nota della **stringa di connessione del progetto**. Questa stringa di connessione verrà usata per connettersi al progetto in un'applicazione client.
 3. Aprire una nuova scheda del browser (mantenendo aperto il Portale Fonderia Azure AI nella scheda esistente). In una nuova scheda del browser, passare al [portale di Azure](https://portal.azure.com) su `https://portal.azure.com`, accedendo con le credenziali di Azure se richiesto.
-4. Usare il pulsante **[\>_]** a destra della barra di ricerca, nella parte superiore della pagina, per aprire una nuova sessione di Cloud Shell nel portale di Azure selezionando un ambiente ***PowerShell***. Cloud Shell fornisce un'interfaccia della riga di comando in un riquadro nella parte inferiore del portale di Azure.
+
+    Chiudere eventuali notifiche di benvenuto per visualizzare la pagina iniziale del portale di Azure.
+
+1. Usare il pulsante **[\>_]** a destra della barra di ricerca, nella parte superiore della pagina, per aprire una nuova sessione di Cloud Shell nel portale di Azure selezionando un ambiente ***PowerShell*** senza archiviazione nell'abbonamento.
+
+    Cloud Shell fornisce un'interfaccia della riga di comando in un riquadro nella parte inferiore del portale di Azure. È possibile ridimensionare o ingrandire questo riquadro per ottimizzare l'esperienza d'uso.
 
     > **Nota**: se in precedenza è stata creata una sessione Cloud Shell che usa un ambiente *Bash*, passare a ***PowerShell***.
 
 5. Nella barra degli strumenti di Cloud Shell scegliere **Vai alla versione classica** dal menu **Impostazioni**. Questa operazione è necessaria per usare l'editor di codice.
 
-6. Nel riquadro PowerShell, immettere i comandi seguenti per clonare il repository GitHub contenente i file di codice per questo esercizio:
+    **<font color="red">Verificare di passare alla versione classica di Cloud Shell prima di continuare.</font>**
+
+1. Nel riquadro Cloud Shell immettere i comandi seguenti per clonare il repository GitHub contenente i file di codice per questo esercizio (digitare il comando o copiarlo negli Appunti e quindi fare clic con il pulsante destro del mouse nella riga di comando e incollarlo come testo normale):
 
     ```
     rm -r mslearn-ai-foundry -f
@@ -98,11 +105,13 @@ Dopo aver distribuito il modello, è possibile usare la distribuzione in un'appl
    cd mslearn-ai-foundry/labfiles/multimodal/c-sharp
     ```
 
-8. Nel riquadro della riga di comando di Cloud Shell immettere il comando seguente per installare le librerie che si useranno, ovvero:
+8. Nel riquadro della riga di comando di Cloud Shell, immettere il comando seguente per installare le librerie che verranno utilizzate:
 
     **Python**
 
     ```
+   python -m venv labenv
+   ./labenv/bin/Activate.ps1
    pip install python-dotenv azure-identity azure-ai-projects azure-ai-inference
     ```
 
@@ -246,7 +255,7 @@ Dopo aver distribuito il modello, è possibile usare la distribuzione in un'appl
 
 2. Usare il comando **CTRL+S** per salvare le modifiche al file di codice, senza chiuderlo.
 
-3. Nel riquadro della riga di comando di Cloud Shell, sotto l'editor di codice, inserire il seguente comando per eseguire l'applicazione:
+3. Nel riquadro della riga di comando di Cloud Shell, sotto l'editor di codice, immettere il seguente comando per eseguire l'applicazione:
 
     **Python**
 
@@ -311,7 +320,7 @@ Dopo aver distribuito il modello, è possibile usare la distribuzione in un'appl
 
 2. Usare il comando **CTRL+S** per salvare le modifiche al file di codice, senza chiuderlo.
 
-3. Nel riquadro della riga di comando di Cloud Shell, sotto l'editor di codice, inserire il seguente comando per eseguire l'applicazione:
+3. Nel riquadro della riga di comando di Cloud Shell, sotto l'editor di codice, immettere il seguente comando per eseguire l'applicazione:
 
     **Python**
 
@@ -377,7 +386,7 @@ Dopo aver distribuito il modello, è possibile usare la distribuzione in un'appl
 
 2. Usare il comando **CTRL+S** per salvare le modifiche apportate al file di codice. È anche possibile chiudere l'editor di codice (**CTRL+Q**) se si desidera.
 
-3. Nel riquadro della riga di comando di Cloud Shell, sotto l'editor di codice, inserire il seguente comando per eseguire l'applicazione:
+3. Nel riquadro della riga di comando di Cloud Shell, sotto l'editor di codice, immettere il seguente comando per eseguire l'applicazione:
 
     **Python**
 
