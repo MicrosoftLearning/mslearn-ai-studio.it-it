@@ -10,7 +10,7 @@ In questo esercizio, verrà usato SDK Fonderia Azure AI per creare una semplice 
 
 Questo esercizio richiede circa **40** minuti.
 
-> **Nota**: questo esercizio si basa su SDK non definitive, che possono essere soggette a modifiche. Se necessario, abbiamo usato versioni specifiche dei pacchetti; che potrebbero non riflettere le versioni disponibili più recenti.
+> **Nota**: questo esercizio si basa su SDK non definitive, che possono essere soggette a modifiche. Se necessario, abbiamo usato versioni specifiche dei pacchetti; che potrebbero non riflettere le versioni disponibili più recenti. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
 
 ## Creare un progetto Fonderia Azure AI
 
