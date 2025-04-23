@@ -14,7 +14,7 @@ Si supponga di lavorare per un'agenzia di viaggi per la quale si sta sviluppando
 
 Questo esercizio richiederà circa **60** minuti\*.
 
-> \***Nota**: questa tempistica è una stima basata sull'esperienza media. L'ottimizzazione dipende dalle risorse dell'infrastruttura cloud, che possono richiedere una quantità variabile di tempo per il provisioning a seconda della capacità del data center e della domanda simultanea. Alcune attività in questo esercizio possono impiegare <u>molto</u> tempo per essere completate e richiedono pazienza. Se la procedura richiede diverso tempo, è consigliabile esaminare la [documentazione sull'ottimizzazione di Fonderia Azure AI](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) o fare una pausa.
+> \***Nota**: questa tempistica è una stima basata sull'esperienza media. L'ottimizzazione dipende dalle risorse dell'infrastruttura cloud, che possono richiedere una quantità variabile di tempo per il provisioning a seconda della capacità del data center e della domanda simultanea. Alcune attività in questo esercizio possono impiegare <u>molto</u> tempo per essere completate e richiedono pazienza. Se la procedura richiede diverso tempo, è consigliabile esaminare la [documentazione sull'ottimizzazione di Fonderia Azure AI](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) o fare una pausa. Alcune delle tecnologie usate in questo esercizio sono in anteprima o in fase di sviluppo. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
 
 ## Creare un hub e un progetto di intelligenza artificiale nel portale Azure AI Foundry
 
@@ -53,6 +53,7 @@ Poiché il completamento dell'ottimizzazione di un modello richiede del tempo, �
 1. Selezionare il pulsante per aggiungere un nuovo modello di ottimizzazione, selezionare il modello **gpt-4o** e quindi **Avanti**.
 1. **Ottimizzare** il modello usando la configurazione seguente:
     - **Versione del modello**: *selezionare la versione predefinita*
+    - **Metodo di personalizzazione**: supervisione
     - **Suffisso del modello**: `ft-travel`
     - **Risorsa AI connessa**: *selezionare la connessione predefinita creata al momento della creazione dell'hub. Dovrebbe essere selezionata per impostazione predefinita.*
     - **Dati di training**: caricare i file
