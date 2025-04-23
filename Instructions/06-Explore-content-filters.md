@@ -6,11 +6,13 @@ lab:
 
 # Applicare i filtri di contenuto per impedire l'output di contenuto dannoso
 
-Azure AI Foundry include filtri di contenuto predefiniti per garantire che le richieste e i completamenti potenzialmente dannosi vengano identificati e rimossi dalle interazioni con il servizio. Inoltre, è possibile richiedere l'autorizzazione per definire filtri di contenuto personalizzati per esigenze specifiche per assicurarsi che le distribuzioni del modello applichino le entità di intelligenza artificiale responsabili appropriate per lo scenario di intelligenza artificiale generativa. Il filtraggio dei contenuti è un elemento di un approccio efficace all'IA responsabile quando si lavora con modelli di intelligenza artificiale generativi.
+Azure AI Foundry include filtri di contenuto predefiniti per garantire che le richieste e i completamenti potenzialmente dannosi vengano identificati e rimossi dalle interazioni con il servizio. Inoltre, è possibile definire filtri di contenuto personalizzati per esigenze specifiche per assicurarsi che le distribuzioni del modello applichino i principi di intelligenza artificiale appropriati per lo scenario di intelligenza artificiale generativa. Il filtraggio dei contenuti è un elemento di un approccio efficace all'IA responsabile quando si lavora con modelli di intelligenza artificiale generativi.
 
 In questo esercizio, verrà esaminato l'effetto dei filtri di contenuto predefiniti in Azure AI Foundry.
 
 Questo esercizio richiederà circa **25** minuti.
+
+> **Nota**: alcune delle tecnologie usate in questo esercizio sono in anteprima o in fase di sviluppo. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
 
 ## Creare un progetto Fonderia Azure AI
 

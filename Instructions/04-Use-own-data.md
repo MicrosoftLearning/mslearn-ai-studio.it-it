@@ -12,7 +12,7 @@ In questo esercizio si userà il portale Fonderia Azure AI e gli SDK di Fonderia
 
 Questo esercizio richiede circa **45** minuti.
 
-> **Nota**: questo esercizio si basa su SDK non definitive, che possono essere soggette a modifiche. Se necessario, abbiamo usato versioni specifiche dei pacchetti; che potrebbero non riflettere le versioni disponibili più recenti.
+> **Nota**: questo esercizio si basa su SDK non definitive, che possono essere soggette a modifiche. Se necessario, abbiamo usato versioni specifiche dei pacchetti; che potrebbero non riflettere le versioni disponibili più recenti. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
 
 ## Creare un progetto Fonderia Azure AI
 
@@ -70,7 +70,7 @@ I dati per l'app sono costituiti da una serie di brochure di viaggio in formato 
 1. Nel portale Azure AI Foundry, nel progetto, nel riquadro di spostamento a sinistra, in **Asset personali**, selezionare la pagina **Dati + indici**.
 1. Selezionare **+ Nuovi dati**.
 1. Nella procedura guidata **Aggiungi dati** espandere il menu a discesa per selezionare **Carica file/cartelle**.
-1. Selezionare **Carica cartella** e selezionare la cartella **brochure**.
+1. Selezionare **Carica cartella** e selezionare la cartella **brochure**. Attendere che vengano elencati tutti i file della cartella.
 1. Selezionare **Avanti** e impostare il nome dei dati su `brochures`.
 1. Attendere il caricamento della cartella e notare che contiene diversi file .pdf.
 
@@ -202,8 +202,9 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
     Il file viene aperto in un editor di codice.
 
 1. Nel file del codice, sostituire i segnaposto seguenti: 
-    - **your_project_connection_string**: sostituire con la stringa di connessione del progetto (copiata dalla pagina **Panoramica** del progetto nel portale Fonderia di Azure AI).
-    - **your_model_deployment** sostituire con il nome assegnato alla distribuzione modello **gpt-4o**
+    - **your_project_connection_string**: sostituire con la stringa di connessione del progetto (copiata dalla pagina **Panoramica** del progetto nel portale Fonderia Azure AI).
+    - **your_gpt_model_deployment**: sostituire con il nome assegnato alla distribuzione modello **gpt-4o**.
+    - **your_embedding_model_deployment**: sostituire con il nome assegnato alla distribuzione modello **text-embedding-ada-002**.
     - **your_index**: sostituire con il nome dell'indice (che deve essere `brochures-index`)
 1. Dopo aver sostituito i segnaposto con l'editor di codice, usare il comando **CTRL+S** o **Fare clic con il pulsante destro del mouse > Salva** per salvare le modifiche e quindi usare il comando **CTRL+Q** o **Fare clic con il pulsante destro del mouse > Esci** per chiudere l'editor di codice mantenendo aperta la riga di comando di Cloud Shell.
 
@@ -228,9 +229,14 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
     - Crea un client Azure OpenAI autenticato dalla connessione al progetto.
     - recupera la connessione predefinita di Azure AI Search dal progetto in modo da poter determinare l'endpoint e la chiave per il servizio di Azure AI Search.
     - Crea un messaggio di sistema appropriato.
-    - Invia una richiesta al client Azure OpenAI contenente le istruzioni di sistema e il messaggio dell'utente basato sull'input fornito, includendo inoltre le informazioni relative all'indice di Azure AI Search da usare per eseguire il grounding del prompt.
+    - Invia una richiesta al client Azure OpenAI (contenente le istruzioni di sistema e il messaggio dell'utente basato sull'input dell'utente), aggiungendo:
+        - Dettagli della connessione per l'indice Azure AI Search su cui eseguire query.
+        - Dettagli del modello di incorporamento da usare per vettorizzare la query\*.
     - Visualizza la risposta dal prompt di cui è stato eseguito il grounding.
     - Aggiunge la risposta alla cronologia della chat.
+
+    \**La query per l'indice di ricerca è basata sul prompt ed è usata per individuare contenuti pertinenti nei documenti indicizzati. È possibile usare una ricerca basata su parole chiave, che trasmette la query come testo semplice. Tuttavia, l'approccio con ricerca vettoriale risulta spesso più efficiente, motivo per cui viene usato un modello di incorporamento per vettorizzare il testo della query prima di inviarlo.*
+
 1. Usare il comando **CTRL+Q** per chiudere l'editor di codice senza salvare le modifiche, mantenendo aperta la riga di comando di Cloud Shell.
 
 ### Eseguire l'applicazione di chat
@@ -249,11 +255,11 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
    dotnet run
     ```
 
-1. Quando richiesto, immettere una domanda, ad esempio `Where should I stay in London?` ed esaminare la risposta del modello di IA generativa.
+1. Quando richiesto, immettere una domanda, ad esempio `Where should I go on vacation to see architecture?` ed esaminare la risposta del modello di IA generativa.
 
     Si noti che la risposta include riferimenti all'origine per indicare i dati indicizzati in cui è stata trovata la risposta.
 
-1. Provare una domanda di completamento, ad esempio `What can I do there?`
+1. Provare una domanda di completamento, ad esempio `Where can I stay there?`
 
 1. Al termine, immettere `quit` per uscire dal programma. Quindi chiudere il riquadro Cloud Shell.
 
