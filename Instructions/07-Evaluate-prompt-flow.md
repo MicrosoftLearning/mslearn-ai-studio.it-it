@@ -10,6 +10,8 @@ In questo esercizio, verranno usate valutazioni manuali e automatizzate per valu
 
 Questo esercizio richiederà circa **30** minuti.
 
+> **Nota**: alcune delle tecnologie usate in questo esercizio sono in anteprima o in fase di sviluppo. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
+
 ## Creare un progetto Fonderia Azure AI
 
 Per iniziare, creare un progetto Fonderia Azure AI.
@@ -32,7 +34,7 @@ Per iniziare, creare un progetto Fonderia Azure AI.
     - **Connettere Servizi di Azure AI o Azure OpenAI**: *Creare una nuova risorsa di Servizi di AI*
     - **Connettere Azure AI Search**: ignorare la connessione
 
-    > \* Al momento della stesura di questo documento, queste aree supportano la valutazione delle metriche di sicurezza dell'IA.
+    > \* Al momento della stesura di questo documento, queste aree supportano la valutazione delle metriche di sicurezza dell'IA. La disponibilità del modello è vincolata dalle quote a livello di area. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un altro progetto in un'area diversa.
 
 1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
 1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
