@@ -10,6 +10,8 @@ In questo esercizio, verrà usato il prompt flow del Portale Fonderia Azure AI p
 
 Questo esercizio richiederà circa **30** minuti.
 
+> **Nota**: alcune delle tecnologie usate in questo esercizio sono in anteprima o in fase di sviluppo. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
+
 ## Creare un progetto Fonderia Azure AI
 
 Per iniziare, creare un progetto Fonderia Azure AI.

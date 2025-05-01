@@ -12,6 +12,8 @@ In questo esercizio verrà esaminerà il catalogo dei modelli nel portale AI Azu
 
 Questo esercizio richiederà circa **25** minuti.
 
+> **Nota**: alcune delle tecnologie usate in questo esercizio sono in anteprima o in fase di sviluppo. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
+
 ## Creare un progetto e un hub di Azure per intelligenza artificiale
 
 Un hub di Intelligenza artificiale di Azure offre un'area di lavoro collaborativa in cui è possibile definire uno o più *progetti*. Creare un progetto un hub di Azure per intelligenza artificiale.

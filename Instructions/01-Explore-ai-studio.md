@@ -10,6 +10,8 @@ In questo esercizio si usa il Portale Fonderia Azure AI per creare un hub e un p
 
 Questo esercizio richiede circa **30** minuti.
 
+> **Nota**: alcune delle tecnologie usate in questo esercizio sono in anteprima o in fase di sviluppo attivo. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
+
 ## Aprire il portale di Azure AI Foundry
 
 Per iniziare, accedere al Portale Fonderia Azure AI.
