@@ -1,10 +1,8 @@
 ---
-title: Sviluppare soluzioni di IA generativa
+title: Sviluppare soluzioni di intelligenza artificiale generativa in Azure
 permalink: index.html
 layout: home
 ---
-
-# Sviluppare soluzioni di intelligenza artificiale generativa in Azure
 
 Gli esercizi seguenti sono progettati per offrire un'esperienza di apprendimento pratica in cui verranno esaminate le attività comuni eseguite dagli sviluppatori durante la creazione di soluzioni di IA generativa con Microsoft Azure.
 
