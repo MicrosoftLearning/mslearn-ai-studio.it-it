@@ -66,31 +66,17 @@ In questo esercizio, verranno valutate le prestazioni di un modello gpt-4o-mini.
 
 È possibile esaminare manualmente le risposte del modello in base ai dati dei test. L'esame manuale consente di testare input diversi per valutare se il modello funziona come previsto.
 
-1. In una nuova scheda del browser, scaricare [travel_evaluation_data.csv](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.csv) da `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.csv` e salvarlo in una cartella locale.
+1. In una nuova scheda del browser, scaricare il file [travel_evaluation_data.jsonl](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl) da `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl` e salvarlo in una cartella locale come **travel_evaluation_data.jsonl** (assicurarsi di salvarlo come file JSONL, non come file TXT).
 1. Tornare alla scheda del portale di Fonderia Azure AI, nel riquadro di spostamento, nella sezione **Valutazione e miglioramento**, selezionare **Valutazione**.
 1. Nella pagina **Valutazione**, visualizzare la scheda **Valutazioni manuali** e selezionare **+ Nuova valutazione manuale**.
+1. Nella sezione **Configurazioni**, selezionare la distribuzione del modello **gpt-4o-mini** nell'elenco **Modello**.
 1. Modificare il **messaggio di sistema** con le istruzioni seguenti per un assistente viaggio di intelligenza artificiale:
 
    ```
-   Objective: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
-
-   Capabilities:
-   - Provide up-to-date travel information, including destinations, accommodations, transportation, and local attractions.
-   - Offer personalized travel suggestions based on user preferences, budget, and travel dates.
-   - Share tips on packing, safety, and navigating travel disruptions.
-   - Help with itinerary planning, including optimal routes and must-see landmarks.
-   - Answer common travel questions and provide solutions to potential travel issues.
-    
-   Instructions:
-   1. Engage with the user in a friendly and professional manner, as a travel agent would.
-   2. Use available resources to provide accurate and relevant travel information.
-   3. Tailor responses to the user's specific travel needs and interests.
-   4. Ensure recommendations are practical and consider the user's safety and comfort.
-   5. Encourage the user to ask follow-up questions for further assistance.
+   Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. Nella sezione **Configurazioni**, selezionare la distribuzione del modello **gpt-4o-mini** nell'elenco **Modello**.
-1. Nella sezione **Risultato della valutazione manuale** selezionare **Importa dati di test** e caricare il file **travel_evaluation_data.csv** scaricato in precedenza. Eseguire il mapping dei campi del set di dati come indicato di seguito:
+1. Nella sezione **Risultato della valutazione manuale**, selezionare **Importa dati di test** e caricare il file **travel_evaluation_data.jsonl** scaricato in precedenza. Eseguire il mapping dei campi del set di dati come indicato di seguito:
     - **Input**: domanda
     - **Risposta prevista**: ExpectedResponse
 1. Esaminare le domande e le risposte previste nel file di test: verranno usate per valutare le risposte generate dal modello.
@@ -114,24 +100,10 @@ La valutazione automatizzata è un approccio che tenta di risolvere queste caren
 1. Modificare il **messaggio di sistema** con le stesse istruzioni per un assistente viaggio di intelligenza artificiale usate in precedenza:
 
    ```
-   Objective: Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
-
-   Capabilities:
-   - Provide up-to-date travel information, including destinations, accommodations, transportation, and local attractions.
-   - Offer personalized travel suggestions based on user preferences, budget, and travel dates.
-   - Share tips on packing, safety, and navigating travel disruptions.
-   - Help with itinerary planning, including optimal routes and must-see landmarks.
-   - Answer common travel questions and provide solutions to potential travel issues.
-    
-   Instructions:
-   1. Engage with the user in a friendly and professional manner, as a travel agent would.
-   2. Use available resources to provide accurate and relevant travel information.
-   3. Tailor responses to the user's specific travel needs and interests.
-   4. Ensure recommendations are practical and consider the user's safety and comfort.
-   5. Encourage the user to ask follow-up questions for further assistance.
+   Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. Nella sezione **Configura dati di test**, è possibile usare un modello GPT per generare automaticamente i dati di test (che è quindi possibile modificare e integrare per soddisfare le proprie aspettative), usare un set di dati esistente o caricare un file. In questo esercizio, selezionare **Usa set di dati esistente** e quindi selezionare il set di dati **travel_evaluation_data_csv_*xxxx...*** (creato al momento del caricamento del file .csv in precedenza).
+1. Nella sezione **Configura dati di test**, è possibile usare un modello GPT per generare automaticamente i dati di test (che è quindi possibile modificare e integrare per soddisfare le proprie aspettative), usare un set di dati esistente o caricare un file. In questo esercizio, selezionare **Usa set di dati esistente** e quindi selezionare il set di dati **travel_evaluation_data_jsonl_*xxxx...*** (creato al momento del caricamento del file JSONL in precedenza).
 1. Esaminare le righe di esempio del set di dati e quindi nella sezione **Scegliere la colonna di dati** selezionare i mapping di colonna seguenti:
     - **Query**: domanda
     - **Contesto**: *lasciare vuoto questo campo. Viene usato per valutare l'"allineamento" quando si associa un'origine dati contestuale al modello.*
