@@ -12,34 +12,28 @@ Questo esercizio richiederà circa **30** minuti.
 
 > **Nota**: alcune delle tecnologie usate in questo esercizio sono in anteprima o in fase di sviluppo. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
 
-## Creare un progetto Fonderia Azure AI
+## Creare un hub e un progetto Fonderia Azure AI
 
-Per iniziare, creare un progetto Fonderia Azure AI.
+Le funzionalità di Fonderia Azure AI che verranno usate in questo esercizio richiedono un progetto basato su una risorsa *hub* di Fonderia Azure AI.
 
-1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere i suggerimenti o i riquadri di avvio rapido aperti la prima volta che è stato eseguito l'accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** se è aperto):
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** nel caso sia aperto):
 
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Nella home page, selezionare **+ Crea progetto**.
-1. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto. Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
-1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Nome hub**: *un nome valido per l'hub*
+1. Nel browser, passare a `https://ai.azure.com/managementCenter/allResources` e selezionare **Crea**. Scegliere quindi l'opzione per creare una nuova **risorsa Hub IA**.
+1. Nella procedura guidata **Crea un progetto**, immettere un nome valido per il progetto e, se è suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo ed espandere **Opzioni avanzate** per specificare le impostazioni seguenti per il progetto:
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
-    - **Posizione**: selezionare una delle aree seguenti\*
+    - **Nome hub**: un nome valido per l'hub
+    - **Località**: *selezionare le una delle località seguenti*:\*
         - Stati Uniti orientali 2
         - Francia centrale
         - Regno Unito meridionale
         - Svezia centrale
-    - **Connettere Servizi di Azure AI o Azure OpenAI**: *Creare una nuova risorsa di Servizi di AI*
-    - **Connettere Azure AI Search**: ignorare la connessione
 
     > \* Al momento della stesura di questo documento, queste aree supportano la valutazione delle metriche di sicurezza dell'IA. La disponibilità del modello è vincolata dalle quote a livello di area. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un altro progetto in un'area diversa.
 
-1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
-1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
-
-    ![Screenshot dei dettagli di un progetto di Azure AI nel portale Fonderia di Azure AI.](./media/ai-foundry-project.png)
+1. Attendere la creazione del progetto.
 
 ## Distribuire i modelli
 
@@ -67,16 +61,17 @@ In questo esercizio, verranno valutate le prestazioni di un modello gpt-4o-mini.
 È possibile esaminare manualmente le risposte del modello in base ai dati dei test. L'esame manuale consente di testare input diversi per valutare se il modello funziona come previsto.
 
 1. In una nuova scheda del browser, scaricare il file [travel_evaluation_data.jsonl](https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl) da `https://raw.githubusercontent.com/MicrosoftLearning/mslearn-ai-studio/refs/heads/main/data/travel_evaluation_data.jsonl` e salvarlo in una cartella locale come **travel_evaluation_data.jsonl** (assicurarsi di salvarlo come file JSONL, non come file TXT).
-1. Tornare alla scheda del portale di Fonderia Azure AI, nel riquadro di spostamento, nella sezione **Valutazione e miglioramento**, selezionare **Valutazione**.
+1. Tornare alla scheda del portale Fonderia Azure AI, nel riquadro di spostamento, nella sezione **Proteggere e gestire**, selezionare **Valutazione**.
+1. Se si apre automaticamente il riquadro **Crea una nuova valutazione** , selezionare **Annulla** per chiuderlo.
 1. Nella pagina **Valutazione**, visualizzare la scheda **Valutazioni manuali** e selezionare **+ Nuova valutazione manuale**.
-1. Nella sezione **Configurazioni**, selezionare la distribuzione del modello **gpt-4o-mini** nell'elenco **Modello**.
+1. Nella sezione **Configurazioni**, nell'elenco **Modello**, selezionare la distribuzione modello **gpt-4o**.
 1. Modificare il **messaggio di sistema** con le istruzioni seguenti per un assistente viaggio di intelligenza artificiale:
 
    ```
    Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. Nella sezione **Risultato della valutazione manuale**, selezionare **Importa dati di test** e caricare il file **travel_evaluation_data.jsonl** scaricato in precedenza. Eseguire il mapping dei campi del set di dati come indicato di seguito:
+1. Nella sezione **Risultato della valutazione manuale**, selezionare **Importa dati di test** e caricare il file **travel_evaluation_data.jsonl** scaricato in precedenza. Scorrere verso il basso per eseguire il mapping dei campi del set di dati come indicato di seguito:
     - **Input**: domanda
     - **Risposta prevista**: ExpectedResponse
 1. Esaminare le domande e le risposte previste nel file di test: verranno usate per valutare le risposte generate dal modello.
@@ -95,39 +90,48 @@ La valutazione automatizzata è un approccio che tenta di risolvere queste caren
 
 1. Usare la freccia indietro (**&larr;**) accanto al titolo pagina **Valutazione manuale** per tornare alla pagina **Valutazione**.
 1. Visualizzare la scheda **Valutazioni automatiche**.
-1. Selezionare **Crea una nuova valutazione** e, quando richiesto, selezionare l'opzione per valutare un **modello e prompt**
-1. Nella pagina **Crea una nuova valutazione**, nella sezione **Informazioni di base**, esaminare il nome di valutazione predefinito generato automaticamente (è possibile modificarlo) e selezionare la distribuzione del modello **gpt-40-mini**.
-1. Modificare il **messaggio di sistema** con le stesse istruzioni per un assistente viaggio di intelligenza artificiale usate in precedenza:
+1. Selezionare **Crea una nuova valutazione**, e quando richiesto, selezionare l'opzione per valutare **Valuta un modello** e selezionare **Avanti**.
+1. Nella pagina **Seleziona origine dati** selezionare **Usa il set di dati** e selezionare il set di dati **travel_evaluation_data_jsonl_*xxxx...*** in base al file caricato in precedenza e selezionare **Avanti**.
+1. Nella pagina **Testa il modello** selezionare il modello **gpt-4o-mini** e modificare il **messaggio di sistema** con le stesse istruzioni per un assistente viaggio di intelligenza artificiale usato in precedenza:
 
    ```
    Assist users with travel-related inquiries, offering tips, advice, and recommendations as a knowledgeable travel agent.
    ```
 
-1. Nella sezione **Configura dati di test**, è possibile usare un modello GPT per generare automaticamente i dati di test (che è quindi possibile modificare e integrare per soddisfare le proprie aspettative), usare un set di dati esistente o caricare un file. In questo esercizio, selezionare **Usa set di dati esistente** e quindi selezionare il set di dati **travel_evaluation_data_jsonl_*xxxx...*** (creato al momento del caricamento del file JSONL in precedenza).
-1. Esaminare le righe di esempio del set di dati e quindi nella sezione **Scegliere la colonna di dati** selezionare i mapping di colonna seguenti:
-    - **Query**: domanda
-    - **Contesto**: *lasciare vuoto questo campo. Viene usato per valutare l'"allineamento" quando si associa un'origine dati contestuale al modello.*
-    - **Verità di base**: ExpectedAnswer
-1. Nella sezione **Scegliere cosa valutare** selezionare <u>tutte</u> le categorie di valutazione seguenti:
-    - Qualità dell'IA (basata sull'IA)
-    - Rischio e sicurezza (basati sull'IA)
-    - Qualità dell'intelligenza artificiale (NLP)
-1. Nell'elenco **Scegliere una distribuzione del modello come giudice** selezionare il modello **gpt-4o**. Questo modello verrà usato per valutare le risposte del modello ***gpt-4o-mini** per la qualità correlata al linguaggio e le metriche di confronto di IA generativa standard.
-1. Selezionare **Crea** per avviare il processo di valutazione e attenderne il completamento. L'operazione potrebbe richiedere alcuni minuti.
+1. Per il campo **query**, selezionare **\{\{item.question\}\}**
+1. Selezionare **Avanti** per passare alla pagina successiva.
+1. Nella pagina **Configura valutatori**, usare il pulsante **+Aggiungi** per aggiungere i valutatori seguenti, configurandoli nel modo seguente:
+    - **Strumento di assegnazione dei punteggi del modello**:
+        - **Nome dei criteri**: Semantic_similarity
+        - **Voto con**: *selezionare il modello **gpt-4o***
+        - Impostazioni **utente** (nella parte inferiore):
 
-    > **Suggerimento**: se viene visualizzato un errore che mostra che le autorizzazioni del progetto sono state impostate, attendere un minuto e quindi selezionare di nuovo **Crea**. Le autorizzazioni delle risorse possono richiedere del tempo prima della propagazione di un progetto appena creato.
 
-1. Al termine della valutazione, scorrere verso il basso, se necessario, per visualizzare l'area **Dashboard delle metriche** e visualizzare le metriche di **qualità dell'intelligenza artificiale (basata sull'IA)**:
+            Output: \{\{sample.output_text\}\}<br>
+            Verità di riferimento: \{\{item.ExpectedResponse\}\}<br>
+            <br>
+        
+    - **Analizzatore di scala likert**:
+        - **Nome criteri**: pertinenza
+        - **Voto con**: *selezionare il modello **gpt-4o***
+        - **Query**: \{\{item.question\}\}
 
-    ![Screenshot delle metriche di qualità dell'intelligenza artificiale nel portale Fonderia Azure AI.](./media/ai-quality-metrics.png)
+    - **Somiglianza del testo**:
+        - **Nome criteri**: F1_Score
+        - **Verità di riferimento**: \{\{item. ExpectedResponse\}\}
 
-    Usare le icone **<sup>(i) </sup>** per visualizzare le definizioni delle metriche.
+    - **Contenuto odioso e fazioso**:
+        - **Nome dei criteri**: Hate_and_unfairness
+        - **Query**: \{\{item.question\}\}
 
-1. Visualizzare la scheda **Rischio e sicurezza** per visualizzare le metriche associate a contenuti potenzialmente dannosi.
-1. Visualizzare la scheda **Qualità intelligenza artificiale (NLP**) per visualizzare le metriche standard per i modelli di IA generativa.
-1. Scorrere di nuovo verso la parte superiore della pagina, se necessario, e selezionare la scheda **Dati** per visualizzare i dati non elaborati dalla valutazione. I dati includono le metriche per ogni input e le spiegazioni del ragionamento che il modello gpt-4o ha applicato durante la valutazione delle risposte.
+1. Selezionare **Avanti** per rivedere le impostazioni di valutazione. È necessario aver configurato la valutazione per usare il set di dati di valutazione del viaggio per valutare il modello **gpt-4o-mini** per la somiglianza semantica, la pertinenza, il punteggio F1 e il linguaggio odioso e fazioso.
+1. Assegnare alla valutazione un nome appropriato e **inviarla** per avviare il processo di valutazione e attendere il completamento. L'operazione potrebbe richiedere alcuni minuti. È possibile usare il pulsante **Aggiorna** della barra degli strumenti per controllare lo stato.
 
-    ![Screenshot dei dati di valutazione nel portale Fonderia Azure AI.](./media/evaluation-data.png)
+1. Al termine della valutazione, scorrere verso il basso, se necessario per esaminare i risultati.
+
+    ![Screenshot delle metriche di valutazione.](./media/ai-quality-metrics.png)
+
+1. Nella parte superiore della pagina, selezionare la scheda **Dati** per visualizzare i dati non elaborati dalla valutazione. I dati includono le metriche per ogni input e le spiegazioni del ragionamento che il modello gpt-4o ha applicato durante la valutazione delle risposte.
 
 ## Eseguire la pulizia
 
