@@ -14,19 +14,19 @@ Questo esercizio richiederà circa **25** minuti.
 
 > **Nota**: alcune delle tecnologie usate in questo esercizio sono in anteprima o in fase di sviluppo. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
 
-## Distribuire un modello in un progetto di Fonderia Azure AI
+## Distribuire un modello nel progetto Fonderia Azure AI
 
-Per iniziare, distribuire un modello nel progetto Fonderia Azure AI.
+Per iniziare, distribuire un modello in un progetto Fonderia Azure AI.
 
 1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** nel caso sia aperto):
 
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Nella home page, nella sezione **Esplora modelli e funzionalità**, cercare il modello `Phi-4`, che verrà usato nel progetto.
+1. Nella home page, nella sezione **Esplora modelli e funzionalità** cercare il modello `Phi-4`, che verrà usato nel progetto.
 1. Nei risultati della ricerca selezionare il modello **Phi-4** per visualizzarne i dettagli e quindi nella relativa parte superiore della pagina selezionare **Usa questo modello**.
 1. Quando viene richiesto di creare un progetto, immettere un nome valido per il progetto ed espandere **Opzioni avanzate**.
 1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Risors di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
+    - **Risorsa di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
     - **Area geografica**: selezionare una delle aree geografiche seguenti\*:
@@ -40,8 +40,9 @@ Per iniziare, distribuire un modello nel progetto Fonderia Azure AI.
 
     > \* Al momento della stesura di questo documento, il modello Microsoft *Phi-4* che verrà usato in questo esercizio è disponibile in queste aree. È possibile controllare la disponibilità a livello di area più recente per modelli specifici nella documentazione di [Fonderia Azure AI ](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). In caso di raggiungimento di un limite di quota di area più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
-1. Selezionare **Crea** e attendere la creazione del progetto, inclusa la distribuzione del modello Phi-4 selezionato.
-1. Quando il progetto viene creato, il playground della chat verrà aperto automaticamente.
+1. Selezionare **Crea** e attendere che venga creato il progetto.
+1. Quando le informazioni Phi-4 vengono richieste, accettare le condizioni per l'utilizzo e distribuire il modello.
+1. Quando il modello viene distribuito, selezionare il pulsante blu nella parte superiore delle informazioni di distribuzione per aprire il playground.
 1. Nel riquadro **Installazione** prendere nota del nome della distribuzione del modello, che deve essere **Phi-4**.
 
 ## Chattare usando il filtro di contenuti
@@ -75,13 +76,13 @@ Il modello Phi-4 distribuito ha applicato un filtro di contenuti per impostazion
 
 ## Rimuovere il filtro di contenuti per impostazione predefinita
 
-Ora vediamo cosa accade quando non viene applicato alcun filtro di contenuti.
+Ora è possibile vedere cosa accade quando non viene applicato alcun filtro di contenuti.
 
 1. Nel riquadro di spostamento a sinistra, nella sezione **Asset personali**, selezionare **Modelli ed endpoint**.
 1. Selezionare il modello **Phi-4** distribuito in precedenza per visualizzarne i dettagli.
 1. Nella barra degli strumenti, seleziona **Modifica**. Quindi nell'elenco **Filtro di contenuti** selezionare **Nessuno** e inviare le modifiche.
 1. Dopo aver apportato le modifiche, nella pagina del modello Phi-4 selezionare **Apri nel playground**.
-1. Nella playground della chat, nel riquadro **Installazione**, assicurarsi che sia selezionata la distribuzione modello Phi-4. Inviare quindi il prompt seguente e visualizzare la risposta:
+1. Nel playground della chat, nel riquadro **Installazione**, assicurarsi che sia selezionata la distribuzione modello Phi-4. Inviare quindi il prompt seguente e visualizzare la risposta:
 
     ```
    What should I do if I cut myself?
@@ -124,13 +125,13 @@ Quando il filtro di contenuto predefinito non soddisfa le proprie esigenze, è p
     - **Sessuale**: Linguaggio sessualmente esplicito o offensivo.
     - **Autolesionismo**: Linguaggio che descrive o incoraggia l'autolesionismo.
 
-    I filtri vengono applicati per ognuna di queste categorie a richieste e completamenti, in base a soglie di blocco di gravità **Bassa**, **Media**, **Elevata** usata per determinare quali tipi specifici di linguaggio vengono intercettati e impediti dal filtro.
+    I filtri vengono applicati a ciascuna di queste categorie per richieste e completamenti, in base alle soglie di blocco con le opzioni di **Bloccare pochi**, **Bloccare alcuni** e **Bloccare tutti**, utilizzate per determinare quali specifiche tipologie di linguaggio intercettare e impedire tramite il filtro.
 
     Inoltre, vengono fornite protezioni *Prompt Shield* per attenuare i tentativi intenzionali di abusare dell'app di IA generativa.
 
-1. Modificare la soglia per ogni categoria di filtro di input in **Bassa, Media ed Elevata**.
+1. Modificare la soglia per ciascuna categoria del filtro di input all'opzione **Bloccare tutti**.
 
-1. Nella pagina **Filtro di output**, esaminare le impostazioni che è possibile applicare alle risposte di output e modificare la soglia per ogni categoria in **Bassa, Media ed Elevata**.
+1. Nella pagina **Filtro di output**, esaminare le impostazioni applicabili alle risposte di output e modificare la soglia per ciascuna categoria all'opzione **Bloccare tutti**.
 
 1. Nella pagina **Distribuzione**, selezionare la distribuzione del modello **Phi-4** per applicare il nuovo filtro di contenuti, confermando di voler sostituire il filtro di contenuti esistente quando richiesto.
 
