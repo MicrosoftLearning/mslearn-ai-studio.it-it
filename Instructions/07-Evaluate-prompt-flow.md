@@ -25,13 +25,15 @@ Le funzionalità di Fonderia Azure AI che verranno usate in questo esercizio ric
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
     - **Nome hub**: un nome valido per l'hub
-    - **Località**: *selezionare le una delle località seguenti*:\*
+    - **Posizione**: Selezionare una delle seguenti posizioni (*In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa*):
         - Stati Uniti orientali 2
         - Francia centrale
         - Regno Unito meridionale
         - Svezia centrale
 
-    > \* Al momento della stesura di questo documento, queste aree supportano la valutazione delle metriche di sicurezza dell'IA. La disponibilità del modello è vincolata dalle quote a livello di area. In caso di raggiungimento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un altro progetto in un'area diversa.
+    > **Nota**: se si usa una sottoscrizione di Azure in cui i criteri vengono usati per limitare i nomi di risorse consentiti, potrebbe essere necessario usare il collegamento nella parte inferiore della finestra di dialogo **Crea un nuovo progetto** per creare l'hub usando il portale di Azure.
+
+    > **Suggerimento**: se il pulsante **Crea** è ancora disabilitato, assicurarsi di rinominare l'hub in un valore alfanumerico univoco.
 
 1. Attendere la creazione del progetto.
 

@@ -14,22 +14,26 @@ Questo esercizio richiede circa **45** minuti.
 
 > **Nota**: questo esercizio si basa sui servizi delle versioni non definitive, che possono essere soggette a modifiche.
 
-## Creare una risorsa di Fonderia Azure AI
+## Creare un hub e un progetto Fonderia Azure AI
 
-Per iniziare, creare una risorsa di Fonderia Azure AI.
+Le funzionalità di Fonderia Azure AI che verranno usate in questo esercizio richiedono un progetto basato su una risorsa *hub* di Fonderia Azure AI.
 
-1. Nel web browser, aprire il [portale di Azure](https://portal.azure.com) su `https://portal.azure` e accedere usando le credenziali di Azure. Chiudere eventuali suggerimenti o riquadri di avvio rapido che vengono aperti al primo accesso.
-1. Hub: creare una nuova risorsa `Azure AI Foundry` con le impostazioni seguenti:
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** nel caso sia aperto):
+
+    ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
+
+1. Nel browser, passare a `https://ai.azure.com/managementCenter/allResources` e selezionare **Crea**. Scegliere quindi l'opzione per creare una nuova **risorsa Hub IA**.
+1. Nella procedura guidata **Crea un progetto**, immettere un nome valido per il progetto e, se è suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo ed espandere **Opzioni avanzate** per specificare le impostazioni seguenti per il progetto:
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
-    - **Nome**: *un nome valido per la risorsa di Fonderia Azure AI*
-    - **Area**: scegliere tra una delle seguenti aree:
-        - Stati Uniti orientali 2
-        - Svezia centrale
-    - **Nome progetto predefinito**: *un nome valido per il progetto*
+    - **Nome hub**: un nome valido per l'hub
+    - **Posizione**: Est degli Stati Uniti 2 o Svezia centrale (*In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.*)
 
-1. Attendere che la risorsa venga creata, quindi passare alla relativa pagina nel portale di Azure.
-1. Nella pagina della risorsa di Fonderia Azure AI, selezionare **Passare al portale di Fonderia Azure AI**.
+    > **Nota**: se si usa una sottoscrizione di Azure in cui i criteri vengono usati per limitare i nomi di risorse consentiti, potrebbe essere necessario usare il collegamento nella parte inferiore della finestra di dialogo **Crea un nuovo progetto** per creare l'hub usando il portale di Azure.
+
+    > **Suggerimento**: se il pulsante **Crea** è ancora disabilitato, assicurarsi di rinominare l'hub in un valore alfanumerico univoco.
+
+1. Attendere che il progetto venga creato e quindi passare al progetto.
 
 ## Distribuire i modelli
 
@@ -59,40 +63,47 @@ Per implementare la soluzione sono necessari due modelli:
 I dati per l'app sono costituiti da una serie di brochure di viaggio in formato PDF dell'agenzia di viaggi fittizia *Margie's Travel*. Aggiungerli al progetto.
 
 1. In una nuova scheda del browser, scaricare l'[archivio compresso delle brochure](https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip) da `https://github.com/MicrosoftLearning/mslearn-ai-studio/raw/main/data/brochures.zip` ed estrarlo in una cartella denominata **brochures** sul file system locale.
-1. Nel portale di Fonderia Azure AI, nel progetto, nel riquadro di spostamento a sinistra, selezionare **Playgrounds**, quindi selezionare **Prova il playground della chat**.
-1. Nel riquadro **Configurazione** dell'area di lavoro, espandere la sezione **Aggiungi dati** e selezionare **Aggiungi un'origine dati**.
-1. Nella procedura guidata **Aggiungi dati**, espandere il menu a discesa per selezionare **Carica file**.
-1. Creare una nuova risorsa di archiviazione BLOB di Azure con le seguenti impostazioni:
-    - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-    - **Gruppo di risorse**: *lo stesso gruppo di risorse della risorsa di Fonderia Azure AI*
-    - **Nome dell'account di archiviazione**: *un nome valido per la risorsa dell'account di archiviazione*
-    - **Area**: *la stessa area della risorsa di Fonderia Azure AI*
-    - **Prestazioni**: standard
-    - **Ridondanza:** archiviazione con ridondanza locale
-1. Creare la risorsa e attendere il completamento della distribuzione.
-1. Tornare alla scheda Fonderia Azure AI, aggiornare l'elenco delle risorse di archiviazione BLOB di Azure e selezionare l'account appena creato.
+1. Nel portale Azure AI Foundry, nel progetto, nel riquadro di spostamento a sinistra, in **Asset personali**, selezionare la pagina **Dati + indici**.
+1. Selezionare **+ Nuovi dati**.
+1. Nella procedura guidata **Aggiungi dati** espandere il menu a discesa per selezionare **Carica file/cartelle**.
+1. Selezionare **Carica cartella** e selezionare la cartella **brochure**. Attendere che vengano elencati tutti i file della cartella.
+1. Selezionare **Avanti** e impostare il nome dei dati su `brochures`.
+1. Attendere il caricamento della cartella e notare che contiene diversi file .pdf.
 
-    > **Nota**: se viene visualizzato un avviso che Azure OpenAI richiede l'autorizzazione per accedere alla risorsa, selezionare **Attiva CORS**.
+## Creare un indice per i dati
 
-1. Creare una nuova risorsa di Azure AI Search con le impostazioni seguenti:
-    - **Sottoscrizione**: *la sottoscrizione di Azure usata*
-    - **Gruppo di risorse**: *lo stesso gruppo di risorse della risorsa di Fonderia Azure AI*
-    - **Nome del servizio**: *un nome valido per la risorsa di Azure AI Search*
-    - **Area**: *la stessa area della risorsa di Fonderia Azure AI*
-    - **Piano tariffario**: Basic.
+Dopo aver aggiunto un'origine dati al progetto, è possibile usarla per creare un indice nella risorsa di Azure AI Search.
 
-1. Creare la risorsa e attendere il completamento della distribuzione.
-1. Tornare alla scheda Fonderia Azure AI, aggiornare l'elenco delle risorse di Azure AI Search e selezionare l'account appena creato.
-1. Assegnare il nome all'indice `brochures-index`.
-1. Abilitare l'opzione **Aggiungi ricerca vettoriale a questa risorsa di ricerca** e selezionare il modello di incorporamento distribuito in precedenza. Selezionare **Avanti**.
+1. Nel portale Azure AI Foundry, nel progetto, nel riquadro di spostamento a sinistra, in **Asset personali**, selezionare la pagina **Dati + indici**.
+1. Nella scheda **Indici**, aggiungere un nuovo indice con le impostazioni seguenti:
+    - **Posizione di origine**:
+        - **Origine dati**: dati nel portale di Fonderia Azure AI
+            - *Selezionare l'origine dati delle **brochure***
+    - **Configurazione dell'indice**:
+        - **Selezionare il servizio Azure AI Search**: *creare una nuova risorsa di Azure AI Search con le impostazioni seguenti*:
+            - **Sottoscrizione**: *sottoscrizione di Azure*
+            - **Gruppo di risorse**: *lo stesso gruppo di risorse dell'Hub IA*
+            - **Nome del servizio**: *nome valido per la risorsa AI Search*
+            - **Località**: *la stessa posizione dell'Hub IA*
+            - **Piano tariffario**: Basic.
+            
+            Attendere che la risorsa AI Search venga creata. Tornare quindi a Fonderia Azure AI e completare la configurazione dell'indice selezionando **Connetti un'altra risorsa di Azure AI Search** e aggiungendo una connessione alla risorsa AI Search appena creata.
+ 
+        - **Indice vettoriale**: `brochures-index`
+        - **Macchina virtuale**: selezione automatica
+    - **Ricerca impostazioni**:
+        - **Impostazioni del vettore**: aggiungere la ricerca vettoriale a questa risorsa di ricerca
+        - **Connessione OpenAI di Azure**: *selezionare la risorsa OpenAI di Azure predefinita per l'hub.*
+        - **Modello di incorporamento**: text-embedding-ada-002
+        - **Distribuzione del modello di incorporamento**: *distribuzione del modello* text-embedding-ada-002 **
 
-   >**Nota**: la procedura guidata **Aggiungi dati** potrebbe impiegare un po' di tempo prima di riconoscere il modello di incorporamento distribuito, quindi se non è possibile abilitare l'opzione di ricerca vettoriale, annullare la procedura guidata, attendere qualche minuto e riprovare.
+1. Creare l'indice vettoriale e attendere il completamento del processo di indicizzazione, che può richiedere un po' di tempo a seconda delle risorse di calcolo disponibili nell'abbonamento.
 
-1. Caricare tutti i file .pdf dalla cartella **brochure** estratta in precedenza e quindi selezionare **Avanti**.
-1. Nel passaggio **Gestione dati**, selezionare il tipo di ricerca **Ibrido (vettore + parola chiave)** e le dimensioni blocco pari **a 1024**. Selezionare **Avanti**.
-1. Nel passaggio **Connessione dati**, selezionare **Chiave API** come tipo di autenticazione. Selezionare **Avanti**.
-1. Esaminare tutti i passaggi di configurazione e quindi selezionare **Salva e chiudi**.
-1. Attendere il completamento del processo di indicizzazione, che può richiedere un po' di tempo a seconda delle risorse di calcolo disponibili nell'abbonamento.
+    L'operazione di creazione dell'indice è costituita dai processi seguenti:
+
+    - Spezzare, suddividere e incorporare i token di testo nei dati delle brochure.
+    - Creare l'indice di Azure AI Search.
+    - Registrare la risorsa dell'indice.
 
     > **Suggerimento**: in attesa della generazione dell'indice, è possibile consultare le brochure scaricate per approfondirne i contenuti.
 
@@ -100,7 +111,14 @@ I dati per l'app sono costituiti da una serie di brochure di viaggio in formato 
 
 Prima di usare l'indice in un flusso immediato basato su RAG, verificare che possa essere usato per influire sulle risposte di intelligenza artificiale generativa.
 
-1. Nella pagina Chat playground, nel riquadro Configurazione, verificare che sia selezionata la distribuzione modello **gpt-4o**. Quindi, nel pannello principale della sessione di chat inviare la richiesta `Where can I stay in New York?`
+1. Nel riquadro di spostamento a sinistra, selezionare la pagina **Playground** e aprire il playground **Chat**.
+1. Nella pagina playground della chat, nel riquadro Configurazione, verificare che sia selezionata la distribuzione modello **gpt-4o**. Quindi, nel pannello principale della sessione di chat inviare la richiesta `Where can I stay in New York?`
+1. Esaminare la risposta, che deve essere una risposta generica dal modello senza dati dall'indice.
+1. Nel pannello di installazione espandere il campo **Aggiungi dati**, quindi aggiungere l'indice di progetto **brochures-index** e selezionare il tipo di ricerca **ibrido (vettore + parola chiave)**.
+
+   > **Suggerimento**: in alcuni casi, gli indici appena creati potrebbero non essere disponibili immediatamente. L'aggiornamento del browser in genere è utile, ma se si verifica ancora il problema per cui non è possibile trovare l'indice, potrebbe essere necessario attendere fino a quando l'indice non viene riconosciuto.
+
+1. Dopo aver aggiunto l'indice e aver riavviato la sessione di chat, inviare di nuovo la richiesta `Where can I stay in New York?`
 1. Esaminare la risposta, che deve essere basata sui dati nell'indice.
 
 ## Creare un'app client RAG

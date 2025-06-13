@@ -32,7 +32,7 @@ Un *progetto* Azure AI offre un'area di lavoro collaborativa per lo sviluppo del
 1. Nei risultati della ricerca, selezionare il modello **gpt-4o** per visualizzarne i dettagli e quindi nella parte superiore della pagina selezionare **Usa questo modello**.
 1. Quando viene richiesto di creare un progetto, immettere un nome valido per il progetto ed espandere **Opzioni avanzate**.
 1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Risors di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
+    - **Risorsa di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
     - **Area geografica**: *selezionare qualsiasi **località supportata per i servizi di intelligenza artificiale**\*
@@ -72,7 +72,7 @@ Un *progetto* Azure AI offre un'area di lavoro collaborativa per lo sviluppo del
 
 Il progetto Fonderia Azure AI e la relativa risorsa a cui appartiene includono connessioni alle risorse che è possibile usare nelle applicazioni di intelligenza artificiale.
 
-1. Nel riquadro di spostamento della pagina Centro di gestione, sotto il progetto, selezionare **Vai al progetto**.
+1. Nel riquadro di spostamento della pagina Centro di gestione, sotto il progetto, selezionare **Vai alla risorsa**.
 1. Nella pagina **Panoramica** del progetto, visualizzare la sezione **Endpoint e chiavi**, che contiene endpoint e chiavi di autorizzazione da poter usare nel codice dell'applicazione per accedere a:
     - Il progetto Fonderia Azure AI e tutti i modelli distribuiti in esso.
     - Azure OpenAI nei modelli Fonderia Azure AI.
