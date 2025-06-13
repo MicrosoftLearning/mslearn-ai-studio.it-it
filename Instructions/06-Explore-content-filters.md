@@ -25,7 +25,7 @@ Per iniziare, distribuire un modello in un progetto Fonderia Azure AI.
 1. Nella home page, nella sezione **Esplora modelli e funzionalità** cercare il modello `Phi-4`, che verrà usato nel progetto.
 1. Nei risultati della ricerca selezionare il modello **Phi-4** per visualizzarne i dettagli e quindi nella relativa parte superiore della pagina selezionare **Usa questo modello**.
 1. Quando viene richiesto di creare un progetto, immettere un nome valido per il progetto ed espandere **Opzioni avanzate**.
-1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
+1. Selezionare **Personalizza** e specificare le impostazioni seguenti per il progetto:
     - **Risorsa di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
