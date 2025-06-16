@@ -12,9 +12,9 @@ Questo esercizio richiede circa **40** minuti.
 
 > **Nota**: questo esercizio si basa su SDK non definitive, che possono essere soggette a modifiche. Se necessario, abbiamo usato versioni specifiche dei pacchetti; che potrebbero non riflettere le versioni disponibili più recenti. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
 
-## Distribuire un modello in un progetto di Fonderia Azure AI
+## Distribuire un modello nel progetto Fonderia Azure AI
 
-Per iniziare, distribuire un modello nel progetto Fonderia Azure AI.
+Per iniziare, distribuire un modello in un progetto Fonderia Azure AI.
 
 1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** nel caso sia aperto):
 
@@ -23,8 +23,8 @@ Per iniziare, distribuire un modello nel progetto Fonderia Azure AI.
 1. Nella home page, nella sezione **Esplora modelli e funzionalità**, cercare il modello `gpt-4o`, che verrà usato nel progetto.
 1. Nei risultati della ricerca, selezionare il modello **gpt-4o** per visualizzarne i dettagli e quindi nella parte superiore della pagina selezionare **Usa questo modello**.
 1. Quando viene richiesto di creare un progetto, immettere un nome valido per il progetto ed espandere **Opzioni avanzate**.
-1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Risors di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
+1. Selezionare **Personalizza** e specificare le impostazioni seguenti per il progetto:
+    - **Risorsa di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
     - **Area geografica**: *selezionare qualsiasi **località supportata per i servizi di intelligenza artificiale**\*

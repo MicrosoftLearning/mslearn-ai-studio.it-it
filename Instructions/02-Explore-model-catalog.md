@@ -69,8 +69,8 @@ Per usare un modello, è necessario creare un *progetto* Fonderia Azure AI.
 
 1. Nella parte superiore della pagina di panoramica del modello **gpt-4o** selezionare **Usa questo modello**.
 1. Quando viene richiesto di creare un progetto, immettere un nome valido per il progetto ed espandere **Opzioni avanzate**.
-1. Nella sezione **Opzioni avanzate** specificare le impostazioni seguenti per l'hub:
-    - **Risors di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
+1. Nella sezione **Opzioni avanzate**, specificare le impostazioni seguenti per il progetto:
+    - **Risorsa di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
     - **Area geografica**: *selezionare qualsiasi **località supportata per i servizi di intelligenza artificiale**\*

@@ -16,9 +16,9 @@ Questo esercizio richiederà circa **60** minuti\*.
 
 > \***Nota**: questa tempistica è una stima basata sull'esperienza media. L'ottimizzazione dipende dalle risorse dell'infrastruttura cloud, che possono richiedere una quantità variabile di tempo per il provisioning a seconda della capacità del data center e della domanda simultanea. Alcune attività in questo esercizio possono impiegare <u>molto</u> tempo per essere completate e richiedono pazienza. Se la procedura richiede diverso tempo, è consigliabile esaminare la [documentazione sull'ottimizzazione di Fonderia Azure AI](https://learn.microsoft.com/azure/ai-studio/concepts/fine-tuning-overview) o fare una pausa. È possibile che alcuni processi possano dare un errore di timeout o essere eseguiti in modo indefinito. Alcune delle tecnologie usate in questo esercizio sono in anteprima o in fase di sviluppo. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
 
-## Distribuire un modello in un progetto di Fonderia Azure AI
+## Distribuire un modello nel progetto Fonderia Azure AI
 
-Per iniziare, distribuire un modello nel progetto Fonderia Azure AI.
+Per iniziare, distribuire un modello in un progetto Fonderia Azure AI.
 
 1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** nel caso sia aperto):
 
@@ -27,8 +27,8 @@ Per iniziare, distribuire un modello nel progetto Fonderia Azure AI.
 1. Nella home page, nella sezione **Esplora modelli e funzionalità**, cercare il modello `gpt-4o`, che verrà usato nel progetto.
 1. Nei risultati della ricerca, selezionare il modello **gpt-4o** per visualizzarne i dettagli e quindi nella parte superiore della pagina selezionare **Usa questo modello**.
 1. Quando viene richiesto di creare un progetto, immettere un nome valido per il progetto ed espandere **Opzioni avanzate**.
-1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Risors di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
+1. Selezionare **Personalizza** e specificare le impostazioni seguenti per il progetto:
+    - **Risorsa di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
     - **Area geografica**: *selezionare una delle aree geografiche seguenti*:\*
