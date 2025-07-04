@@ -46,8 +46,6 @@ Un *progetto* Azure AI offre un'area di lavoro collaborativa per lo sviluppo del
 
 1. Nel riquadro di spostamento a sinistra, selezionare **Panoramica** per visualizzare la pagina principale del progetto, che avrà questo aspetto:
 
-    > **Nota**: se viene visualizzato un errore *autorizzazioni insufficienti*, usare il pulsante **Correggi** per risolverlo.
-
     ![Screenshot della pagina di panoramica del progetto Fonderia Azure AI.](./media/ai-foundry-project.png)
 
 1. Nella parte inferiore del riquadro di spostamento a sinistra selezionare **Centro di gestione**. Il centro di gestione consente di configurare le impostazioni sia a livello di *risorsa* sia di *progetto*, entrambi visualizzati nel riquadro di spostamento.

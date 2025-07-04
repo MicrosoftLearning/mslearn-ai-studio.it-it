@@ -43,8 +43,6 @@ Per iniziare, distribuire un modello in un progetto Fonderia Azure AI.
 1. Nel riquadro **Installazione** prendere nota del nome della distribuzione modello, che deve essere **gpt-4o**. È possibile confermarlo visualizzando la distribuzione nella pagina **Modelli ed endpoint** (è sufficiente aprire tale pagina nel riquadro di spostamento a sinistra).
 1. Nel riquadro di spostamento a sinistra, selezionare **Panoramica** per visualizzare la pagina principale del progetto, che avrà questo aspetto:
 
-    > **Nota**: se viene visualizzato un errore *Autorizzazioni insufficienti**, usare il pulsante **Correggi** per risolverlo.
-
     ![Screenshot della pagina di panoramica del progetto Fonderia Azure AI.](./media/ai-foundry-project.png)
 
 ## Ottimizzare un modello
