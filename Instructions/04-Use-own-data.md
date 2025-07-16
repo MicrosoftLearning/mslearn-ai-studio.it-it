@@ -8,36 +8,31 @@ lab:
 
 Generazione ottimizzata per il recupero (RAG) è una tecnica usata per creare applicazioni che integrano dati da origini dati personalizzate in una richiesta di un modello di intelligenza artificiale generativa. RAG è un modello comunemente usato per lo sviluppo di app di IA generativa: applicazioni basate su chat che usano un modello linguistico per interpretare gli input e generare risposte appropriate.
 
-In questo esercizio si userà il portale Fonderia Azure AI e gli SDK di Fonderia Azure AI e Azure OpenAI per integrare dati personalizzati in un'app di IA generativa.
+In questo esercizio, verrà utilizzato il portale Fonderia Azure AI per integrare dati personalizzati in una soluzione di IA generativa.
 
 Questo esercizio richiede circa **45** minuti.
 
-> **Nota**: questo esercizio si basa su SDK non definitive, che possono essere soggette a modifiche. Se necessario, abbiamo usato versioni specifiche dei pacchetti; che potrebbero non riflettere le versioni disponibili più recenti. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
+> **Nota**: questo esercizio si basa sui servizi delle versioni non definitive, che possono essere soggette a modifiche.
 
-## Creare un progetto Fonderia Azure AI
+## Creare un hub e un progetto Fonderia Azure AI
 
-Per iniziare, creare un progetto Azure AI Foundry e le risorse del servizio che deve supportare usando i propri dati, inclusa una risorsa di Azure AI Search.
+Le funzionalità di Fonderia Azure AI che verranno usate in questo esercizio richiedono un progetto basato su una risorsa *hub* di Fonderia Azure AI.
 
-1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere i suggerimenti o i riquadri di avvio rapido aperti la prima volta che si accede e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente:
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** nel caso sia aperto):
 
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Nella home page, selezionare **+ Crea progetto**.
-1. Nella procedura guidata **Crea un progetto**, immettere un nome valido per il progetto e, se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
-1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Nome hub**: *un nome valido per l'hub*
+1. Nel browser, passare a `https://ai.azure.com/managementCenter/allResources` e selezionare **Crea**. Scegliere quindi l'opzione per creare una nuova **risorsa Hub IA**.
+1. Nella procedura guidata **Crea un progetto**, immettere un nome valido per il progetto e selezionare l'opzione per crearne uno nuovo. Usare quindi il collegamento **Rinomina hub** per specificare un nome valido per il nuovo hub, espandere **Opzioni avanzate** e specificare le impostazioni seguenti per il progetto:
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
-    - **Posizione**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4o** nella finestra Helper posizione e usare l'area consigliata\*
-    - **Connettere Servizi di Azure AI o Azure OpenAI**: *Creare una nuova risorsa di Servizi di AI*
-    - **Connettere Azure AI Search**: *creare una nuova risorsa di Azure AI Search con un nome univoco*
+    - **Area**: Est degli Stati Uniti 2 o Svezia centrale (*In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.*)
 
-    > \* Le risorse Azure OpenAI sono limitate da quote di modelli regionali. In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > **Nota**: se si usa una sottoscrizione di Azure in cui i criteri vengono usati per limitare i nomi di risorse consentiti, potrebbe essere necessario usare il collegamento nella parte inferiore della finestra di dialogo **Crea un nuovo progetto** per creare l'hub usando il portale di Azure.
 
-1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
-1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
+    > **Suggerimento**: se il pulsante **Crea** è ancora disabilitato, assicurarsi di rinominare l'hub in un valore alfanumerico univoco.
 
-    ![Screenshot dei dettagli di un progetto di Azure AI nel portale Fonderia di Azure AI.](./media/ai-foundry-project.png)
+1. Attendere che il progetto venga creato e quindi passare al progetto.
 
 ## Distribuire i modelli
 
@@ -84,7 +79,15 @@ Dopo aver aggiunto un'origine dati al progetto, è possibile usarla per creare u
         - **Origine dati**: dati nel portale di Fonderia Azure AI
             - *Selezionare l'origine dati delle **brochure***
     - **Configurazione dell'indice**:
-        - **Selezionare il servizio Azure AI Search**: *selezionare la connessione tra **AzureAISearch** e la risorsa di Azure AI Search in uso*
+        - **Selezionare il servizio Azure AI Search**: *creare una nuova risorsa di Azure AI Search con le impostazioni seguenti*:
+            - **Sottoscrizione**: *sottoscrizione di Azure*
+            - **Gruppo di risorse**: *lo stesso gruppo di risorse dell'Hub IA*
+            - **Nome del servizio**: *nome valido per la risorsa AI Search*
+            - **Località**: *la stessa posizione dell'Hub IA*
+            - **Piano tariffario**: Basic.
+            
+            Attendere che la risorsa AI Search venga creata. Tornare quindi a Fonderia Azure AI e completare la configurazione dell'indice selezionando **Connetti un'altra risorsa di Azure AI Search** e aggiungendo una connessione alla risorsa AI Search appena creata.
+ 
         - **Indice vettoriale**: `brochures-index`
         - **Macchina virtuale**: selezione automatica
     - **Ricerca impostazioni**:
@@ -117,20 +120,15 @@ Prima di usare l'indice in un flusso immediato basato su RAG, verificare che pos
 1. Dopo aver aggiunto l'indice e aver riavviato la sessione di chat, inviare di nuovo la richiesta `Where can I stay in New York?`
 1. Esaminare la risposta, che deve essere basata sui dati nell'indice.
 
-## Creare un'app client RAG con Fonderia di Azure AI e gli SDK OpenAI di Azure
+## Creare un'app client RAG
 
-Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia Azure AI e Azure OpenAI per implementare il pattern RAG in un'applicazione client. Varrà ora esaminato il codice per eseguire questa operazione in un semplice esempio.
+Ora che si dispone di un indice funzionante, è possibile usare l'SDK di Azure OpenAI per implementare il pattern RAG in un'applicazione client. Varrà ora esaminato il codice per eseguire questa operazione in un semplice esempio.
 
 > **Suggerimento**: è possibile scegliere di sviluppare la soluzione RAG usando Python o Microsoft C#. Seguire le istruzioni nella sezione appropriata per la lingua scelta.
 
 ### Preparare la configurazione dell'applicazione
 
-1. Nel Portale Fonderia Azure AI visualizzare la pagina **Panoramica** per il progetto.
-1. Nell'area **Dettagli di progetto** prendere nota della **stringa di connessione del progetto**. Questa stringa di connessione verrà usata per connettersi al progetto in un'applicazione client.
-1. Aprire una nuova scheda del browser (mantenendo aperto il Portale Fonderia Azure AI nella scheda esistente). In una nuova scheda del browser, passare al [portale di Azure](https://portal.azure.com) su `https://portal.azure.com`, accedendo con le credenziali di Azure se richiesto.
-
-    Chiudere eventuali notifiche di benvenuto per visualizzare la pagina iniziale del portale di Azure.
-
+1. Tornare alla scheda del browser contenente il portale di Azure (mantenendo aperto il portale Fonderia Azure AI nella scheda esistente).
 1. Usare il pulsante **[\>_]** a destra della barra di ricerca, nella parte superiore della pagina, per aprire una nuova sessione di Cloud Shell nel portale di Azure selezionando un ambiente ***PowerShell*** senza archiviazione nell'abbonamento.
 
     Cloud Shell fornisce un'interfaccia della riga di comando in un riquadro nella parte inferiore del portale di Azure. È possibile ridimensionare o ingrandire questo riquadro per ottimizzare l'esperienza d'uso.
@@ -166,22 +164,20 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
    cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
     ```
 
-1. Nel riquadro della riga di comando di Cloud Shell, immettere il comando seguente per installare le librerie che verranno utilizzate:
+1. Nel riquadro della riga di comando di Cloud Shell, immettere il comando seguente per installare la libreria dell'SDK di OpenAI:
 
     **Python**
 
     ```
    python -m venv labenv
    ./labenv/bin/Activate.ps1
-   pip install python-dotenv azure-ai-projects azure-identity openai
+   pip install -r requirements.txt openai
     ```
 
     **C#**
 
     ```
-   dotnet add package Azure.Identity
-   dotnet add package Azure.AI.Projects --prerelease
-   dotnet add package Azure.AI.OpenAI --prerelease
+   dotnet add package Azure.AI.OpenAI
     ```
     
 
@@ -202,10 +198,13 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
     Il file viene aperto in un editor di codice.
 
 1. Nel file del codice, sostituire i segnaposto seguenti: 
-    - **your_project_connection_string**: sostituire con la stringa di connessione del progetto (copiata dalla pagina **Panoramica** del progetto nel portale Fonderia Azure AI).
-    - **your_gpt_model_deployment**: sostituire con il nome assegnato alla distribuzione modello **gpt-4o**.
-    - **your_embedding_model_deployment**: sostituire con il nome assegnato alla distribuzione modello **text-embedding-ada-002**.
-    - **your_index**: sostituire con il nome dell'indice (che deve essere `brochures-index`)
+    - **your_openai_endpoint**: l'endpoint Open AI dalla pagina **Panoramica** del progetto nel portale Fonderia Azure AI (selezionare la scheda di funzionalità **Azure OpenAI**, non l'inferenza di Azure AI o la funzionalità di Servizi di Azure AI).
+    - **your_openai_api_key** La chiave API Open AI dalla pagina **Panoramica** del progetto nel portale Fonderia Azure AI (selezionare la scheda delle funzionalità **Azure OpenAI**, non l'inferenza di Azure AI o la funzionalità Servizi di Azure AI).
+    - **your_chat_model**: il nome assegnato alla distribuzione del modello **gpt-4o**, dalla pagina **Modelli ed endpoint** nel portale Fonderia Azure AI (il nome predefinito è `gpt-4o`).
+    - **your_embedding_model**: il nome assegnato alla distribuzione modello **text-embedding-ada-002**, dalla pagina **Modelli ed endpoint** nel portale Fonderia Azure AI (il nome predefinito è `text-embedding-ada-002`).
+    - **your_search_endpoint**: URL della risorsa Azure AI Search. Questo è disponibile nel **Centro di gestione** nel portale Fonderia Azure AI.
+    - **your_search_api_key**: chiave API per la risorsa Azure AI Search. Questo è disponibile nel **Centro di gestione** nel portale Fonderia Azure AI.
+    - **your_index**: sostituire con il nome dell'indice dalla pagina **Dati e indici** per il progetto nel portale Fonderia Azure AI (deve essere `brochures-index`).
 1. Dopo aver sostituito i segnaposto con l'editor di codice, usare il comando **CTRL+S** o **Fare clic con il pulsante destro del mouse > Salva** per salvare le modifiche e quindi usare il comando **CTRL+Q** o **Fare clic con il pulsante destro del mouse > Esci** per chiudere l'editor di codice mantenendo aperta la riga di comando di Cloud Shell.
 
 ### Esplorare il codice per implementare il criterio RAG
@@ -225,10 +224,8 @@ Ora che si dispone di un indice funzionante, è possibile usare gli SDK Fonderia
     ```
 
 1. Esaminare il codice nel file, notando che:
-    - usa l'SDK Fonderia di Azure AI per connettersi al progetto (usando il progetto stringa di connessione)
-    - Crea un client Azure OpenAI autenticato dalla connessione al progetto.
-    - recupera la connessione predefinita di Azure AI Search dal progetto in modo da poter determinare l'endpoint e la chiave per il servizio di Azure AI Search.
-    - Crea un messaggio di sistema appropriato.
+    - Crea un client Azure OpenAI usando l'endpoint, la chiave e il modello di chat.
+    - Crea un messaggio di sistema appropriato per una soluzione di chat correlata ai viaggi.
     - Invia una richiesta al client Azure OpenAI (contenente le istruzioni di sistema e il messaggio dell'utente basato sull'input dell'utente), aggiungendo:
         - Dettagli della connessione per l'indice Azure AI Search su cui eseguire query.
         - Dettagli del modello di incorporamento da usare per vettorizzare la query\*.

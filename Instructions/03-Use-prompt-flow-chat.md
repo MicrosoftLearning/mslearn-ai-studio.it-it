@@ -4,7 +4,7 @@ lab:
   description: Informazioni su come usare i prompt flow per gestire i dialoghi di conversazione e assicurarsi che i prompt vengano sviluppati e orchestrati per ottenere risultati ottimali.
 ---
 
-# Usare un prompt flow per gestire la conversazione in un'app di chat
+## Usare un prompt flow per gestire la conversazione in un'app di chat
 
 In questo esercizio, verrà usato il prompt flow del Portale Fonderia Azure AI per creare un'app di chat personalizzata che impiega un prompt dell'utente e la cronologia della chat come input e usa un modello GPT di Azure OpenAI per generare un output.
 
@@ -12,44 +12,32 @@ Questo esercizio richiederà circa **30** minuti.
 
 > **Nota**: alcune delle tecnologie usate in questo esercizio sono in anteprima o in fase di sviluppo. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
 
-## Creare un progetto Fonderia Azure AI
+## Creare un hub e un progetto Fonderia Azure AI
 
-Per iniziare, creare un progetto Fonderia Azure AI.
+Le funzionalità di Fonderia Azure AI che verranno usate in questo esercizio richiedono un progetto basato su una risorsa *hub* di Fonderia Azure AI.
 
-1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere i suggerimenti o i riquadri di avvio rapido aperti la prima volta che si accede e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente:
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** nel caso sia aperto):
 
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Nella home page, selezionare **+ Crea progetto**.
-1. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto. Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
-1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Nome hub**: *un nome valido per l'hub*
+1. Nel browser, passare a `https://ai.azure.com/managementCenter/allResources` e selezionare **Crea**. Scegliere quindi l'opzione per creare una nuova **risorsa Hub IA**.
+1. Nella procedura guidata **Crea un progetto**, immettere un nome valido per il progetto e usare il collegamento **Rinomina hub** per specificare un nome valido per il nuovo hub. Espandere quindi **Opzioni avanzate** per specificare le impostazioni seguenti per il progetto:
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
-    - **Posizione**: selezionare **Informazioni su come scegliere** e quindi selezionare **gpt-4o** nella finestra Helper posizione e usare l'area consigliata\*
-    - **Connettere Servizi di Azure AI o Azure OpenAI**: *Creare una nuova risorsa di Servizi di AI*
-    - **Connettere Azure AI Search**: ignorare la connessione
+    - **Area**: Est degli Stati Uniti 2 o Svezia centrale (*In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.*)
 
-    > \* Le risorse Azure OpenAI sono limitate da quote di modelli regionali. In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > **Nota**: se si usa una sottoscrizione di Azure in cui i criteri vengono usati per limitare i nomi di risorse consentiti, potrebbe essere necessario usare il collegamento nella parte inferiore della finestra di dialogo **Crea un nuovo progetto** per creare l'hub usando il portale di Azure.
 
-1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
-1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
+    > **Suggerimento**: se il pulsante **Crea** è ancora disabilitato, assicurarsi di rinominare l'hub in un valore alfanumerico univoco.
 
-    ![Screenshot dei dettagli di un progetto di Azure AI nel portale Fonderia di Azure AI.](./media/ai-foundry-project.png)
+1. Attendere la creazione del progetto.
 
 ## Configurare l'autorizzazione delle risorse
 
-Gli strumenti di prompt flow in Fonderia Azure AI creano asset basati su file che definiscono il prompt flow in una cartella di archiviazione BLOB. Prima di esplorare il prompt flow, verificare che la risorsa Servizi di Azure AI abbia l'accesso necessario all'archivio BLOB in modo che possa leggerli.
+Gli strumenti di prompt flow in Fonderia Azure AI creano asset basati su file che definiscono il prompt flow in una cartella di archiviazione BLOB. Prima di esplorare il prompt flow, verificare che la risorsa Fonderia Azure AI abbia l'accesso necessario all'archivio BLOB in modo che possa leggerli.
 
-1. Nel riquadro di spostamento del portale Fonderia Azure AI, selezionare il **Centro di gestione** e visualizzare la pagina dei dettagli per il progetto, simile a questa immagine:
-
-    ![Screenshot del centro di gestione.](./media/ai-foundry-manage-project.png)
-
-1. In **Gruppo di risorse**, selezionare il gruppo di risorse per aprirlo nella portale di Azure in una nuova scheda del browser; accedendo con le credenziali di Azure, se richiesto, e chiudendo eventuali notifiche di benvenuto per visualizzare la pagina del gruppo di risorse.
-
-    Il gruppo di risorse contiene tutte le risorse di Azure per supportare l'hub e il progetto.
-
-1. Selezionare la risorsa **Servizi di Azure AI** per l'hub per aprirla. Espandere quindi la sezione **In Gestione risorse** e selezionare la pagina **Identità**:
+1. In una nuova scheda del browser, aprire il [portale di Azure](https://portal.azure.com) in `https://portal.azure.com`, accedendo con le credenziali di Azure se richiesto e visualizzare il gruppo di risorse contenente le risorse hub di Azure AI.
+1. Selezionare la risorsa **Fonderia Azure AI** per l'hub per aprirla. Espandere quindi la sezione **Gestione risorse** e selezionare la pagina **Identità**:
 
     ![Screenshot della risorsa dei Servizi di Azure AI nel portale di Azure.](./media/ai-services-identity.png)
 
@@ -58,12 +46,11 @@ Gli strumenti di prompt flow in Fonderia Azure AI creano asset basati su file ch
 
     ![Screenshot della pagina di controllo di accesso dell'account di archiviazione nel portale di Azure.](./media/storage-access-control.png)
 
-1. Aggiungere un'assegnazione di ruolo al`Storage blob data reader` ruolo per l'identità gestita usata dalla risorsa Servizi di Azure AI:
+1. Aggiungere un'assegnazione di ruolo al`Storage blob data reader` ruolo per l'identità gestita usata dalla risorsa Fonderia Azure AI:
 
     ![Screenshot della pagina di controllo di accesso dell'account di archiviazione nel portale di Azure.](./media/assign-role-access.png)
 
-1. Dopo aver esaminato e assegnato l'accesso al ruolo per consentire all'identità gestita di Servizi di Azure AI di leggere i BLOB nell'account di archiviazione, chiudere la scheda del portale di Azure e tornare al portale Fonderia di Azure AI.
-1. Nel riquadro di spostamento del portale Fonderia di Azure AI, selezionare **Vai al progetto** per tornare alla home page del progetto.
+1. Dopo aver esaminato e assegnato l'accesso al ruolo per consentire all'identità gestita di Fonderia Azure AI di leggere i BLOB nell'account di archiviazione, chiudere la scheda del portale di Azure e tornare al portale Fonderia di Azure AI.
 
 ## Implementare un modello di IA generativa
 
@@ -93,6 +80,8 @@ Un prompt flow consente di orchestrare le richieste e altre attività per defini
 1. Creare un nuovo flusso basato sul modello **flusso di chat**, specificando `Travel-Chat` come nome della cartella.
 
     Viene creato un flusso di chat semplice.
+
+    > **Suggerimento**: se si verifica un errore di autorizzazioni. Attendere alcuni minuti e riprovare, specificando un nome di flusso diverso, se necessario.
 
 1. Per poter testare il flusso, è necessario calcolare e può essere necessario un po' di tempo per iniziare; selezionare quindi **Avvia sessione di calcolo** per iniziare durante l'esplorazione e la modifica del flusso predefinito.
 

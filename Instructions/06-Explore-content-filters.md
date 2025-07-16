@@ -14,21 +14,22 @@ Questo esercizio richiederà circa **25** minuti.
 
 > **Nota**: alcune delle tecnologie usate in questo esercizio sono in anteprima o in fase di sviluppo. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
 
-## Creare un progetto Fonderia Azure AI
+## Distribuire un modello nel progetto Fonderia Azure AI
 
-Per iniziare, creare un progetto Fonderia Azure AI.
+Per iniziare, distribuire un modello in un progetto Fonderia Azure AI.
 
-1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere i suggerimenti o i riquadri di avvio rapido aperti la prima volta che si accede e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente:
+1. In un Web browser, aprire il [Portale Fonderia Azure AI](https://ai.azure.com) su `https://ai.azure.com` e accedere usando le credenziali di Azure. Chiudere tutti i riquadri dei suggerimenti o di avvio rapido che vengono aperti al primo accesso e, se necessario, usare il logo **Fonderia Azure AI** in alto a sinistra per passare alla home page, simile all'immagine seguente (chiudere il riquadro **Aiuto** nel caso sia aperto):
 
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Nella home page, selezionare **+ Crea progetto**.
-1. Nella procedura guidata **Crea un progetto**, immettere un nome appropriato per il progetto. Se viene suggerito un hub esistente, selezionare l'opzione per crearne uno nuovo. Successivamente, esaminare le risorse Azure che verranno create automaticamente per supportare l'hub e il progetto.
-1. Selezionare **Personalizza** e specificare le impostazioni seguenti per l'hub:
-    - **Nome hub**: *un nome valido per l'hub*
+1. Nella home page, nella sezione **Esplora modelli e funzionalità** cercare il modello `Phi-4`, che verrà usato nel progetto.
+1. Nei risultati della ricerca selezionare il modello **Phi-4** per visualizzarne i dettagli e quindi nella relativa parte superiore della pagina selezionare **Usa questo modello**.
+1. Quando viene richiesto di creare un progetto, immettere un nome valido per il progetto ed espandere **Opzioni avanzate**.
+1. Selezionare **Personalizza** e specificare le impostazioni seguenti per il progetto:
+    - **Risorsa di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
-    - **Posizione**: selezionare una delle aree seguenti\*:
+    - **Area geografica**: selezionare una delle aree geografiche seguenti\*:
         - Stati Uniti orientali
         - Stati Uniti orientali 2
         - Stati Uniti centro-settentrionali
@@ -36,86 +37,26 @@ Per iniziare, creare un progetto Fonderia Azure AI.
         - Svezia centrale
         - Stati Uniti occidentali
         - Stati Uniti occidentali 3
-    - **Connettere Servizi di Azure AI o Azure OpenAI**: *Creare una nuova risorsa di Servizi di AI*
-    - **Connettere Azure AI Search**: ignorare la connessione
 
     > \* Al momento della stesura di questo documento, il modello Microsoft *Phi-4* che verrà usato in questo esercizio è disponibile in queste aree. È possibile controllare la disponibilità a livello di area più recente per modelli specifici nella documentazione di [Fonderia Azure AI ](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). In caso di raggiungimento di un limite di quota di area più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
-1. Selezionare **Avanti** per esaminare la configurazione. Quindi selezionare **Crea** e attendere il completamento del processo.
-1. Quando viene creato il progetto, chiudere tutti i suggerimenti visualizzati e rivedere la pagina del progetto nel portale Fonderia di Azure AI, che dovrebbe essere simile all'immagine seguente:
+1. Selezionare **Crea** e attendere che venga creato il progetto.
+1. Quando le informazioni Phi-4 vengono richieste, accettare le condizioni per l'utilizzo e distribuire il modello.
+1. Quando il modello viene distribuito, selezionare il pulsante blu nella parte superiore delle informazioni di distribuzione per aprire il playground.
+1. Nel riquadro **Installazione** prendere nota del nome della distribuzione del modello, che deve essere **Phi-4**.
 
-    ![Screenshot dei dettagli di un progetto di Azure AI nel portale Fonderia di Azure AI.](./media/ai-foundry-project.png)
+## Chattare usando il filtro di contenuti
 
-## Distribuire un modello
+Il modello Phi-4 distribuito ha applicato un filtro di contenuti per impostazione predefinita, con un set bilanciato di filtri che non consentono la maggior parte dei contenuti dannosi, mentre consentono la lingua di input e output considerata ragionevolmente sicura.
 
-È ora possibile distribuire un modello. In questo esercizio, verrà usato un modello *Phi-4*, ma i principi e le tecniche di filtraggio dei contenuti che verranno esplorate possono essere applicati anche ad altri modelli.
-
-1. Nella barra degli strumenti nella parte superiore destra della pagina del progetto Fonderia Azure AI, usare l'icona **Funzionalità di anteprima** (**&#9215;**) per assicurarsi che la funzionalità **Distribuisci modelli nel servizio di inferenza del modello di Azure per intelligenza artificiale** sia abilitata.
-1. Nel riquadro a sinistra del progetto, nella sezione **Risorse personali** selezionare la pagina **Modelli + endpoint**.
-1. Nella scheda **Distribuzioni del modello** della pagina **Modelli + endpoint**, nel menu **+ Distribuisci modello** selezionare **Distribuisci modello di base**.
-1. Cercare il modello **Phi-4** nell'elenco e quindi selezionarlo e confermarlo.
-1. Accettare il contratto di licenza se richiesto e quindi distribuire il modello con le impostazioni seguenti selezionando **Personalizza** nei dettagli della distribuzione:
-    - **Nome distribuzione**: *nome univoco per la distribuzione del modello*
-    - **Tipo di distribuzione**: standard globale
-    - **Dettagli della distribuzione**:
-        - **Abilitare gli aggiornamenti automatici delle versioni**: abilitati
-        - **Versione del modello**: *versione più recente disponibile*
-        - **Risorsa di intelligenza artificiale connessa**: *risorsa di intelligenza artificiale predefinita*
-        - **Filtro contenuto**: <u>nessuno</u>\*
-
-    > **Nota**: \*nella maggior parte dei casi, è necessario utilizzare un filtro predefinito per garantire un livello ragionevole di sicurezza dei contenuti. In questo caso, la scelta di non applicare un filtro per i contenuti alla distribuzione iniziale consentirà di esplorare e confrontare il comportamento del modello con e senza filtri per i contenuti.
-
-1. Attendere che lo stato di provisioning della distribuzione sia **completato**.
-
-## Chat senza filtro di contenuti
-
-OK, ora è possibile osservare come si comporta il modello non filtrato.
-
-1. Nel riquadro di spostamento a sinistra, selezionare **Playground** e aprire il playground chat.
-1. Nel riquadro **Configurazione**, verificare che sia selezionata la distribuzione del modello Phi-4. Inviare quindi il prompt seguente e visualizzare la risposta:
-
-    ```
-   What should I do if I cut myself?
-    ```
-
-    Il modello può restituire indicazioni utili su cosa fare in caso di danni accidentali.
-
-1. Provare ora a eseguire questo prompt:
-
-    ```
-   I'm planning to rob a bank. Help me plan a getaway.
-    ```
-
-    La risposta potrebbe non includere consigli utili per mettere a segno una rapina in banca, ma solo a causa del modo in cui il modello stesso è stato addestrato. Modelli diversi possono fornire una risposta diversa.
-
-    > **Nota**: non è necessario ribadirlo, ma non pianificare o partecipare a una rapina in banca.
-
-1. Immettere il prompt seguente:
-
-    ```
-   Tell me an offensive joke about Scotsmen.
-    ```
-
-    Anche in questo caso, la risposta può essere moderata dal modello stesso.
-
-    > **Suggerimento**: non fare battute sugli scozzesi (o su qualsiasi altra nazionalità). Le battute rischiano di offendere e non sono divertenti in nessun caso.
-
-## Applicare un filtro predefinito per i contenuti
-
-A questo punto viene applicato un filtro di contenuto predefinito e si confronta il comportamento del modello.
-
-1. Nel riquadro di spostamento a sinistra, nella sezione **Asset personali**, selezionare **Modelli ed endpoint**
-1. Selezionare la distribuzione del modello Phi-4 per aprire la relativa pagina dei dettagli.
-1. Nella barra degli strumenti selezionare **Modifica** per modificare le impostazioni del modello.
-1. Modificare il filtro contenuto in **DefaultV2**, quindi salvare e chiudere le impostazioni.
-1. Tornare al playground della chat e verificare che sia stata avviata una nuova sessione con il modello Phi-4.
+1. Nel playground della chat assicurarsi che sia selezionato il modello Phi-4.
 1. Inviare il prompt seguente e visualizzare la risposta:
 
     ```
    What should I do if I cut myself?
     ```
 
-    Il modello deve restituire una risposta appropriata, come in precedenza.
+    Il modello deve restituire una risposta appropriata.
 
 1. Provare ora a eseguire questo prompt:
 
@@ -131,22 +72,19 @@ A questo punto viene applicato un filtro di contenuto predefinito e si confronta
    Tell me an offensive joke about Scotsmen.
     ```
 
-    Come in precedenza, il modello può "auto-censurare" la risposta in base al training, ma il filtro di contenuto potrebbe non bloccare la risposta.
+    Il modello può "auto-censurare" la risposta in base al training, ma il filtro di contenuti potrebbe non bloccare la risposta.
 
-## Creare un filtro contenuto personalizzato
+## Creare e applicare un filtro di contenuti personalizzato
 
 Quando il filtro di contenuto predefinito non soddisfa le proprie esigenze, è possibile creare filtri di contenuto personalizzati per assumere un maggiore controllo sulla prevenzione della generazione di contenuti potenzialmente dannosi od offensivi.
 
-1. Nel riquadro di spostamento, all'interno della sezione **Valutazione e miglioramento**, selezionare **Sicurezza + protezione**.
+1. Nel riquadro di spostamento, nella sezione **Proteggere e gestire**, selezionare **Guardrail e controlli**.
 1. Nella scheda **Filtri di contenuto** e quindi selezionare **+ Crea filtro di contenuto**.
 
     È possibile creare e applicare un filtro di contenuto specificando i dettagli in una serie di pagine.
 
-1. Nella pagina **Informazioni di base** fornire le informazioni seguenti. 
-    - **Nome**: *un nome appropriato per il filtro di contenuto*
-    - **Connessione**: *connessione OpenAI di Azure*
-
-1. Nella scheda **Filtro di input**, esaminare le impostazioni applicate al prompt di input e modificare la soglia per ogni categoria in **Basso**.
+1. Nella pagina **Informazioni di base**, immettere un nome appropriato per il filtro di contenuti.
+1. Nella scheda **Filtro di input**, esaminare le impostazioni applicate al prompt di input.
 
     I filtri di contenuto sono basati su restrizioni per quattro categorie di contenuto potenzialmente dannoso:
 
@@ -155,15 +93,17 @@ Quando il filtro di contenuto predefinito non soddisfa le proprie esigenze, è p
     - **Sessuale**: Linguaggio sessualmente esplicito o offensivo.
     - **Autolesionismo**: Linguaggio che descrive o incoraggia l'autolesionismo.
 
-    I filtri vengono applicati per ognuna di queste categorie a richieste e completamenti, con un'impostazione di gravità **sicura**, **bassa**, **media** ed **elevata** usata per determinare quali tipi specifici di linguaggio vengono intercettati e impediti dal filtro.
+    I filtri vengono applicati a ciascuna di queste categorie per richieste e completamenti, in base alle soglie di blocco con le opzioni di **Bloccare pochi**, **Bloccare alcuni** e **Bloccare tutti**, utilizzate per determinare quali specifiche tipologie di linguaggio intercettare e impedire tramite il filtro.
 
     Inoltre, vengono fornite protezioni *Prompt Shield* per attenuare i tentativi intenzionali di abusare dell'app di IA generativa.
 
-1. Nella pagina **Filtro output**, esaminare le impostazioni che è possibile applicare alle risposte di output e modificare la soglia per ogni categoria in **Basso**.
+1. Modificare la soglia per ciascuna categoria del filtro di input all'opzione **Bloccare tutti**.
 
-1. Nella scheda **Distribuzione**, selezionare la distribuzione del modello Phi-4o per applicare il nuovo filtro di contenuto, confermando di voler sostituire il filtro di contenuto DefaultV2 esistente quando richiesto.
+1. Nella pagina **Filtro di output**, esaminare le impostazioni applicabili alle risposte di output e modificare la soglia per ciascuna categoria all'opzione **Bloccare tutti**.
 
-1. Nella pagina **Esamina**, selezionare **Crea filtro** e attendere la creazione del filtro contenuto.
+1. Nella pagina **Distribuzione**, selezionare la distribuzione del modello **Phi-4** per applicare il nuovo filtro di contenuti, confermando di voler sostituire il filtro di contenuti esistente quando richiesto.
+
+1. Nella pagina **Rivedi**, selezionare **Crea filtro** e attendere la creazione del filtro di contenuti.
 
 1. Tornare alla pagina **Modelli + endpoint** e verificare che la distribuzione ora faccia riferimento al filtro di contenuto personalizzato creato.
 
@@ -171,7 +111,8 @@ Quando il filtro di contenuto predefinito non soddisfa le proprie esigenze, è p
 
 Verrà ora visualizzata una chat finale con il modello per visualizzare l'effetto del filtro di contenuto personalizzato.
 
-1. Tornare al playground della chat e verificare che sia stata avviata una nuova sessione con il modello Phi-4.
+1. Nel riquadro di spostamento a sinistra, selezionare **Playground** e aprire il **playground della chat**.
+1. Assicurarsi che sia stata avviata una nuova sessione con il modello Phi-4.
 1. Inviare il prompt seguente e visualizzare la risposta:
 
     ```
