@@ -36,8 +36,6 @@ Per iniziare, distribuire un modello in un progetto Fonderia Azure AI.
 1. Nel riquadro **Installazione** prendere nota del nome della distribuzione modello, che deve essere **gpt-4o**. È possibile confermarlo visualizzando la distribuzione nella pagina **Modelli ed endpoint** (è sufficiente aprire tale pagina nel riquadro di spostamento a sinistra).
 1. Nel riquadro di spostamento a sinistra, selezionare **Panoramica** per visualizzare la pagina principale del progetto, che avrà questo aspetto:
 
-    > **Nota**: se viene visualizzato un errore *Autorizzazioni insufficienti**, usare il pulsante **Correggi** per risolverlo.
-
     ![Screenshot della pagina di panoramica del progetto Fonderia Azure AI.](./media/ai-foundry-project.png)
 
 ## Creare un'applicazione client per chattare con il modello
@@ -152,8 +150,9 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
     ```python
    # Add references
    from dotenv import load_dotenv
+   from urllib.parse import urlparse
    from azure.identity import DefaultAzureCredential
-   from azure.ai.projects import AIProjectClient
+   from azure.ai.inference import ChatCompletionsClient
    from azure.ai.inference.models import SystemMessage, UserMessage, AssistantMessage
     ```
 
@@ -167,48 +166,36 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
     ```
 
 1. Nella funzione **principale**, sotto il commento **Ottieni impostazioni di configurazione**, notare che il codice carica i valori della stringa di connessione del progetto e del nome della distribuzione modello definiti nel file di configurazione.
-1. Trovare il commento **Inizializza il client del progetto** e aggiungere il codice seguente per connettersi al progetto Fonderia Azure AI usando le credenziali di Azure con cui si è attualmente eseguito l'accesso:
+1. Trovare il commento **Ottieni un client di chat** e aggiungere il codice seguente per creare un oggetto client per la chat con un modello:
 
     > **Suggerimento**: prestare attenzione a mantenere il livello di rientro corretto per il codice.
 
     **Python**
 
     ```python
-   # Initialize the project client
-   projectClient = AIProjectClient(            
-            credential=DefaultAzureCredential(
-                exclude_environment_credential=True,
-                exclude_managed_identity_credential=True
-            ),
-            endpoint=project_connection,
-        )
-    ```
-
-    **C#**
-
-    ```csharp
-   // Initialize the project client
-   DefaultAzureCredentialOptions options = new()
-       { ExcludeEnvironmentCredential = true,
-        ExcludeManagedIdentityCredential = true };
-   var projectClient = new AIProjectClient(
-        new Uri(project_connection),
-        new DefaultAzureCredential(options));
-    ```
-
-1. Trovare il commento **Ottieni un client di chat** e aggiungere il codice seguente per creare un oggetto client per la chat con un modello:
-
-    **Python**
-
-    ```python
    # Get a chat client
-   chat = projectClient.inference.get_chat_completions_client()
+   inference_endpoint = f"https://{urlparse(project_endpoint).netloc}/models"
+
+   credential = DefaultAzureCredential(exclude_environment_credential=True,
+                                        exclude_managed_identity_credential=True,
+                                        exclude_interactive_browser_credential=False)
+
+   chat = ChatCompletionsClient(
+            endpoint=inference_endpoint,
+            credential=credential,
+            credential_scopes=["https://ai.azure.com/.default"])
     ```
 
     **C#**
 
     ```csharp
    // Get a chat client
+   DefaultAzureCredentialOptions options = new()More actions
+           { ExcludeEnvironmentCredential = true,
+            ExcludeManagedIdentityCredential = true };
+   var projectClient = new AIProjectClient(
+            new Uri(project_connection),
+            new DefaultAzureCredential(options));
    ChatCompletionsClient chat = projectClient.GetChatCompletionsClient();
     ```
 
@@ -294,6 +281,8 @@ Ora che è stato distribuito un modello, è possibile usare SDK Fonderia Azure A
     ```
    dotnet run
     ```
+
+    > **Suggerimento**: Se si verifica un errore di compilazione perché .NET versione 9.0 non è installato, usare il comando `dotnet --version` per determinare la versione di .NET installata nell'ambiente e quindi modificare il file **chat_app.csproj** nella cartella del codice per aggiornare di conseguenza l'impostazione **TargetFramework**.
 
 1. Quando richiesto, immettere una domanda, ad esempio `What is the fastest animal on Earth?` ed esaminare la risposta del modello di IA generativa.
 1. Provare alcune domande di completamento, ad esempio `Where can I see one?` o `Are they endangered?`. La conversazione dovrebbe continuare, usando la cronologia delle chat come contesto per ogni iterazione.

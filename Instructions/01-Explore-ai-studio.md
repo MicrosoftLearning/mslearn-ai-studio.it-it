@@ -66,9 +66,9 @@ Un *progetto* Azure AI offre un'area di lavoro collaborativa per lo sviluppo del
 
 1. Chiudere la scheda portale di Azure e tornare al portale Fonderia Azure AI.
 
-## Rivedere i collegamenti del progetto.
+## Esaminare gli endpoint del progetto
 
-Il progetto Fonderia Azure AI e la relativa risorsa a cui appartiene includono connessioni alle risorse che è possibile usare nelle applicazioni di intelligenza artificiale.
+Il progetto Fonderia Azure AI include diversi *endpoint* che le applicazioni client possono usare per connettersi al progetto e ai modelli e ai servizi di intelligenza artificiale inclusi.
 
 1. Nel riquadro di spostamento della pagina Centro di gestione, sotto il progetto, selezionare **Vai alla risorsa**.
 1. Nella pagina **Panoramica** del progetto, visualizzare la sezione **Endpoint e chiavi**, che contiene endpoint e chiavi di autorizzazione da poter usare nel codice dell'applicazione per accedere a:

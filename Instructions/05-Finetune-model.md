@@ -38,8 +38,11 @@ Per iniziare, distribuire un modello in un progetto Fonderia Azure AI.
 
     > \* Al momento della stesura di questo documento, queste aree geografiche supportano l'ottimizzazione per i modelli gpt-4o.
 
-1. Selezionare **Crea** e attendere la creazione del progetto, inclusa la distribuzione del modello gpt-4 selezionato.
-1. Quando il progetto viene creato, il playground della chat verrà aperto automaticamente.
+1. Selezionare **Crea** e attendere che venga creato il progetto. Se richiesto, distribuire il modello gpt-4o usando il tipo di distribuzione **Standard globale** e personalizzare i dettagli della distribuzione per impostare un **Limite di velocità di token al minuto** di 50.000 o il valore massimo disponibile se inferiore a 50.000.
+
+    > **Nota**: la riduzione del TPM consente di evitare l'eccessivo utilizzo della quota disponibile nella sottoscrizione in uso. 50.000 TPM dovrebbero essere sufficienti per i dati usati in questo esercizio. Se la quota disponibile è inferiore a questa, sarà possibile completare l'esercizio, ma potrebbero verificarsi errori se viene superato il limite di velocità.
+
+1. Quando viene creato il progetto, il playground della chat verrà aperto automaticamente in modo da poter testare il modello:
 1. Nel riquadro **Installazione** prendere nota del nome della distribuzione modello, che deve essere **gpt-4o**. È possibile confermarlo visualizzando la distribuzione nella pagina **Modelli ed endpoint** (è sufficiente aprire tale pagina nel riquadro di spostamento a sinistra).
 1. Nel riquadro di spostamento a sinistra, selezionare **Panoramica** per visualizzare la pagina principale del progetto, che avrà questo aspetto:
 

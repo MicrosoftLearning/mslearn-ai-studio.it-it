@@ -34,7 +34,7 @@ Per iniziare, accedere al portale Fonderia Azure AI ed esplorare alcuni dei mode
     ![Screenshot della pagina degli indicatori di modello di gpt-4o.](./media/gpt4-benchmarks.png)
 
 1. Usare la freccia indietro (**&larr;**) accanto al titolo pagina **gpt-4o** per tornare al catalogo dei modelli.
-1. Cercare `Phi-3.5-mini-instruct` e visualizzare i dettagli e i benchmark per il modello **Phi-3.5-mini-instruct**.
+1. Cercare `Phi-4-mini-instruct` e visualizzare i dettagli e i benchmark per il modello **Phi-4-mini-instruct**.
 
 ## Confrontare i modelli
 
@@ -47,16 +47,14 @@ Sono stati esaminati due modelli diversi, entrambi utilizzabili per implementare
 
 1. Nel riquadro **Modelli da confrontare**, notare che è possibile selezionare le attività più diffuse, ad esempio la *risposta alla domanda*, per selezionare automaticamente i modelli di uso comune per attività specifiche.
 1. Usare l'icona **Cancella tutti i modelli** (&#128465;) per rimuovere tutti i modelli pre-selezionati.
-1. Usare il pulsante **+ Modello da confrontare** per aggiungere il modello **GPT-4o** all'elenco. Usare quindi lo stesso pulsante per aggiungere il modello **Phi-3.5-mini-instruct** all'elenco.
+1. Usare il pulsante **+ Modello da confrontare** per aggiungere il modello **GPT-4o** all'elenco. Usare quindi lo stesso pulsante per aggiungere il modello **Phi-4-mini-instruct** all'elenco.
 1. Esaminare il grafico, che confronta i modelli in base all'**indice di qualità** (un punteggio standardizzato che indica la qualità del modello) e al **costo**. È possibile visualizzare i valori specifici per un modello tenendo il mouse sul punto che lo rappresenta nel grafico.
 
-    ![Screenshot del grafico di confronto tra modelli per GPT-4o e Phi-3.5-mini-instruct.](./media/comparison-chart.png)
+    ![Screenshot del grafico di confronto tra modelli per gpt-4o e Phi-4-mini-instruct.](./media/comparison-chart.png)
 
 1. Nel menu a discesa **Asse X**, in **Qualità**, selezionare le metriche seguenti e osservare ogni grafico risultante prima di passare al successivo:
     - Precisione
-    - Coerenza
-    - Scorrevolezza
-    - Pertinenza
+    - Indice di qualità
 
     In base ai benchmark, il modello gpt-4o sembra offrire le migliori prestazioni complessive, ma a un costo più elevato.
 
@@ -103,27 +101,25 @@ Ora che è disponibile una distribuzione del modello, è possibile usare il play
 
 ## Distribuire un altro modello
 
-Dopo aver creato il progetto, il modello **gpt-4o** selezionato è stato distribuito automaticamente. Distribuiamo ora anche il modello ***Phi-3.5-mini-instruct** considerato.
+Dopo aver creato il progetto, il modello **gpt-4o** selezionato è stato distribuito automaticamente. Verrà ora distribuito il modello ***Phi-4-mini-instruct** incluso nella considerazione.
 
 1. Nella barra di spostamento a sinistra, nella sezione **Risorse personali**, selezionare **Modelli + endpoint**.
-1. Nell'elenco a discesa **+ Distribuisci modello** della scheda **Distribuzioni modelli**, selezionare **Distribuisci modello di base**. Quindi cercare `Phi-3.5-mini-instruct` e confermare la selezione.
+1. Nell'elenco a discesa **+ Distribuisci modello** della scheda **Distribuzioni modelli**, selezionare **Distribuisci modello di base**. Quindi cercare `Phi-4-mini-instruct` e confermare la selezione.
 1. Accettare la licenza del modello.
-1. Distribuire un modello **Phi-3.5-mini-instruct** con le impostazioni seguenti:
+1. Distribuire un modello **Phi-4-mini-instruct** con le impostazioni seguenti:
     - **Nome distribuzione**: *nome univoco per la distribuzione del modello*
     - **Tipo di distribuzione**: standard globale
     - **Dettagli della distribuzione**: *usare le impostazioni predefinite*
 
 1. Attendere il completamento della distribuzione.
 
-## Chattare con il modello *Phi-3.5*
+## Chattare con il modello *Phi-4*
 
 A questo punto è possibile chattare con il nuovo modello nel playground.
 
 1. Nella barra di spostamento selezionare **Playground**. Quindi selezionare il **playground chat**.
-1. Nel playground della chat, nel riquadro **Installazione** assicurarsi che il modello **Phi-3.5-mini-instruct** sia selezionato e nel campo **Assegna istruzioni e contesto**, impostare il prompt di sistema su `You are an AI assistant that helps solve problems.` (lo stesso prompt di sistema usato per testare il modello gpt-4o).
-1. Selezionare **Applica modifiche** per aggiornare il prompt di sistema.
-1. Assicurarsi che venga avviata una nuova sessione di chat prima di ripetere le stesse richieste usate in precedenza per testare il modello GPT-4.
-1. Nella finestra della chat, immettere la query seguente
+1. Nel riquadro **Installazione** nel playground della chat assicurarsi che il modello **Phi-4-mini-instruct** sia selezionato e nella casella di chat fornire la prima riga come `System message: You are an AI assistant that helps solve problems.`. Si tratta della stessa richiesta di sistema usata per testare il modello gpt-4o, ma poiché non è presente alcuna configurazione dei messaggi di sistema, viene fornita nella prima chat come contesto.
+1. In una nuova riga nella finestra chat (sotto il messaggio di sistema) immettere la query seguente
 
     ```
    I have a fox, a chicken, and a bag of grain that I need to take over a river in a boat. I can only take one thing at a time. If I leave the chicken and the grain unattended, the chicken will eat the grain. If I leave the fox and the chicken unattended, the fox will eat the chicken. How can I get all three things across the river without anything being eaten?
