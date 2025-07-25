@@ -22,7 +22,7 @@ Le funzionalità di Fonderia Azure AI che verranno usate in questo esercizio ric
 
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Nel browser, passare a `https://ai.azure.com/managementCenter/allResources` e selezionare **Crea**. Scegliere quindi l'opzione per creare una nuova **risorsa Hub IA**.
+1. Nel browser passare a `https://ai.azure.com/managementCenter/allResources` e selezionare **Crea nuovo**. Scegliere quindi l'opzione per creare una nuova **risorsa Hub IA**.
 1. Nella procedura guidata **Crea un progetto**, immettere un nome valido per il progetto e selezionare l'opzione per crearne uno nuovo. Usare quindi il collegamento **Rinomina hub** per specificare un nome valido per il nuovo hub, espandere **Opzioni avanzate** e specificare le impostazioni seguenti per il progetto:
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
@@ -198,8 +198,8 @@ Ora che si dispone di un indice funzionante, è possibile usare l'SDK di Azure O
     Il file viene aperto in un editor di codice.
 
 1. Nel file del codice, sostituire i segnaposto seguenti: 
-    - **your_openai_endpoint**: l'endpoint Open AI dalla pagina **Panoramica** del progetto nel portale Fonderia Azure AI (selezionare la scheda di funzionalità **Azure OpenAI**, non l'inferenza di Azure AI o la funzionalità di Servizi di Azure AI).
-    - **your_openai_api_key** La chiave API Open AI dalla pagina **Panoramica** del progetto nel portale Fonderia Azure AI (selezionare la scheda delle funzionalità **Azure OpenAI**, non l'inferenza di Azure AI o la funzionalità Servizi di Azure AI).
+    - **your_openai_endpoint**: Endpoint Open AI dalla pagina **Panoramica** nel portale Fonderia Azure AI. Selezionare la scheda di funzionalità **Azure OpenAI**, non la capacità Inferenza di Azure AI o Servizi di Azure AI.
+    - **your_openai_api_key** Chiave API Open AI dalla pagina **Panoramica** nel portale Fonderia Azure AI. Selezionare la scheda di funzionalità **Azure OpenAI**, non la capacità Inferenza di Azure AI o Servizi di Azure AI.
     - **your_chat_model**: il nome assegnato alla distribuzione del modello **gpt-4o**, dalla pagina **Modelli ed endpoint** nel portale Fonderia Azure AI (il nome predefinito è `gpt-4o`).
     - **your_embedding_model**: il nome assegnato alla distribuzione modello **text-embedding-ada-002**, dalla pagina **Modelli ed endpoint** nel portale Fonderia Azure AI (il nome predefinito è `text-embedding-ada-002`).
     - **your_search_endpoint**: URL della risorsa Azure AI Search. Questo è disponibile nel **Centro di gestione** nel portale Fonderia Azure AI.
@@ -251,6 +251,8 @@ Ora che si dispone di un indice funzionante, è possibile usare l'SDK di Azure O
     ```
    dotnet run
     ```
+
+    > **Suggerimento**: Se si verifica un errore di compilazione perché .NET versione 9.0 non è installato, usare il comando `dotnet --version` per determinare la versione di .NET installata nell'ambiente e quindi modificare il file **rag_app.csproj** nella cartella del codice per aggiornare di conseguenza l'impostazione **TargetFramework**.
 
 1. Quando richiesto, immettere una domanda, ad esempio `Where should I go on vacation to see architecture?` ed esaminare la risposta del modello di IA generativa.
 
