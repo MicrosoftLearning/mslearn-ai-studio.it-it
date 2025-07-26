@@ -10,9 +10,15 @@ Generazione ottimizzata per il recupero (RAG) è una tecnica usata per creare ap
 
 In questo esercizio, verrà utilizzato il portale Fonderia Azure AI per integrare dati personalizzati in una soluzione di IA generativa.
 
-Questo esercizio richiede circa **45** minuti.
+> **Nota**: Il codice in questo esercizio è basato sulla versione non definitiva del software SDK, che può essere soggetta a modifiche. Se necessario, abbiamo usato versioni specifiche dei pacchetti; che potrebbero non riflettere le versioni disponibili più recenti. È possibile che si verifichino alcuni comportamenti, avvisi o errori imprevisti.
 
-> **Nota**: questo esercizio si basa sui servizi delle versioni non definitive, che possono essere soggette a modifiche.
+Anche se questo esercizio è basato su Azure OpenAI Python SDK, è possibile sviluppare applicazioni di chat basate su intelligenza artificiale usando più SDK specifici del linguaggio; tra cui:
+
+- [OpenAI per Python](https://pypi.org/project/openai/)
+- [Azure Open AI per Microsoft .NET](https://www.nuget.org/packages/Azure.AI.OpenAI)
+- [Azure OpenAI per TypeScript](https://www.npmjs.com/package/@azure/openai)
+
+Questo esercizio richiede circa **45** minuti.
 
 ## Creare un hub e un progetto Fonderia Azure AI
 
@@ -124,8 +130,6 @@ Prima di usare l'indice in un flusso immediato basato su RAG, verificare che pos
 
 Ora che si dispone di un indice funzionante, è possibile usare l'SDK di Azure OpenAI per implementare il pattern RAG in un'applicazione client. Varrà ora esaminato il codice per eseguire questa operazione in un semplice esempio.
 
-> **Suggerimento**: è possibile scegliere di sviluppare la soluzione RAG usando Python o Microsoft C#. Seguire le istruzioni nella sezione appropriata per la lingua scelta.
-
 ### Preparare la configurazione dell'applicazione
 
 1. Tornare alla scheda del browser contenente il portale di Azure (mantenendo aperto il portale Fonderia Azure AI nella scheda esistente).
@@ -150,23 +154,11 @@ Ora che si dispone di un indice funzionante, è possibile usare l'SDK di Azure O
 
 1. Dopo aver clonato il repository, passare alla cartella contenente i file di codice dell'applicazione chat:
 
-    > **Nota**: seguire i passaggi per il linguaggio di programmazione scelto.
-
-    **Python**
-
     ```
    cd mslearn-ai-foundry/labfiles/rag-app/python
     ```
 
-    **C#**
-
-    ```
-   cd mslearn-ai-foundry/labfiles/rag-app/c-sharp
-    ```
-
 1. Nel riquadro della riga di comando di Cloud Shell, immettere il comando seguente per installare la libreria dell'SDK di OpenAI:
-
-    **Python**
 
     ```
    python -m venv labenv
@@ -174,30 +166,15 @@ Ora che si dispone di un indice funzionante, è possibile usare l'SDK di Azure O
    pip install -r requirements.txt openai
     ```
 
-    **C#**
-
-    ```
-   dotnet add package Azure.AI.OpenAI
-    ```
-    
-
 1. Immettere il comando seguente per modificare il file di configurazione fornito:
-
-    **Python**
 
     ```
    code .env
     ```
 
-    **C#**
-
-    ```
-   code appsettings.json
-    ```
-
     Il file viene aperto in un editor di codice.
 
-1. Nel file del codice, sostituire i segnaposto seguenti: 
+1. Nel file di configurazione sostituire i segnaposto seguenti: 
     - **your_openai_endpoint**: Endpoint Open AI dalla pagina **Panoramica** nel portale Fonderia Azure AI. Selezionare la scheda di funzionalità **Azure OpenAI**, non la capacità Inferenza di Azure AI o Servizi di Azure AI.
     - **your_openai_api_key** Chiave API Open AI dalla pagina **Panoramica** nel portale Fonderia Azure AI. Selezionare la scheda di funzionalità **Azure OpenAI**, non la capacità Inferenza di Azure AI o Servizi di Azure AI.
     - **your_chat_model**: il nome assegnato alla distribuzione del modello **gpt-4o**, dalla pagina **Modelli ed endpoint** nel portale Fonderia Azure AI (il nome predefinito è `gpt-4o`).
@@ -211,16 +188,8 @@ Ora che si dispone di un indice funzionante, è possibile usare l'SDK di Azure O
 
 1. Immettere il comando seguente per modificare il file di codice fornito:
 
-    **Python**
-
     ```
    code rag-app.py
-    ```
-
-    **C#**
-
-    ```
-   code Program.cs
     ```
 
 1. Esaminare il codice nel file, notando che:
@@ -240,19 +209,9 @@ Ora che si dispone di un indice funzionante, è possibile usare l'SDK di Azure O
 
 1. Nel riquadro della riga di comando di Cloud Shell immettere il comando seguente per eseguire l'app:
 
-    **Python**
-
     ```
    python rag-app.py
     ```
-
-    **C#**
-
-    ```
-   dotnet run
-    ```
-
-    > **Suggerimento**: Se si verifica un errore di compilazione perché .NET versione 9.0 non è installato, usare il comando `dotnet --version` per determinare la versione di .NET installata nell'ambiente e quindi modificare il file **rag_app.csproj** nella cartella del codice per aggiornare di conseguenza l'impostazione **TargetFramework**.
 
 1. Quando richiesto, immettere una domanda, ad esempio `Where should I go on vacation to see architecture?` ed esaminare la risposta del modello di IA generativa.
 

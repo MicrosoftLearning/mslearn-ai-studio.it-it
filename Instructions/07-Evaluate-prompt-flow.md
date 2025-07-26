@@ -103,7 +103,7 @@ La valutazione automatizzata è un approccio che tenta di risolvere queste caren
 1. Selezionare **Avanti** per passare alla pagina successiva.
 1. Nella pagina **Configura valutatori**, usare il pulsante **+Aggiungi** per aggiungere i valutatori seguenti, configurandoli nel modo seguente:
     - **Strumento di assegnazione dei punteggi del modello**:
-        - **Nome dei criteri**: Semantic_similarity
+        - **Nome dei criteri**: *Selezionare il set di impostazioni **Semantic_similarity***
         - **Voto con**: *selezionare il modello **gpt-4o***
         - Impostazioni **utente** (nella parte inferiore):
 
@@ -113,12 +113,12 @@ La valutazione automatizzata è un approccio che tenta di risolvere queste caren
             <br>
         
     - **Analizzatore di scala likert**:
-        - **Nome criteri**: pertinenza
+        - **Nome dei criteri**: *Selezionare il set di impostazioni **Relevance***
         - **Voto con**: *selezionare il modello **gpt-4o***
         - **Query**: \{\{item.question\}\}
 
     - **Somiglianza del testo**:
-        - **Nome criteri**: F1_Score
+        - **Nome dei criteri**: *Selezionare il set di impostazioni **F1_Score***
         - **Verità di riferimento**: \{\{item. ExpectedResponse\}\}
 
     - **Contenuto odioso e fazioso**:

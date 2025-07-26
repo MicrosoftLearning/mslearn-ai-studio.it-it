@@ -1,7 +1,7 @@
 ---
 lab:
   title: Prepararsi per un progetto di sviluppo di intelligenza artificiale
-  description: Informazioni su come organizzare le risorse cloud in hub e progetti in modo da garantire agli sviluppatori una creazione di soluzioni di intelligenza artificiale di successo.
+  description: Informazioni su come organizzare le risorse cloud nei progetti di Fonderia Azure AI in modo che gli sviluppatori abbiano tutto il necessario per creare con successo soluzioni di intelligenza artificiale.
 ---
 
 # Prepararsi per un progetto di sviluppo di intelligenza artificiale
@@ -39,7 +39,10 @@ Un *progetto* Azure AI offre un'area di lavoro collaborativa per lo sviluppo del
 
     > \* Alcune risorse Azure AI sono limitate da quote di modelli regionali. In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
-1. Selezionare **Crea** e attendere la creazione del progetto, inclusa la distribuzione del modello gpt-4 selezionato.
+1. Selezionare **Crea** e attendere che venga creato il progetto. Se richiesto, distribuire il modello gpt-4o usando il tipo di distribuzione **Standard globale** e personalizzare i dettagli della distribuzione per impostare un **Limite di velocità di token al minuto** di 50.000 o il valore massimo disponibile se inferiore a 50.000.
+
+    > **Nota**: la riduzione del TPM consente di evitare l'eccessivo utilizzo della quota disponibile nella sottoscrizione in uso. 50.000 TPM dovrebbero essere sufficienti per i dati usati in questo esercizio. Se la quota disponibile è inferiore a questa, sarà possibile completare l'esercizio, ma potrebbero verificarsi errori se viene superato il limite di velocità.
+
 1. Quando viene creato il progetto, il playground della chat verrà aperto automaticamente in modo da poter testare il modello:
 
     ![Screenshot del playground della chat di Fonderia Azure AI.](./media/ai-foundry-chat-playground.png)
