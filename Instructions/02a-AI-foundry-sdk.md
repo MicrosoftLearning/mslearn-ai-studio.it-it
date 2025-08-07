@@ -147,7 +147,7 @@ Dopo avere distribuito un modello, è possibile usare gli SDK per Fonderia Azure
 
     ```python
    # Get a chat client
-   openai_client = project_client.inference.get_azure_openai_client(api_version="2024-10-21")
+   openai_client = project_client.get_openai_client(api_version="2024-10-21")
     ```
 
 1. Trovare il commento **Inizializza richiesta con il messaggio di sistema** e aggiungere il codice seguente per inizializzare una raccolta di messaggi con una richiesta di sistema.
