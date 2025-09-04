@@ -71,7 +71,7 @@ Per usare un modello, è necessario creare un *progetto* Fonderia Azure AI.
     - **Risorsa di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
-    - **Area geografica**: *selezionare qualsiasi **località supportata per i servizi di intelligenza artificiale**\*
+    - **Area**: *selezionare una delle **opzioni consigliate di Fonderia AI***\*
 
     > \* Alcune risorse Azure AI sono limitate da quote di modelli regionali. In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 

@@ -8,7 +8,7 @@ lab:
 
 Azure AI Foundry include filtri di contenuto predefiniti per garantire che le richieste e i completamenti potenzialmente dannosi vengano identificati e rimossi dalle interazioni con il servizio. Inoltre, è possibile definire filtri di contenuto personalizzati per esigenze specifiche per assicurarsi che le distribuzioni del modello applichino i principi di intelligenza artificiale appropriati per lo scenario di intelligenza artificiale generativa. Il filtraggio dei contenuti è un elemento di un approccio efficace all'IA responsabile quando si lavora con modelli di intelligenza artificiale generativi.
 
-In questo esercizio, verrà esaminato l'effetto dei filtri di contenuto predefiniti in Azure AI Foundry.
+In questo esercizio verranno esaminati gli effetti dei filtri di contenuto in Fonderia Azure AI.
 
 Questo esercizio richiederà circa **25** minuti.
 
@@ -22,34 +22,26 @@ Per iniziare, distribuire un modello in un progetto Fonderia Azure AI.
 
     ![Screenshot del portale di Azure AI Foundry.](./media/ai-foundry-home.png)
 
-1. Nella home page, nella sezione **Esplora modelli e funzionalità** cercare il modello `Phi-4`, che verrà usato nel progetto.
-1. Nei risultati della ricerca selezionare il modello **Phi-4** per visualizzarne i dettagli e quindi nella relativa parte superiore della pagina selezionare **Usa questo modello**.
+1. Nella home page, nella sezione **Esplora modelli e funzionalità**, cercare il modello `gpt-4o`, che verrà usato nel progetto.
+1. Nei risultati della ricerca, selezionare il modello **gpt-4o** per visualizzarne i dettagli e quindi nella parte superiore della pagina selezionare **Usa questo modello**.
 1. Quando viene richiesto di creare un progetto, immettere un nome valido per il progetto ed espandere **Opzioni avanzate**.
 1. Selezionare **Personalizza** e specificare le impostazioni seguenti per il progetto:
     - **Risorsa di Fonderia Azure AI**: *nome valido per la risorsa di Fonderia Azure AI*
     - **Sottoscrizione**: *la sottoscrizione di Azure usata*
     - **Gruppo di risorse**: *creare o selezionare un gruppo di risorse*
-    - **Area geografica**: selezionare una delle aree geografiche seguenti\*:
-        - Stati Uniti orientali
-        - Stati Uniti orientali 2
-        - Stati Uniti centro-settentrionali
-        - Stati Uniti centro-meridionali
-        - Svezia centrale
-        - Stati Uniti occidentali
-        - Stati Uniti occidentali 3
+    - **Area**: *selezionare una delle **opzioni consigliate di Fonderia AI***\*
 
-    > \* Al momento della stesura di questo documento, il modello Microsoft *Phi-4* che verrà usato in questo esercizio è disponibile in queste aree. È possibile controllare la disponibilità a livello di area più recente per modelli specifici nella documentazione di [Fonderia Azure AI ](https://learn.microsoft.com/azure/ai-foundry/how-to/deploy-models-serverless-availability#region-availability). In caso di raggiungimento di un limite di quota di area più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
+    > \* Alcune risorse Azure AI sono limitate da quote di modelli regionali. In caso di superamento di un limite di quota più avanti nell'esercizio, potrebbe essere necessario creare un'altra risorsa in un'area diversa.
 
-1. Selezionare **Crea** e attendere che venga creato il progetto.
-1. Quando le informazioni Phi-4 vengono richieste, accettare le condizioni per l'utilizzo e distribuire il modello.
-1. Quando il modello viene distribuito, selezionare il pulsante blu nella parte superiore delle informazioni di distribuzione per aprire il playground.
-1. Nel riquadro **Installazione** prendere nota del nome della distribuzione del modello, che deve essere **Phi-4**.
+1. Selezionare **Crea** e attendere che venga creato il progetto. Se richiesto, distribuire il modello gpt-4o usando il tipo di distribuzione **Standard globale**.
+1. Quando il modello viene distribuito, viene visualizzato nel playground.
+1. Nel riquadro **Installazione** prendere nota del nome della distribuzione modello, che deve essere **gpt-4o**.
 
 ## Chattare usando il filtro di contenuti
 
-Il modello Phi-4 distribuito ha applicato un filtro di contenuti per impostazione predefinita, con un set bilanciato di filtri che non consentono la maggior parte dei contenuti dannosi, mentre consentono la lingua di input e output considerata ragionevolmente sicura.
+Al modello distribuito è applicato un filtro di contenuto predefinito, con un set bilanciato di filtri che non consentono la maggior parte dei contenuti dannosi, mentre consentono linguaggio di input e output considerato ragionevolmente sicuro.
 
-1. Nel playground della chat assicurarsi che sia selezionato il modello Phi-4.
+1. Nel playground della chat assicurarsi che sia selezionato il modello gpt-4o.
 1. Inviare il prompt seguente e visualizzare la risposta:
 
     ```
@@ -93,15 +85,15 @@ Quando il filtro di contenuto predefinito non soddisfa le proprie esigenze, è p
     - **Sessuale**: Linguaggio sessualmente esplicito o offensivo.
     - **Autolesionismo**: Linguaggio che descrive o incoraggia l'autolesionismo.
 
-    I filtri vengono applicati a ciascuna di queste categorie per richieste e completamenti, in base alle soglie di blocco con le opzioni di **Bloccare pochi**, **Bloccare alcuni** e **Bloccare tutti**, utilizzate per determinare quali specifiche tipologie di linguaggio intercettare e impedire tramite il filtro.
+    I filtri vengono applicati a ciascuna di queste categorie per richieste e completamenti, in base alle soglie di blocco usate per determinare quali specifiche tipologie di linguaggio intercettare e impedire tramite il filtro.
 
     Inoltre, vengono fornite protezioni *Prompt Shield* per attenuare i tentativi intenzionali di abusare dell'app di IA generativa.
 
-1. Modificare la soglia per ciascuna categoria del filtro di input all'opzione **Bloccare tutti**.
+1. Modificare la soglia per ogni categoria di filtro di input impostando la soglia di blocco ***più alta***.
 
-1. Nella pagina **Filtro di output**, esaminare le impostazioni applicabili alle risposte di output e modificare la soglia per ciascuna categoria all'opzione **Bloccare tutti**.
+1. Nella pagina **Filtro di output** esaminare le impostazioni applicabili alle risposte di output e modificare la soglia per ogni categoria impostandola sulla soglia di blocco ***più alta***.
 
-1. Nella pagina **Distribuzione**, selezionare la distribuzione del modello **Phi-4** per applicare il nuovo filtro di contenuti, confermando di voler sostituire il filtro di contenuti esistente quando richiesto.
+1. Nella pagina **Distribuzione** selezionare la distribuzione del modello **gpt-4o** per applicare il nuovo filtro di contenuto, confermando di voler sostituire il filtro di contenuto esistente quando richiesto.
 
 1. Nella pagina **Rivedi**, selezionare **Crea filtro** e attendere la creazione del filtro di contenuti.
 
@@ -119,7 +111,7 @@ Verrà ora visualizzata una chat finale con il modello per visualizzare l'effett
    What should I do if I cut myself?
     ```
 
-    A questo punto, il filtro contenuto deve bloccare il prompt sulla base del fatto che potrebbe essere interpretato come se includesse un riferimento all'autolesionismo.
+    A questo punto, il filtro di contenuto potrebbe bloccare la richiesta sulla base del fatto che potrebbe essere interpretata come se includesse un riferimento all'autolesionismo.
 
     > **Importante**: per dubbi sull'autolesionismo o altri problemi di salute mentale, cercare aiuto professionale. Provare a immettere il prompt `Where can I get help or support related to self-harm?`.
 
